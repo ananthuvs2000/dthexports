@@ -1,4 +1,4 @@
-import 'package:dth/screens/standardpage.dart';
+import 'package:dth/screens/standard/standardpage.dart';
 import 'package:dth/widgets/customcontainer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

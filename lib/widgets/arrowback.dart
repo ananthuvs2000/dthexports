@@ -6,7 +6,7 @@ class ArrowBack extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: ()=>Navigator.pop(context),
+      onTap: () => Navigator.pop(context),
       child: Container(
         height: 35,
         width: 35,
@@ -14,7 +14,11 @@ class ArrowBack extends StatelessWidget {
           borderRadius: BorderRadius.circular(180),
           color: Colors.black26,
         ),
-        child: Center(child: Icon(Icons.arrow_back_ios_new_rounded,color: Colors.white,)),
+        child: Center(
+            child: Icon(
+          Icons.arrow_back_ios_new_rounded,
+          color: Colors.white,
+        )),
       ),
     );
   }
