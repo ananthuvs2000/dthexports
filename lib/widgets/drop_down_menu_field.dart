@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class DropdownMenuField extends StatefulWidget {
   const DropdownMenuField({
+    required this.controller,
     required this.fieldLabel,
     required this.dropDownLabel,
     required this.dropdownEntries,
@@ -9,6 +10,7 @@ class DropdownMenuField extends StatefulWidget {
     this.menuWidth,
     super.key,
   });
+  final TextEditingController controller;
   final double? menuWidth;
   final String fieldLabel;
   final String dropDownLabel;
@@ -33,6 +35,7 @@ class _DropdownMenuFieldState extends State<DropdownMenuField> {
           ),
         ),
         DropdownMenu(
+          controller: widget.controller,
           width: widget.menuWidth ?? 200,
           menuStyle: MenuStyle(
             shape: MaterialStatePropertyAll(RoundedRectangleBorder(
@@ -58,7 +61,7 @@ class _DropdownMenuFieldState extends State<DropdownMenuField> {
           ),
           dropdownMenuEntries: widget.dropdownEntries,
           initialSelection: '',
-          onSelected: (value) => widget.onSelected,
+          onSelected: (value) => widget.onSelected(value),
         ),
       ],
     );

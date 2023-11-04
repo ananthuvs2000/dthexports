@@ -12,89 +12,82 @@ class LoginPg extends StatelessWidget {
   });
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  // final _formKey=GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          fit: BoxFit.fitHeight,
-          image: AssetImage(
-            'assets/images/logpage.jpg',
-          ),
-        ),
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 400, right: 25, left: 25),
-              child: Form(
-                // key: _formKey,
-                child: ListView(
-                  // shrinkWrap: true,
-                  children: [
-                    BuildTextformField(
-                      keyboardType: TextInputType.emailAddress,
-                      controller: _emailController,
-                      validator: (val) {
-                        return '';
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
+          child: Form(
+            key: _formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                // shrinkWrap: true,
+                children: [
+                  hSpace(180),
+                  Image.asset(
+                    'assets/images/appbar.jpg',
+                    fit: BoxFit.contain,
+                    width: 200,
+                  ),
+                  hSpace(50),
+                  CustomTextFormField(
+                    keyboardType: TextInputType.emailAddress,
+                    controller: _emailController,
+                    validator: (val) {
+                      if (val == '') {
+                        return 'Invalid Email';
+                      }
+                      return '';
+                    },
+                    icon: const Icon(Icons.email_outlined),
+                    text: 'Email Address',
+                  ),
+                  hSpace(20),
+                  CustomTextFormField(
+                    isPassword: true,
+                    validator: (val) {
+                      if (val == '') {
+                        return 'Please enter a password';
+                      }
+                      return '';
+                    },
+                    controller: _passwordController,
+                    icon: const Icon(Icons.lock_open_rounded),
+                    text: 'Password',
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  SizedBox(
+                    width: 150,
+                    child: PrimaryElevatedButton(
+                      onPressed: () {
+                        // _formKey.currentState!.validate();
+                        Get.to(
+                          const HomePage(),
+                          transition: Transition.downToUp,
+                          curve: Curves.easeInOut,
+                        );
                       },
-                      icon: const Icon(Icons.email_outlined),
-                      text: 'Email Address',
+                      label: 'LOGIN',
                     ),
-                    hSpace(20),
-                    BuildTextformField(
-                      isPassword: true,
-                      validator: (val) {
-                        return '';
-                      },
-                      controller: _passwordController,
-                      icon: const Icon(Icons.lock_open_rounded),
-                      text: 'Password',
+                  ),
+                  hSpace(15),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Forgot Password",
+                      style: TextStyles.labelStyle,
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    PrimaryElevatedButton(
-                        onPressed: () {
-                          Get.to(
-                            const HomePage(),
-                            transition: Transition.downToUp,
-                            curve: Curves.easeInOut,
-                          );
-                        },
-                        label: 'LOGIN'),
-                    TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          "Forgot Password",
-                          style: TextStyles.labelStyle,
-                        )),
-                    hSpace(40),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Don't have an account?",
-                          style: TextStyles.labelStyle,
-                        ),
-                        TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            "Signup",
-                            style: TextStyles.labelStyle,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            )
-          ],
+            ),
+          ),
         ),
       ),
     );

@@ -28,6 +28,7 @@ class _DthTextFieldState extends State<DthTextField> {
       //
       decoration: InputDecoration(
         hintText: widget.hintText ?? '',
+        hintStyle: TextStyle(color: Colors.black.withOpacity(0.25)),
         //
         enabledBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(formFieldBorderRadius)),

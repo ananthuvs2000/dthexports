@@ -1,5 +1,4 @@
 import 'package:dth/theme/layout.dart';
-import 'package:dth/widgets/MainHeading.dart';
 import 'package:dth/widgets/drop_down_menu_field.dart';
 import 'package:dth/widgets/dt_text_field.dart';
 import 'package:dth/widgets/dynamic_field_row.dart';
@@ -32,11 +31,14 @@ class _RecycleDayStartPageState extends State<RecycleDayStartScreen> {
           scrolledUnderElevation: 0,
           elevation: 0,
           backgroundColor: Colors.white,
-          title: Image.asset(
-            'assets/images/appbar.jpg',
-            width: appBarTitleImageWidth,
-            fit: BoxFit.contain,
+          bottom: PreferredSize(
+            preferredSize: const Size(double.infinity, 1),
+            child: Container(
+              color: Colors.black.withOpacity(0.25),
+              height: 1,
+            ),
           ),
+          title: const Text('Recycle Day Start'),
         ),
         body: SafeArea(
           child: Padding(
@@ -47,12 +49,6 @@ class _RecycleDayStartPageState extends State<RecycleDayStartScreen> {
                   child: ListView(
                     shrinkWrap: true,
                     children: [
-                      hSpace(10),
-                      const Center(
-                        child: MainHeading(
-                          text: 'RCL-DAY Start',
-                        ),
-                      ),
                       hSpace(10),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -86,6 +82,7 @@ class _RecycleDayStartPageState extends State<RecycleDayStartScreen> {
                       ),
                       hSpace(15),
                       DropdownMenuField(
+                        controller: TextEditingController(),
                         fieldLabel: 'Box No.',
                         dropDownLabel: 'Select Box',
                         dropdownEntries: const [],
@@ -98,12 +95,15 @@ class _RecycleDayStartPageState extends State<RecycleDayStartScreen> {
                       hSpace(10),
                       Container(
                         padding: const EdgeInsets.all(30),
-                        color: Colors.red,
                         width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                         height: 100,
                       ),
                       // Auto Calculated Field
-                      hSpace(15),
+
                       const Divider(),
                       hSpace(5),
                       const DynamicFieldRow(label: 'Material QTY:', value: 'Calculated'),

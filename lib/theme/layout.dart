@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 const double appBarTitleImageWidth = 70;
 const double formFieldBorderRadius = 10;
 const double teamManagerBorderRadius = 10;
+const double dashboardItemBorderRadius = 10;
 
 class PageLayout {
   static double get pagePaddingX => 20;
@@ -23,10 +24,10 @@ class TextStyles {
     fontSize: 16,
     fontWeight: FontWeight.w500,
   );
-  static TextStyle dynamicFieldLabelStyle = TextStyle(
+  static TextStyle dynamicFieldLabelStyle = const TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.bold,
     letterSpacing: 0,
-    color: Colors.grey.shade800,
+    color: Colors.black,
   );
 }

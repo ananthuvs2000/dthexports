@@ -1,5 +1,4 @@
 import 'package:dth/theme/layout.dart';
-import 'package:dth/widgets/MainHeading.dart';
 import 'package:dth/widgets/drop_down_menu_field.dart';
 import 'package:dth/widgets/dt_text_field.dart';
 import 'package:dth/widgets/dynamic_field_row.dart';
@@ -32,11 +31,7 @@ class _RecycleDayEndPageState extends State<RecycleDayEndScreen> {
           scrolledUnderElevation: 0,
           elevation: 0,
           backgroundColor: Colors.white,
-          title: Image.asset(
-            'assets/images/appbar.jpg',
-            width: appBarTitleImageWidth,
-            fit: BoxFit.contain,
-          ),
+          title: const Text('Recycle Day End'),
           bottom: PreferredSize(
             preferredSize: const Size(double.infinity, 1),
             child: Container(
@@ -54,13 +49,7 @@ class _RecycleDayEndPageState extends State<RecycleDayEndScreen> {
                   child: ListView(
                     shrinkWrap: true,
                     children: [
-                      hSpace(10),
-                      const Center(
-                        child: MainHeading(
-                          text: 'RCL-DAY End',
-                        ),
-                      ),
-                      hSpace(10),
+                      hSpace(15),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -91,6 +80,7 @@ class _RecycleDayEndPageState extends State<RecycleDayEndScreen> {
                       ),
                       hSpace(15),
                       DropdownMenuField(
+                        controller: TextEditingController(),
                         fieldLabel: 'Box No.',
                         dropDownLabel: 'Select Box',
                         dropdownEntries: const [],
@@ -115,7 +105,7 @@ class _RecycleDayEndPageState extends State<RecycleDayEndScreen> {
                       const DynamicFieldRow(label: 'Status:', value: 'Displayed'),
                       const DynamicFieldRow(label: 'Wastage:', value: 'Displayed'),
                       const DynamicFieldRow(label: 'Wastage %:', value: 'Calculated %'),
-
+                      hSpace(10),
                       //! Worker Team Area
                       TeamManagerWidget(
                         editable: true,
@@ -125,38 +115,9 @@ class _RecycleDayEndPageState extends State<RecycleDayEndScreen> {
                         ],
                       ),
 
-                      hSpace(10),
+                      hSpace(15),
                       // No. Of Days Counter
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Text(
-                            'No. Of Days: ',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          wSpace(100),
-                          IconButton.filled(
-                            onPressed: () {},
-                            icon: const Icon(Icons.add),
-                          ),
-                          Expanded(
-                            child: DthTextField(
-                              controller: TextEditingController(),
-                              validator: (value) {
-                                return null;
-                              },
-                            ),
-                          ),
-                          IconButton.filled(
-                            onPressed: () {},
-                            icon: const Icon(Icons.remove),
-                          ),
-                        ],
-                      ),
-
+                      const DynamicFieldRow(label: 'No. Of Days:', value: '0'),
                       // End of listview
                       hSpace(15),
                     ],
