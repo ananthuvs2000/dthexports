@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class VendorDropdownWidget extends StatefulWidget {
-   VendorDropdownWidget({super.key});
+class OrderDropdownWidget extends StatefulWidget {
+   OrderDropdownWidget({super.key});
    
 
   @override
-  State<VendorDropdownWidget> createState() => _DropdownWidgetState();
+  State<OrderDropdownWidget> createState() => _DropdownWidgetState();
 }
 
-class _DropdownWidgetState extends State<VendorDropdownWidget> {
+class _DropdownWidgetState extends State<OrderDropdownWidget> {
   String? valueChoose;
   
   @override
@@ -27,12 +27,17 @@ class _DropdownWidgetState extends State<VendorDropdownWidget> {
           items: [
                   DropdownMenuItem(
                     value: '1',
-                    child: Text('VC123'),
+                    child: Text('Order 1'),
                   ),
                   DropdownMenuItem(
                     value: '2',
-                    child: Text('VC220'),
+                    child: Text('Order 2'),
                   ),
+                  DropdownMenuItem(
+                    value: '3',
+                    child: Text('Order 3'),
+                  ),
+                 
                   
                 ],
                 onChanged: (newValue) {

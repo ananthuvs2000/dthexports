@@ -17,7 +17,7 @@ class BoxContainer extends StatelessWidget {
           
         ),
         height: 80,
-        width: 170,
+        width: 150,
         child: Center(child: Text(text,style: TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.w600),)),
     
       ),

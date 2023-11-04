@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class VendorDropdownWidget extends StatefulWidget {
-   VendorDropdownWidget({super.key});
+class CustomeDropDown extends StatefulWidget {
+   CustomeDropDown({super.key});
    
 
   @override
-  State<VendorDropdownWidget> createState() => _DropdownWidgetState();
+  State<CustomeDropDown> createState() => _DropdownWidgetState();
 }
 
-class _DropdownWidgetState extends State<VendorDropdownWidget> {
+class _DropdownWidgetState extends State<CustomeDropDown> {
   String? valueChoose;
   
   @override
@@ -22,16 +22,24 @@ class _DropdownWidgetState extends State<VendorDropdownWidget> {
         ),
         
         child: DropdownButton(
-         hint: Text('-SELECT-',style: TextStyle(fontSize: 18),),
+         hint: Text('-Select Customer-',style: TextStyle(fontSize: 18),),
             value: valueChoose,
           items: [
                   DropdownMenuItem(
                     value: '1',
-                    child: Text('VC123'),
+                    child: Text('Customer 1'),
                   ),
                   DropdownMenuItem(
                     value: '2',
-                    child: Text('VC220'),
+                    child: Text('Customer 2'),
+                  ),
+                  DropdownMenuItem(
+                    value: '3',
+                    child: Text('Customer 3'),
+                  ),
+                  DropdownMenuItem(
+                    value: '4',
+                    child: Text('Customer 4'),
                   ),
                   
                 ],

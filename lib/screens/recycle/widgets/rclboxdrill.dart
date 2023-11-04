@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class VendorDropdownWidget extends StatefulWidget {
-   VendorDropdownWidget({super.key});
+class RecycleBoxDropdownWidget extends StatefulWidget {
+   RecycleBoxDropdownWidget({super.key});
    
 
   @override
-  State<VendorDropdownWidget> createState() => _DropdownWidgetState();
+  State<RecycleBoxDropdownWidget> createState() => _DropdownWidgetState();
 }
 
-class _DropdownWidgetState extends State<VendorDropdownWidget> {
+class _DropdownWidgetState extends State<RecycleBoxDropdownWidget> {
   String? valueChoose;
   
   @override
@@ -27,11 +27,19 @@ class _DropdownWidgetState extends State<VendorDropdownWidget> {
           items: [
                   DropdownMenuItem(
                     value: '1',
-                    child: Text('VC123'),
+                    child: Text('A'),
                   ),
                   DropdownMenuItem(
                     value: '2',
-                    child: Text('VC220'),
+                    child: Text('B'),
+                  ),
+                  DropdownMenuItem(
+                    value: '3',
+                    child: Text('C'),
+                  ),
+                  DropdownMenuItem(
+                    value: '4',
+                    child: Text('D'),
                   ),
                   
                 ],

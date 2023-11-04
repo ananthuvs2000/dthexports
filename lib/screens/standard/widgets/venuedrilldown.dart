@@ -22,7 +22,7 @@ class _DropdownWidgetState extends State<DropdownWidget> {
         ),
         
         child: DropdownButton(
-         hint: Text('Select Venue',style: TextStyle(fontSize: 18),),
+         hint: Text('-SELECT-',style: TextStyle(fontSize: 18),),
             value: valueChoose,
           items: [
                   DropdownMenuItem(

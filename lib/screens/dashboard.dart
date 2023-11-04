@@ -1,3 +1,4 @@
+import 'package:dth/screens/recycle/recycle.dart';
 import 'package:dth/screens/standard/standardpage.dart';
 import 'package:dth/widgets/customcontainer.dart';
 import 'package:flutter/material.dart';
@@ -13,35 +14,43 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-        Column(
+    return Container(
+      decoration: BoxDecoration(
+     image: DecorationImage(image: AssetImage('assets/images/bg.jpg'),fit: BoxFit.cover)
+    ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Stack(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Container(
-                height: 50,
-                width: MediaQuery.sizeOf(context).width,
-                child: Image.asset(
-                  'assets/images/appbar.jpg',
-                  fit: BoxFit.fitHeight,
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: Container(
+                  height: 50,
+                  width: MediaQuery.sizeOf(context).width,
+                  child: Image.asset(
+                    'assets/images/appbar.jpg',
+                    fit: BoxFit.fitHeight,
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            InkWell(
-              onTap:()=> Get.to(StandardScreen()),
-              child: Customcontainer(text: 'STANDARD', colors: Colors.red.shade500)),
-            Customcontainer(text: 'RECYCLE', colors: Colors.yellow.shade700),
-            Customcontainer(text: 'REPORTS', colors: Colors.indigo),
-          ],
-        )
-      ]),
+            ],
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              InkWell(
+                onTap:()=> Get.to(StandardScreen()),
+                child: Customcontainer(text: 'STANDARD', colors: Colors.red.shade500)),
+              InkWell(
+                onTap: () => Get.to(RecyclePage()),
+                child: Customcontainer(text: 'RECYCLE', colors: Colors.yellow.shade700)),
+              Customcontainer(text: 'REPORTS', colors: Colors.indigo),
+            ],
+          )
+        ]),
+      ),
     );
   }
 }
