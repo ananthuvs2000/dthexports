@@ -1,5 +1,5 @@
-import 'package:dth/screens/loginpage.dart';
 import 'package:dth/screens/splashscreen.dart';
+import 'package:dth/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,15 +15,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        brightness: Brightness.light,
-         fontFamily: 'Poppins'  
-        
-        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        // useMaterial3: true,
-      ),
-      home: SplashScreen(),
+      title: 'DTS Exports LLP',
+      theme: dthAppThem,
+      home: const SplashScreen(),
     );
   }
 }

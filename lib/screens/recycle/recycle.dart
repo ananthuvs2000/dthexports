@@ -1,10 +1,11 @@
+import 'package:dth/screens/recycle/rcl_day_start.dart';
 import 'package:dth/screens/recycle/rcladd.dart';
 
 import 'package:dth/widgets/arrowback.dart';
 import 'package:dth/widgets/headertext.dart';
+import 'package:dth/widgets/spacer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 
 class RecyclePage extends StatefulWidget {
   const RecyclePage({super.key});
@@ -18,17 +19,16 @@ class _ProductionPageState extends State<RecyclePage> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-     image: DecorationImage(image: AssetImage('assets/images/bg.jpg'),fit: BoxFit.cover)
-    ),
+          image: DecorationImage(image: AssetImage('assets/images/bg.jpg'), fit: BoxFit.cover)),
       child: Scaffold(
-       backgroundColor: Colors.transparent,
-        body: Stack(
-          children:[ Padding(
+        backgroundColor: Colors.transparent,
+        body: Stack(children: [
+          Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 2,top: 25),
+                  padding: const EdgeInsets.only(left: 2, top: 25),
                   child: ArrowBack(),
                 )
               ],
@@ -37,17 +37,22 @@ class _ProductionPageState extends State<RecyclePage> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
-            
               children: [
                 Padding(
                   padding: const EdgeInsets.only(top: 35),
-                  child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('RECYCLE',style: TextStyle(fontSize: 22,fontWeight: FontWeight.w600),),
+                      Text(
+                        'RECYCLE',
+                        style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+                      ),
                     ],
                   ),
                 ),
-                SizedBox(height: 15,),
+                SizedBox(
+                  height: 15,
+                ),
                 //  Container(
                 //     height: 80,
                 //     decoration: BoxDecoration(
@@ -63,53 +68,63 @@ class _ProductionPageState extends State<RecyclePage> {
                 //       ),
                 //     ),
                 //   ),
-                  SizedBox(height: 100,),
-                   InkWell(
-                    onTap: () => Get.to(RecycleAddScreen()),
-                    child: Container(
-                      height: 80,
-                      width: 200,
-                      decoration: BoxDecoration(
-                       
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.grey.shade300
-                      ),
-                      child: Center(child: Text('RCL ADD',style: headerText(),)),
-                    ),
+                SizedBox(
+                  height: 100,
+                ),
+                InkWell(
+                  onTap: () => Get.to(RecycleAddScreen()),
+                  child: Container(
+                    height: 80,
+                    width: 200,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8), color: Colors.grey.shade300),
+                    child: Center(
+                        child: Text(
+                      'RCL ADD',
+                      style: headerText(),
+                    )),
                   ),
-                  SizedBox(height: 25,),
-                  InkWell(
-                    // onTap: () => Get.to(DayStart()),
-                    child: Container(
-                      height: 80,
-                      width: 200,
-                      decoration: BoxDecoration(
-                       
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.grey.shade300
-                      ),
-                      child: Center(child: Text('RCL-DAY START',style: headerText(),)),
-                    ),
+                ),
+                hSpace(25),
+                InkWell(
+                  onTap: () => Get.to(
+                    RecycleDayStartScreen(),
+                    transition: Transition.rightToLeft,
                   ),
-                  SizedBox(height: 25),
-                  InkWell(
-                    // onTap: () => Get.to(DayEndScreen()),
-                    child: Container(
-                      height: 80,
-                      width: 200,
-                      decoration: BoxDecoration(
-                       
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.grey.shade300
-                      ),
-                      child: Center(child: Text('RCL-DAY END',style: headerText(),)),
-                    ),
+                  child: Container(
+                    height: 80,
+                    width: 200,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8), color: Colors.grey.shade300),
+                    child: Center(
+                        child: Text(
+                      'RCL-DAY START',
+                      style: headerText(),
+                    )),
                   ),
+                ),
+                hSpace(25),
+                InkWell(
+                  // onTap: () => Get.to(
+                  //   RecycleDayEndScreen(),
+                  //   transition: Transition.rightToLeft,
+                  // ),
+                  child: Container(
+                    height: 80,
+                    width: 200,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8), color: Colors.grey.shade300),
+                    child: Center(
+                        child: Text(
+                      'RCL-DAY END',
+                      style: headerText(),
+                    )),
+                  ),
+                ),
               ],
             ),
           )
-          ]
-        ),
+        ]),
       ),
     );
   }

@@ -1,6 +1,8 @@
 import 'package:dth/screens/recycle/recycle.dart';
 import 'package:dth/screens/standard/standardpage.dart';
 import 'package:dth/widgets/customcontainer.dart';
+import 'package:dth/widgets/primaryElevatedButton.dart';
+import 'package:dth/widgets/spacer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,41 +17,59 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-     image: DecorationImage(image: AssetImage('assets/images/bg.jpg'),fit: BoxFit.cover)
-    ),
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/bg.jpg'),
+          fit: BoxFit.cover,
+        ),
+      ),
       child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          centerTitle: true,
+          actions: [
+            PrimaryElevatedButton(
+              onPressed: () {},
+              label: 'Log Out',
+            ),
+            wSpace(10),
+          ],
+        ),
         backgroundColor: Colors.transparent,
-        body: Stack(
-          children: [
-          Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: Container(
-                  height: 50,
-                  width: MediaQuery.sizeOf(context).width,
-                  child: Image.asset(
-                    'assets/images/appbar.jpg',
-                    fit: BoxFit.fitHeight,
+        body: SafeArea(
+          child: Stack(children: [
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: Container(
+                    height: 50,
+                    width: MediaQuery.sizeOf(context).width,
+                    child: Image.asset(
+                      'assets/images/appbar.jpg',
+                      fit: BoxFit.fitHeight,
+                    ),
                   ),
                 ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  InkWell(
+                      onTap: () => Get.to(StandardScreen(), transition: Transition.rightToLeft),
+                      child: Customcontainer(text: 'STANDARD', colors: Colors.red.shade500)),
+                  InkWell(
+                      onTap: () => Get.to(RecyclePage(), transition: Transition.rightToLeft),
+                      child: Customcontainer(text: 'RECYCLE', colors: Colors.yellow.shade700)),
+                  Customcontainer(text: 'REPORTS', colors: Colors.indigo),
+                ],
               ),
-            ],
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              InkWell(
-                onTap:()=> Get.to(StandardScreen()),
-                child: Customcontainer(text: 'STANDARD', colors: Colors.red.shade500)),
-              InkWell(
-                onTap: () => Get.to(RecyclePage()),
-                child: Customcontainer(text: 'RECYCLE', colors: Colors.yellow.shade700)),
-              Customcontainer(text: 'REPORTS', colors: Colors.indigo),
-            ],
-          )
-        ]),
+            )
+          ]),
+        ),
       ),
     );
   }

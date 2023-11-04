@@ -22,6 +22,7 @@ class _DropdownWidgetState extends State<RecycleBoxDropdownWidget> {
         ),
         
         child: DropdownButton(
+          
          hint: Text('-SELECT-',style: TextStyle(fontSize: 18),),
             value: valueChoose,
           items: [
