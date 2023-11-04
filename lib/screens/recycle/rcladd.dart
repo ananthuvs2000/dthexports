@@ -1,8 +1,7 @@
 import 'package:dth/screens/recycle/widgets/rclboxdrill.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/widgets/headertext.dart';
-import 'package:dth/widgets/textfield.dart';
-import 'package:dth/widgets/textformfield.dart';
+import 'package:dth/widgets/spacer.dart';
 import 'package:flutter/material.dart';
 
 class RecycleAddScreen extends StatefulWidget {
@@ -18,7 +17,10 @@ class _RecycleAddScreenState extends State<RecycleAddScreen> {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-          image: DecorationImage(image: AssetImage('assets/images/bg.jpg'), fit: BoxFit.cover)),
+          image: DecorationImage(
+        image: AssetImage('assets/images/bg.jpg'),
+        fit: BoxFit.cover,
+      )),
       child: Scaffold(
         appBar: AppBar(
             elevation: 0,
@@ -53,20 +55,20 @@ class _RecycleAddScreenState extends State<RecycleAddScreen> {
                   )
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    padding: EdgeInsets.all(5),
+                    padding: const EdgeInsets.all(5),
                     alignment: Alignment.center,
                     height: 120,
                     width: 120,
                     decoration:
                         BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(8)),
-                    child: Column(
+                    child: const Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(Icons.camera_alt_outlined),
@@ -75,7 +77,7 @@ class _RecycleAddScreenState extends State<RecycleAddScreen> {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(right: 10),
+                    padding: const EdgeInsets.only(right: 10),
                     height: 30,
                     width: 120,
                     decoration: BoxDecoration(
@@ -85,9 +87,9 @@ class _RecycleAddScreenState extends State<RecycleAddScreen> {
                       child: TextField(
                         textAlign: TextAlign.center,
                         controller: _weightController,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 16, color: Colors.black, fontWeight: FontWeight.w400),
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           focusedBorder: InputBorder.none,
                         ),
                       ),
@@ -95,9 +97,7 @@ class _RecycleAddScreenState extends State<RecycleAddScreen> {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 20,
-              ),
+              hSpace(25),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -108,7 +108,7 @@ class _RecycleAddScreenState extends State<RecycleAddScreen> {
                   RecycleBoxDropdownWidget()
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Row(
@@ -124,9 +124,7 @@ class _RecycleAddScreenState extends State<RecycleAddScreen> {
                   )
                 ],
               ),
-              SizedBox(
-                height: 30,
-              ),
+              hSpace(25),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

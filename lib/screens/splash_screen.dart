@@ -1,4 +1,4 @@
-import 'package:dth/screens/loginpage.dart';
+import 'package:dth/screens/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

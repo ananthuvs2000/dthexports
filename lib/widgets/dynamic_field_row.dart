@@ -25,7 +25,7 @@ class DynamicFieldRow extends StatelessWidget {
               fontSize: 16,
             ),
           ),
-          Text(
+          SelectableText(
             value,
             style: const TextStyle(
               letterSpacing: 0,

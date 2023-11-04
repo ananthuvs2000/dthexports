@@ -4,12 +4,13 @@ class DthTextField extends StatefulWidget {
   const DthTextField({
     required this.controller,
     required this.validator,
+    this.hintText,
     super.key,
   });
 
   final TextEditingController controller;
   final String? Function(String?) validator;
-
+  final String? hintText;
   @override
   State<DthTextField> createState() => _DthTextFieldState();
 }
@@ -20,16 +21,21 @@ class _DthTextFieldState extends State<DthTextField> {
     return TextFormField(
       controller: widget.controller,
       validator: (value) => widget.validator(value),
+
       keyboardType: TextInputType.number,
       textAlign: TextAlign.center,
-      decoration: const InputDecoration(
-        enabledBorder: OutlineInputBorder(
+
+      //
+      decoration: InputDecoration(
+        hintText: widget.hintText ?? '',
+        //
+        enabledBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(formFieldBorderRadius)),
         ),
-        focusedBorder: OutlineInputBorder(
+        focusedBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(formFieldBorderRadius)),
         ),
-        errorBorder: OutlineInputBorder(
+        errorBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(formFieldBorderRadius)),
         ),
         contentPadding: EdgeInsets.zero,

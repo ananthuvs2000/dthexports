@@ -1,4 +1,4 @@
-import 'package:dth/screens/splashscreen.dart';
+import 'package:dth/screens/splash_screen.dart';
 import 'package:dth/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class DropdownMenuField extends StatefulWidget {
   const DropdownMenuField({
     required this.fieldLabel,
+    required this.dropDownLabel,
     required this.dropdownEntries,
     required this.onSelected,
     this.menuWidth,
@@ -10,6 +11,7 @@ class DropdownMenuField extends StatefulWidget {
   });
   final double? menuWidth;
   final String fieldLabel;
+  final String dropDownLabel;
   final void Function(String) onSelected;
   final List<DropdownMenuEntry> dropdownEntries;
 
@@ -23,9 +25,9 @@ class _DropdownMenuFieldState extends State<DropdownMenuField> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text(
-          'BOX NO.',
-          style: TextStyle(
+        Text(
+          widget.fieldLabel,
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 16,
           ),
@@ -48,7 +50,12 @@ class _DropdownMenuFieldState extends State<DropdownMenuField> {
                 )),
             contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           ),
-          label: const Text('Select Boxes'),
+          label: Text(
+            widget.dropDownLabel,
+            style: const TextStyle(
+              fontSize: 14,
+            ),
+          ),
           dropdownMenuEntries: widget.dropdownEntries,
           initialSelection: '',
           onSelected: (value) => widget.onSelected,

@@ -1,3 +1,4 @@
+import 'package:dth/screens/recycle/rcl_day_end.dart';
 import 'package:dth/screens/recycle/rcl_day_start.dart';
 import 'package:dth/screens/recycle/rcladd.dart';
 
@@ -88,7 +89,7 @@ class _ProductionPageState extends State<RecyclePage> {
                 hSpace(25),
                 InkWell(
                   onTap: () => Get.to(
-                    RecycleDayStartScreen(),
+                    const RecycleDayStartScreen(),
                     transition: Transition.rightToLeft,
                   ),
                   child: Container(
@@ -105,10 +106,10 @@ class _ProductionPageState extends State<RecyclePage> {
                 ),
                 hSpace(25),
                 InkWell(
-                  // onTap: () => Get.to(
-                  //   RecycleDayEndScreen(),
-                  //   transition: Transition.rightToLeft,
-                  // ),
+                  onTap: () => Get.to(
+                    const RecycleDayEndScreen(),
+                    transition: Transition.rightToLeft,
+                  ),
                   child: Container(
                     height: 80,
                     width: 200,

@@ -19,16 +19,14 @@ class _StandardScreenState extends State<StandardScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-     image: DecorationImage(image: AssetImage('assets/images/bg.jpg'),fit: BoxFit.cover)
-    ),
+      decoration: const BoxDecoration(
+          image: DecorationImage(image: AssetImage('assets/images/bg.jpg'), fit: BoxFit.cover)),
       child: Scaffold(
+        appBar: AppBar(
+          title: Text('Standard'.toUpperCase()),
+        ),
         backgroundColor: Colors.transparent,
         body: Stack(children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 35, left: 8),
-            child: ArrowBack(),
-          ),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -37,8 +35,8 @@ class _StandardScreenState extends State<StandardScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     InkWell(
-                      onTap: () => Get.to(ProductionPage()),
-                      child: BoxContainer(text: 'PRODUCTION')),
+                        onTap: () => Get.to(ProductionPage()),
+                        child: BoxContainer(text: 'PRODUCTION')),
                     InkWell(
                         onTap: () => showDialog(
                             context: context,
@@ -55,18 +53,14 @@ class _StandardScreenState extends State<StandardScreen> {
                                             Get.to(CheckPage());
                                           },
                                           child: Text('Check',
-                                              style: TextStyle(
-                                                  fontSize: 20,
-                                                  color: Colors.black))),
+                                              style: TextStyle(fontSize: 20, color: Colors.black))),
                                       Divider(),
                                       TextButton(
                                           onPressed: () {
                                             Get.to(AcceptPage());
                                           },
                                           child: Text('Accept',
-                                              style: TextStyle(
-                                                  fontSize: 20,
-                                                  color: Colors.black))),
+                                              style: TextStyle(fontSize: 20, color: Colors.black))),
                                     ],
                                   ),
                                 ),
@@ -79,11 +73,11 @@ class _StandardScreenState extends State<StandardScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     InkWell(
-                      onTap: () => Get.to(DespachScreen()),
-                      child: BoxContainer(text: 'DESPATCH')),
+                        onTap: () => Get.to(DespachScreen()),
+                        child: BoxContainer(text: 'DESPATCH')),
                     InkWell(
-                      onTap: () => Get.to(OutGoingScreen()), 
-                      child: BoxContainer(text: 'OUTGOING')),
+                        onTap: () => Get.to(OutGoingScreen()),
+                        child: BoxContainer(text: 'OUTGOING')),
                   ],
                 ),
               ],

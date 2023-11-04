@@ -1,4 +1,5 @@
 import 'package:dth/screens/recycle/recycle.dart';
+import 'package:dth/screens/reports/reports_page.dart';
 import 'package:dth/screens/standard/standardpage.dart';
 import 'package:dth/widgets/customcontainer.dart';
 import 'package:dth/widgets/primaryElevatedButton.dart';
@@ -59,12 +60,19 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   InkWell(
-                      onTap: () => Get.to(StandardScreen(), transition: Transition.rightToLeft),
+                      onTap: () =>
+                          Get.to(const StandardScreen(), transition: Transition.rightToLeft),
                       child: Customcontainer(text: 'STANDARD', colors: Colors.red.shade500)),
                   InkWell(
-                      onTap: () => Get.to(RecyclePage(), transition: Transition.rightToLeft),
+                      onTap: () => Get.to(const RecyclePage(), transition: Transition.rightToLeft),
                       child: Customcontainer(text: 'RECYCLE', colors: Colors.yellow.shade700)),
-                  Customcontainer(text: 'REPORTS', colors: Colors.indigo),
+                  InkWell(
+                    onTap: () => Get.to(const ReportsPage(), transition: Transition.rightToLeft),
+                    child: Customcontainer(
+                      text: 'REPORTS',
+                      colors: Colors.indigo,
+                    ),
+                  ),
                 ],
               ),
             )
