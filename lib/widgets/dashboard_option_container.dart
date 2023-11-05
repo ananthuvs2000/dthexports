@@ -18,8 +18,8 @@ class DashboardOptionContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      borderRadius: BorderRadius.circular(10),
       onTap: onTap,
+      borderRadius: BorderRadius.circular(10),
       child: Ink(
         width: 250,
         padding: const EdgeInsets.all(15),

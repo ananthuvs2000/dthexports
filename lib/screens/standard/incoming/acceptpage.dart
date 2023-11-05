@@ -20,6 +20,7 @@ class AcceptPage extends StatefulWidget {
 
 class _AcceptPageState extends State<AcceptPage> {
   double? boxweight;
+
   final TextEditingController _quantityController = TextEditingController();
 
   @override
@@ -52,7 +53,7 @@ class _AcceptPageState extends State<AcceptPage> {
                       color: Colors.blue.shade100),
                   child: Center(
                     child: Text(
-                      DateFormat('yyyy-MM-dd').format(DateTime.now()),
+                      DateFormat('yyyy-MM-dd hh:mm:a').format(DateTime.now()),
                       style: labelText(),
                     ),
                   ),
@@ -113,7 +114,7 @@ class _AcceptPageState extends State<AcceptPage> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 25),
+                hSpace(25),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -140,33 +141,7 @@ class _AcceptPageState extends State<AcceptPage> {
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 25,
-                ),
-                // ElevatedButton(
-
-                //   onPressed: () {
-                //     showDialog(
-                //             context: context,
-                //             builder: (BuildContext context) {
-                //               return AlertDialog(
-                //                 content: Container(
-                //                   height: 150,
-                //                   width: 100,
-                //                   child: Column(
-                //                     mainAxisAlignment: MainAxisAlignment.center,
-                //                     children: [
-                //                       Text('${_'),
-                //                     ],
-                //                   ),
-                //                 ),
-                //               );
-                //             });
-
-                // }, child: Text('Show Material Weight',style: labelText(),)),
-                const SizedBox(
-                  height: 10,
-                ),
+                hSpace(35),
                 TextButton.icon(
                     icon: const Icon(Icons.camera_alt_outlined),
                     onPressed: () {
@@ -178,7 +153,9 @@ class _AcceptPageState extends State<AcceptPage> {
                     )),
                 hSpace(30),
                 SizedBox(
-                    width: 120, child: PrimaryElevatedButton(onPressed: () {}, label: 'SUBMIT')),
+                  width: 120,
+                  child: PrimaryElevatedButton(onPressed: () {}, label: 'SUBMIT'),
+                ),
               ],
             ),
           ),

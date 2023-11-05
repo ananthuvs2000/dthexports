@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class BoxContainer extends StatelessWidget {
-  BoxContainer({Key? key, required this.text}) : super(key: key);
-  String text;
+  const BoxContainer({Key? key, required this.text}) : super(key: key);
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,11 @@ class BoxContainer extends StatelessWidget {
         child: Center(
             child: Text(
           text,
-          style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w600),
+          style: const TextStyle(
+            color: Colors.black,
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+          ),
         )),
       ),
     );
