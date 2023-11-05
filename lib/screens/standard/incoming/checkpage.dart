@@ -1,5 +1,6 @@
 // import 'package:dth/screens/standard/incoming/checking/datetime_provider.dart';
-import 'package:dth/screens/standard/incoming/checking/vendor_provider.dart';
+import 'package:dth/_providers/team_provider.dart';
+import 'package:dth/_providers/vendor_provider.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/widgets/appbar_underline.dart';
 import 'package:dth/widgets/drop_down_menu_field.dart';
@@ -23,10 +24,13 @@ class _CheckPageState extends State<CheckPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    //! ONE TIME FETCHING OF ALL API INFO FROM PROVIDER DURING PAGE INITIALIZATION
     Provider.of<VendorProvider>(context, listen: false).fetchVendors();
+    Provider.of<TeamProvider>(context, listen: false).fetchTeams();
   }
 
-  //
+  //^ Setting all form field controllers
   final _venueController = TextEditingController();
   final _vendorCodeController = TextEditingController();
   final _quantityController = TextEditingController();
@@ -37,6 +41,7 @@ class _CheckPageState extends State<CheckPage> {
   Widget build(BuildContext context) {
     // Provider
     final vendorProvider = Provider.of<VendorProvider>(context);
+    final teamProvider = Provider.of<TeamProvider>(context);
     // UI
     return Container(
       decoration: const BoxDecoration(
@@ -86,7 +91,7 @@ class _CheckPageState extends State<CheckPage> {
               ),
               hSpace(15),
 
-              //! Vendor Code From Consumer
+              //! Team List From Team API Consumer
               Consumer<VendorProvider>(builder: (context, vendorData, child) {
                 if (vendorProvider.vendors.isNotEmpty) {
                   return DropdownMenuField(
@@ -97,12 +102,14 @@ class _CheckPageState extends State<CheckPage> {
                     dropdownEntries: vendorProvider.vendors
                         .map(
                           (vendor) => DropdownMenuEntry(
-                            value: vendor.vendorName,
+                            value: vendor.id.toString(),
                             label: vendor.vendorName,
                           ),
                         )
                         .toList(),
-                    onSelected: (selectedVal) {},
+                    onSelected: (selectedVal) {
+                      print(selectedVal);
+                    },
                   );
                 }
                 return const Center(
@@ -133,13 +140,30 @@ class _CheckPageState extends State<CheckPage> {
                 ],
               ),
               hSpace(15),
-              DropdownMenuField(
-                controller: _teamIdController,
-                fieldLabel: 'Team',
-                dropDownLabel: 'Select Team',
-                dropdownEntries: const [],
-                onSelected: (selectedVal) {},
-              ),
+
+              //! Team List From Team API Consumer
+              Consumer(builder: (context, state, child) {
+                if (teamProvider.teams.isNotEmpty) {
+                  return DropdownMenuField(
+                    controller: _teamIdController,
+                    fieldLabel: 'Team',
+                    dropDownLabel: 'Select Team',
+                    dropdownEntries: teamProvider.teams
+                        .map(
+                          (team) =>
+                              DropdownMenuEntry(value: team.id.toString(), label: team.teamName),
+                        )
+                        .toList(),
+                    onSelected: (selectedVal) {
+                      print('Team Selected: $selectedVal');
+                    },
+                  );
+                } else {
+                  return const Center(
+                    child: Text('Failed To Get Teams'),
+                  );
+                }
+              }),
               hSpace(25),
               SizedBox(width: 120, child: PrimaryElevatedButton(onPressed: () {}, label: 'POST')),
             ],

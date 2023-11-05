@@ -1,17 +1,18 @@
 import 'dart:convert';
 
-import 'package:dth/_api/api_constant.dart';
-import 'package:dth/models/vendor_model.dart';
+import 'package:dth/_api_endpoints/api_endpoints.dart';
+import 'package:dth/_models/vendor_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class VendorDataService extends ChangeNotifier {
   //! API ENDPOINT
-  final String vendorAPI = '$apiURL/vendor';
+  final String _vendorAPI = '$apiHOME/vendor';
 
+  //^ Fetching all vendors
   Future<List<Vendor>> fetchVendors() async {
-    final response = await http.get(Uri.parse(vendorAPI));
-    print(response.body);
+    final response = await http.get(Uri.parse(_vendorAPI));
+    // print(response.body);
     if (response.statusCode == 403) {
       final List<dynamic> jsonData = json.decode(response.body);
 
@@ -31,6 +32,23 @@ class VendorDataService extends ChangeNotifier {
           .toList();
     } else {
       throw Exception('Failed to fetch vendor information');
+    }
+  }
+
+  //^ Adding a new vendor
+  Future<bool> addVendor(String name, String email, String mobile, String address) async {
+    final response = await http.post(Uri.parse(_vendorAPI), body: {
+      "vendor_name": name,
+      "vendor_email": email,
+      "vendor_mobile": mobile,
+      "vendor_address": address,
+    });
+    print(response.body);
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      throw Exception('Failed to fetch vendor information');
+      // return false;
     }
   }
 }

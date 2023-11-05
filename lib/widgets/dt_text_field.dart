@@ -24,8 +24,7 @@ class _DthTextFieldState extends State<DthTextField> {
 
       keyboardType: TextInputType.number,
       textAlign: TextAlign.center,
-
-      //
+      //? DECORATION
       decoration: InputDecoration(
         hintText: widget.hintText ?? '',
         hintStyle: TextStyle(color: Colors.black.withOpacity(0.25)),

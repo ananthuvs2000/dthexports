@@ -1,5 +1,5 @@
-import 'package:dth/_services/vendor_data_service.dart';
-import 'package:dth/models/vendor_model.dart';
+import 'package:dth/_services/vendor_service.dart';
+import 'package:dth/_models/vendor_model.dart';
 import 'package:flutter/material.dart';
 
 class VendorProvider with ChangeNotifier {
