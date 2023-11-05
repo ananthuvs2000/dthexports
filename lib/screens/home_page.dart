@@ -1,12 +1,10 @@
+import 'package:dth/screens/login_page.dart';
 import 'package:dth/screens/recycle/recycle.dart';
 import 'package:dth/screens/reports/reports_page.dart';
 import 'package:dth/screens/standard/standardpage.dart';
 import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
-import 'package:dth/widgets/MainHeading.dart';
-import 'package:dth/widgets/customcontainer.dart';
 import 'package:dth/widgets/dashboard_option_container.dart';
-import 'package:dth/widgets/primaryElevatedButton.dart';
 import 'package:dth/widgets/spacer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -55,7 +53,6 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     hSpace(10),
-                    const MainHeading(text: 'DASHBOARD'),
                     hSpace(15),
                     DashboardOptionContainer(
                       color: primaryColor,
@@ -90,6 +87,15 @@ class _HomePageState extends State<HomePage> {
                           const ReportsPage(),
                           transition: Transition.rightToLeft,
                         );
+                      },
+                    ),
+                    hSpace(15),
+                    DashboardOptionContainer(
+                      color: Colors.grey.shade800,
+                      icon: Icons.logout,
+                      text: 'LOG OUT',
+                      onTap: () {
+                        Get.offAll(LoginPg());
                       },
                     ),
                   ],

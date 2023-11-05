@@ -1,54 +1,48 @@
-import 'package:dth/screens/standard/widgets/camera.dart';
+// import 'package:dth/screens/standard/widgets/camera.dart';
 import 'package:dth/screens/standard/widgets/texturedrilldown.dart';
+import 'package:dth/theme/layout.dart';
+import 'package:dth/widgets/appbar_underline.dart';
 import 'package:dth/widgets/headertext.dart';
-import 'package:dth/screens/standard/standardpage.dart';
 import 'package:dth/screens/standard/widgets/boxdrilldown.dart';
 import 'package:dth/screens/standard/widgets/colordrilldown.dart';
 import 'package:dth/screens/standard/widgets/sizedrilldown.dart';
+import 'package:dth/widgets/primaryElevatedButton.dart';
+import 'package:dth/widgets/spacer.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class AcceptPage extends StatefulWidget {
-   AcceptPage({super.key});
-  
+  const AcceptPage({super.key});
 
   @override
   State<AcceptPage> createState() => _AcceptPageState();
 }
 
 class _AcceptPageState extends State<AcceptPage> {
-
- 
-  
   double? boxweight;
   final TextEditingController _quantityController = TextEditingController();
-  
-  
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-     image: DecorationImage(image: AssetImage('assets/images/bg.jpg'),fit: BoxFit.cover)
-    ),
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/bg.jpg'),
+          fit: BoxFit.cover,
+        ),
+      ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
+          scrolledUnderElevation: 0,
+          title: const Text('ACCEPTANCE'),
           elevation: 0,
-          backgroundColor: Colors.transparent,
-          leading: IconButton(
-              onPressed: () {
-                Get.to(StandardScreen());
-              },
-              icon: Icon(
-                Icons.arrow_back_ios_new_rounded,
-                color: Colors.black,
-              )),
+          backgroundColor: Colors.white,
+          bottom: appBarUnderline,
         ),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
             child: Column(
               children: [
                 Container(
@@ -103,7 +97,7 @@ class _AcceptPageState extends State<AcceptPage> {
                     TextureDropdownWidget()
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Row(
@@ -119,7 +113,7 @@ class _AcceptPageState extends State<AcceptPage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -136,11 +130,9 @@ class _AcceptPageState extends State<AcceptPage> {
                       child: Center(
                         child: TextField(
                           controller: _quantityController,
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w400),
-                          decoration: InputDecoration(
+                          style: const TextStyle(
+                              fontSize: 20, color: Colors.black, fontWeight: FontWeight.w400),
+                          decoration: const InputDecoration(
                             focusedBorder: InputBorder.none,
                           ),
                         ),
@@ -148,11 +140,11 @@ class _AcceptPageState extends State<AcceptPage> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 25,
                 ),
                 // ElevatedButton(
-    
+
                 //   onPressed: () {
                 //     showDialog(
                 //             context: context,
@@ -170,47 +162,23 @@ class _AcceptPageState extends State<AcceptPage> {
                 //                 ),
                 //               );
                 //             });
-    
+
                 // }, child: Text('Show Material Weight',style: labelText(),)),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 40,
-                      width: 40,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Image.asset('assets/images/camera.png'),
-                    ),
-                    TextButton(
-                        onPressed: () {
-                          // Get.to(Camera());
-                        },
-                        child: Text(
-                          'Add Photo',
-                          style: labelText(),
-                        )),
-                  ],
-                ),
-                SizedBox(height: 50,),
-                 ElevatedButton(
-                            style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.indigo.shade700),
-                            textStyle:MaterialStateProperty.all<TextStyle>(
-                                    TextStyle(fontSize: 20,),
-                                  ), shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                  ),
-                            ),
-                            onPressed: () {
-                            Get.snackbar('POST', 'Success');
-                         
-                          }, child:Text("SUBMIT",style: TextStyle(color: Colors.white),),),
+                TextButton.icon(
+                    icon: const Icon(Icons.camera_alt_outlined),
+                    onPressed: () {
+                      // Get.to(Camera());
+                    },
+                    label: Text(
+                      'Add Photo',
+                      style: labelText(),
+                    )),
+                hSpace(30),
+                SizedBox(
+                    width: 120, child: PrimaryElevatedButton(onPressed: () {}, label: 'SUBMIT')),
               ],
             ),
           ),

@@ -29,7 +29,6 @@ class CustomTextFormField extends StatelessWidget {
 
       //
       autovalidateMode: AutovalidateMode.onUserInteraction,
-
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.transparent),
@@ -50,7 +49,7 @@ class CustomTextFormField extends StatelessWidget {
         prefixIcon: icon,
         hintText: text,
         hintStyle: TextStyle(color: Colors.black.withOpacity(0.25)),
-        fillColor: Colors.black.withOpacity(0.05),
+        fillColor: Colors.black.withOpacity(0.1),
         filled: true,
       ),
     );

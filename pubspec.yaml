@@ -1,5 +1,5 @@
 name: dth
-description: A new Flutter project.
+description: DTH Exports Management App.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -38,6 +38,7 @@ dependencies:
   get: ^4.6.6
   camera: ^0.10.5+5
   intl: ^0.18.1
+  http:
 
 dev_dependencies:
   flutter_test:
