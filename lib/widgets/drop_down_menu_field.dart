@@ -7,6 +7,7 @@ class DropdownMenuField extends StatefulWidget {
     required this.dropDownLabel,
     required this.dropdownEntries,
     required this.onSelected,
+    this.defaultValue,
     this.menuWidth,
     super.key,
   });
@@ -14,6 +15,7 @@ class DropdownMenuField extends StatefulWidget {
   final double? menuWidth;
   final String fieldLabel;
   final String dropDownLabel;
+  final String? defaultValue;
   final void Function(String) onSelected;
   final List<DropdownMenuEntry> dropdownEntries;
 
@@ -39,23 +41,6 @@ class _DropdownMenuFieldState extends State<DropdownMenuField> {
           enableFilter: false,
           controller: widget.controller,
           width: widget.menuWidth ?? 200,
-          // menuStyle: MenuStyle(
-          //   shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-          //     borderRadius: BorderRadius.circular(10),
-          //   )),
-          //   backgroundColor: const MaterialStatePropertyAll(Colors.white),
-          //   padding: const MaterialStatePropertyAll(EdgeInsets.all(0)),
-          // ),
-          // inputDecorationTheme: InputDecorationTheme(
-          //   border: OutlineInputBorder(
-          //       borderRadius: BorderRadius.circular(10),
-          //       borderSide: BorderSide(
-          //         width: 1,
-          //         color: Colors.black.withOpacity(0.25),
-          //       )),
-          //   contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-          // ),
-
           label: Text(
             widget.dropDownLabel,
             style: const TextStyle(
@@ -63,7 +48,7 @@ class _DropdownMenuFieldState extends State<DropdownMenuField> {
             ),
           ),
           dropdownMenuEntries: widget.dropdownEntries,
-          initialSelection: '',
+          initialSelection: widget.defaultValue,
           onSelected: (value) => widget.onSelected(value),
         ),
       ],

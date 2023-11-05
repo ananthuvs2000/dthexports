@@ -39,6 +39,7 @@ dependencies:
   camera: ^0.10.5+5
   intl: ^0.18.1
   http:
+  provider:
 
 dev_dependencies:
   flutter_test:

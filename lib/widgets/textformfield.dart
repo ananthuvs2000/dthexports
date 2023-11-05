@@ -55,6 +55,10 @@ class CustomTextFormField extends StatelessWidget {
         labelStyle: TextStyle(color: Colors.black.withOpacity(0.5)),
         fillColor: Colors.black.withOpacity(0.1),
         filled: true,
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 10,
+          vertical: 5,
+        ),
       ),
     );
   }

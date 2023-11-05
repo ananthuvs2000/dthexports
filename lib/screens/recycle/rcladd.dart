@@ -1,10 +1,8 @@
-import 'package:dth/screens/recycle/widgets/rclboxdrill.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/widgets/appbar_underline.dart';
 import 'package:dth/widgets/drop_down_menu_field.dart';
 import 'package:dth/widgets/dt_text_field.dart';
 import 'package:dth/widgets/dynamic_field_row.dart';
-import 'package:dth/widgets/headertext.dart';
 import 'package:dth/widgets/open_camera_button.dart';
 import 'package:dth/widgets/primaryElevatedButton.dart';
 import 'package:dth/widgets/spacer.dart';
