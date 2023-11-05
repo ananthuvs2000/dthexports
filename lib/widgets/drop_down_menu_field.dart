@@ -35,24 +35,27 @@ class _DropdownMenuFieldState extends State<DropdownMenuField> {
           ),
         ),
         DropdownMenu(
+          enableSearch: false,
+          enableFilter: false,
           controller: widget.controller,
           width: widget.menuWidth ?? 200,
-          menuStyle: MenuStyle(
-            shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            )),
-            backgroundColor: const MaterialStatePropertyAll(Colors.white),
-            padding: const MaterialStatePropertyAll(EdgeInsets.all(5)),
-          ),
-          inputDecorationTheme: InputDecorationTheme(
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(
-                  width: 1,
-                  color: Colors.black.withOpacity(0.25),
-                )),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          ),
+          // menuStyle: MenuStyle(
+          //   shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+          //     borderRadius: BorderRadius.circular(10),
+          //   )),
+          //   backgroundColor: const MaterialStatePropertyAll(Colors.white),
+          //   padding: const MaterialStatePropertyAll(EdgeInsets.all(0)),
+          // ),
+          // inputDecorationTheme: InputDecorationTheme(
+          //   border: OutlineInputBorder(
+          //       borderRadius: BorderRadius.circular(10),
+          //       borderSide: BorderSide(
+          //         width: 1,
+          //         color: Colors.black.withOpacity(0.25),
+          //       )),
+          //   contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+          // ),
+
           label: Text(
             widget.dropDownLabel,
             style: const TextStyle(

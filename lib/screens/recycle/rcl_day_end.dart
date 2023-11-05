@@ -1,4 +1,5 @@
 import 'package:dth/theme/layout.dart';
+import 'package:dth/widgets/box_info_display_card.dart';
 import 'package:dth/widgets/drop_down_menu_field.dart';
 import 'package:dth/widgets/dt_text_field.dart';
 import 'package:dth/widgets/dynamic_field_row.dart';
@@ -47,6 +48,7 @@ class _RecycleDayEndPageState extends State<RecycleDayEndScreen> {
               children: [
                 Expanded(
                   child: ListView(
+                    physics: const BouncingScrollPhysics(),
                     shrinkWrap: true,
                     children: [
                       hSpace(15),
@@ -54,6 +56,7 @@ class _RecycleDayEndPageState extends State<RecycleDayEndScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           OpenCameraButton(
+                            label: 'Take Photo',
                             onTap: () {},
                           ),
                           wSpace(20),
@@ -89,12 +92,11 @@ class _RecycleDayEndPageState extends State<RecycleDayEndScreen> {
 
                       /// Details of Stored Info Of Selected Box
                       hSpace(10),
-                      Container(
-                        padding: const EdgeInsets.all(30),
-                        color: Colors.red,
-                        width: double.infinity,
-                        height: 100,
-                      ),
+                      const BoxInfoDisplay(
+                          boxNumber: '12134',
+                          boxType: '25425',
+                          boxSize: '235245',
+                          boxWeight: '355'),
                       // Auto Calculated Field
                       hSpace(15),
                       const Divider(),
@@ -124,7 +126,7 @@ class _RecycleDayEndPageState extends State<RecycleDayEndScreen> {
                   ),
                 ),
                 // Main submit button goes here
-                hSpace(2.5),
+                hSpace(10),
                 SizedBox(
                   width: double.infinity,
                   child: PrimaryElevatedButton(
@@ -132,7 +134,7 @@ class _RecycleDayEndPageState extends State<RecycleDayEndScreen> {
                     label: 'Post',
                   ),
                 ),
-                hSpace(5),
+                hSpace(10),
               ],
             ),
           ),

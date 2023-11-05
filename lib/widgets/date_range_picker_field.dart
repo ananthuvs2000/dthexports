@@ -5,12 +5,14 @@ import 'package:flutter/material.dart';
 
 class DateRangePicker extends StatefulWidget {
   const DateRangePicker({
+    required this.label,
     required this.controller,
     required this.onTap,
     super.key,
   });
   final TextEditingController controller;
   final void Function() onTap;
+  final String label;
 
   @override
   State<DateRangePicker> createState() => _DateRangePickerState();
@@ -22,26 +24,35 @@ class _DateRangePickerState extends State<DateRangePicker> {
     return Row(
       children: [
         Text(
-          'Period:',
+          widget.label,
           style: TextStyles.dynamicFieldLabelStyle,
         ),
-        wSpace(90),
+        wSpace(95),
         Expanded(
           child: TextFormField(
             controller: widget.controller,
             onTap: widget.onTap,
             //
             readOnly: true,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(formFieldBorderRadius)),
+                borderSide: BorderSide(
+                  color: Colors.black.withOpacity(0.5),
+                ),
+                borderRadius: const BorderRadius.all(Radius.circular(formFieldBorderRadius)),
               ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: primaryColor),
-                borderRadius: BorderRadius.all(Radius.circular(formFieldBorderRadius)),
+              focusedBorder: const OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: primaryColor,
+                ),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(formFieldBorderRadius),
+                ),
               ),
-              errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(formFieldBorderRadius)),
+              errorBorder: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(formFieldBorderRadius),
+                ),
                 borderSide: BorderSide(
                   color: formFieldErrorColor,
                 ),
@@ -49,11 +60,11 @@ class _DateRangePickerState extends State<DateRangePicker> {
 
               //
               hintText: ' Date Range',
-              errorStyle: TextStyle(color: formFieldErrorColor),
-              suffixIcon: Icon(
+              errorStyle: const TextStyle(color: formFieldErrorColor),
+              suffixIcon: const Icon(
                 Icons.date_range,
               ),
-              contentPadding: EdgeInsets.all(10),
+              contentPadding: const EdgeInsets.all(10),
             ),
           ),
         ),

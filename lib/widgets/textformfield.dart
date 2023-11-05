@@ -31,7 +31,10 @@ class CustomTextFormField extends StatelessWidget {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.transparent),
+          borderSide: BorderSide(
+            width: 1,
+            color: Colors.black.withOpacity(0.25),
+          ),
           borderRadius: BorderRadius.circular(10),
         ),
         focusedBorder: OutlineInputBorder(
@@ -39,7 +42,7 @@ class CustomTextFormField extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: formFieldErrorColor),
+          borderSide: const BorderSide(color: primaryColor),
           borderRadius: BorderRadius.circular(10),
         ),
         errorBorder: OutlineInputBorder(
@@ -47,8 +50,9 @@ class CustomTextFormField extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         prefixIcon: icon,
-        hintText: text,
-        hintStyle: TextStyle(color: Colors.black.withOpacity(0.25)),
+        prefixIconColor: Colors.black.withOpacity(0.5),
+        label: Text(text),
+        labelStyle: TextStyle(color: Colors.black.withOpacity(0.5)),
         fillColor: Colors.black.withOpacity(0.1),
         filled: true,
       ),

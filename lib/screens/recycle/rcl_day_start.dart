@@ -1,4 +1,5 @@
 import 'package:dth/theme/layout.dart';
+import 'package:dth/widgets/box_info_display_card.dart';
 import 'package:dth/widgets/drop_down_menu_field.dart';
 import 'package:dth/widgets/dt_text_field.dart';
 import 'package:dth/widgets/dynamic_field_row.dart';
@@ -54,6 +55,7 @@ class _RecycleDayStartPageState extends State<RecycleDayStartScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           OpenCameraButton(
+                            label: 'Take Photo',
                             onTap: () {},
                           ),
                           wSpace(20),
@@ -93,14 +95,11 @@ class _RecycleDayStartPageState extends State<RecycleDayStartScreen> {
 
                       /// Details of Stored Info Of Selected Box
                       hSpace(10),
-                      Container(
-                        padding: const EdgeInsets.all(30),
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        height: 100,
+                      const BoxInfoDisplay(
+                        boxNumber: '111',
+                        boxType: '111',
+                        boxSize: '111',
+                        boxWeight: '111',
                       ),
                       // Auto Calculated Field
 

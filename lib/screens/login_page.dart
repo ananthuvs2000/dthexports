@@ -20,7 +20,7 @@ class LoginPg extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
+          padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX + 10),
           child: Form(
             key: _formKey,
             child: SingleChildScrollView(
@@ -46,7 +46,7 @@ class LoginPg extends StatelessWidget {
                     icon: const Icon(Icons.email_outlined),
                     text: 'Email Address',
                   ),
-                  hSpace(20),
+                  hSpace(10),
                   CustomTextFormField(
                     isPassword: true,
                     validator: (val) {
@@ -67,6 +67,8 @@ class LoginPg extends StatelessWidget {
                     child: PrimaryElevatedButton(
                       onPressed: () {
                         // _formKey.currentState!.validate();
+                        _emailController.clear();
+                        _passwordController.clear();
                         Get.to(
                           const HomePage(),
                           transition: Transition.downToUp,

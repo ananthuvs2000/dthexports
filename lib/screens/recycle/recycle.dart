@@ -55,13 +55,14 @@ class _ProductionPageState extends State<RecyclePage> {
                       label: 'RCL-DAY START'),
                   hSpace(15),
                   SubDashboardItem(
-                      onTap: () {
-                        Get.to(
-                          const RecycleDayEndScreen(),
-                          transition: Transition.rightToLeft,
-                        );
-                      },
-                      label: 'RCL-DAY END'),
+                    onTap: () {
+                      Get.to(
+                        const RecycleDayEndScreen(),
+                        transition: Transition.rightToLeft,
+                      );
+                    },
+                    label: 'RCL-DAY END',
+                  ),
                 ],
               ),
             ),
