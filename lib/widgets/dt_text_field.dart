@@ -1,3 +1,4 @@
+import 'package:dth/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class DthTextField extends StatefulWidget {
@@ -24,21 +25,33 @@ class _DthTextFieldState extends State<DthTextField> {
 
       keyboardType: TextInputType.number,
       textAlign: TextAlign.center,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+
+      //! INPUT FORMATTERS
+      inputFormatters: const [],
       //? DECORATION
       decoration: InputDecoration(
-        hintText: widget.hintText ?? '',
-        hintStyle: TextStyle(color: Colors.black.withOpacity(0.25)),
+        labelText: widget.hintText ?? '',
+        labelStyle: TextStyle(
+          color: Colors.black.withOpacity(0.25),
+        ),
         //
         enabledBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(formFieldBorderRadius)),
         ),
         focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: primaryColor),
+          borderRadius: BorderRadius.all(Radius.circular(formFieldBorderRadius)),
+        ),
+        focusedErrorBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: formFieldErrorColor),
           borderRadius: BorderRadius.all(Radius.circular(formFieldBorderRadius)),
         ),
         errorBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: formFieldErrorColor),
           borderRadius: BorderRadius.all(Radius.circular(formFieldBorderRadius)),
         ),
-        contentPadding: EdgeInsets.zero,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       ),
     );
   }

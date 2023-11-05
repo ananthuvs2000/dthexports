@@ -2,9 +2,6 @@ import 'package:dth/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-// Colors
-
-// Themes
 AppBarTheme dthAppbarTheme = const AppBarTheme(
   systemOverlayStyle: SystemUiOverlayStyle.dark,
   backgroundColor: Colors.transparent,
@@ -68,11 +65,11 @@ DropdownMenuThemeData dropdownMenuThemeData = DropdownMenuThemeData(
   ),
 );
 
+// Final ThemeData Variable
 ThemeData dthAppThem = ThemeData(
   useMaterial3: true,
   brightness: Brightness.light,
   fontFamily: 'Poppins',
-  // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
   colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
   appBarTheme: dthAppbarTheme,
   dropdownMenuTheme: dropdownMenuThemeData,
