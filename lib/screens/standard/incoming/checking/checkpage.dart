@@ -1,4 +1,5 @@
-import 'package:dth/_services/vendor_data_service.dart';
+// import 'package:dth/screens/standard/incoming/checking/datetime_provider.dart';
+import 'package:dth/screens/standard/incoming/checking/vendor_provider.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/widgets/appbar_underline.dart';
 import 'package:dth/widgets/drop_down_menu_field.dart';
@@ -18,8 +19,14 @@ class CheckPage extends StatefulWidget {
 }
 
 class _CheckPageState extends State<CheckPage> {
-  String venueValue = 'Select Venue';
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<VendorProvider>(context, listen: false).fetchVendors();
+  }
 
+  //
   final _venueController = TextEditingController();
   final _vendorCodeController = TextEditingController();
   final _quantityController = TextEditingController();
@@ -28,6 +35,9 @@ class _CheckPageState extends State<CheckPage> {
   ///
   @override
   Widget build(BuildContext context) {
+    // Provider
+    final vendorProvider = Provider.of<VendorProvider>(context);
+    // UI
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
@@ -77,19 +87,27 @@ class _CheckPageState extends State<CheckPage> {
               hSpace(15),
 
               //! Vendor Code From Consumer
-              Consumer<VendorDataService>(builder: (context, vendorCodeModel, child) {
-                //
-                if (vendorCodeModel.vendorCodes.isNotEmpty) {
+              Consumer<VendorProvider>(builder: (context, vendorData, child) {
+                if (vendorProvider.vendors.isNotEmpty) {
                   return DropdownMenuField(
                     controller: _vendorCodeController,
                     fieldLabel: 'Vendor Code',
-                    dropDownLabel: 'Select Vendor Code',
+                    dropDownLabel: 'Select Vendor',
                     // from API
-                    dropdownEntries: [],
+                    dropdownEntries: vendorProvider.vendors
+                        .map(
+                          (vendor) => DropdownMenuEntry(
+                            value: vendor.vendorName,
+                            label: vendor.vendorName,
+                          ),
+                        )
+                        .toList(),
                     onSelected: (selectedVal) {},
                   );
                 }
-                return SizedBox();
+                return const Center(
+                  child: Text('Failed To Get Vendor Codes'),
+                );
               }),
               hSpace(15),
               Row(

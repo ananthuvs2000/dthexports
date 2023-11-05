@@ -1,5 +1,6 @@
 import 'package:dth/screens/splash_screen.dart';
-import 'package:dth/_services/vendor_data_service.dart';
+// import 'package:dth/screens/standard/incoming/checking/datetime_provider.dart';
+import 'package:dth/screens/standard/incoming/checking/vendor_provider.dart';
 import 'package:dth/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,9 +18,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (context) => VendorDataService(),
-        )
+        ChangeNotifierProvider(create: (context) => VendorProvider()),
+        // ChangeNotifierProvider(create: (context) => DateTimeProvider()),
       ],
       builder: (context, child) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
