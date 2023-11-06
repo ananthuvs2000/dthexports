@@ -1,3 +1,4 @@
+import 'package:dth/_providers/checking_provider.dart';
 import 'package:dth/_providers/team_provider.dart';
 import 'package:dth/_providers/vendor_provider.dart';
 import 'package:dth/_services/checking_service.dart';
@@ -34,9 +35,9 @@ class _CheckPageState extends State<CheckPage> {
   final _formKey = GlobalKey<FormState>();
   //^ Setting all form field controllers
   final _venueController = TextEditingController();
-  final _vendorCodeController = TextEditingController();
+  final _vendorController = TextEditingController();
   final _quantityController = TextEditingController();
-  final _teamIdController = TextEditingController();
+  final _teamController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +90,7 @@ class _CheckPageState extends State<CheckPage> {
                 Consumer<VendorProvider>(builder: (context, vendorData, child) {
                   if (vendorProvider.vendors.isNotEmpty) {
                     return DropdownMenuField(
-                      controller: _vendorCodeController,
+                      controller: _vendorController,
                       fieldLabel: 'Vendor',
                       dropDownLabel: 'Select Vendor',
                       // from API
@@ -140,7 +141,7 @@ class _CheckPageState extends State<CheckPage> {
                 Consumer(builder: (context, state, child) {
                   if (teamProvider.teams.isNotEmpty) {
                     return DropdownMenuField(
-                      controller: _teamIdController,
+                      controller: _teamController,
                       fieldLabel: 'Team',
                       dropDownLabel: 'Select Team',
                       dropdownEntries: teamProvider.teams
@@ -165,19 +166,18 @@ class _CheckPageState extends State<CheckPage> {
                 SizedBox(
                   width: 120,
                   child: PrimaryElevatedButton(
-                    onPressed: () {
-                      print({
-                        _venueController.text,
-                        _vendorCodeController.text,
+                    onPressed: () async {
+                      final res = await CheckingProvider().postToCheck(
+                        _vendorController.text,
+                        _vendorController.text,
                         _quantityController.text,
-                        _teamIdController.text,
-                      });
-                      //
-                      // if (_formKey.currentState!.validate()) {
-                      //   print('Submitted succesfully');
-                      // } else {
-                      //   print('Form Error');
-                      // }
+                        _teamController.text,
+                      );
+                      if (res) {
+                        print('Succesfully posted');
+                      } else {
+                        print('Post failed');
+                      }
                     },
                     label: 'POST',
                   ),
