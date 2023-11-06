@@ -41,7 +41,7 @@ class _DateRangePickerState extends State<DateRangePicker> {
                 ),
                 borderRadius: const BorderRadius.all(Radius.circular(formFieldBorderRadius)),
               ),
-              focusedBorder: const OutlineInputBorder(
+              focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   color: primaryColor,
                 ),

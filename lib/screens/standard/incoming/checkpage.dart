@@ -1,15 +1,14 @@
-// import 'package:dth/screens/standard/incoming/checking/datetime_provider.dart';
 import 'package:dth/_providers/team_provider.dart';
 import 'package:dth/_providers/vendor_provider.dart';
+import 'package:dth/_services/checking_service.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/widgets/appbar_underline.dart';
 import 'package:dth/widgets/drop_down_menu_field.dart';
 import 'package:dth/widgets/dt_text_field.dart';
-import 'package:dth/widgets/headertext.dart';
-import 'package:dth/widgets/primaryElevatedButton.dart';
+import 'package:dth/widgets/loading_display_caption.dart';
+import 'package:dth/widgets/primary_elevated_button.dart';
 import 'package:dth/widgets/spacer.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class CheckPage extends StatefulWidget {
@@ -28,6 +27,7 @@ class _CheckPageState extends State<CheckPage> {
     //! ONE TIME FETCHING OF ALL API INFO FROM PROVIDER DURING PAGE INITIALIZATION
     Provider.of<VendorProvider>(context, listen: false).fetchVendors();
     Provider.of<TeamProvider>(context, listen: false).fetchTeams();
+    // Provider.of<DateTimeProvider>(context, listen: false).fetchDateTime();
   }
 
   //^ Form Key
@@ -43,6 +43,7 @@ class _CheckPageState extends State<CheckPage> {
     // Provider
     final vendorProvider = Provider.of<VendorProvider>(context);
     final teamProvider = Provider.of<TeamProvider>(context);
+    // final dateTimeProvider = Provider.of<DateTimeProvider>(context);
     // UI
     return Container(
       decoration: const BoxDecoration(
@@ -64,23 +65,13 @@ class _CheckPageState extends State<CheckPage> {
           padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
           child: Form(
             key: _formKey,
-            child: ListView(
+            child: Column(
               children: [
-                Container(
-                  height: 60,
-                  decoration: BoxDecoration(
-                      // borderRadius: BorderRadius.circular(20),
-                      color: Colors.blue.shade100),
-                  child: Center(
-                    child: Text(
-                      DateFormat('yyyy-MM-dd').format(DateTime.now()),
-                      style: labelText(),
-                    ),
-                  ),
-                ),
-                /////
-                // Venue
+                //! DateTime from API Consumer
                 hSpace(15),
+
+                // Venue
+                hSpace(20),
                 DropdownMenuField(
                   controller: _venueController,
                   fieldLabel: 'Venue',
@@ -99,7 +90,7 @@ class _CheckPageState extends State<CheckPage> {
                   if (vendorProvider.vendors.isNotEmpty) {
                     return DropdownMenuField(
                       controller: _vendorCodeController,
-                      fieldLabel: 'Vendor Code',
+                      fieldLabel: 'Vendor',
                       dropDownLabel: 'Select Vendor',
                       // from API
                       dropdownEntries: vendorProvider.vendors
@@ -115,9 +106,7 @@ class _CheckPageState extends State<CheckPage> {
                       },
                     );
                   }
-                  return const Center(
-                    child: Text('Loading Vendors...'),
-                  );
+                  return const Center(child: LoadingDisplayCaption(message: 'Loading Vendor Info'));
                 }),
                 hSpace(15),
                 Row(
@@ -167,9 +156,7 @@ class _CheckPageState extends State<CheckPage> {
                       },
                     );
                   } else {
-                    return const Center(
-                      child: Text('Loading Teams...'),
-                    );
+                    return const Center(child: LoadingDisplayCaption(message: 'Loading Team Info'));
                   }
                 }),
                 hSpace(25),
@@ -179,11 +166,18 @@ class _CheckPageState extends State<CheckPage> {
                   width: 120,
                   child: PrimaryElevatedButton(
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        print('Submitted succesfully');
-                      } else {
-                        print('Form Error');
-                      }
+                      print({
+                        _venueController.text,
+                        _vendorCodeController.text,
+                        _quantityController.text,
+                        _teamIdController.text,
+                      });
+                      //
+                      // if (_formKey.currentState!.validate()) {
+                      //   print('Submitted succesfully');
+                      // } else {
+                      //   print('Form Error');
+                      // }
                     },
                     label: 'POST',
                   ),

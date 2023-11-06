@@ -15,8 +15,10 @@ AppBarTheme dthAppbarTheme = const AppBarTheme(
   ),
 );
 
+//& DROP DOWN MENU
 DropdownMenuThemeData dropdownMenuThemeData = DropdownMenuThemeData(
   inputDecorationTheme: InputDecorationTheme(
+    isDense: true,
     contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
@@ -34,34 +36,37 @@ DropdownMenuThemeData dropdownMenuThemeData = DropdownMenuThemeData(
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
-      borderSide: const BorderSide(
+      borderSide: BorderSide(
         width: 1,
         color: primaryColor,
       ),
     ),
     focusedErrorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
-      borderSide: BorderSide(
+      borderSide: const BorderSide(
         width: 1,
-        color: formFieldErrorColor.withOpacity(1),
+        color: formFieldErrorColor,
       ),
     ),
+    hintStyle: const TextStyle(fontSize: 12),
+    labelStyle: const TextStyle(fontSize: 12),
   ),
-  menuStyle: const MenuStyle(
+  menuStyle: MenuStyle(
     alignment: Alignment.bottomLeft,
     shape: MaterialStatePropertyAll(
       RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
+        side: BorderSide(color: Colors.black.withOpacity(0.5)),
+        borderRadius: const BorderRadius.all(
           Radius.circular(10),
         ),
       ),
     ),
-    padding: MaterialStatePropertyAll(EdgeInsets.zero),
-    elevation: MaterialStatePropertyAll(1),
-    backgroundColor: MaterialStatePropertyAll(Colors.white),
+    padding: const MaterialStatePropertyAll(EdgeInsets.zero),
+    elevation: const MaterialStatePropertyAll(0),
+    backgroundColor: const MaterialStatePropertyAll(Colors.white),
   ),
   textStyle: const TextStyle(
-    fontSize: 15,
+    fontSize: 12,
   ),
 );
 

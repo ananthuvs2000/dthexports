@@ -12,5 +12,5 @@ class DateTimeProvider with ChangeNotifier {
     return _dateTime;
   }
 
-  DateAndTime get vendors => _dateTime;
+  DateAndTime get dateTime => _dateTime;
 }

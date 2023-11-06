@@ -1,3 +1,4 @@
+import 'package:dth/theme/layout.dart';
 import 'package:dth/widgets/spacer.dart';
 import 'package:flutter/material.dart';
 
@@ -22,17 +23,17 @@ class DashboardOptionContainer extends StatelessWidget {
       borderRadius: BorderRadius.circular(10),
       child: Ink(
         width: 250,
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           border: Border.all(color: Colors.black.withOpacity(0.25)),
           color: color,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(formFieldBorderRadius),
         ),
         child: Row(
           children: [
             Icon(
               icon,
-              size: 40,
+              size: 35,
               color: Colors.white,
             ),
             wSpace(20),
@@ -40,7 +41,7 @@ class DashboardOptionContainer extends StatelessWidget {
               text,
               style: const TextStyle(
                 color: Colors.white,
-                fontSize: 25,
+                fontSize: 21,
                 letterSpacing: -0.5,
                 fontWeight: FontWeight.bold,
               ),

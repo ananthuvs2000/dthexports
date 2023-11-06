@@ -28,21 +28,26 @@ class CustomTextFormField extends StatelessWidget {
       keyboardType: keyboardType ?? TextInputType.text,
 
       //
+      style: const TextStyle(
+        fontSize: 14,
+        letterSpacing: 0,
+      ),
       autovalidateMode: AutovalidateMode.onUserInteraction,
+
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
             width: 1,
-            color: Colors.black.withOpacity(0.25),
+            color: Colors.black.withOpacity(0.15),
           ),
           borderRadius: BorderRadius.circular(10),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: primaryColor),
+          borderSide: BorderSide(color: primaryColor),
           borderRadius: BorderRadius.circular(10),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: primaryColor),
+          borderSide: BorderSide(color: primaryColor),
           borderRadius: BorderRadius.circular(10),
         ),
         errorBorder: OutlineInputBorder(
@@ -52,12 +57,16 @@ class CustomTextFormField extends StatelessWidget {
         prefixIcon: icon,
         prefixIconColor: Colors.black.withOpacity(0.5),
         label: Text(text),
-        labelStyle: TextStyle(color: Colors.black.withOpacity(0.5)),
-        fillColor: Colors.black.withOpacity(0.1),
+        labelStyle: TextStyle(
+          color: Colors.black.withOpacity(0.5),
+          fontSize: 14,
+          letterSpacing: 0,
+        ),
+        fillColor: Colors.black.withOpacity(0.05),
         filled: true,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 10,
-          vertical: 5,
+          vertical: 10,
         ),
       ),
     );

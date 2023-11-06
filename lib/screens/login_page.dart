@@ -1,6 +1,6 @@
 import 'package:dth/screens/home_page.dart';
 import 'package:dth/theme/layout.dart';
-import 'package:dth/widgets/primaryElevatedButton.dart';
+import 'package:dth/widgets/primary_elevated_button.dart';
 import 'package:dth/widgets/spacer.dart';
 import 'package:dth/widgets/textformfield.dart';
 import 'package:flutter/material.dart';

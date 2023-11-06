@@ -4,7 +4,7 @@ import 'package:dth/widgets/drop_down_menu_field.dart';
 import 'package:dth/widgets/dt_text_field.dart';
 import 'package:dth/widgets/dynamic_field_row.dart';
 import 'package:dth/widgets/open_camera_button.dart';
-import 'package:dth/widgets/primaryElevatedButton.dart';
+import 'package:dth/widgets/primary_elevated_button.dart';
 import 'package:dth/widgets/spacer.dart';
 import 'package:flutter/material.dart';
 

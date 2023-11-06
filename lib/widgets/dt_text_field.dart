@@ -1,14 +1,16 @@
 import 'package:dth/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class DthTextField extends StatefulWidget {
   const DthTextField({
     required this.controller,
     required this.validator,
     this.hintText,
+    this.inputFormatters,
     super.key,
   });
-
+  final List<TextInputFormatter>? inputFormatters;
   final TextEditingController controller;
   final String? Function(String?) validator;
   final String? hintText;
@@ -28,20 +30,28 @@ class _DthTextFieldState extends State<DthTextField> {
       autovalidateMode: AutovalidateMode.onUserInteraction,
 
       //! INPUT FORMATTERS
-      inputFormatters: const [],
+      inputFormatters: widget.inputFormatters,
       //? DECORATION
       decoration: InputDecoration(
         labelText: widget.hintText ?? '',
         labelStyle: TextStyle(
           color: Colors.black.withOpacity(0.25),
         ),
-        //
-        enabledBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(formFieldBorderRadius)),
+
+        errorStyle: const TextStyle(
+          fontSize: 12,
+          letterSpacing: -0.5,
         ),
-        focusedBorder: const OutlineInputBorder(
+        //
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: formFieldEnabledBorderColor,
+          ),
+          borderRadius: const BorderRadius.all(Radius.circular(formFieldBorderRadius)),
+        ),
+        focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: primaryColor),
-          borderRadius: BorderRadius.all(Radius.circular(formFieldBorderRadius)),
+          borderRadius: const BorderRadius.all(Radius.circular(formFieldBorderRadius)),
         ),
         focusedErrorBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: formFieldErrorColor),

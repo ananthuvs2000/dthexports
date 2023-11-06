@@ -8,19 +8,20 @@ class DateTimeService extends ChangeNotifier {
   //! API ENDPOINT
   final String _dateTimeAPI = '$apiHOME/getdatetime';
 
-  Future<DateAndTime> fetchDateTime() async {
+  Future fetchDateTime() async {
     final response = await http.get(Uri.parse(_dateTimeAPI));
-    //print(response.body);
-    if (response.statusCode == 403) {
+    print(response.body);
+    if (response.statusCode == 200) {
       final Map<String, dynamic> jsonData = json.decode(response.body);
-
       // Mapping to a Dart Model
+      final apiRes = ApiResponse.fromJson(jsonData);
+      final data = apiRes.data;
       return DateAndTime(
-        date: jsonData['date'],
-        time: jsonData['time'],
+        date: data.date,
+        time: data.time,
       );
     } else {
-      throw Exception('Failed to date time information');
+      throw Exception('Failed to get date time information');
     }
   }
 }
