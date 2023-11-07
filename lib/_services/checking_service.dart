@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class CheckingDataService extends ChangeNotifier {
   //! API ENDPOINT
-  final String _checkingAPI = '$apiHOME/iteamcheck_add';
+  final String _checkingAPI = '$apiHOME/itemcheck_add';
 
   //^ Posting a new Chcecking record
   Future<bool> postCheck(
@@ -18,7 +18,7 @@ class CheckingDataService extends ChangeNotifier {
       // Body
       body: {
         
-     "vendor_code":"V101",
+    "vendor_code":"V101",
     "batch_code":"BC01",
     "venue":"In-House",
     "quantity_checked":500.0,
