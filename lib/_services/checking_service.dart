@@ -17,9 +17,12 @@ class CheckingDataService extends ChangeNotifier {
       Uri.parse(_checkingAPI),
       // Body
       body: {
-        "venue": venue,
-        "quantity": quantity,
-        "team": teamID,
+        
+     "vendor_code":"V101",
+    "batch_code":"BC01",
+    "venue":"In-House",
+    "quantity_checked":500.0,
+    "team_name":"Team1"
       },
     );
     // print(response.body);
