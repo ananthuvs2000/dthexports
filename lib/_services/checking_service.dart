@@ -13,12 +13,13 @@ class CheckingDataService extends ChangeNotifier {
     String quantity,
     String teamID,
   ) async {
+    print({venue, vendor, quantity, teamID});
     final response = await http.post(
       Uri.parse(_checkingAPI),
       // Body
       body: {
         
-    "vendor_code":"V101",
+     "vendor_code":"V101",
     "batch_code":"BC01",
     "venue":"In-House",
     "quantity_checked":500.0,
