@@ -1,7 +1,6 @@
 import 'package:dth/_providers/checking_provider.dart';
 import 'package:dth/_providers/team_provider.dart';
 import 'package:dth/_providers/vendor_provider.dart';
-import 'package:dth/_services/checking_service.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/widgets/appbar_underline.dart';
 import 'package:dth/widgets/drop_down_menu_field.dart';
@@ -10,6 +9,7 @@ import 'package:dth/widgets/loading_display_caption.dart';
 import 'package:dth/widgets/primary_elevated_button.dart';
 import 'package:dth/widgets/spacer.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class CheckPage extends StatefulWidget {
@@ -175,6 +175,7 @@ class _CheckPageState extends State<CheckPage> {
                       );
                       if (res) {
                         print('Succesfully posted');
+                        Get.snackbar('Success', 'Succesfully Posted To Checking!');
                       } else {
                         print('Post failed');
                       }
