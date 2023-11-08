@@ -1,8 +1,22 @@
 import 'package:dth/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-AppBarTheme dthAppbarTheme = const AppBarTheme(
+TextTheme textTheme = TextTheme(
+  bodySmall: TextStyle(
+    fontSize: 14.sp,
+  ),
+  bodyMedium: TextStyle(
+    fontSize: 16.sp,
+  ),
+  bodyLarge: TextStyle(
+    fontSize: 20.sp,
+  ),
+);
+
+AppBarTheme dthAppbarTheme = AppBarTheme(
+  toolbarHeight: 60.h,
   systemOverlayStyle: SystemUiOverlayStyle.dark,
   backgroundColor: Colors.transparent,
   centerTitle: true,
@@ -10,7 +24,7 @@ AppBarTheme dthAppbarTheme = const AppBarTheme(
     fontWeight: FontWeight.bold,
     color: Colors.black,
     fontFamily: 'Poppins',
-    fontSize: 22,
+    fontSize: 20,
     letterSpacing: -1,
   ),
 );

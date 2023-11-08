@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -20,18 +19,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => VendorProvider()),
         ChangeNotifierProvider(create: (context) => TeamProvider()),
         // ChangeNotifierProvider(create: (context) => DateTimeProvider()),
       ],
-      builder: (context, child) => GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'DTS Exports LLP',
-        theme: dthAppThem,
-        home: const SplashScreen(),
+      builder: (context, child) => ScreenUtilInit(
+        ensureScreenSize: false,
+        designSize: Size(540, 960),
+        builder: (context, child) => GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'DTS Exports LLP',
+          theme: dthAppThem,
+          home: const SplashScreen(),
+        ),
       ),
     );
   }

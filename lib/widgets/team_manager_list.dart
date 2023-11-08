@@ -1,3 +1,4 @@
+import 'package:dth/widgets/spacer.dart';
 import 'package:dth/widgets/team_item_list.dart';
 import 'package:flutter/material.dart';
 
@@ -68,9 +69,7 @@ class _TeamManagerWidgetState extends State<TeamManagerWidget> {
                         icon: const Icon(Icons.add),
                         label: const Text('ADD'),
                       )
-                    : const SizedBox(
-                        height: 40,
-                      ),
+                    : hSpace(40),
               ],
             ),
           ),

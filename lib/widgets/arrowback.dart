@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ArrowBack extends StatelessWidget {
   const ArrowBack({super.key});
@@ -8,8 +9,8 @@ class ArrowBack extends StatelessWidget {
     return InkWell(
       onTap: () => Navigator.pop(context),
       child: Container(
-        height: 35,
-        width: 35,
+        height: 35.h,
+        width: 35.w,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(180),
           color: Colors.black26,

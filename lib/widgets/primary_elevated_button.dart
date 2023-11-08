@@ -32,7 +32,7 @@ class PrimaryElevatedButton extends StatelessWidget {
       child: Text(
         label,
         style: const TextStyle(
-          fontSize: 16,
+          fontSize: 15,
           fontWeight: FontWeight.bold,
         ),
       ),

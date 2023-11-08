@@ -1,17 +1,14 @@
 // import 'package:dth/screens/standard/widgets/camera.dart';
 import 'package:dth/screens/standard/widgets/camera.dart';
-import 'package:dth/screens/standard/widgets/texturedrilldown.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/widgets/appbar_underline.dart';
 import 'package:dth/widgets/drop_down_menu_field.dart';
 import 'package:dth/widgets/headertext.dart';
-import 'package:dth/screens/standard/widgets/boxdrilldown.dart';
-import 'package:dth/screens/standard/widgets/colordrilldown.dart';
-import 'package:dth/screens/standard/widgets/sizedrilldown.dart';
 import 'package:dth/widgets/open_camera_button.dart';
 import 'package:dth/widgets/primary_elevated_button.dart';
 import 'package:dth/widgets/spacer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -48,12 +45,11 @@ class _AcceptPageState extends State<AcceptPage> {
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
-              padding:
-                  EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
+              padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
               child: Column(
                 children: [
                   Container(
-                    height: 60,
+                    height: 60.h,
                     decoration: BoxDecoration(
                         // borderRadius: BorderRadius.circular(20),
                         color: Colors.blue.shade100),
@@ -64,7 +60,6 @@ class _AcceptPageState extends State<AcceptPage> {
                       ),
                     ),
                   ),
-                 
                   hSpace(15),
                   DropdownMenuField(
                     controller: TextEditingController(),
@@ -79,14 +74,13 @@ class _AcceptPageState extends State<AcceptPage> {
                       print(selectedVal.toString());
                     },
                   ),
-                  
                   hSpace(15),
                   DropdownMenuField(
                     controller: TextEditingController(),
                     fieldLabel: 'Size:',
                     dropDownLabel: 'Select Size',
                     dropdownEntries: const [
-                       DropdownMenuEntry(value: '32', label: '32'),
+                      DropdownMenuEntry(value: '32', label: '32'),
                       DropdownMenuEntry(value: '40', label: '40'),
                     ],
                     onSelected: (selectedVal) {
@@ -94,12 +88,12 @@ class _AcceptPageState extends State<AcceptPage> {
                     },
                   ),
                   hSpace(15),
-                   DropdownMenuField(
+                  DropdownMenuField(
                     controller: TextEditingController(),
                     fieldLabel: 'Color:',
                     dropDownLabel: 'Select Color',
                     dropdownEntries: const [
-                       DropdownMenuEntry(value: 'RED', label: 'RED'),
+                      DropdownMenuEntry(value: 'RED', label: 'RED'),
                       DropdownMenuEntry(value: 'BlACK', label: 'BlACK'),
                     ],
                     onSelected: (selectedVal) {
@@ -107,13 +101,11 @@ class _AcceptPageState extends State<AcceptPage> {
                     },
                   ),
                   hSpace(15),
-                   DropdownMenuField(
+                  DropdownMenuField(
                     controller: TextEditingController(),
                     fieldLabel: 'Texture:',
                     dropDownLabel: 'Select Texture',
-                    dropdownEntries: const [
-                     
-                    ],
+                    dropdownEntries: const [],
                     onSelected: (selectedVal) {
                       print(selectedVal.toString());
                     },
@@ -125,9 +117,9 @@ class _AcceptPageState extends State<AcceptPage> {
                       Text(
                         'Process:',
                         style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
                       ),
                       Text(
                         'RAW MATERIAL',
@@ -142,13 +134,13 @@ class _AcceptPageState extends State<AcceptPage> {
                       Text(
                         'Material Qty:',
                         style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16.sp,
+                        ),
                       ),
                       Container(
-                        height: 30,
-                        width: 60,
+                        height: 30.h,
+                        width: 60.w,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
                             border: Border.all(color: Colors.transparent)),
@@ -156,9 +148,7 @@ class _AcceptPageState extends State<AcceptPage> {
                           child: TextField(
                             controller: _quantityController,
                             style: const TextStyle(
-                                fontSize: 16,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w400),
+                                fontSize: 16, color: Colors.black, fontWeight: FontWeight.w400),
                             decoration: const InputDecoration(
                               focusedBorder: InputBorder.none,
                             ),
@@ -168,30 +158,23 @@ class _AcceptPageState extends State<AcceptPage> {
                     ],
                   ),
                   hSpace(35),
-                  // TextButton.icon(
-                  //     icon: const Icon(Icons.camera_alt_outlined),
-                  //     onPressed: () {
-                  //       Get.to(CameraScreen());
-                  //     },
-                  //     label: Text(
-                  //       'Add Photo',
-                  //       style: labelText(),
-                  //     )),
-                  OpenCameraButton(label: 'Open Camera', onTap: () {
-                    Get.to(CameraScreen());
-                  },),
+                  OpenCameraButton(
+                    label: 'Open Camera',
+                    onTap: () {
+                      Get.to(CameraScreen());
+                    },
+                  ),
                   hSpace(20),
                   TextButton(
                       onPressed: () {},
-                      child: Text(
+                      child: const Text(
                         'Add More +',
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontSize: 16),
                       )),
                   hSpace(30),
                   SizedBox(
-                    width: 120,
-                    child: PrimaryElevatedButton(
-                        onPressed: () {}, label: 'SUBMIT'),
+                    width: 100,
+                    child: PrimaryElevatedButton(onPressed: () {}, label: 'SUBMIT'),
                   ),
                 ],
               ),

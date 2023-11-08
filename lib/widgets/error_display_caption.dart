@@ -2,6 +2,7 @@ import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/widgets/spacer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ErrorDisplayCaption extends StatefulWidget {
   const ErrorDisplayCaption({
@@ -20,7 +21,7 @@ class _ErrorDisplayCaptionState extends State<ErrorDisplayCaption> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5),
-      padding: const EdgeInsets.all(10),
+      padding: EdgeInsets.all(10.h),
       decoration: BoxDecoration(
         color: formFieldErrorColor.withOpacity(0.25),
         border: Border.all(color: formFieldErrorColor.withOpacity(0.5)),

@@ -4,6 +4,7 @@ import 'package:dth/widgets/primary_elevated_button.dart';
 import 'package:dth/widgets/spacer.dart';
 import 'package:dth/widgets/textformfield.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class LoginPg extends StatelessWidget {
@@ -20,7 +21,7 @@ class LoginPg extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX + 10),
+          padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX + 10.w),
           child: Form(
             key: _formKey,
             child: SingleChildScrollView(
@@ -31,7 +32,7 @@ class LoginPg extends StatelessWidget {
                   Image.asset(
                     'assets/images/appbar.jpg',
                     fit: BoxFit.contain,
-                    width: 200,
+                    width: 200.h,
                   ),
                   hSpace(50),
                   CustomTextFormField(

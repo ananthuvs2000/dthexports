@@ -1,5 +1,6 @@
 import 'package:dth/theme/layout.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SubDashboardItem extends StatelessWidget {
   const SubDashboardItem({
@@ -18,7 +19,7 @@ class SubDashboardItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(dashboardItemBorderRadius),
       child: Ink(
         width: 200,
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Colors.white,
           border: Border.all(

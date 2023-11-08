@@ -7,6 +7,7 @@ import 'package:dth/theme/layout.dart';
 import 'package:dth/widgets/dashboard_option_container.dart';
 import 'package:dth/widgets/spacer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
@@ -35,11 +36,11 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 100),
+                  padding: EdgeInsets.only(top: 100.h),
                   child: Center(
                     child: Image.asset(
                       'assets/images/appbar.jpg',
-                      height: 100,
+                      height: 100.h,
                       fit: BoxFit.fitHeight,
                     ),
                   ),

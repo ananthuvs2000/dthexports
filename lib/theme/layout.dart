@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-const double appBarTitleImageWidth = 70;
+final double appBarTitleImageWidth = 70.w;
 const double formFieldBorderRadius = 10;
 const double teamManagerBorderRadius = 10;
 const double dashboardItemBorderRadius = 10;
 
 class PageLayout {
-  static double get pagePaddingX => 20;
+  static double get pagePaddingX => 20.w;
 }
 
 class TextStyles {
-  static TextStyle appBarHeading = const TextStyle(
-    fontSize: 20,
+  static TextStyle appBarHeading = TextStyle(
+    fontSize: 21.sp,
     fontWeight: FontWeight.bold,
     letterSpacing: 0,
   );

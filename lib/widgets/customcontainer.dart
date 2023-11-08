@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Customcontainer extends StatelessWidget {
   const Customcontainer({Key? key, required this.text, required this.colors}) : super(key: key);
@@ -11,8 +12,8 @@ class Customcontainer extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: colors),
-        height: 100,
-        width: 400,
+        height: 100.h,
+        width: 400.w,
         child: Center(
             child: Text(
           text,

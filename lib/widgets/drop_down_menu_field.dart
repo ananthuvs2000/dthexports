@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DropdownMenuField extends StatefulWidget {
   const DropdownMenuField({
@@ -40,7 +41,7 @@ class _DropdownMenuFieldState extends State<DropdownMenuField> {
           enableSearch: false,
           enableFilter: false,
           controller: widget.controller,
-          width: widget.menuWidth ?? 200,
+          width: widget.menuWidth ?? 220.w,
           label: Text(
             widget.dropDownLabel,
             style: const TextStyle(

@@ -55,19 +55,20 @@ class _StandardScreenState extends State<StandardScreen> {
                           builder: (context) => AlertDialog(
                             actions: [
                               Center(
-                                  child: SubDashboardItem(
-                                      onTap: () {
-                                        Get.off(const AcceptPage(),
-                                            transition: Transition.upToDown);
-                                      },
-                                      label: 'ACCEPT')),
+                                child: SubDashboardItem(
+                                    onTap: () {
+                                      Get.off(const AcceptPage(), transition: Transition.upToDown);
+                                    },
+                                    label: 'ACCEPT'),
+                              ),
                               hSpace(10),
                               Center(
-                                  child: SubDashboardItem(
-                                      onTap: () {
-                                        Get.off(const CheckPage(), transition: Transition.downToUp);
-                                      },
-                                      label: 'CHECK')),
+                                child: SubDashboardItem(
+                                    onTap: () {
+                                      Get.off(const CheckPage(), transition: Transition.downToUp);
+                                    },
+                                    label: 'CHECK'),
+                              ),
                             ],
                             title: const Center(child: MainHeading(text: 'Incoming')),
                           ),

@@ -1,6 +1,7 @@
 import 'package:dth/theme/layout.dart';
 import 'package:dth/widgets/spacer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DashboardOptionContainer extends StatelessWidget {
   const DashboardOptionContainer({
@@ -22,7 +23,7 @@ class DashboardOptionContainer extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(10),
       child: Ink(
-        width: 250,
+        width: 300.w,
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           border: Border.all(color: Colors.black.withOpacity(0.25)),
