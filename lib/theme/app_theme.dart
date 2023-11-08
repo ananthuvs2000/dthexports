@@ -9,7 +9,6 @@ const mainFont = 'Instrument';
 AppBarTheme dthAppbarTheme = AppBarTheme(
   toolbarHeight: 60.h,
   systemOverlayStyle: SystemUiOverlayStyle.dark,
-  backgroundColor: Colors.transparent,
   centerTitle: true,
   titleTextStyle: const TextStyle(
     fontWeight: FontWeight.bold,
@@ -30,7 +29,7 @@ DropdownMenuThemeData dropdownMenuThemeData = DropdownMenuThemeData(
     ),
     focusColor: Colors.red,
     isDense: true,
-    // contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+    contentPadding: const EdgeInsets.symmetric(horizontal: 10),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(globalBorderRadius),
       borderSide: BorderSide(

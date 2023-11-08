@@ -31,7 +31,7 @@ class NumberEntryField extends StatelessWidget {
           ),
         ),
         Flexible(
-          flex: 1,
+          flex: 3,
           child: DthTextField(
             hintText: 'XX.XX KG',
             controller: controller,

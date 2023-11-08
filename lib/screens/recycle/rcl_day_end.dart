@@ -1,4 +1,5 @@
 import 'package:dth/theme/layout.dart';
+import 'package:dth/widgets/appbar_underline.dart';
 import 'package:dth/widgets/box_info_display.dart';
 import 'package:dth/widgets/drop_down_menu_field.dart';
 import 'package:dth/widgets/dt_text_field.dart';
@@ -19,124 +20,104 @@ class RecycleDayEndScreen extends StatefulWidget {
 class _RecycleDayEndPageState extends State<RecycleDayEndScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          image: AssetImage('assets/images/bg.jpg'),
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        scrolledUnderElevation: 0,
+        elevation: 0,
+        title: const Text('Recycle Day End'),
+        bottom: appBarUnderline,
       ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          scrolledUnderElevation: 0,
-          elevation: 0,
-          backgroundColor: Colors.white,
-          title: const Text('Recycle Day End'),
-          bottom: PreferredSize(
-            preferredSize: const Size(double.infinity, 1),
-            child: Container(
-              height: 1,
-              color: Colors.black.withOpacity(0.25),
-            ),
-          ),
-        ),
-        body: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
-            child: Column(
-              children: [
-                Expanded(
-                  child: ListView(
-                    physics: const BouncingScrollPhysics(),
-                    shrinkWrap: true,
-                    children: [
-                      hSpace(15),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          OpenCameraButton(
-                            label: 'Take Photo',
-                            onTap: () {},
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
+          child: Column(
+            children: [
+              Expanded(
+                child: ListView(
+                  physics: const BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  children: [
+                    hSpace(15),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        OpenCameraButton(
+                          label: 'Take Photo',
+                          onTap: () {},
+                        ),
+                        wSpace(20),
+                        // Field to Enter Value
+                        Expanded(
+                          child: Column(
+                            children: [
+                              const Text(
+                                'Enter Value Shown',
+                                textAlign: TextAlign.center,
+                                maxLines: 2,
+                              ),
+                              DthTextField(
+                                hintText: 'XX.XXX KG',
+                                controller: TextEditingController(),
+                                validator: (value) {
+                                  return null;
+                                },
+                              ),
+                            ],
                           ),
-                          wSpace(20),
-                          // Field to Enter Value
-                          Expanded(
-                            child: Column(
-                              children: [
-                                const Text(
-                                  'Enter Value Shown',
-                                  textAlign: TextAlign.center,
-                                  maxLines: 2,
-                                ),
-                                DthTextField(
-                                  hintText: 'XX.XXX KG',
-                                  controller: TextEditingController(),
-                                  validator: (value) {
-                                    return null;
-                                  },
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                      hSpace(15),
-                      DropdownMenuField(
-                        controller: TextEditingController(),
-                        fieldLabel: 'Box No.',
-                        dropDownLabel: 'Select Box',
-                        dropdownEntries: const [],
-                        onSelected: (selectedVal) {},
-                      ),
+                        )
+                      ],
+                    ),
+                    hSpace(15),
+                    DropdownMenuField(
+                      controller: TextEditingController(),
+                      fieldLabel: 'Box No.',
+                      dropDownLabel: 'Select Box',
+                      dropdownEntries: const [],
+                      onSelected: (selectedVal) {},
+                    ),
 
-                      /// Details of Stored Info Of Selected Box
-                      hSpace(10),
-                      const BoxInfoDisplay(
-                          boxNumber: '12134',
-                          boxType: '25425',
-                          boxSize: '235245',
-                          boxWeight: '355'),
-                      // Auto Calculated Field
-                      hSpace(15),
-                      const Divider(),
-                      hSpace(5),
-                      const DynamicFieldRow(label: 'Batch No:', value: 'Displayed'),
-                      const DynamicFieldRow(label: 'Output QTY:', value: 'Calculated'),
-                      const DynamicFieldRow(label: 'Process:', value: 'Displayed'),
-                      const DynamicFieldRow(label: 'Status:', value: 'Displayed'),
-                      const DynamicFieldRow(label: 'Wastage:', value: 'Displayed'),
-                      const DynamicFieldRow(label: 'Wastage %:', value: 'Calculated %'),
-                      hSpace(10),
-                      //! Worker Team Area
-                      TeamManagerWidget(
-                        editable: true,
-                        teamList: [
-                          WorkerData(id: 10, name: 'Arjun'),
-                          WorkerData(id: 10, name: 'Arjun'),
-                        ],
-                      ),
+                    /// Details of Stored Info Of Selected Box
+                    hSpace(10),
+                    const BoxInfoDisplay(
+                        boxNumber: '12134', boxType: '25425', boxSize: '235245', boxWeight: '355'),
+                    // Auto Calculated Field
+                    hSpace(15),
+                    const Divider(),
+                    hSpace(5),
+                    const DynamicFieldRow(label: 'Batch No:', value: 'Displayed'),
+                    const DynamicFieldRow(label: 'Output QTY:', value: 'Calculated'),
+                    const DynamicFieldRow(label: 'Process:', value: 'Displayed'),
+                    const DynamicFieldRow(label: 'Status:', value: 'Displayed'),
+                    const DynamicFieldRow(label: 'Wastage:', value: 'Displayed'),
+                    const DynamicFieldRow(label: 'Wastage %:', value: 'Calculated %'),
+                    // No. Of Days Counter
+                    const DynamicFieldRow(label: 'No. Of Days:', value: '0'),
+                    //! Worker Team Area
+                    hSpace(15),
+                    TeamManagerWidget(
+                      editable: true,
+                      teamList: [
+                        WorkerData(id: 10, name: 'Arjun'),
+                        WorkerData(id: 10, name: 'Arjun'),
+                      ],
+                    ),
 
-                      hSpace(15),
-                      // No. Of Days Counter
-                      const DynamicFieldRow(label: 'No. Of Days:', value: '0'),
-                      // End of listview
-                      hSpace(15),
-                    ],
-                  ),
+                    // End of listview
+                    hSpace(15),
+                  ],
                 ),
-                // Main submit button goes here
-                hSpace(10),
-                SizedBox(
-                  width: double.infinity,
-                  child: PrimaryElevatedButton(
-                    onPressed: () {},
-                    label: 'Post',
-                  ),
+              ),
+              // Main submit button goes here
+              hSpace(10),
+              SizedBox(
+                width: double.infinity,
+                child: PrimaryElevatedButton(
+                  onPressed: () {},
+                  label: 'Post',
                 ),
-                hSpace(10),
-              ],
-            ),
+              ),
+              hSpace(10),
+            ],
           ),
         ),
       ),

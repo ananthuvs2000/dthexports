@@ -19,8 +19,7 @@ class _LoadingDisplayCaptionState extends State<LoadingDisplayCaption> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 5),
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
         color: primaryColor.withOpacity(0.25),
         border: Border.all(color: primaryColor.withOpacity(0.5)),
@@ -44,7 +43,7 @@ class _LoadingDisplayCaptionState extends State<LoadingDisplayCaption> {
                 style: TextStyle(
                   color: primaryColor,
                   fontWeight: FontWeight.w500,
-                  fontSize: 15,
+                  fontSize: 14,
                 ),
               ),
             ],

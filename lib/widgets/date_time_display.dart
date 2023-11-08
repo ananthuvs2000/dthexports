@@ -34,6 +34,7 @@ class _DateTimeDisplayState extends State<DateTimeDisplay> {
           Icon(
             Icons.watch_later_outlined,
             color: primaryColor,
+            size: 20,
           ),
           wSpace(10),
           // DateTimeText

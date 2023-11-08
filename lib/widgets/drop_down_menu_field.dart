@@ -32,7 +32,7 @@ class _DropdownMenuFieldState extends State<DropdownMenuField> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Flexible(
-          flex: 1,
+          flex: 2,
           child: Text(
             widget.fieldLabel,
             style: const TextStyle(

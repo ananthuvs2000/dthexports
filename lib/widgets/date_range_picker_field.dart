@@ -1,7 +1,6 @@
 import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/theme/text_sizing.dart';
-import 'package:dth/widgets/spacer.dart';
 import 'package:flutter/material.dart';
 
 class DateRangePicker extends StatefulWidget {
@@ -22,19 +21,27 @@ class DateRangePicker extends StatefulWidget {
 class _DateRangePickerState extends State<DateRangePicker> {
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Flex(
+      direction: Axis.horizontal,
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          widget.label,
-          style: TextStyles.dynamicFieldLabelStyle,
+        Flexible(
+          flex: 2,
+          child: Text(
+            widget.label,
+            style: TextStyles.dynamicFieldLabelStyle,
+          ),
         ),
-        wSpace(95),
-        Expanded(
+        Flexible(
+          flex: 3,
           child: TextFormField(
             controller: widget.controller,
             onTap: widget.onTap,
             //
             readOnly: true,
+            style: const TextStyle(),
+
             decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
@@ -46,7 +53,7 @@ class _DateRangePickerState extends State<DateRangePicker> {
                 borderSide: BorderSide(
                   color: primaryColor,
                 ),
-                borderRadius: BorderRadius.all(
+                borderRadius: const BorderRadius.all(
                   Radius.circular(formFieldBorderRadius),
                 ),
               ),
@@ -58,14 +65,14 @@ class _DateRangePickerState extends State<DateRangePicker> {
                   color: formFieldErrorColor,
                 ),
               ),
-
-              //
-              hintText: ' Date Range',
+              hintText: 'Date Range',
+              hintStyle: const TextStyle(fontSize: 14),
               errorStyle: const TextStyle(color: formFieldErrorColor),
-              suffixIcon: const Icon(
-                Icons.date_range,
+              suffixIcon: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: Icon(Icons.date_range),
               ),
-              contentPadding: const EdgeInsets.all(10),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
             ),
           ),
         ),

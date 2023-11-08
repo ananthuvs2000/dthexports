@@ -18,105 +18,96 @@ class DespachScreen extends StatefulWidget {
 class _DespachScreenState extends State<DespachScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/images/bg.jpg'),
-          fit: BoxFit.cover,
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        title: const Text('Dispatch'),
+        bottom: appBarUnderline,
       ),
-      child: Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          title: const Text('Dispatch'),
-          bottom: appBarUnderline,
-        ),
-        backgroundColor: Colors.transparent,
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
-          child: Column(
-            children: [
-              Expanded(
-                child: ListView(
-                  shrinkWrap: true,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Order No:',
-                          style: headerText(),
-                        ),
-                        OrderDropdownWidget()
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Process',
-                          style: headerText(),
-                        ),
-                        Text(
-                          'Threading/Wefting',
-                          style: labelText(),
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Box No:',
-                          style: headerText(),
-                        ),
-                        Text(
-                          'Display Box No',
-                          style: labelText(),
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    ...List.generate(
-                        2,
-                        (index) => Text(
-                              'Order Items',
-                              style: labelText(),
-                            )),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Team:',
-                          style: headerText(),
-                        ),
-                        TeamDropdownWidget()
-                      ],
-                    ),
-                    const DespachTableWidget(),
-                  ],
-                ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView(
+                shrinkWrap: true,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Order No:',
+                        style: headerText(),
+                      ),
+                      OrderDropdownWidget()
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Process',
+                        style: headerText(),
+                      ),
+                      Text(
+                        'Threading/Wefting',
+                        style: labelText(),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Box No:',
+                        style: headerText(),
+                      ),
+                      Text(
+                        'Display Box No',
+                        style: labelText(),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  ...List.generate(
+                      2,
+                      (index) => Text(
+                            'Order Items',
+                            style: labelText(),
+                          )),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Team:',
+                        style: headerText(),
+                      ),
+                      TeamDropdownWidget()
+                    ],
+                  ),
+                  const DespachTableWidget(),
+                ],
               ),
-              hSpace(10),
-              SizedBox(
-                width: double.infinity,
-                child: PrimaryElevatedButton(
-                  onPressed: () {},
-                  label: 'SUBMIT',
-                ),
+            ),
+            hSpace(10),
+            SizedBox(
+              width: double.infinity,
+              child: PrimaryElevatedButton(
+                onPressed: () {},
+                label: 'SUBMIT',
               ),
-              hSpace(10),
-            ],
-          ),
+            ),
+            hSpace(10),
+          ],
         ),
       ),
     );

@@ -58,7 +58,8 @@ class _CheckPageState extends State<CheckPage> {
         padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
         child: Form(
           key: _formKey,
-          child: Column(
+          child: ListView(
+            shrinkWrap: true,
             children: [
               //! DateTime from API Consumer
               hSpace(15),
@@ -141,28 +142,23 @@ class _CheckPageState extends State<CheckPage> {
               hSpace(25),
 
               // Submit Button
-              const Spacer(),
-              SizedBox(
-                width: double.infinity,
-                child: PrimaryElevatedButton(
-                  onPressed: () async {
-                    final res = await CheckingProvider().postToCheck(
-                      _vendorController.text,
-                      _vendorController.text,
-                      _quantityController.text,
-                      _teamController.text,
-                    );
-                    if (res) {
-                      print('Succesfully posted');
-                      Get.snackbar('Success', 'Succesfully Posted To Checking!',
-                          snackPosition: SnackPosition.BOTTOM,
-                          duration: const Duration(seconds: 1));
-                    } else {
-                      print('Post failed');
-                    }
-                  },
-                  label: 'Post',
-                ),
+              PrimaryElevatedButton(
+                onPressed: () async {
+                  final res = await CheckingProvider().postToCheck(
+                    _vendorController.text,
+                    _vendorController.text,
+                    _quantityController.text,
+                    _teamController.text,
+                  );
+                  if (res) {
+                    print('Succesfully posted');
+                    Get.snackbar('Success', 'Succesfully Posted To Checking!',
+                        snackPosition: SnackPosition.BOTTOM, duration: const Duration(seconds: 1));
+                  } else {
+                    print('Post failed');
+                  }
+                },
+                label: 'Post',
               ),
               hSpace(10),
             ],

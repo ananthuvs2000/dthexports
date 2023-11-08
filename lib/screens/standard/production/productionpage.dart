@@ -6,7 +6,6 @@ import 'package:dth/widgets/headertext.dart';
 import 'package:dth/widgets/spacer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 class ProductionPage extends StatefulWidget {
   const ProductionPage({super.key});

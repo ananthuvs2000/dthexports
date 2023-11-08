@@ -129,12 +129,12 @@ class _AcceptPageState extends State<AcceptPage> {
                 ),
               ),
               // Submit Button
-              hSpace(10),
-              SizedBox(
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 5),
+                color: Colors.white,
                 width: double.infinity,
                 child: PrimaryElevatedButton(onPressed: () {}, label: 'Submit'),
               ),
-              hSpace(10),
             ],
           ),
         ),

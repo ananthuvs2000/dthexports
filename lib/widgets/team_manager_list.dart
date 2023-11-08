@@ -1,6 +1,7 @@
 import 'package:dth/widgets/spacer.dart';
 import 'package:dth/widgets/team_item_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TeamManagerWidget extends StatefulWidget {
   const TeamManagerWidget({
@@ -27,7 +28,7 @@ class _TeamManagerWidgetState extends State<TeamManagerWidget> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.zero,
-      margin: const EdgeInsets.symmetric(horizontal: 10),
+      margin: EdgeInsets.symmetric(horizontal: 10.w),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: Colors.white.withOpacity(1),
