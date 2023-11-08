@@ -56,36 +56,37 @@ class _DayStartState extends State<DayStart> {
                 BoxInfoDisplay(
                     boxNumber: 'No.', boxType: 'Type', boxSize: 'Size', boxWeight: 'Weight'),
                 const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Process:  ',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(right: 8),
-                      alignment: Alignment.center,
-                      height: 50,
-                      width: 150,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(
-                            color: Colors.grey.shade700,
-                          )),
-                      child: Text(
-                        'Display Process',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Text(
+                //       'Process:  ',
+                //       style: TextStyle(
+                //         fontWeight: FontWeight.bold,
+                //         fontSize: 16,
+                //       ),
+                //     ),
+                //     Container(
+                //       margin: const EdgeInsets.only(right: 8),
+                //       alignment: Alignment.center,
+                //       height: 50,
+                //       width: 150,
+                //       decoration: BoxDecoration(
+                //           borderRadius: BorderRadius.circular(8),
+                //           border: Border.all(
+                //             color: Colors.grey.shade700,
+                //           )),
+                //       child: Text(
+                //         'Display Process',
+                //         style: TextStyle(
+                //           fontWeight: FontWeight.w500,
+                //           fontSize: 16,
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                DynamicFieldRow(label: 'Process', value: 'Display Process'),
                 hSpace(15),
                 DropdownMenuField(
                   controller: TextEditingController(),
@@ -135,25 +136,8 @@ class _DayStartState extends State<DayStart> {
                 const SizedBox(
                   height: 10,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Material Weight',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                    Text(
-                      'Calculate Wt. & Display',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ],
-                ),
+                
+                DynamicFieldRow(label: 'Material Weight', value: 'Calculate Weight&Display'),
                 hSpace(15),
                 TeamManagerWidget(
                   editable: true,

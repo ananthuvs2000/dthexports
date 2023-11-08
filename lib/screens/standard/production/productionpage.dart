@@ -1,9 +1,11 @@
 import 'package:dth/screens/standard/production/dayend.dart';
 import 'package:dth/screens/standard/production/daystart.dart';
 import 'package:dth/theme/layout.dart';
+import 'package:dth/theme/text_sizing.dart';
 import 'package:dth/widgets/appbar_underline.dart';
 import 'package:dth/widgets/headertext.dart';
 import 'package:dth/widgets/spacer.dart';
+import 'package:dth/widgets/sub_dashboard_option.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,38 +28,33 @@ class _ProductionPageState extends State<ProductionPage> {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            hSpace(100),
-            InkWell(
-              onTap: () => Get.to(const DayStart()),
-              child: Container(
-                height: 80,
-                width: 150,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8), color: Colors.grey.shade300),
-                child: Center(
-                    child: Text(
-                  'DAY START',
-                  style: headerText(),
-                )),
+            
+           Text(
+                'Production',
+                style: TextStyles.veryLargeHeading,
               ),
-            ),
-            const SizedBox(height: 25),
-            InkWell(
-              onTap: () => Get.to(const DayEndScreen()),
-              child: Container(
-                height: 80,
-                width: 150,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8), color: Colors.grey.shade300),
-                child: Center(
-                    child: Text(
-                  'DAY END',
-                  style: headerText(),
-                )),
-              ),
-            ),
+              hSpace(15),
+              SubDashboardItem(
+                  onTap: () {
+                    Get.to(
+                      const DayStart(),
+                      transition: Transition.rightToLeft,
+                    );
+                  },
+                  label: 'Day Start'),
+            
+              hSpace(10),
+              SubDashboardItem(
+                  onTap: () {
+                    Get.to(
+                      const DayEndScreen(),
+                      transition: Transition.rightToLeft,
+                    );
+                  },
+                  label: 'Day End'),
           ],
         ),
       ),

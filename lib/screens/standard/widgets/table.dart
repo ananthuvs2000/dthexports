@@ -1,3 +1,4 @@
+import 'package:dth/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class TableWidget extends StatefulWidget {
@@ -20,17 +21,17 @@ class _TableWidgetState extends State<TableWidget> {
                         children: [
                           TableRow(
                             decoration: BoxDecoration(
-                              color: Colors.grey.shade300
+                              color: primaryColor
                             ),
                             children: [
                               TableCell(child: Padding(padding: EdgeInsets.all(8),
-                              child: Text('WORKER'),)),
+                              child: Text('WORKER',style: TextStyle(color: inversePrimaryColor),),)),
                               TableCell(child: Padding(padding: EdgeInsets.all(8),
-                              child: Text('QTY USED'),)),
+                              child: Text('QTY USED',style: TextStyle(color: inversePrimaryColor)),)),
                                TableCell(child: Padding(padding: EdgeInsets.all(8),
-                              child: Text('OUTPUT'),)),
+                              child: Text('OUTPUT',style: TextStyle(color: inversePrimaryColor)),)),
                                TableCell(child: Padding(padding: EdgeInsets.all(8),
-                              child: Text('% WASTAGE'),))
+                              child: Text('% WASTAGE',style: TextStyle(color: inversePrimaryColor)),))
                             ]
                             
                           ),

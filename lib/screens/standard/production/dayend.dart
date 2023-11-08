@@ -4,9 +4,11 @@ import 'package:dth/widgets/appbar_underline.dart';
 import 'package:dth/widgets/box_info_display.dart';
 import 'package:dth/widgets/drop_down_menu_field.dart';
 import 'package:dth/widgets/dt_text_field.dart';
+import 'package:dth/widgets/dynamic_field_row.dart';
 import 'package:dth/widgets/headertext.dart';
 import 'package:dth/widgets/open_camera_button.dart';
 import 'package:dth/widgets/primary_elevated_button.dart';
+import 'package:dth/widgets/secondary_elevated_button.dart';
 import 'package:dth/widgets/spacer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -82,17 +84,7 @@ class _DayEndScreenState extends State<DayEndScreen> {
                         print(selectedVal.toString());
                       },
                     ),
-                    // hSpace(15),
-                    // Container(
-                    //     padding: const EdgeInsets.all(6),
-                    //     alignment: Alignment.center,
-                    //     height: 60,
-                    //     width: MediaQuery.sizeOf(context).width,
-                    //     decoration: BoxDecoration(
-                    //         border: Border.all(color: Colors.black54),
-                    //         borderRadius: BorderRadius.circular(10)),
-                    //     child: Text('DISPLAY THE BASIC STORED INFO OF THAT BOX “DAY START"',
-                    //         style: labelText())),
+                    
                     hSpace(15),
 
                     BoxInfoDisplay(
@@ -101,128 +93,85 @@ class _DayEndScreenState extends State<DayEndScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Process:  ',
-                          style: headerText(),
-                        ),
-                        Container(
-                            alignment: Alignment.center,
-                            height: 40,
-                            width: 180,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.black),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Text('Display Process', style: labelText())),
-                      ],
-                    ),
+               DynamicFieldRow(label: 'Material Weight', value: 'Calculate Weight&Display'),
                     const SizedBox(
                       height: 10,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(Colors.red.shade800),
-                            textStyle: MaterialStateProperty.all<TextStyle>(
-                              const TextStyle(
-                                fontSize: 16,
-                              ),
-                            ),
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                            ),
-                          ),
-                          onPressed: () {
-                            Get.snackbar('OPEN CAMERA', '', snackPosition: SnackPosition.BOTTOM);
-                          },
-                          child: const Text(
-                            "PRS. COMPLETED",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Container(
-                            alignment: Alignment.center,
-                            height: 40,
-                            width: 150,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.black),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Text('APPLY FORMULA', style: labelText())),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(Colors.red.shade800),
-                            textStyle: MaterialStateProperty.all<TextStyle>(
-                              const TextStyle(
-                                fontSize: 16,
-                              ),
-                            ),
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                            ),
-                          ),
-                          onPressed: () {},
-                          child: const Text(
-                            "BALANCE:",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Container(
-                            alignment: Alignment.center,
-                            height: 40,
-                            width: 150,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.black),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Text('APPLY FORMULA', style: labelText())),
-                      ],
-                    ),
+                    hSpace(10),
+                    SecondaryElevatedButton(onPressed: () {
+                      
+                    }, label: 'PRS Completed'),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     ElevatedButton(
+                    //       style: ButtonStyle(
+                    //         backgroundColor: MaterialStateProperty.all<Color>(Colors.red.shade800),
+                    //         textStyle: MaterialStateProperty.all<TextStyle>(
+                    //           const TextStyle(
+                    //             fontSize: 16,
+                    //           ),
+                    //         ),
+                    //         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    //           RoundedRectangleBorder(
+                    //             borderRadius: BorderRadius.circular(5),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //       onPressed: () {},
+                    //       child: const Text(
+                    //         "BALANCE:",
+                    //         style: TextStyle(color: Colors.white),
+                    //       ),
+                    //     ),
+                    //     const SizedBox(
+                    //       width: 10,
+                    //     ),
+                    //     Container(
+                    //         alignment: Alignment.center,
+                    //         height: 40,
+                    //         width: 150,
+                    //         decoration: BoxDecoration(
+                    //             border: Border.all(color: Colors.black),
+                    //             borderRadius: BorderRadius.circular(10)),
+                    //         child: Text('APPLY FORMULA', style: labelText())),
+                    //   ],
+                    // ),
+                    
+                    hSpace(10),
+                    SecondaryElevatedButton(onPressed: () {
+                      
+                    }, label: 'Balance'),
                     const SizedBox(
                       height: 10,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                            alignment: Alignment.centerRight,
-                            height: 80,
-                            width: 160,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.black),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Text('TOTAL PRS WASTAGE%', style: labelText())),
-                        Container(
-                            padding: const EdgeInsets.all(5),
-                            alignment: Alignment.center,
-                            height: 80,
-                            width: 160,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.black),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Text('AUTO CALC TOTAL % WASTAGE', style: labelText())),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     Container(
+                    //         alignment: Alignment.centerRight,
+                    //         height: 80,
+                    //         width: 160,
+                    //         decoration: BoxDecoration(
+                    //             border: Border.all(color: Colors.black),
+                    //             borderRadius: BorderRadius.circular(10)),
+                    //         child: Text('TOTAL PRS WASTAGE%', style: labelText())),
+                    //     Container(
+                    //         padding: const EdgeInsets.all(5),
+                    //         alignment: Alignment.center,
+                    //         height: 80,
+                    //         width: 160,
+                    //         decoration: BoxDecoration(
+                    //             border: Border.all(color: Colors.black),
+                    //             borderRadius: BorderRadius.circular(10)),
+                    //         child: Text('AUTO CALC TOTAL % WASTAGE', style: labelText())),
+                    //   ],
+                    // ),
+                    // const SizedBox(
+                    //   height: 20,
+                    // ),
+                    DynamicFieldRow(label: 'Total Process Wastage', value: 'Auto Calc Total% Wastage'),
+                    hSpace(10),
                     const TableWidget(),
                     const SizedBox(
                       height: 20,

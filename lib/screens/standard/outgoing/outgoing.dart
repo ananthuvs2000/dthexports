@@ -5,6 +5,8 @@ import 'package:dth/screens/standard/widgets/sizedrilldown.dart';
 import 'package:dth/screens/standard/widgets/texturedrilldown.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/widgets/appbar_underline.dart';
+import 'package:dth/widgets/drop_down_menu_field.dart';
+import 'package:dth/widgets/dynamic_field_row.dart';
 import 'package:dth/widgets/headertext.dart';
 import 'package:dth/widgets/primary_elevated_button.dart';
 import 'package:dth/widgets/spacer.dart';
@@ -48,213 +50,119 @@ class _OutGoingScreenState extends State<OutGoingScreen> {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
-          child: Column(
-            children: [
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Customer Name:',
-                      style: headerText(),
-                    ),
-                    CustomeDropDown(),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                hSpace(10),
+                DropdownMenuField(
+                  controller: TextEditingController(),
+                  fieldLabel: 'Customer Name',
+                  dropDownLabel: 'Select Customer',
+                  dropdownEntries: const [
+                    DropdownMenuEntry(value: 'Customer 1', label: 'Customer 1'),
+                    DropdownMenuEntry(value: 'Customer 2', label: 'Customer 2'),
+                    
                   ],
+                  onSelected: (selectedVal) {
+                    print(selectedVal.toString());
+                  },
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextButton(
-                      onPressed: () {
-                        updateName();
-                      },
-                      child: Text(
-                        'Generate order No:',
-                        style: labelText(),
-                      )),
-                  Container(
-                    margin: const EdgeInsets.only(right: 8),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: Colors.black54)),
-                    padding: const EdgeInsets.all(5.0),
-                    child: Text(
-                      'ORDER NO: $name',
-                      style: labelText(),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Size: ',
-                    style: headerText(),
-                  ),
-                  SizeDropdownWidget()
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Colour: ',
-                    style: headerText(),
-                  ),
-                  ColorDropdownWidget()
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Box No:',
-                    style: headerText(),
-                  ),
-                  BoxDropdownWidget(),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Texture:',
-                    style: headerText(),
-                  ),
-                  TextureDropdownWidget()
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        'REQ. QTY',
-                        style: headerText(),
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      Container(
-                        padding: const EdgeInsets.only(right: 10),
-                        height: 30,
-                        width: 60,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(color: Colors.transparent)),
-                        child: Center(
-                          child: TextField(
-                            textAlign: TextAlign.center,
-                            controller: _quantityController,
-                            style: const TextStyle(
-                                fontSize: 16, color: Colors.black, fontWeight: FontWeight.w400),
-                            decoration: const InputDecoration(
-                              focusedBorder: InputBorder.none,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Container(
-                      margin: const EdgeInsets.only(right: 8),
-                      alignment: Alignment.center,
-                      height: 35,
-                      width: 110,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Text('Total Qty', style: labelText())),
-                ],
-              ),
-              // Container(height: 60,
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     TextButton(
+                //         onPressed: () {
+                //           updateName();
+                //         },
+                //         child: Text(
+                //           'Generate order No:',
+                //           style: labelText(),
+                //         )),
+                //     Container(
+                //       margin: const EdgeInsets.only(right: 8),
+                //       decoration: BoxDecoration(
+                //           borderRadius: BorderRadius.circular(8),
+                //           border: Border.all(color: Colors.black54)),
+                //       padding: const EdgeInsets.all(5.0),
+                //       child: Text(
+                //         'ORDER NO: $name',
+                //         style: labelText(),
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                hSpace(10),
+               DropdownMenuField(
+                  controller: TextEditingController(),
+                  fieldLabel: 'Size',
+                  dropDownLabel: 'Select Size',
+                  dropdownEntries: const [
+                    
+                    
+                  ],
+                  onSelected: (selectedVal) {
+                    print(selectedVal.toString());
+                  },
+                ),
+                hSpace(10),
 
-              //   child: Column(
-              //      children: [
-              //       RadioListTile(
-              //           title: Text('Yes'),
-              //           value: 'Yes',
-              //           groupValue: selectedOption,
-              //           onChanged: (value) {
-              //             _handleRadioValueChange(value!);
-              //           },
-              //         ),
-              //         RadioListTile(
-              //           title: Text('No'),
-              //           value: 'No',
-              //           groupValue: selectedOption,
-              //           onChanged:  (value) {
-              //             _handleRadioValueChange(value!);
-              //           },
-              //         ),
+               DropdownMenuField(
+                  controller: TextEditingController(),
+                  fieldLabel: 'Colour',
+                  dropDownLabel: 'Select Colour',
+                  dropdownEntries: const [
+                    DropdownMenuEntry(value: 'Red', label: 'Red'),
+                    DropdownMenuEntry(value: 'Green', label: 'Green'),
+                    
+                  ],
+                  onSelected: (selectedVal) {
+                    print(selectedVal.toString());
+                  },
+                ),
+                hSpace(10),
+                DropdownMenuField(
+                  controller: TextEditingController(),
+                  fieldLabel: 'Box No',
+                  dropDownLabel: 'Select Box No',
+                  dropdownEntries: const [
+                    DropdownMenuEntry(value: '15', label: 'Customer 15'),
+                    DropdownMenuEntry(value: 'Customer 25', label: 'Customer 25'),
+                    
+                  ],
+                  onSelected: (selectedVal) {
+                    print(selectedVal.toString());
+                  },
+                ),
+                hSpace(10),
 
-              //     ],
-              //   )
-              // )
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    '2nd Contitioning',
-                    style: headerText(),
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        'YES',
-                        style: labelText(),
-                      ),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                      Text(
-                        'NO',
-                        style: labelText(),
-                      )
-                    ],
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Send For Wefting',
-                    style: headerText(),
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        'YES',
-                        style: labelText(),
-                      ),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                      Text(
-                        'NO',
-                        style: labelText(),
-                      )
-                    ],
-                  )
-                ],
-              ),
-              hSpace(15),
-              PrimaryElevatedButton(
-                onPressed: () {},
-                label: 'ADD MORE',
-              ),
-            ],
+               DropdownMenuField(
+                  controller: TextEditingController(),
+                  fieldLabel: 'Texture',
+                  dropDownLabel: 'Select Texture',
+                  dropdownEntries: const [
+                    
+                  ],
+                  onSelected: (selectedVal) {
+                    print(selectedVal.toString());
+                  },
+                ),
+                hSpace(10),
+                DynamicFieldRow(label: 'Req Qty', value: ''),
+                hSpace(20),
+                
+                DynamicFieldRow(label: '2nd Conditioning', value: 'Yes or No'),
+                hSpace(20),
+                DynamicFieldRow(label: 'Send For Wefting', value: 'Yes or No'),
+                
+                
+                
+                hSpace(30),
+                PrimaryElevatedButton(
+                  onPressed: () {},
+                  label: 'ADD MORE',
+                ),
+              ],
+            ),
           ),
         ),
       ),
