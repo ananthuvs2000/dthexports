@@ -34,14 +34,12 @@ class _DateRangePickerState extends State<DateRangePicker> {
           ),
         ),
         Flexible(
-          flex: 3,
+          flex: 2,
           child: TextFormField(
             controller: widget.controller,
             onTap: widget.onTap,
-            //
             readOnly: true,
             style: const TextStyle(),
-
             decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(

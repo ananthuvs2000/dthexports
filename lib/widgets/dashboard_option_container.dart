@@ -23,17 +23,18 @@ class DashboardOptionContainer extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(globalBorderRadius),
       child: Ink(
-        width: 210.w,
+        width: 250.w,
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
           color: color,
-          borderRadius: BorderRadius.circular(formFieldBorderRadius),
+          borderRadius: BorderRadius.circular(globalBorderRadius),
         ),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(
               icon,
-              size: 30,
+              size: 25,
               color: Colors.white,
             ),
             wSpace(15),

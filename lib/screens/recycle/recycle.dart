@@ -30,9 +30,10 @@ class _ProductionPageState extends State<RecyclePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Standard',
+                'Recycle',
                 style: TextStyles.veryLargeHeading,
               ),
+              hSpace(10),
               SubDashboardItem(
                   onTap: () {
                     Get.to(

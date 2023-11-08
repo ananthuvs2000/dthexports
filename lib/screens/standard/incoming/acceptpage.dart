@@ -37,106 +37,112 @@ class _AcceptPageState extends State<AcceptPage> {
         bottom: appBarUnderline,
       ),
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
-          child: Column(
-            children: [
-              Expanded(
-                child: ListView(
-                  shrinkWrap: true,
-                  children: [
-                    hSpace(15),
-                    DateTimeDisplay(
-                      date: date,
-                      time: time,
-                    ),
-                    hSpace(15),
-                    DropdownMenuField(
-                      controller: TextEditingController(),
-                      fieldLabel: 'Box No:',
-                      dropDownLabel: 'Select Box ',
-                      dropdownEntries: const [
-                        DropdownMenuEntry(value: '1', label: '1'),
-                        DropdownMenuEntry(value: '2', label: '2'),
-                        DropdownMenuEntry(value: '3', label: '3'),
-                      ],
-                      onSelected: (selectedVal) {
-                        print(selectedVal.toString());
-                      },
-                    ),
-                    hSpace(15),
-                    DropdownMenuField(
-                      controller: TextEditingController(),
-                      fieldLabel: 'Size:',
-                      dropDownLabel: 'Select Size',
-                      dropdownEntries: const [
-                        DropdownMenuEntry(value: '32', label: '32'),
-                        DropdownMenuEntry(value: '40', label: '40'),
-                      ],
-                      onSelected: (selectedVal) {
-                        print(selectedVal.toString());
-                      },
-                    ),
-                    hSpace(15),
-                    DropdownMenuField(
-                      controller: TextEditingController(),
-                      fieldLabel: 'Color:',
-                      dropDownLabel: 'Select Color',
-                      dropdownEntries: const [
-                        DropdownMenuEntry(value: 'RED', label: 'RED'),
-                        DropdownMenuEntry(value: 'BlACK', label: 'BlACK'),
-                      ],
-                      onSelected: (selectedVal) {
-                        print(selectedVal.toString());
-                      },
-                    ),
-                    hSpace(15),
-                    DropdownMenuField(
-                      controller: TextEditingController(),
-                      fieldLabel: 'Texture:',
-                      dropDownLabel: 'Select Texture',
-                      dropdownEntries: const [],
-                      onSelected: (selectedVal) {
-                        print(selectedVal.toString());
-                      },
-                    ),
-                    hSpace(15),
-                    const DynamicFieldRow(label: 'Process', value: 'RAW MATERIAL'),
-                    hSpace(25),
-                    NumberEntryField(
-                      label: 'Material Qty',
-                      controller: _quantityController,
-                      validator: (value) {
-                        return '';
-                      },
-                    ),
-                    hSpace(35),
-                    OpenCameraButton(
-                      label: 'Open Camera',
-                      onTap: () {
-                        Get.to(CameraScreen());
-                      },
-                    ),
-                    hSpace(20),
-                    TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          'Add More +',
-                          style: TextStyle(fontSize: 16),
-                        )),
-                    hSpace(30),
-                  ],
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView(
+                padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
+                shrinkWrap: true,
+                children: [
+                  hSpace(15),
+                  DateTimeDisplay(
+                    date: date,
+                    time: time,
+                  ),
+                  hSpace(15),
+                  DropdownMenuField(
+                    controller: TextEditingController(),
+                    fieldLabel: 'Box No:',
+                    dropDownLabel: 'Select Box ',
+                    dropdownEntries: const [
+                      DropdownMenuEntry(value: '1', label: '1'),
+                      DropdownMenuEntry(value: '2', label: '2'),
+                      DropdownMenuEntry(value: '3', label: '3'),
+                    ],
+                    onSelected: (selectedVal) {
+                      print(selectedVal.toString());
+                    },
+                  ),
+                  hSpace(15),
+                  DropdownMenuField(
+                    controller: TextEditingController(),
+                    fieldLabel: 'Size:',
+                    dropDownLabel: 'Select Size',
+                    dropdownEntries: const [
+                      DropdownMenuEntry(value: '32', label: '32'),
+                      DropdownMenuEntry(value: '40', label: '40'),
+                    ],
+                    onSelected: (selectedVal) {
+                      print(selectedVal.toString());
+                    },
+                  ),
+                  hSpace(15),
+                  DropdownMenuField(
+                    controller: TextEditingController(),
+                    fieldLabel: 'Color:',
+                    dropDownLabel: 'Select Color',
+                    dropdownEntries: const [
+                      DropdownMenuEntry(value: 'RED', label: 'RED'),
+                      DropdownMenuEntry(value: 'BlACK', label: 'BlACK'),
+                    ],
+                    onSelected: (selectedVal) {
+                      print(selectedVal.toString());
+                    },
+                  ),
+                  hSpace(15),
+                  DropdownMenuField(
+                    controller: TextEditingController(),
+                    fieldLabel: 'Texture:',
+                    dropDownLabel: 'Select Texture',
+                    dropdownEntries: const [],
+                    onSelected: (selectedVal) {
+                      print(selectedVal.toString());
+                    },
+                  ),
+                  hSpace(15),
+                  const DynamicFieldRow(label: 'Process', value: 'RAW MATERIAL'),
+                  hSpace(25),
+                  NumberEntryField(
+                    label: 'Material Qty',
+                    controller: _quantityController,
+                    validator: (value) {
+                      return '';
+                    },
+                  ),
+                  hSpace(35),
+                  OpenCameraButton(
+                    label: 'Open Camera',
+                    onTap: () {
+                      Get.to(CameraScreen());
+                    },
+                  ),
+                  hSpace(20),
+                  TextButton(
+                      onPressed: () {},
+                      child: const Text(
+                        'Add More +',
+                        style: TextStyle(fontSize: 16),
+                      )),
+                  hSpace(30),
+                ],
+              ),
+            ),
+            // Submit Button
+            Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: PageLayout.pagePaddingX,
+                vertical: 5,
+              ),
+              decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                BoxShadow(
+                  blurRadius: 10,
+                  color: Colors.black.withOpacity(0.25),
                 ),
-              ),
-              // Submit Button
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 5),
-                color: Colors.white,
-                width: double.infinity,
-                child: PrimaryElevatedButton(onPressed: () {}, label: 'Submit'),
-              ),
-            ],
-          ),
+              ]),
+              width: double.infinity,
+              child: PrimaryElevatedButton(onPressed: () {}, label: 'Submit'),
+            ),
+          ],
         ),
       ),
     );

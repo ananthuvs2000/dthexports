@@ -1,3 +1,4 @@
+import 'package:dth/theme/layout.dart';
 import 'package:dth/widgets/spacer.dart';
 import 'package:dth/widgets/team_item_list.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class _TeamManagerWidgetState extends State<TeamManagerWidget> {
         color: Colors.white.withOpacity(1),
         boxShadow: [
           BoxShadow(
-            blurRadius: 10,
+            blurRadius: 5,
             color: Colors.black.withOpacity(0.25),
           )
         ],
@@ -48,8 +49,8 @@ class _TeamManagerWidgetState extends State<TeamManagerWidget> {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.only(
-                topRight: Radius.circular(10),
-                topLeft: Radius.circular(10),
+                topRight: Radius.circular(globalBorderRadius),
+                topLeft: Radius.circular(globalBorderRadius),
               ),
               color: Colors.indigo,
             ),
@@ -58,8 +59,11 @@ class _TeamManagerWidgetState extends State<TeamManagerWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  'TEAM',
-                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  'Team',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 (widget.editable)
                     ? TextButton.icon(
@@ -70,7 +74,7 @@ class _TeamManagerWidgetState extends State<TeamManagerWidget> {
                         icon: const Icon(Icons.add),
                         label: const Text('ADD'),
                       )
-                    : hSpace(40),
+                    : hSpace(30),
               ],
             ),
           ),
@@ -80,10 +84,10 @@ class _TeamManagerWidgetState extends State<TeamManagerWidget> {
             ListView.builder(
               padding: const EdgeInsets.only(
                 top: 0,
-                bottom: 10,
+                bottom: 20,
               ),
               shrinkWrap: true,
-              itemExtent: 50,
+              itemExtent: 50.h,
               physics: const BouncingScrollPhysics(),
               itemCount: widget.teamList.length,
               itemBuilder: (context, index) {

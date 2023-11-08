@@ -42,7 +42,6 @@ class _StandardScreenState extends State<StandardScreen> {
               children: [
                 SubDashboardItem(
                   onTap: () {
-                    // Get.to(const ProductionPage(), transition: Transition.rightToLeft);
                     showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
