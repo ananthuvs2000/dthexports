@@ -13,11 +13,11 @@
 //    var cameraValue;
 //   @override
 //   void initState() {
-    
+
 //     super.initState();
 //     _cameraContRoller=CameraController(cameras![0], ResolutionPreset.high);
 //     cameraValue=_cameraContRoller?.initialize();
-    
+
 //   }
 //   @override
 //   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@
 //             return CameraPreview(_cameraContRoller!);
 //           }
 //           return CircularProgressIndicator();
-          
+
 //         },
 //         future: cameraValue,
 //         ),
@@ -86,7 +86,7 @@ class _CameraScreenState extends State<CameraScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Take Photo'),
+        title: const Text('Take Photo'),
       ),
       body: FutureBuilder<void>(
         future: _initializeControllerFuture,
@@ -96,11 +96,12 @@ class _CameraScreenState extends State<CameraScreen> {
             return CameraPreview(_cameraController!);
           } else {
             // Otherwise, show a loading indicator
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
         },
       ),
       floatingActionButton: FloatingActionButton(
+        shape: const CircleBorder(),
         onPressed: () async {
           try {
             await _initializeControllerFuture;
@@ -112,12 +113,9 @@ class _CameraScreenState extends State<CameraScreen> {
             print('Error: $e');
           }
         },
-        child: Icon(Icons.camera),
+        child: const Icon(Icons.camera),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
-
-
-

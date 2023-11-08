@@ -113,7 +113,7 @@ class _AcceptPageState extends State<AcceptPage> {
                   OpenCameraButton(
                     label: 'Open Camera',
                     onTap: () {
-                      Get.to(CameraScreen());
+                      Get.to(const CameraScreen());
                     },
                   ),
                   hSpace(20),
