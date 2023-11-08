@@ -10,7 +10,7 @@ class NumberEntryField extends StatelessWidget {
   });
   final String label;
   final TextEditingController controller;
-  final String Function(String? value) validator;
+  final String? Function(String? value) validator;
 
   @override
   Widget build(BuildContext context) {

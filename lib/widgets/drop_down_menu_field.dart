@@ -18,7 +18,7 @@ class DropdownMenuField extends StatefulWidget {
   final String? defaultValue;
   final void Function(String) onSelected;
   final List<DropdownMenuItem> dropdownEntries;
-  final String Function(String? value) validator;
+  final String? Function(dynamic value) validator;
 
   @override
   State<DropdownMenuField> createState() => _DropdownMenuFieldState();
@@ -51,7 +51,7 @@ class _DropdownMenuFieldState extends State<DropdownMenuField> {
             enableFeedback: true,
             isExpanded: true,
             borderRadius: BorderRadius.circular(globalBorderRadius),
-            alignment: Alignment.bottomLeft,
+            alignment: Alignment.centerLeft,
             padding: EdgeInsets.zero,
             focusColor: primaryColor,
             icon: const Icon(Icons.keyboard_arrow_down),
@@ -61,14 +61,21 @@ class _DropdownMenuFieldState extends State<DropdownMenuField> {
               fontFamily: mainFont,
               color: Colors.black,
             ),
+
             autovalidateMode: AutovalidateMode.onUserInteraction,
 
             // Dropdown decoration
             decoration: InputDecoration(
+              errorStyle: const TextStyle(
+                fontSize: 12,
+                height: 1,
+                fontFamily: mainFont,
+                color: Colors.red,
+              ),
               hoverColor: primaryColor,
               focusColor: primaryColor,
               isDense: true,
-              alignLabelWithHint: true,
+              alignLabelWithHint: false,
               floatingLabelAlignment: FloatingLabelAlignment.center,
               disabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(globalBorderRadius),
@@ -111,6 +118,7 @@ class _DropdownMenuFieldState extends State<DropdownMenuField> {
             items: widget.dropdownEntries,
             validator: (value) => widget.validator(value),
             onChanged: (value) => widget.onSelected(value),
+            value: widget.defaultValue,
           ),
         ),
       ],

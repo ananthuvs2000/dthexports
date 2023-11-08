@@ -34,9 +34,11 @@ class _CheckPageState extends State<CheckPage> {
   //^ Form Key
   final _formKey = GlobalKey<FormState>();
   //^ Setting all form field controllers
-  final _vendorController = TextEditingController();
   final _quantityController = TextEditingController();
-  final _teamController = TextEditingController();
+  //
+  String _selectedVenue = '';
+  String _selectedVendor = '';
+  String _selectedTeam = '';
 
   @override
   Widget build(BuildContext context) {
@@ -67,16 +69,24 @@ class _CheckPageState extends State<CheckPage> {
               hSpace(20),
               DropdownMenuField(
                 validator: (value) {
-                  return '';
+                  if (value == null) {
+                    return 'Select a venue';
+                  } else {
+                    return null;
+                  }
                 },
                 fieldLabel: 'Venue',
-                dropDownLabel: 'SELECT VENUE',
-                defaultValue: 'IN_HOUSE',
+                dropDownLabel: 'Select the venue',
                 dropdownEntries: const [
-                  DropdownMenuItem(child: Text('In House'), value: 'In House'),
-                  DropdownMenuItem(child: Text('Out Station'), value: 'Out Station'),
+                  DropdownMenuItem(value: 'In-House', child: Text('In House')),
+                  DropdownMenuItem(value: 'Out-Station', child: Text('Out Station')),
                 ],
-                onSelected: (selectedValue) {},
+                onSelected: (value) {
+                  setState(() {
+                    _selectedVenue = value;
+                  });
+                  print(_selectedVenue);
+                },
               ),
               hSpace(15),
 
@@ -85,7 +95,11 @@ class _CheckPageState extends State<CheckPage> {
                 if (vendorProvider.vendors.isNotEmpty) {
                   return DropdownMenuField(
                     validator: (value) {
-                      return '';
+                      if (value == null) {
+                        return 'Select a vendor';
+                      } else {
+                        return null;
+                      }
                     },
                     fieldLabel: 'Vendor',
                     dropDownLabel: 'Select Vendor',
@@ -98,8 +112,10 @@ class _CheckPageState extends State<CheckPage> {
                           ),
                         )
                         .toList(),
-                    onSelected: (selectedVal) {
-                      print(selectedVal);
+                    onSelected: (value) {
+                      setState(() {
+                        _selectedVendor = value;
+                      });
                     },
                   );
                 }
@@ -113,7 +129,7 @@ class _CheckPageState extends State<CheckPage> {
                   if (value == '') {
                     return 'Invalid Number';
                   } else {
-                    return '';
+                    return null;
                   }
                 },
               ),
@@ -124,7 +140,11 @@ class _CheckPageState extends State<CheckPage> {
                 if (teamProvider.teams.isNotEmpty) {
                   return DropdownMenuField(
                     validator: (value) {
-                      return 'Please select a team';
+                      if (value == null) {
+                        return 'Select a team';
+                      } else {
+                        return null;
+                      }
                     },
                     fieldLabel: 'Team',
                     dropDownLabel: 'Select Team',
@@ -137,7 +157,9 @@ class _CheckPageState extends State<CheckPage> {
                         )
                         .toList(),
                     onSelected: (selectedVal) {
-                      print('Team Selected: $selectedVal');
+                      setState(() {
+                        _selectedTeam = selectedVal;
+                      });
                     },
                   );
                 } else {
@@ -150,21 +172,23 @@ class _CheckPageState extends State<CheckPage> {
               PrimaryElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    print('Valid');
+                    print('Form Valid');
+                    final res = CheckingProvider().postToCheck(
+                      _selectedVenue,
+                      _selectedVendor,
+                      _quantityController.text,
+                      _selectedTeam,
+                    );
+                    if (await res) {
+                      print('Succesfully posted');
+                      Get.snackbar('Success', 'Succesfully Posted To Checking!',
+                          snackPosition: SnackPosition.TOP, duration: const Duration(seconds: 1));
+                    } else {
+                      print('Post failed');
+                    }
+                  } else {
+                    print('Form Invalid');
                   }
-                  // final res = await CheckingProvider().postToCheck(
-                  //   _vendorController.text,
-                  //   _vendorController.text,
-                  //   _quantityController.text,
-                  //   _teamController.text,
-                  // );
-                  // if (res) {
-                  //   print('Succesfully posted');
-                  //   Get.snackbar('Success', 'Succesfully Posted To Checking!',
-                  //       snackPosition: SnackPosition.BOTTOM, duration: const Duration(seconds: 1));
-                  // } else {
-                  //   print('Post failed');
-                  // }
                 },
                 label: 'Post',
               ),
