@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       ],
       builder: (context, child) => ScreenUtilInit(
         ensureScreenSize: false,
-        designSize: Size(540, 960),
+        designSize: const Size(540, 960),
         builder: (context, child) => GetMaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'DTS Exports LLP',

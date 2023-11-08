@@ -19,6 +19,7 @@ class SubDashboardItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(dashboardItemBorderRadius),
       child: Ink(
         width: 200,
+        height: 50,
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -31,7 +32,7 @@ class SubDashboardItem extends StatelessWidget {
           child: Text(
             label,
             style: const TextStyle(
-              fontSize: 18,
+              fontSize: 16,
               fontWeight: FontWeight.w600,
             ),
           ),

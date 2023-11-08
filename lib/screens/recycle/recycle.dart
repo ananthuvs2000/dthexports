@@ -5,6 +5,7 @@ import 'package:dth/theme/layout.dart';
 import 'package:dth/widgets/spacer.dart';
 import 'package:dth/widgets/sub_dashboard_option.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class RecyclePage extends StatefulWidget {
@@ -30,44 +31,46 @@ class _ProductionPageState extends State<RecyclePage> {
         ),
         //
         backgroundColor: Colors.transparent,
-        body: Stack(children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX, vertical: 200),
-            child: Center(
-              child: Column(
-                children: [
-                  SubDashboardItem(
-                      onTap: () {
-                        Get.to(
-                          const RecycleAddScreen(),
-                          transition: Transition.rightToLeft,
-                        );
-                      },
-                      label: 'RCL-ADD'),
-                  hSpace(15),
-                  SubDashboardItem(
-                      onTap: () {
-                        Get.to(
-                          const RecycleDayStartScreen(),
-                          transition: Transition.rightToLeft,
-                        );
-                      },
-                      label: 'RCL-DAY START'),
-                  hSpace(15),
-                  SubDashboardItem(
+        body: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: PageLayout.pagePaddingX,
+          ),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SubDashboardItem(
                     onTap: () {
                       Get.to(
-                        const RecycleDayEndScreen(),
+                        const RecycleAddScreen(),
                         transition: Transition.rightToLeft,
                       );
                     },
-                    label: 'RCL-DAY END',
-                  ),
-                ],
-              ),
+                    label: 'RCL-ADD'),
+                hSpace(15),
+                SubDashboardItem(
+                    onTap: () {
+                      Get.to(
+                        const RecycleDayStartScreen(),
+                        transition: Transition.rightToLeft,
+                      );
+                    },
+                    label: 'RCL-DAY START'),
+                hSpace(15),
+                SubDashboardItem(
+                  onTap: () {
+                    Get.to(
+                      const RecycleDayEndScreen(),
+                      transition: Transition.rightToLeft,
+                    );
+                  },
+                  label: 'RCL-DAY END',
+                ),
+                hSpace(40),
+              ],
             ),
-          )
-        ]),
+          ),
+        ),
       ),
     );
   }
