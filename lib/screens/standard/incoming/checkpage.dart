@@ -175,7 +175,7 @@ class _CheckPageState extends State<CheckPage> {
                       );
                       if (res) {
                         print('Succesfully posted');
-                        Get.snackbar('Success', 'Succesfully Posted To Checking!');
+                        Get.snackbar('Success', 'Succesfully Posted To Checking!',snackPosition: SnackPosition.BOTTOM,duration: Duration(seconds: 1));
                       } else {
                         print('Post failed');
                       }

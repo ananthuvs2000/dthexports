@@ -2,7 +2,11 @@ import 'package:dth/screens/standard/widgets/boxdrilldown.dart';
 import 'package:dth/screens/standard/widgets/table.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/widgets/appbar_underline.dart';
+import 'package:dth/widgets/box_info_display_card.dart';
+import 'package:dth/widgets/drop_down_menu_field.dart';
+import 'package:dth/widgets/dt_text_field.dart';
 import 'package:dth/widgets/headertext.dart';
+import 'package:dth/widgets/open_camera_button.dart';
 import 'package:dth/widgets/primary_elevated_button.dart';
 import 'package:dth/widgets/spacer.dart';
 import 'package:flutter/material.dart';
@@ -30,73 +34,83 @@ class _DayEndScreenState extends State<DayEndScreen> {
         appBar: AppBar(
           scrolledUnderElevation: 0,
           elevation: 0,
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.white,
           title: const Text('Production Day End'),
           bottom: appBarUnderline,
         ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX - 5),
-          child: Column(
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  child: Column(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX - 5),
+              child: Column(
+                children: [
+                  Column(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(5),
-                            alignment: Alignment.center,
-                            height: 120,
-                            width: 120,
-                            decoration: BoxDecoration(
-                                color: Colors.grey, borderRadius: BorderRadius.circular(8)),
-                            child: const Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(Icons.camera_alt_outlined),
-                                Text('OPEN CAMERA  - BOX WITH MATERIAL '),
-                              ],
+                      hSpace(15),
+                       Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      OpenCameraButton(
+                        label: 'Take Photo',
+                        onTap: () {},
+                      ),
+                      wSpace(20),
+                      // Field to Enter Value
+                      Expanded(
+                        child: Column(
+                          children: [
+                            const Text(
+                              'Enter Value Shown',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, height: 1),
+                              textAlign: TextAlign.center,
+                              maxLines: 2,
                             ),
-                          ),
-                          Container(
-                              padding: const EdgeInsets.all(8),
-                              alignment: Alignment.center,
-                              height: 60,
-                              width: 200,
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.black),
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Text('ENTER WT SHOWN IN SCREEN: XXX', style: labelText())),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Box No:',
-                            style: headerText(),
-                          ),
-                          BoxDropdownWidget(),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                              padding: const EdgeInsets.all(6),
-                              alignment: Alignment.center,
-                              height: 60,
-                              width: 300,
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.black),
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Text('DISPLAY THE BASIC STORED INFO OF THAT BOX “DAY START"',
-                                  style: labelText())),
-                        ],
-                      ),
+                            hSpace(5),
+                            DthTextField(
+                              hintText: 'XX.XXX KG',
+                              controller: TextEditingController(),
+                              validator: (value) {
+                                return null;
+                              },
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                     DropdownMenuField(
+                    controller: TextEditingController(),
+                    fieldLabel: 'Box No:',
+                    dropDownLabel: 'Select Box',
+                    dropdownEntries: const [
+                      DropdownMenuEntry(value: '1', label: '1'),
+                      DropdownMenuEntry(value: '2', label: '2'),
+                      DropdownMenuEntry(value: '3', label: '3'),
+                    ],
+                    onSelected: (selectedVal) {
+                      print(selectedVal.toString());
+                    },
+                  ),
+                  // hSpace(15),
+                      // Container(
+                      //     padding: const EdgeInsets.all(6),
+                      //     alignment: Alignment.center,
+                      //     height: 60,
+                      //     width: MediaQuery.sizeOf(context).width,
+                      //     decoration: BoxDecoration(
+                      //         border: Border.all(color: Colors.black54),
+                      //         borderRadius: BorderRadius.circular(10)),
+                      //     child: Text('DISPLAY THE BASIC STORED INFO OF THAT BOX “DAY START"',
+                      //         style: labelText())),
+                      hSpace(15),
+                  
+                  BoxInfoDisplay(
+                      boxNumber: 'No.',
+                      boxType: 'Type',
+                      boxSize: 'Size',
+                      boxWeight: 'Weight'),
+                  
                       const SizedBox(
                         height: 20,
                       ),
@@ -104,7 +118,7 @@ class _DayEndScreenState extends State<DayEndScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'PROCESS:  ',
+                            'Process:  ',
                             style: headerText(),
                           ),
                           Container(
@@ -114,7 +128,7 @@ class _DayEndScreenState extends State<DayEndScreen> {
                               decoration: BoxDecoration(
                                   border: Border.all(color: Colors.black),
                                   borderRadius: BorderRadius.circular(10)),
-                              child: Text('DISPLAY PROCESS', style: labelText())),
+                              child: Text('Display Process', style: labelText())),
                         ],
                       ),
                       const SizedBox(
@@ -230,15 +244,15 @@ class _DayEndScreenState extends State<DayEndScreen> {
                       ),
                     ],
                   ),
-                ),
+                  hSpace(10),
+                  SizedBox(
+                    width: double.infinity,
+                    child: PrimaryElevatedButton(onPressed: () {}, label: "SUBMIT"),
+                  ),
+                  hSpace(10),
+                ],
               ),
-              hSpace(10),
-              SizedBox(
-                width: double.infinity,
-                child: PrimaryElevatedButton(onPressed: () {}, label: "SUBMIT"),
-              ),
-              hSpace(10),
-            ],
+            ),
           ),
         ),
       ),
