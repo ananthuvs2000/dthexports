@@ -71,13 +71,17 @@ class _RecycleDayStartPageState extends State<RecycleDayStartScreen> {
                     ),
                     hSpace(15),
                     DropdownMenuField(
-                      controller: TextEditingController(),
+                      validator: (value) {
+                        return '';
+                      },
                       fieldLabel: 'Box No.',
                       dropDownLabel: 'Select Box',
-                      dropdownEntries: const [],
-                      onSelected: (selectedVal) {
-                        print('');
-                      },
+                      dropdownEntries: const [
+                        DropdownMenuItem(value: '1', child: Text('1')),
+                        DropdownMenuItem(value: '2', child: Text('2')),
+                        DropdownMenuItem(value: '3', child: Text('3')),
+                      ],
+                      onSelected: (selectedVal) {},
                     ),
 
                     /// Details of Stored Info Of Selected Box

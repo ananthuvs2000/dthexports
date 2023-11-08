@@ -34,7 +34,6 @@ class _CheckPageState extends State<CheckPage> {
   //^ Form Key
   final _formKey = GlobalKey<FormState>();
   //^ Setting all form field controllers
-  final _venueController = TextEditingController();
   final _vendorController = TextEditingController();
   final _quantityController = TextEditingController();
   final _teamController = TextEditingController();
@@ -67,13 +66,15 @@ class _CheckPageState extends State<CheckPage> {
               // Venue
               hSpace(20),
               DropdownMenuField(
-                controller: _venueController,
+                validator: (value) {
+                  return '';
+                },
                 fieldLabel: 'Venue',
                 dropDownLabel: 'SELECT VENUE',
                 defaultValue: 'IN_HOUSE',
                 dropdownEntries: const [
-                  DropdownMenuEntry(value: 'IN_HOUSE', label: 'In House'),
-                  DropdownMenuEntry(value: 'OUT_STATION', label: 'Out Station'),
+                  DropdownMenuItem(child: Text('In House'), value: 'In House'),
+                  DropdownMenuItem(child: Text('Out Station'), value: 'Out Station'),
                 ],
                 onSelected: (selectedValue) {},
               ),
@@ -83,15 +84,17 @@ class _CheckPageState extends State<CheckPage> {
               Consumer<VendorProvider>(builder: (context, vendorData, child) {
                 if (vendorProvider.vendors.isNotEmpty) {
                   return DropdownMenuField(
-                    controller: _vendorController,
+                    validator: (value) {
+                      return '';
+                    },
                     fieldLabel: 'Vendor',
                     dropDownLabel: 'Select Vendor',
                     // from API
                     dropdownEntries: vendorProvider.vendors
                         .map(
-                          (vendor) => DropdownMenuEntry(
+                          (vendor) => DropdownMenuItem(
                             value: vendor.id.toString(),
-                            label: vendor.vendorName,
+                            child: Text(vendor.vendorName),
                           ),
                         )
                         .toList(),
@@ -120,14 +123,16 @@ class _CheckPageState extends State<CheckPage> {
               Consumer(builder: (context, state, child) {
                 if (teamProvider.teams.isNotEmpty) {
                   return DropdownMenuField(
-                    controller: _teamController,
+                    validator: (value) {
+                      return '';
+                    },
                     fieldLabel: 'Team',
                     dropDownLabel: 'Select Team',
                     dropdownEntries: teamProvider.teams
                         .map(
-                          (team) => DropdownMenuEntry(
+                          (team) => DropdownMenuItem(
                             value: team.id.toString(),
-                            label: team.teamName,
+                            child: Text(team.teamName),
                           ),
                         )
                         .toList(),

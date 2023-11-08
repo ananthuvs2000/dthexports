@@ -40,62 +40,39 @@ class _DayStartState extends State<DayStart> {
                 const DynamicFieldRow(label: 'Batch No:', value: 'Display Batch No'),
                 hSpace(15),
                 DropdownMenuField(
-                  controller: TextEditingController(),
+                  validator: (value) {
+                    return '';
+                  },
                   fieldLabel: 'Box No:',
                   dropDownLabel: 'Select Box',
                   dropdownEntries: const [
-                    DropdownMenuEntry(value: '1', label: '1'),
-                    DropdownMenuEntry(value: '2', label: '2'),
-                    DropdownMenuEntry(value: '3', label: '3'),
+                    DropdownMenuItem(value: '1', child: Text('1')),
+                    DropdownMenuItem(value: '2', child: Text('2')),
+                    DropdownMenuItem(
+                      value: '3',
+                      child: Text('3'),
+                    )
                   ],
                   onSelected: (selectedVal) {
                     print(selectedVal.toString());
                   },
                 ),
                 hSpace(15),
-                BoxInfoDisplay(
+                const BoxInfoDisplay(
                     boxNumber: 'No.', boxType: 'Type', boxSize: 'Size', boxWeight: 'Weight'),
                 const SizedBox(height: 20),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: [
-                //     Text(
-                //       'Process:  ',
-                //       style: TextStyle(
-                //         fontWeight: FontWeight.bold,
-                //         fontSize: 16,
-                //       ),
-                //     ),
-                //     Container(
-                //       margin: const EdgeInsets.only(right: 8),
-                //       alignment: Alignment.center,
-                //       height: 50,
-                //       width: 150,
-                //       decoration: BoxDecoration(
-                //           borderRadius: BorderRadius.circular(8),
-                //           border: Border.all(
-                //             color: Colors.grey.shade700,
-                //           )),
-                //       child: Text(
-                //         'Display Process',
-                //         style: TextStyle(
-                //           fontWeight: FontWeight.w500,
-                //           fontSize: 16,
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                DynamicFieldRow(label: 'Process', value: 'Display Process'),
+                const DynamicFieldRow(label: 'Process', value: 'Display Process'),
                 hSpace(15),
                 DropdownMenuField(
-                  controller: TextEditingController(),
+                  validator: (value) {
+                    return '';
+                  },
                   fieldLabel: 'Team',
                   dropDownLabel: 'Select Team',
                   dropdownEntries: const [
-                    DropdownMenuEntry(value: 'Team 1', label: 'Team 1'),
-                    DropdownMenuEntry(value: 'Team 2', label: 'Team 2'),
-                    DropdownMenuEntry(value: 'Team 3', label: 'Team 3'),
+                    DropdownMenuItem(value: 'Team 1', child: Text('Team 1')),
+                    DropdownMenuItem(value: 'Team 2', child: Text('Team 2')),
+                    DropdownMenuItem(value: 'Team 3', child: Text('Team 3')),
                   ],
                   onSelected: (selectedVal) {
                     print(selectedVal.toString());
@@ -136,8 +113,7 @@ class _DayStartState extends State<DayStart> {
                 const SizedBox(
                   height: 10,
                 ),
-                
-                DynamicFieldRow(label: 'Material Weight', value: 'Calculate Weight&Display'),
+                const DynamicFieldRow(label: 'Material Weight', value: 'Calculate Weight&Display'),
                 hSpace(15),
                 TeamManagerWidget(
                   editable: true,

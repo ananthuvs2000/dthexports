@@ -73,10 +73,16 @@ class _RecycleAddScreenState extends State<RecycleAddScreen> {
                   const Divider(),
                   hSpace(10),
                   DropdownMenuField(
-                    controller: TextEditingController(),
+                    validator: (value) {
+                      return '';
+                    },
                     fieldLabel: 'Box No.',
                     dropDownLabel: 'Select Box',
-                    dropdownEntries: const [],
+                    dropdownEntries: const [
+                      DropdownMenuItem(value: '1', child: Text('1')),
+                      DropdownMenuItem(value: '2', child: Text('2')),
+                      DropdownMenuItem(value: '3', child: Text('3')),
+                    ],
                     onSelected: (selectedVal) {},
                   ),
                   hSpace(15),

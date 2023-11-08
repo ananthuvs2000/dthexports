@@ -4,6 +4,7 @@ import 'package:dth/screens/reports/reports_page.dart';
 import 'package:dth/screens/standard/standardpage.dart';
 import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
+import 'package:dth/theme/text_sizing.dart';
 import 'package:dth/widgets/dashboard_option_container.dart';
 import 'package:dth/widgets/spacer.dart';
 import 'package:flutter/material.dart';
@@ -22,29 +23,31 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Stack(children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: EdgeInsets.only(top: 100.h),
-                child: Center(
-                  child: Image.asset(
-                    'assets/images/appbar.jpg',
-                    height: 100.h,
-                    fit: BoxFit.fitHeight,
-                  ),
+              Center(
+                child: Image.asset(
+                  'assets/images/appbar.jpg',
+                  height: 75.h,
+                  fit: BoxFit.fitHeight,
                 ),
               ),
-            ],
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+              hSpace(25),
+              Text(
+                'Dashboard',
+                style: TextStyles.veryLargeHeading,
+              ),
+              GridView.count(
+                shrinkWrap: true,
+                crossAxisCount: 2,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                childAspectRatio: 2.5,
                 children: [
-                  hSpace(50),
                   DashboardOptionContainer(
                     color: primaryColor,
                     icon: Icons.factory_outlined,
@@ -56,7 +59,6 @@ class _HomePageState extends State<HomePage> {
                       );
                     },
                   ),
-                  hSpace(15),
                   DashboardOptionContainer(
                     color: Colors.teal,
                     icon: Icons.recycling_outlined,
@@ -68,7 +70,6 @@ class _HomePageState extends State<HomePage> {
                       );
                     },
                   ),
-                  hSpace(15),
                   DashboardOptionContainer(
                     color: Colors.pink,
                     icon: Icons.list_alt_sharp,
@@ -80,7 +81,6 @@ class _HomePageState extends State<HomePage> {
                       );
                     },
                   ),
-                  hSpace(15),
                   DashboardOptionContainer(
                     color: Colors.grey.shade800,
                     icon: Icons.logout,
@@ -91,9 +91,10 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-            ),
-          )
-        ]),
+              hSpace(100),
+            ],
+          ),
+        ),
       ),
     );
   }

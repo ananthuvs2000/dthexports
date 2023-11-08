@@ -55,65 +55,14 @@ class _OutGoingScreenState extends State<OutGoingScreen> {
               children: [
                 hSpace(10),
                 DropdownMenuField(
-                  controller: TextEditingController(),
+                  validator: (value) {
+                    return '';
+                  },
                   fieldLabel: 'Customer Name',
                   dropDownLabel: 'Select Customer',
                   dropdownEntries: const [
-                    DropdownMenuEntry(value: 'Customer 1', label: 'Customer 1'),
-                    DropdownMenuEntry(value: 'Customer 2', label: 'Customer 2'),
-                    
-                  ],
-                  onSelected: (selectedVal) {
-                    print(selectedVal.toString());
-                  },
-                ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: [
-                //     TextButton(
-                //         onPressed: () {
-                //           updateName();
-                //         },
-                //         child: Text(
-                //           'Generate order No:',
-                //           style: labelText(),
-                //         )),
-                //     Container(
-                //       margin: const EdgeInsets.only(right: 8),
-                //       decoration: BoxDecoration(
-                //           borderRadius: BorderRadius.circular(8),
-                //           border: Border.all(color: Colors.black54)),
-                //       padding: const EdgeInsets.all(5.0),
-                //       child: Text(
-                //         'ORDER NO: $name',
-                //         style: labelText(),
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                hSpace(10),
-               DropdownMenuField(
-                  controller: TextEditingController(),
-                  fieldLabel: 'Size',
-                  dropDownLabel: 'Select Size',
-                  dropdownEntries: const [
-                    
-                    
-                  ],
-                  onSelected: (selectedVal) {
-                    print(selectedVal.toString());
-                  },
-                ),
-                hSpace(10),
-
-               DropdownMenuField(
-                  controller: TextEditingController(),
-                  fieldLabel: 'Colour',
-                  dropDownLabel: 'Select Colour',
-                  dropdownEntries: const [
-                    DropdownMenuEntry(value: 'Red', label: 'Red'),
-                    DropdownMenuEntry(value: 'Green', label: 'Green'),
-                    
+                    DropdownMenuItem(value: 'Customer 1', child: Text('Customer 1')),
+                    DropdownMenuItem(value: 'Customer 2', child: Text('Customer 2')),
                   ],
                   onSelected: (selectedVal) {
                     print(selectedVal.toString());
@@ -121,41 +70,64 @@ class _OutGoingScreenState extends State<OutGoingScreen> {
                 ),
                 hSpace(10),
                 DropdownMenuField(
-                  controller: TextEditingController(),
+                  validator: (value) {
+                    return '';
+                  },
+                  fieldLabel: 'Size',
+                  dropDownLabel: 'Select Size',
+                  dropdownEntries: const [],
+                  onSelected: (selectedVal) {
+                    print(selectedVal.toString());
+                  },
+                ),
+                hSpace(10),
+                DropdownMenuField(
+                  validator: (value) {
+                    return '';
+                  },
+                  fieldLabel: 'Colour',
+                  dropDownLabel: 'Select Colour',
+                  dropdownEntries: const [
+                    DropdownMenuItem(value: 'Red', child: Text('Red')),
+                    DropdownMenuItem(value: 'Green', child: Text('Green')),
+                  ],
+                  onSelected: (selectedVal) {
+                    print(selectedVal.toString());
+                  },
+                ),
+                hSpace(10),
+                DropdownMenuField(
+                  validator: (value) {
+                    return '';
+                  },
                   fieldLabel: 'Box No',
                   dropDownLabel: 'Select Box No',
                   dropdownEntries: const [
-                    DropdownMenuEntry(value: '15', label: 'Customer 15'),
-                    DropdownMenuEntry(value: 'Customer 25', label: 'Customer 25'),
-                    
+                    DropdownMenuItem(value: '15', child: Text('Customer 15')),
+                    DropdownMenuItem(value: 'Customer 25', child: Text('Customer 25')),
                   ],
                   onSelected: (selectedVal) {
                     print(selectedVal.toString());
                   },
                 ),
                 hSpace(10),
-
-               DropdownMenuField(
-                  controller: TextEditingController(),
+                DropdownMenuField(
+                  validator: (value) {
+                    return '';
+                  },
                   fieldLabel: 'Texture',
                   dropDownLabel: 'Select Texture',
-                  dropdownEntries: const [
-                    
-                  ],
+                  dropdownEntries: const [],
                   onSelected: (selectedVal) {
                     print(selectedVal.toString());
                   },
                 ),
                 hSpace(10),
-                DynamicFieldRow(label: 'Req Qty', value: ''),
+                const DynamicFieldRow(label: 'Req Qty', value: ''),
                 hSpace(20),
-                
-                DynamicFieldRow(label: '2nd Conditioning', value: 'Yes or No'),
+                const DynamicFieldRow(label: '2nd Conditioning', value: 'Yes or No'),
                 hSpace(20),
-                DynamicFieldRow(label: 'Send For Wefting', value: 'Yes or No'),
-                
-                
-                
+                const DynamicFieldRow(label: 'Send For Wefting', value: 'Yes or No'),
                 hSpace(30),
                 PrimaryElevatedButton(
                   onPressed: () {},

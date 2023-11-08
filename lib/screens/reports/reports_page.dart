@@ -32,10 +32,16 @@ class _ReportsPageState extends State<ReportsPage> {
                   children: [
                     hSpace(15),
                     DropdownMenuField(
-                      controller: TextEditingController(),
+                      validator: (value) {
+                        return '';
+                      },
                       fieldLabel: 'Category',
                       dropDownLabel: 'Select Category',
-                      dropdownEntries: const [],
+                      dropdownEntries: const [
+                        DropdownMenuItem(value: '1', child: Text('1')),
+                        DropdownMenuItem(value: '2', child: Text('2')),
+                        DropdownMenuItem(value: '3', child: Text('3')),
+                      ],
                       onSelected: (selectedVal) {},
                     ),
                     hSpace(15),
@@ -54,17 +60,19 @@ class _ReportsPageState extends State<ReportsPage> {
                     // Criterea
                     hSpace(15),
                     DropdownMenuField(
-                      controller: TextEditingController(),
+                      validator: (value) {
+                        return '';
+                      },
                       fieldLabel: 'Standard',
                       dropDownLabel: 'Select Type',
                       dropdownEntries: const [
-                        DropdownMenuEntry(value: 'BATCH_WISE', label: 'Batch Wise'),
-                        DropdownMenuEntry(value: 'DATE_WISE', label: 'Date Wise'),
-                        DropdownMenuEntry(value: 'MONTH_WISE', label: 'Month Wise'),
-                        DropdownMenuEntry(value: 'SIZE_WISE', label: 'Size Wise'),
-                        DropdownMenuEntry(value: 'BOX_NO_WISE', label: 'Box No. Wise'),
-                        DropdownMenuEntry(value: 'STAGE_WISE', label: 'Stage Wise'),
-                        DropdownMenuEntry(value: 'EMPLOYEE_WISE', label: 'Employee Wise'),
+                        DropdownMenuItem(value: 'BATCH_WISE', child: Text('BATCH_WISE')),
+                        DropdownMenuItem(value: 'DATE_WISE', child: Text('DATE_WISE')),
+                        DropdownMenuItem(value: 'MONTH_WISE', child: Text('MONTH_WISE')),
+                        DropdownMenuItem(value: 'SIZE_WISE', child: Text('SIZE_WISE')),
+                        DropdownMenuItem(value: 'BOX_NO_WISE', child: Text('BOX_NO_WISE')),
+                        DropdownMenuItem(value: 'STAGE_WISE', child: Text('STAGE_WISE')),
+                        DropdownMenuItem(value: 'EMPLOYEE_WISE', child: Text('EMPLOYEE_WISE')),
                       ],
                       onSelected: (selectedVal) {
                         print(selectedVal.toString());
@@ -72,17 +80,19 @@ class _ReportsPageState extends State<ReportsPage> {
                     ),
                     hSpace(15),
                     DropdownMenuField(
-                      controller: TextEditingController(),
+                      validator: (value) {
+                        return '';
+                      },
                       fieldLabel: 'Size',
                       dropDownLabel: 'Select Size',
                       dropdownEntries: const [
-                        DropdownMenuEntry(value: '10"-14"', label: '10"-14"'),
-                        DropdownMenuEntry(value: '15"-18"', label: '15"-18"'),
-                        DropdownMenuEntry(value: '19"-22"', label: '19"-22"'),
-                        DropdownMenuEntry(value: '23"-26"', label: '23"-26"'),
-                        DropdownMenuEntry(value: '27"-30"', label: '27"-30"'),
-                        DropdownMenuEntry(value: '31"-34"', label: '31"-34"'),
-                        DropdownMenuEntry(value: '35"_AND_ABOVE', label: '35" And Above'),
+                        DropdownMenuItem(value: '10"-14"', child: Text('10"-14"')),
+                        DropdownMenuItem(value: '15"-18"', child: Text('15"-18"')),
+                        DropdownMenuItem(value: '19"-22"', child: Text('19"-22"')),
+                        DropdownMenuItem(value: '23"-26"', child: Text('23"-26"')),
+                        DropdownMenuItem(value: '27"-30"', child: Text('27"-30"')),
+                        DropdownMenuItem(value: '31"-34"', child: Text('31"-34"')),
+                        DropdownMenuItem(value: '35"_AND_ABOVE', child: Text('35" And Above')),
                       ],
                       onSelected: (selectedVal) {
                         print(selectedVal.toString());
@@ -91,13 +101,15 @@ class _ReportsPageState extends State<ReportsPage> {
                     hSpace(15),
 
                     DropdownMenuField(
-                      controller: TextEditingController(),
+                      validator: (value) {
+                        return '';
+                      },
                       fieldLabel: 'Color',
                       dropDownLabel: 'Select Color',
                       dropdownEntries: const [
-                        DropdownMenuEntry(value: 'BLACK', label: 'Black'),
-                        DropdownMenuEntry(value: 'GREY', label: 'Grey'),
-                        DropdownMenuEntry(value: 'DYE', label: 'Dye'),
+                        DropdownMenuItem(value: 'BLACK', child: Text('Black')),
+                        DropdownMenuItem(value: 'GREY', child: Text('Grey')),
+                        DropdownMenuItem(value: 'DYE', child: Text('Dye')),
                       ],
                       onSelected: (selectedVal) {
                         print(selectedVal.toString());
@@ -106,13 +118,15 @@ class _ReportsPageState extends State<ReportsPage> {
                     hSpace(15),
 
                     DropdownMenuField(
-                      controller: TextEditingController(),
+                      validator: (value) {
+                        return '';
+                      },
                       fieldLabel: 'Texture',
                       dropDownLabel: 'Select Texture',
                       dropdownEntries: const [
-                        DropdownMenuEntry(value: 'STRAIGHT/WAVY', label: 'STRAIGHT/WAVY'),
-                        DropdownMenuEntry(value: 'CURLY', label: 'CURLY'),
-                        DropdownMenuEntry(value: 'SUPER STRAIGHT', label: 'SUPER STRAIGHT'),
+                        DropdownMenuItem(value: 'STRAIGHT/WAVY', child: Text('STRAIGHT/WAVY')),
+                        DropdownMenuItem(value: 'CURLY', child: Text('CURLY')),
+                        DropdownMenuItem(value: 'SUPER STRAIGHT', child: Text('SUPER STRAIGHT')),
                       ],
                       onSelected: (selectedVal) {
                         print(selectedVal.toString());

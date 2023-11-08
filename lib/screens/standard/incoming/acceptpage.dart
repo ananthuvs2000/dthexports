@@ -51,13 +51,15 @@ class _AcceptPageState extends State<AcceptPage> {
                   ),
                   hSpace(15),
                   DropdownMenuField(
-                    controller: TextEditingController(),
+                    validator: (value) {
+                      return '';
+                    },
                     fieldLabel: 'Box No:',
                     dropDownLabel: 'Select Box ',
                     dropdownEntries: const [
-                      DropdownMenuEntry(value: '1', label: '1'),
-                      DropdownMenuEntry(value: '2', label: '2'),
-                      DropdownMenuEntry(value: '3', label: '3'),
+                      DropdownMenuItem(value: '1', child: Text('1')),
+                      DropdownMenuItem(value: '2', child: Text('2')),
+                      DropdownMenuItem(value: '3', child: Text('3')),
                     ],
                     onSelected: (selectedVal) {
                       print(selectedVal.toString());
@@ -65,12 +67,14 @@ class _AcceptPageState extends State<AcceptPage> {
                   ),
                   hSpace(15),
                   DropdownMenuField(
-                    controller: TextEditingController(),
+                    validator: (value) {
+                      return '';
+                    },
                     fieldLabel: 'Size:',
                     dropDownLabel: 'Select Size',
                     dropdownEntries: const [
-                      DropdownMenuEntry(value: '32', label: '32'),
-                      DropdownMenuEntry(value: '40', label: '40'),
+                      DropdownMenuItem(value: '13"', child: Text('1')),
+                      DropdownMenuItem(value: '15"', child: Text('2')),
                     ],
                     onSelected: (selectedVal) {
                       print(selectedVal.toString());
@@ -78,12 +82,14 @@ class _AcceptPageState extends State<AcceptPage> {
                   ),
                   hSpace(15),
                   DropdownMenuField(
-                    controller: TextEditingController(),
+                    validator: (value) {
+                      return '';
+                    },
                     fieldLabel: 'Color:',
                     dropDownLabel: 'Select Color',
                     dropdownEntries: const [
-                      DropdownMenuEntry(value: 'RED', label: 'RED'),
-                      DropdownMenuEntry(value: 'BlACK', label: 'BlACK'),
+                      DropdownMenuItem(value: 'RED', child: Text('Red')),
+                      DropdownMenuItem(value: 'Black', child: Text('Black')),
                     ],
                     onSelected: (selectedVal) {
                       print(selectedVal.toString());
@@ -91,10 +97,15 @@ class _AcceptPageState extends State<AcceptPage> {
                   ),
                   hSpace(15),
                   DropdownMenuField(
-                    controller: TextEditingController(),
+                    validator: (value) {
+                      return '';
+                    },
                     fieldLabel: 'Texture:',
                     dropDownLabel: 'Select Texture',
-                    dropdownEntries: const [],
+                    dropdownEntries: const [
+                      DropdownMenuItem(value: 'WAVY', child: Text('WAVY')),
+                      DropdownMenuItem(value: 'SUPER STRAIGHT', child: Text('SUPER STRAIGHT')),
+                    ],
                     onSelected: (selectedVal) {
                       print(selectedVal.toString());
                     },

@@ -5,13 +5,11 @@ import 'package:dth/widgets/box_info_display.dart';
 import 'package:dth/widgets/drop_down_menu_field.dart';
 import 'package:dth/widgets/dt_text_field.dart';
 import 'package:dth/widgets/dynamic_field_row.dart';
-import 'package:dth/widgets/headertext.dart';
 import 'package:dth/widgets/open_camera_button.dart';
 import 'package:dth/widgets/primary_elevated_button.dart';
 import 'package:dth/widgets/secondary_elevated_button.dart';
 import 'package:dth/widgets/spacer.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class DayEndScreen extends StatefulWidget {
   const DayEndScreen({super.key});
@@ -72,105 +70,40 @@ class _DayEndScreenState extends State<DayEndScreen> {
                       ],
                     ),
                     DropdownMenuField(
-                      controller: TextEditingController(),
+                      validator: (value) {
+                        return '';
+                      },
                       fieldLabel: 'Box No:',
                       dropDownLabel: 'Select Box',
                       dropdownEntries: const [
-                        DropdownMenuEntry(value: '1', label: '1'),
-                        DropdownMenuEntry(value: '2', label: '2'),
-                        DropdownMenuEntry(value: '3', label: '3'),
+                        DropdownMenuItem(value: '1', child: Text('1')),
+                        DropdownMenuItem(value: '2', child: Text('2')),
+                        DropdownMenuItem(value: '3', child: Text('3')),
                       ],
                       onSelected: (selectedVal) {
                         print(selectedVal.toString());
                       },
                     ),
-                    
                     hSpace(15),
-
-                    BoxInfoDisplay(
+                    const BoxInfoDisplay(
                         boxNumber: 'No.', boxType: 'Type', boxSize: 'Size', boxWeight: 'Weight'),
-
                     const SizedBox(
                       height: 20,
                     ),
-               DynamicFieldRow(label: 'Material Weight', value: 'Calculate Weight&Display'),
+                    const DynamicFieldRow(
+                        label: 'Material Weight', value: 'Calculate Weight&Display'),
                     const SizedBox(
                       height: 10,
                     ),
                     hSpace(10),
-                    SecondaryElevatedButton(onPressed: () {
-                      
-                    }, label: 'PRS Completed'),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //   children: [
-                    //     ElevatedButton(
-                    //       style: ButtonStyle(
-                    //         backgroundColor: MaterialStateProperty.all<Color>(Colors.red.shade800),
-                    //         textStyle: MaterialStateProperty.all<TextStyle>(
-                    //           const TextStyle(
-                    //             fontSize: 16,
-                    //           ),
-                    //         ),
-                    //         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    //           RoundedRectangleBorder(
-                    //             borderRadius: BorderRadius.circular(5),
-                    //           ),
-                    //         ),
-                    //       ),
-                    //       onPressed: () {},
-                    //       child: const Text(
-                    //         "BALANCE:",
-                    //         style: TextStyle(color: Colors.white),
-                    //       ),
-                    //     ),
-                    //     const SizedBox(
-                    //       width: 10,
-                    //     ),
-                    //     Container(
-                    //         alignment: Alignment.center,
-                    //         height: 40,
-                    //         width: 150,
-                    //         decoration: BoxDecoration(
-                    //             border: Border.all(color: Colors.black),
-                    //             borderRadius: BorderRadius.circular(10)),
-                    //         child: Text('APPLY FORMULA', style: labelText())),
-                    //   ],
-                    // ),
-                    
+                    SecondaryElevatedButton(onPressed: () {}, label: 'PRS Completed'),
                     hSpace(10),
-                    SecondaryElevatedButton(onPressed: () {
-                      
-                    }, label: 'Balance'),
+                    SecondaryElevatedButton(onPressed: () {}, label: 'Balance'),
                     const SizedBox(
                       height: 10,
                     ),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //   children: [
-                    //     Container(
-                    //         alignment: Alignment.centerRight,
-                    //         height: 80,
-                    //         width: 160,
-                    //         decoration: BoxDecoration(
-                    //             border: Border.all(color: Colors.black),
-                    //             borderRadius: BorderRadius.circular(10)),
-                    //         child: Text('TOTAL PRS WASTAGE%', style: labelText())),
-                    //     Container(
-                    //         padding: const EdgeInsets.all(5),
-                    //         alignment: Alignment.center,
-                    //         height: 80,
-                    //         width: 160,
-                    //         decoration: BoxDecoration(
-                    //             border: Border.all(color: Colors.black),
-                    //             borderRadius: BorderRadius.circular(10)),
-                    //         child: Text('AUTO CALC TOTAL % WASTAGE', style: labelText())),
-                    //   ],
-                    // ),
-                    // const SizedBox(
-                    //   height: 20,
-                    // ),
-                    DynamicFieldRow(label: 'Total Process Wastage', value: 'Auto Calc Total% Wastage'),
+                    const DynamicFieldRow(
+                        label: 'Total Process Wastage', value: 'Auto Calc Total% Wastage'),
                     hSpace(10),
                     const TableWidget(),
                     const SizedBox(
