@@ -3,9 +3,13 @@ import 'package:dth/screens/standard/widgets/orderdrilldown.dart';
 import 'package:dth/screens/standard/widgets/teamdrilldown.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/widgets/appbar_underline.dart';
+import 'package:dth/widgets/drop_down_menu_field.dart';
+import 'package:dth/widgets/dynamic_field_row.dart';
 import 'package:dth/widgets/headertext.dart';
+import 'package:dth/widgets/ordered_items_display.dart';
 import 'package:dth/widgets/primary_elevated_button.dart';
 import 'package:dth/widgets/spacer.dart';
+import 'package:dth/widgets/team_manager_list.dart';
 import 'package:flutter/material.dart';
 
 class DespachScreen extends StatefulWidget {
@@ -33,67 +37,36 @@ class _DespachScreenState extends State<DespachScreen> {
               child: ListView(
                 shrinkWrap: true,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Order No:',
-                        style: headerText(),
-                      ),
-                      OrderDropdownWidget()
-                    ],
+                  hSpace(10),
+                  DropdownMenuField(
+                    validator: (value) {
+                      return '';
+                    },
+                    fieldLabel: 'Order No',
+                    dropDownLabel: 'Select Order No',
+                    dropdownEntries: const [],
+                    onSelected: (selectedVal) {
+                      print(selectedVal.toString());
+                    },
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Process',
-                        style: headerText(),
-                      ),
-                      Text(
-                        'Threading/Wefting',
-                        style: labelText(),
-                      )
-                    ],
-                  ),
+                  hSpace(10),
+                  DynamicFieldRow(label: 'Process', value: 'Threading/Wefting'),
+                  hSpace(20),
+                  DynamicFieldRow(label: 'Box No', value: 'Display Box No'),
                   const SizedBox(
                     height: 20,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Box No:',
-                        style: headerText(),
-                      ),
-                      Text(
-                        'Display Box No',
-                        style: labelText(),
-                      )
+                  OrderedItemsdisplay(
+                      boxNumber: 'Box No', boxType: 'Type', boxSize: 'Size', boxWeight: 'Weight'),
+                  hSpace(10),
+                  TeamManagerWidget(
+                    editable: true,
+                    teamList: [
+                      WorkerData(id: 10, name: 'Athul'),
+                      WorkerData(id: 15, name: 'Amal'),
                     ],
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  ...List.generate(
-                      2,
-                      (index) => Text(
-                            'Order Items',
-                            style: labelText(),
-                          )),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Team:',
-                        style: headerText(),
-                      ),
-                      TeamDropdownWidget()
-                    ],
-                  ),
+                  hSpace(10),
                   const DespachTableWidget(),
                 ],
               ),

@@ -22,15 +22,15 @@ class _DespachTableWidgetState extends State<DespachTableWidget> {
                         children: [
                           TableRow(
                             decoration: BoxDecoration(
-                              color: Colors.grey.shade300
+                              color: Colors.indigo
                             ),
                             children: [
                               TableCell(child: Padding(padding: EdgeInsets.all(8),
-                              child: Text('WORKER',style: headerText(),),)),
+                              child: Text('Worker',style: TextStyle(color: Colors.white,fontSize: 16),),)),
                               TableCell(child: Padding(padding: EdgeInsets.all(8),
-                              child: Text('COMPLETED QTY',style: headerText(),),)),
+                              child: Text('Completed Qty',style: TextStyle(color: Colors.white,fontSize: 16),),)),
                                TableCell(child: Padding(padding: EdgeInsets.all(8),
-                              child: Text('TOTAL QTY',style: headerText(),),)),
+                              child: Text('Total Qty',style: TextStyle(color: Colors.white,fontSize: 16),),)),
                               
                             ]
                             
