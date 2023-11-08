@@ -124,7 +124,7 @@ class _CheckPageState extends State<CheckPage> {
                 if (teamProvider.teams.isNotEmpty) {
                   return DropdownMenuField(
                     validator: (value) {
-                      return '';
+                      return 'Please select a team';
                     },
                     fieldLabel: 'Team',
                     dropDownLabel: 'Select Team',
@@ -149,19 +149,22 @@ class _CheckPageState extends State<CheckPage> {
               // Submit Button
               PrimaryElevatedButton(
                 onPressed: () async {
-                  final res = await CheckingProvider().postToCheck(
-                    _vendorController.text,
-                    _vendorController.text,
-                    _quantityController.text,
-                    _teamController.text,
-                  );
-                  if (res) {
-                    print('Succesfully posted');
-                    Get.snackbar('Success', 'Succesfully Posted To Checking!',
-                        snackPosition: SnackPosition.BOTTOM, duration: const Duration(seconds: 1));
-                  } else {
-                    print('Post failed');
+                  if (_formKey.currentState!.validate()) {
+                    print('Valid');
                   }
+                  // final res = await CheckingProvider().postToCheck(
+                  //   _vendorController.text,
+                  //   _vendorController.text,
+                  //   _quantityController.text,
+                  //   _teamController.text,
+                  // );
+                  // if (res) {
+                  //   print('Succesfully posted');
+                  //   Get.snackbar('Success', 'Succesfully Posted To Checking!',
+                  //       snackPosition: SnackPosition.BOTTOM, duration: const Duration(seconds: 1));
+                  // } else {
+                  //   print('Post failed');
+                  // }
                 },
                 label: 'Post',
               ),
