@@ -20,91 +20,80 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/images/bg.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      height: 100,
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: SafeArea(
-          child: Stack(children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(top: 100.h),
-                  child: Center(
-                    child: Image.asset(
-                      'assets/images/appbar.jpg',
-                      height: 100.h,
-                      fit: BoxFit.fitHeight,
-                    ),
+    return Scaffold(
+      body: SafeArea(
+        child: Stack(children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(top: 100.h),
+                child: Center(
+                  child: Image.asset(
+                    'assets/images/appbar.jpg',
+                    height: 100.h,
+                    fit: BoxFit.fitHeight,
                   ),
                 ),
-              ],
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    hSpace(10),
-                    hSpace(15),
-                    DashboardOptionContainer(
-                      color: primaryColor,
-                      icon: Icons.factory_outlined,
-                      text: 'STANDARD',
-                      onTap: () {
-                        Get.to(
-                          const StandardScreen(),
-                          transition: Transition.rightToLeft,
-                        );
-                      },
-                    ),
-                    hSpace(15),
-                    DashboardOptionContainer(
-                      color: Colors.green,
-                      icon: Icons.recycling_outlined,
-                      text: 'RECYCLE',
-                      onTap: () {
-                        Get.to(
-                          const RecyclePage(),
-                          transition: Transition.rightToLeft,
-                        );
-                      },
-                    ),
-                    hSpace(15),
-                    DashboardOptionContainer(
-                      color: Colors.deepOrange,
-                      icon: Icons.list_alt_sharp,
-                      text: 'REPORTS',
-                      onTap: () {
-                        Get.to(
-                          const ReportsPage(),
-                          transition: Transition.rightToLeft,
-                        );
-                      },
-                    ),
-                    hSpace(15),
-                    DashboardOptionContainer(
-                      color: Colors.grey.shade800,
-                      icon: Icons.logout,
-                      text: 'LOG OUT',
-                      onTap: () {
-                        Get.offAll(LoginPg());
-                      },
-                    ),
-                  ],
-                ),
               ),
-            )
-          ]),
-        ),
+            ],
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  hSpace(50),
+                  DashboardOptionContainer(
+                    color: primaryColor,
+                    icon: Icons.factory_outlined,
+                    text: 'Standard',
+                    onTap: () {
+                      Get.to(
+                        const StandardScreen(),
+                        transition: Transition.rightToLeft,
+                      );
+                    },
+                  ),
+                  hSpace(15),
+                  DashboardOptionContainer(
+                    color: Colors.teal,
+                    icon: Icons.recycling_outlined,
+                    text: 'Recycle',
+                    onTap: () {
+                      Get.to(
+                        const RecyclePage(),
+                        transition: Transition.rightToLeft,
+                      );
+                    },
+                  ),
+                  hSpace(15),
+                  DashboardOptionContainer(
+                    color: Colors.pink,
+                    icon: Icons.list_alt_sharp,
+                    text: 'Reports',
+                    onTap: () {
+                      Get.to(
+                        const ReportsPage(),
+                        transition: Transition.rightToLeft,
+                      );
+                    },
+                  ),
+                  hSpace(15),
+                  DashboardOptionContainer(
+                    color: Colors.grey.shade800,
+                    icon: Icons.logout,
+                    text: 'Log Out',
+                    onTap: () {
+                      Get.offAll(LoginPg());
+                    },
+                  ),
+                ],
+              ),
+            ),
+          )
+        ]),
       ),
     );
   }

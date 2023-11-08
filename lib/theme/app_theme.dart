@@ -1,62 +1,59 @@
 import 'package:dth/theme/colors.dart';
+import 'package:dth/theme/layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-TextTheme textTheme = TextTheme(
-  bodySmall: TextStyle(
-    fontSize: 14.sp,
-  ),
-  bodyMedium: TextStyle(
-    fontSize: 16.sp,
-  ),
-  bodyLarge: TextStyle(
-    fontSize: 20.sp,
-  ),
-);
+const mainFont = 'Instrument';
 
 AppBarTheme dthAppbarTheme = AppBarTheme(
   toolbarHeight: 60.h,
   systemOverlayStyle: SystemUiOverlayStyle.dark,
   backgroundColor: Colors.transparent,
   centerTitle: true,
-  titleTextStyle: TextStyle(
+  titleTextStyle: const TextStyle(
     fontWeight: FontWeight.bold,
     color: Colors.black,
-    fontFamily: 'Poppins',
+    fontFamily: mainFont,
     fontSize: 20,
-    letterSpacing: -1,
   ),
 );
 
 //& DROP DOWN MENU
 DropdownMenuThemeData dropdownMenuThemeData = DropdownMenuThemeData(
   inputDecorationTheme: InputDecorationTheme(
+    disabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(globalBorderRadius),
+      borderSide: BorderSide(
+        color: Colors.black.withOpacity(0.1),
+      ),
+    ),
+    focusColor: Colors.red,
     isDense: true,
-    contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+    // contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
     border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(globalBorderRadius),
       borderSide: BorderSide(
         width: 1,
         color: Colors.black.withOpacity(0.25),
       ),
     ),
     enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(globalBorderRadius),
       borderSide: BorderSide(
         width: 1,
         color: Colors.black.withOpacity(0.5),
       ),
     ),
     focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(globalBorderRadius),
       borderSide: BorderSide(
         width: 1,
         color: primaryColor,
       ),
     ),
     focusedErrorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(globalBorderRadius),
       borderSide: const BorderSide(
         width: 1,
         color: formFieldErrorColor,
@@ -66,12 +63,15 @@ DropdownMenuThemeData dropdownMenuThemeData = DropdownMenuThemeData(
     labelStyle: const TextStyle(fontSize: 12),
   ),
   menuStyle: MenuStyle(
+    visualDensity: VisualDensity.compact,
     alignment: Alignment.bottomLeft,
     shape: MaterialStatePropertyAll(
       RoundedRectangleBorder(
-        side: BorderSide(color: Colors.black.withOpacity(0.5)),
+        side: BorderSide(
+          color: Colors.black.withOpacity(0.5),
+        ),
         borderRadius: const BorderRadius.all(
-          Radius.circular(10),
+          Radius.circular(globalBorderRadius),
         ),
       ),
     ),
@@ -85,10 +85,10 @@ DropdownMenuThemeData dropdownMenuThemeData = DropdownMenuThemeData(
 );
 
 // Final ThemeData Variable
-ThemeData dthAppThem = ThemeData(
+ThemeData dthAppTheme = ThemeData(
   useMaterial3: true,
   brightness: Brightness.light,
-  fontFamily: 'Poppins',
+  fontFamily: mainFont,
   colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
   appBarTheme: dthAppbarTheme,
   dropdownMenuTheme: dropdownMenuThemeData,

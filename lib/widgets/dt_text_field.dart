@@ -35,12 +35,14 @@ class _DthTextFieldState extends State<DthTextField> {
       decoration: InputDecoration(
         labelText: widget.hintText ?? '',
         labelStyle: TextStyle(
-          color: Colors.black.withOpacity(0.25),
+          fontSize: 13,
+          color: Colors.black.withOpacity(0.3),
         ),
 
         errorStyle: const TextStyle(
-          fontSize: 12,
-          letterSpacing: -0.5,
+          fontSize: 13,
+          letterSpacing: -0.25,
+          color: Colors.red,
         ),
         //
         enabledBorder: OutlineInputBorder(
@@ -61,7 +63,7 @@ class _DthTextFieldState extends State<DthTextField> {
           borderSide: BorderSide(color: formFieldErrorColor),
           borderRadius: BorderRadius.all(Radius.circular(formFieldBorderRadius)),
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       ),
     );
   }

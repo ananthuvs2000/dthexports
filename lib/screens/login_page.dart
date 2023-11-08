@@ -1,5 +1,6 @@
 import 'package:dth/screens/home_page.dart';
 import 'package:dth/theme/layout.dart';
+import 'package:dth/theme/text_sizing.dart';
 import 'package:dth/widgets/primary_elevated_button.dart';
 import 'package:dth/widgets/spacer.dart';
 import 'package:dth/widgets/textformfield.dart';
@@ -21,7 +22,7 @@ class LoginPg extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX + 10.w),
+          padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX + 12.w),
           child: Form(
             key: _formKey,
             child: SingleChildScrollView(
@@ -34,7 +35,7 @@ class LoginPg extends StatelessWidget {
                     fit: BoxFit.contain,
                     width: 200.h,
                   ),
-                  hSpace(50),
+                  hSpace(25),
                   CustomTextFormField(
                     keyboardType: TextInputType.emailAddress,
                     controller: _emailController,
@@ -47,7 +48,7 @@ class LoginPg extends StatelessWidget {
                     icon: const Icon(Icons.email_outlined),
                     text: 'Email Address',
                   ),
-                  hSpace(10),
+                  hSpace(20),
                   CustomTextFormField(
                     isPassword: true,
                     validator: (val) {
@@ -60,11 +61,9 @@ class LoginPg extends StatelessWidget {
                     icon: const Icon(Icons.lock_open_rounded),
                     text: 'Password',
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  hSpace(20),
                   SizedBox(
-                    width: 150,
+                    width: 150.w,
                     child: PrimaryElevatedButton(
                       onPressed: () {
                         // _formKey.currentState!.validate();
@@ -84,7 +83,7 @@ class LoginPg extends StatelessWidget {
                     onPressed: () {},
                     child: Text(
                       "Forgot Password",
-                      style: TextStyles.labelStyle,
+                      style: TextStyles.textButtonLabelStyle,
                     ),
                   ),
                 ],

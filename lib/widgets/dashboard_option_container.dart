@@ -21,12 +21,11 @@ class DashboardOptionContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(globalBorderRadius),
       child: Ink(
-        width: 300.w,
-        padding: const EdgeInsets.all(10),
+        width: 210.w,
+        padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.black.withOpacity(0.25)),
           color: color,
           borderRadius: BorderRadius.circular(formFieldBorderRadius),
         ),
@@ -34,16 +33,15 @@ class DashboardOptionContainer extends StatelessWidget {
           children: [
             Icon(
               icon,
-              size: 35,
+              size: 30,
               color: Colors.white,
             ),
-            wSpace(20),
+            wSpace(15),
             Text(
               text,
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 21,
-                letterSpacing: -0.5,
                 fontWeight: FontWeight.bold,
               ),
             ),

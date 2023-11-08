@@ -1,4 +1,4 @@
-import 'package:dth/theme/layout.dart';
+import 'package:dth/theme/text_sizing.dart';
 import 'package:flutter/material.dart';
 
 class MainHeading extends StatelessWidget {

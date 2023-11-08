@@ -1,6 +1,5 @@
 import 'package:dth/theme/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
@@ -29,8 +28,8 @@ class CustomTextFormField extends StatelessWidget {
       keyboardType: keyboardType ?? TextInputType.text,
 
       //
-      style: TextStyle(
-        fontSize: 14,
+      style: const TextStyle(
+        fontSize: 15,
         letterSpacing: 0,
       ),
       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -60,14 +59,14 @@ class CustomTextFormField extends StatelessWidget {
         label: Text(text),
         labelStyle: TextStyle(
           color: Colors.black.withOpacity(0.5),
-          fontSize: 14,
+          fontSize: 15,
           letterSpacing: 0,
         ),
         fillColor: Colors.black.withOpacity(0.05),
         filled: true,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 10,
-          vertical: 10,
+          vertical: 12,
         ),
       ),
     );

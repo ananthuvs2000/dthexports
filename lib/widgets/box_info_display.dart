@@ -36,7 +36,7 @@ class BoxInfoDisplay extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             decoration: BoxDecoration(
               color: primaryColor,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(formFieldBorderRadius),
                 topRight: Radius.circular(formFieldBorderRadius),
               ),

@@ -1,5 +1,6 @@
 import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
+import 'package:dth/theme/text_sizing.dart';
 import 'package:dth/widgets/spacer.dart';
 import 'package:flutter/material.dart';
 

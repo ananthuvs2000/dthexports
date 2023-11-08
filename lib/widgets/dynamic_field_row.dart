@@ -12,28 +12,25 @@ class DynamicFieldRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 5),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            label,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              letterSpacing: 0,
-              fontSize: 16,
-            ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          label,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            letterSpacing: 0,
+            fontSize: 15,
           ),
-          SelectableText(
-            value,
-            style: const TextStyle(
-              letterSpacing: 0,
-              fontSize: 15,
-            ),
+        ),
+        SelectableText(
+          value,
+          style: const TextStyle(
+            letterSpacing: 0,
+            fontSize: 15,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

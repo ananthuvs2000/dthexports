@@ -40,7 +40,7 @@ class _DateTimeDisplayState extends State<DateTimeDisplay> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              SelectableText(
                 widget.date,
                 style: TextStyle(
                   color: primaryColor,
@@ -48,8 +48,8 @@ class _DateTimeDisplayState extends State<DateTimeDisplay> {
                   fontSize: 15,
                 ),
               ),
-              wSpace(10),
-              Text(
+              wSpace(5),
+              SelectableText(
                 widget.time,
                 style: TextStyle(
                   color: primaryColor,

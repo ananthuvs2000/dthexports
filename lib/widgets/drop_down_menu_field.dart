@@ -27,30 +27,41 @@ class DropdownMenuField extends StatefulWidget {
 class _DropdownMenuFieldState extends State<DropdownMenuField> {
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Flex(
+      direction: Axis.horizontal,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          widget.fieldLabel,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
+        Flexible(
+          flex: 1,
+          child: Text(
+            widget.fieldLabel,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 15,
+            ),
+            maxLines: 2,
           ),
         ),
-        DropdownMenu(
-          enableSearch: false,
-          enableFilter: false,
-          controller: widget.controller,
-          width: widget.menuWidth ?? 220.w,
-          label: Text(
-            widget.dropDownLabel,
-            style: const TextStyle(
+        Flexible(
+          flex: 3,
+          child: DropdownMenu(
+            width: 200.w,
+            enableSearch: false,
+            enableFilter: false,
+            controller: widget.controller,
+            label: Text(
+              widget.dropDownLabel,
+              style: const TextStyle(
+                fontSize: 14,
+              ),
+            ),
+            textStyle: const TextStyle(
               fontSize: 14,
             ),
+            dropdownMenuEntries: widget.dropdownEntries,
+            initialSelection: widget.defaultValue,
+            onSelected: (value) => widget.onSelected(value),
           ),
-          dropdownMenuEntries: widget.dropdownEntries,
-          initialSelection: widget.defaultValue,
-          onSelected: (value) => widget.onSelected(value),
         ),
       ],
     );

@@ -1,8 +1,7 @@
-import 'package:dth/_providers/datetime_provider.dart';
+// import 'package:dth/_providers/datetime_provider.dart';
 import 'package:dth/_providers/team_provider.dart';
 import 'package:dth/_providers/vendor_provider.dart';
 import 'package:dth/screens/splash_screen.dart';
-// import 'package:dth/screens/standard/incoming/checking/datetime_provider.dart';
 import 'package:dth/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,12 +25,13 @@ class MyApp extends StatelessWidget {
         // ChangeNotifierProvider(create: (context) => DateTimeProvider()),
       ],
       builder: (context, child) => ScreenUtilInit(
-        ensureScreenSize: false,
-        designSize: const Size(540, 960),
+        ensureScreenSize: true,
+        designSize: const Size(360, 800),
+        minTextAdapt: true,
         builder: (context, child) => GetMaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'DTS Exports LLP',
-          theme: dthAppThem,
+          theme: dthAppTheme,
           home: const SplashScreen(),
         ),
       ),

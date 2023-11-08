@@ -2,7 +2,7 @@ import 'package:dth/screens/standard/widgets/boxdrilldown.dart';
 import 'package:dth/screens/standard/widgets/table.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/widgets/appbar_underline.dart';
-import 'package:dth/widgets/box_info_display_card.dart';
+import 'package:dth/widgets/box_info_display.dart';
 import 'package:dth/widgets/drop_down_menu_field.dart';
 import 'package:dth/widgets/dt_text_field.dart';
 import 'package:dth/widgets/headertext.dart';

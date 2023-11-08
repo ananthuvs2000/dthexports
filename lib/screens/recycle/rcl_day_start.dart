@@ -1,5 +1,5 @@
 import 'package:dth/theme/layout.dart';
-import 'package:dth/widgets/box_info_display_card.dart';
+import 'package:dth/widgets/box_info_display.dart';
 import 'package:dth/widgets/drop_down_menu_field.dart';
 import 'package:dth/widgets/dt_text_field.dart';
 import 'package:dth/widgets/dynamic_field_row.dart';
