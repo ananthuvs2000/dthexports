@@ -99,77 +99,18 @@ class _DayEndScreenState extends State<DayEndScreen> {
                     ),
                     hSpace(10),
                     SecondaryElevatedButton(onPressed: () {
-                      
+                      Get.snackbar('Opne Camera', 'Apply Formula',snackPosition: SnackPosition.BOTTOM);
                     }, label: 'PRS Completed'),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //   children: [
-                    //     ElevatedButton(
-                    //       style: ButtonStyle(
-                    //         backgroundColor: MaterialStateProperty.all<Color>(Colors.red.shade800),
-                    //         textStyle: MaterialStateProperty.all<TextStyle>(
-                    //           const TextStyle(
-                    //             fontSize: 16,
-                    //           ),
-                    //         ),
-                    //         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    //           RoundedRectangleBorder(
-                    //             borderRadius: BorderRadius.circular(5),
-                    //           ),
-                    //         ),
-                    //       ),
-                    //       onPressed: () {},
-                    //       child: const Text(
-                    //         "BALANCE:",
-                    //         style: TextStyle(color: Colors.white),
-                    //       ),
-                    //     ),
-                    //     const SizedBox(
-                    //       width: 10,
-                    //     ),
-                    //     Container(
-                    //         alignment: Alignment.center,
-                    //         height: 40,
-                    //         width: 150,
-                    //         decoration: BoxDecoration(
-                    //             border: Border.all(color: Colors.black),
-                    //             borderRadius: BorderRadius.circular(10)),
-                    //         child: Text('APPLY FORMULA', style: labelText())),
-                    //   ],
-                    // ),
+                  
                     
                     hSpace(10),
                     SecondaryElevatedButton(onPressed: () {
-                      
+                      Get.snackbar('Apply Formula','');
                     }, label: 'Balance'),
                     const SizedBox(
                       height: 10,
                     ),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //   children: [
-                    //     Container(
-                    //         alignment: Alignment.centerRight,
-                    //         height: 80,
-                    //         width: 160,
-                    //         decoration: BoxDecoration(
-                    //             border: Border.all(color: Colors.black),
-                    //             borderRadius: BorderRadius.circular(10)),
-                    //         child: Text('TOTAL PRS WASTAGE%', style: labelText())),
-                    //     Container(
-                    //         padding: const EdgeInsets.all(5),
-                    //         alignment: Alignment.center,
-                    //         height: 80,
-                    //         width: 160,
-                    //         decoration: BoxDecoration(
-                    //             border: Border.all(color: Colors.black),
-                    //             borderRadius: BorderRadius.circular(10)),
-                    //         child: Text('AUTO CALC TOTAL % WASTAGE', style: labelText())),
-                    //   ],
-                    // ),
-                    // const SizedBox(
-                    //   height: 20,
-                    // ),
+                  
                     DynamicFieldRow(label: 'Total Process Wastage', value: 'Auto Calc Total% Wastage'),
                     hSpace(10),
                     const TableWidget(),
