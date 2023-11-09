@@ -59,148 +59,153 @@ class _CheckPageState extends State<CheckPage> {
         padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
         child: Form(
           key: _formKey,
-          child: ListView(
-            shrinkWrap: true,
+          child: Column(
             children: [
-              //! DateTime from API Consumer
-              hSpace(15),
+              ListView(
+                shrinkWrap: true,
+                children: [
+                  //! DateTime from API Consumer
+                 
 
-              // Venue
-              hSpace(20),
-              DropdownMenuField(
-                validator: (value) {
-                  if (value == null) {
-                    return 'Select a venue';
-                  } else {
-                    return null;
-                  }
-                },
-                fieldLabel: 'Venue',
-                dropDownLabel: 'Select the venue',
-                dropdownEntries: const [
-                  DropdownMenuItem(value: 'In-House', child: Text('In House')),
-                  DropdownMenuItem(value: 'Out-Station', child: Text('Out Station')),
-                ],
-                onSelected: (value) {
-                  setState(() {
-                    _selectedVenue = value;
-                  });
-                  print(_selectedVenue);
-                },
-              ),
-              hSpace(15),
-
-              //! Team List From Team API Consumer
-              Consumer<VendorProvider>(builder: (context, vendorData, child) {
-                if (vendorProvider.vendors.isNotEmpty) {
-                  return DropdownMenuField(
+                  // Venue
+                  hSpace(20),
+                  DropdownMenuField(
                     validator: (value) {
                       if (value == null) {
-                        return 'Select a vendor';
+                        return 'Select a venue';
                       } else {
                         return null;
                       }
                     },
-                    fieldLabel: 'Vendor',
-                    dropDownLabel: 'Select Vendor',
-                    // from API
-                    dropdownEntries: vendorProvider.vendors
-                        .map(
-                          (vendor) => DropdownMenuItem(
-                            value: vendor.id.toString(),
-                            child: Text(vendor.vendorCode),
-                          ),
-                        )
-                        .toList(),
+                    fieldLabel: 'Venue',
+                    dropDownLabel: 'Select the venue',
+                    dropdownEntries: const [
+                      DropdownMenuItem(value: 'In-House', child: Text('In House')),
+                      DropdownMenuItem(value: 'Out-Station', child: Text('Out Station')),
+                    ],
                     onSelected: (value) {
                       setState(() {
-                        _selectedVendor = value;
+                        _selectedVenue = value;
                       });
+                      print(_selectedVenue);
                     },
-                  );
-                }
-                return const Center(child: LoadingDisplayCaption(message: 'Loading Vendor Info'));
-              }),
-              hSpace(15),
-              NumberEntryField(
-                label: 'Total Qty Checked',
-                controller: _quantityController,
-                validator: (value) {
-                  if (value == '') {
-                    return 'Invalid Number';
-                  } else {
-                    return null;
-                  }
-                },
-              ),
-              hSpace(15),
+                  ),
+                  hSpace(15),
 
-              //! Team List From Team API Consumer
-              Consumer(builder: (context, state, child) {
-                if (teamProvider.teams.isNotEmpty) {
-                  return DropdownMenuField(
+                  //! Team List From Team API Consumer
+                  Consumer<VendorProvider>(builder: (context, vendorData, child) {
+                    if (vendorProvider.vendors.isNotEmpty) {
+                      return DropdownMenuField(
+                        validator: (value) {
+                          if (value == null) {
+                            return 'Select a vendor';
+                          } else {
+                            return null;
+                          }
+                        },
+                        fieldLabel: 'Vendor',
+                        dropDownLabel: 'Select Vendor',
+                        // from API
+                        dropdownEntries: vendorProvider.vendors
+                            .map(
+                              (vendor) => DropdownMenuItem(
+                                value: vendor.id.toString(),
+                                child: Text(vendor.vendorCode),
+                              ),
+                            )
+                            .toList(),
+                        onSelected: (value) {
+                          setState(() {
+                            _selectedVendor = value;
+                          });
+                        },
+                      );
+                    }
+                    return const Center(child: LoadingDisplayCaption(message: 'Loading Vendor Info'));
+                  }),
+                  hSpace(15),
+                  NumberEntryField(
+                    label: 'Total Qty Checked',
+                    controller: _quantityController,
                     validator: (value) {
-                      if (value == null) {
-                        return 'Select a team';
+                      if (value == '') {
+                        return 'Invalid Number';
                       } else {
                         return null;
                       }
                     },
-                    fieldLabel: 'Team',
-                    dropDownLabel: 'Select Team',
-                    dropdownEntries: teamProvider.teams
-                        .map(
-                          (team) => DropdownMenuItem(
-                            value: team.id.toString(),
-                            child: Text(team.teamName),
-                          ),
-                        )
-                        .toList(),
-                    onSelected: (selectedVal) {
-                      setState(() {
-                        _selectedTeam = selectedVal;
-                      });
-                    },
-                  );
-                } else {
-                  return const Center(
-                    child: LoadingDisplayCaption(
-                      message: 'Loading Team Info',
-                    ),
-                  );
-                }
-              }),
-              hSpace(25),
+                  ),
+                  hSpace(15),
 
-              // Submit Button
-              PrimaryElevatedButton(
-                onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
-                    print('Form Valid');
-                    final res = CheckingProvider().postToCheck(
-                      _selectedVenue,
-                      _selectedVendor,
-                      _quantityController.text,
-                      _selectedTeam,
-                    );
-                    if (await res) {
-                      print('Succesfully posted');
-                      Get.snackbar(
-                        'Success',
-                        'Succesfully Posted To Checking!',
-                        snackPosition: SnackPosition.TOP,
-                        duration: const Duration(seconds: 1),
+                  //! Team List From Team API Consumer
+                  Consumer(builder: (context, state, child) {
+                    if (teamProvider.teams.isNotEmpty) {
+                      return DropdownMenuField(
+                        validator: (value) {
+                          if (value == null) {
+                            return 'Select a team';
+                          } else {
+                            return null;
+                          }
+                        },
+                        fieldLabel: 'Team',
+                        dropDownLabel: 'Select Team',
+                        dropdownEntries: teamProvider.teams
+                            .map(
+                              (team) => DropdownMenuItem(
+                                value: team.id.toString(),
+                                child: Text(team.teamName),
+                              ),
+                            )
+                            .toList(),
+                        onSelected: (selectedVal) {
+                          setState(() {
+                            _selectedTeam = selectedVal;
+                          });
+                        },
                       );
                     } else {
-                      print('Post failed');
+                      return const Center(
+                        child: LoadingDisplayCaption(
+                          message: 'Loading Team Info',
+                        ),
+                      );
                     }
-                  } else {
-                    print('Form Invalid');
-                  }
-                },
-                label: 'Post',
+                  }),
+                  hSpace(25),
+
+                  // Submit Button
+                  PrimaryElevatedButton(
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        print('Form Valid');
+                        final res = CheckingProvider().postToCheck(
+                          _selectedVenue,
+                          _selectedVendor,
+                          _quantityController.text,
+                          _selectedTeam,
+                        );
+                        if (await res) {
+                          print('Succesfully posted');
+                          Get.snackbar(
+                            'Success',
+                            'Succesfully Posted To Checking!',
+                            snackPosition: SnackPosition.TOP,
+                            duration: const Duration(seconds: 1),
+                          );
+                        } else {
+                          print('Post failed');
+                        }
+                      } else {
+                        print('Form Invalid');
+                      }
+                    },
+                    label: 'Post',
+                  ),
+                  hSpace(10),
+                ],
               ),
-              hSpace(10),
+              
             ],
           ),
         ),

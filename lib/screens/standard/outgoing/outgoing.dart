@@ -1,8 +1,4 @@
-import 'package:dth/screens/standard/widgets/boxdrilldown.dart';
-import 'package:dth/screens/standard/widgets/colordrilldown.dart';
-import 'package:dth/screens/standard/widgets/customerdrilldown.dart';
-import 'package:dth/screens/standard/widgets/sizedrilldown.dart';
-import 'package:dth/screens/standard/widgets/texturedrilldown.dart';
+
 import 'package:dth/theme/layout.dart';
 import 'package:dth/widgets/appbar_underline.dart';
 import 'package:dth/widgets/drop_down_menu_field.dart';
