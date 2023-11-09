@@ -42,7 +42,7 @@ class DashboardOptionContainer extends StatelessWidget {
               text,
               style: const TextStyle(
                 color: Colors.white,
-                fontSize: 21,
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),

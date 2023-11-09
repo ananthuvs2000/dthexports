@@ -41,6 +41,7 @@
 // }
 
 import 'package:camera/camera.dart';
+import 'package:dth/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class CameraScreen extends StatefulWidget {
@@ -93,7 +94,9 @@ class _CameraScreenState extends State<CameraScreen> {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             // If the Future is complete, display the CameraPreview
-            return CameraPreview(_cameraController!);
+            return CameraPreview(
+              _cameraController!,
+            );
           } else {
             // Otherwise, show a loading indicator
             return const Center(child: CircularProgressIndicator());
@@ -101,6 +104,9 @@ class _CameraScreenState extends State<CameraScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
+        tooltip: 'Capture',
+        backgroundColor: primaryColor,
+        isExtended: true,
         shape: const CircleBorder(),
         onPressed: () async {
           try {
@@ -113,8 +119,13 @@ class _CameraScreenState extends State<CameraScreen> {
             print('Error: $e');
           }
         },
-        child: const Icon(Icons.camera),
+        child: const Icon(
+          Icons.camera,
+          size: 35,
+          color: Colors.white,
+        ),
       ),
+      backgroundColor: Colors.transparent,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }

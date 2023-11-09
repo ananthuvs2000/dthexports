@@ -52,7 +52,11 @@ class _AcceptPageState extends State<AcceptPage> {
                   hSpace(15),
                   DropdownMenuField(
                     validator: (value) {
-                      return '';
+                      if (value == '') {
+                        return 'Please select a value';
+                      } else {
+                        return null;
+                      }
                     },
                     fieldLabel: 'Box No:',
                     dropDownLabel: 'Select Box ',
@@ -68,7 +72,11 @@ class _AcceptPageState extends State<AcceptPage> {
                   hSpace(15),
                   DropdownMenuField(
                     validator: (value) {
-                      return '';
+                      if (value == '') {
+                        return 'Please select a value';
+                      } else {
+                        return null;
+                      }
                     },
                     fieldLabel: 'Size:',
                     dropDownLabel: 'Select Size',
@@ -83,7 +91,11 @@ class _AcceptPageState extends State<AcceptPage> {
                   hSpace(15),
                   DropdownMenuField(
                     validator: (value) {
-                      return '';
+                      if (value == '') {
+                        return 'Please select a value';
+                      } else {
+                        return null;
+                      }
                     },
                     fieldLabel: 'Color:',
                     dropDownLabel: 'Select Color',
@@ -98,7 +110,11 @@ class _AcceptPageState extends State<AcceptPage> {
                   hSpace(15),
                   DropdownMenuField(
                     validator: (value) {
-                      return '';
+                      if (value == '') {
+                        return 'Please select a value';
+                      } else {
+                        return null;
+                      }
                     },
                     fieldLabel: 'Texture:',
                     dropDownLabel: 'Select Texture',
@@ -117,7 +133,11 @@ class _AcceptPageState extends State<AcceptPage> {
                     label: 'Material Qty',
                     controller: _quantityController,
                     validator: (value) {
-                      return '';
+                      if (value == '') {
+                        return 'Please select a value';
+                      } else {
+                        return null;
+                      }
                     },
                   ),
                   hSpace(35),

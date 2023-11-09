@@ -19,19 +19,23 @@ class _LoadingDisplayCaptionState extends State<LoadingDisplayCaption> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(5),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: primaryColor.withOpacity(0.25),
         border: Border.all(color: primaryColor.withOpacity(0.5)),
-        borderRadius: BorderRadius.circular(formFieldBorderRadius),
+        borderRadius: BorderRadius.circular(globalBorderRadius),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // Icon
-          CircularProgressIndicator(
-            color: primaryColor,
-            strokeWidth: 2,
+          SizedBox(
+            height: 20,
+            width: 20,
+            child: CircularProgressIndicator(
+              color: primaryColor,
+              strokeWidth: 2,
+            ),
           ),
           wSpace(10),
           // DateTimeText

@@ -43,7 +43,7 @@ class LoginPg extends StatelessWidget {
                       if (val == '') {
                         return 'Invalid Email';
                       }
-                      return '';
+                      return null;
                     },
                     icon: const Icon(Icons.email_outlined),
                     text: 'Email Address',
@@ -55,7 +55,7 @@ class LoginPg extends StatelessWidget {
                       if (val == '') {
                         return 'Please enter a password';
                       }
-                      return '';
+                      return null;
                     },
                     controller: _passwordController,
                     icon: const Icon(Icons.lock_open_rounded),
@@ -66,14 +66,17 @@ class LoginPg extends StatelessWidget {
                     width: 150.w,
                     child: PrimaryElevatedButton(
                       onPressed: () {
-                        // _formKey.currentState!.validate();
-                        _emailController.clear();
-                        _passwordController.clear();
-                        Get.to(
-                          const HomePage(),
-                          transition: Transition.downToUp,
-                          curve: Curves.easeInOut,
-                        );
+                        if (_formKey.currentState!.validate()) {
+                          _emailController.clear();
+                          _passwordController.clear();
+                          Get.to(
+                            const HomePage(),
+                            transition: Transition.downToUp,
+                            curve: Curves.easeInOut,
+                          );
+                        } else {
+                          print('Form Invalid');
+                        }
                       },
                       label: 'LOGIN',
                     ),

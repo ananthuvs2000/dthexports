@@ -21,6 +21,7 @@ class VendorDataService extends ChangeNotifier {
           .map(
             (item) => Vendor(
               id: item['id'],
+              vendorCode: item['vendor_code'],
               vendorName: item['vendor_name'],
               vendorEmail: item['vendor_email'],
               vendorMobile: item['vendor_mobile'],
@@ -36,8 +37,10 @@ class VendorDataService extends ChangeNotifier {
   }
 
   //^ Adding a new vendor
-  Future<bool> addVendor(String name, String email, String mobile, String address) async {
+  Future<bool> addVendor(
+      String code, String name, String email, String mobile, String address) async {
     final response = await http.post(Uri.parse(_vendorAPI), body: {
+      "vendor_code": code,
       "vendor_name": name,
       "vendor_email": email,
       "vendor_mobile": mobile,

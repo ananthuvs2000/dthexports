@@ -1,4 +1,5 @@
 import 'package:dth/theme/colors.dart';
+import 'package:dth/theme/layout.dart';
 import 'package:flutter/material.dart';
 
 class SecondaryElevatedButton extends StatelessWidget {
@@ -16,6 +17,8 @@ class SecondaryElevatedButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
+        elevation: 0,
+        shadowColor: Colors.transparent,
         backgroundColor: Colors.transparent,
         foregroundColor: theme.primary,
         shape: RoundedRectangleBorder(
@@ -23,7 +26,7 @@ class SecondaryElevatedButton extends StatelessWidget {
             width: 1,
             color: primaryColor,
           ),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(globalBorderRadius),
         ),
         padding: const EdgeInsets.symmetric(
           horizontal: 20,
