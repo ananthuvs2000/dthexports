@@ -11,6 +11,7 @@ import 'package:dth/widgets/primary_elevated_button.dart';
 import 'package:dth/widgets/secondary_elevated_button.dart';
 import 'package:dth/widgets/spacer.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AcceptPage extends StatefulWidget {
@@ -26,6 +27,9 @@ class _AcceptPageState extends State<AcceptPage> {
   final String date = DateTime.now().toString();
   final String time = '${DateTime.now().hour}:${DateTime.now().minute}:${DateTime.now().second}';
   final TextEditingController _quantityController = TextEditingController();
+
+  //^ Form Key
+  final _acceptFormKey = GlobalKey<FormState>();
 
   //! Initializing Image Picker
   XFile? _image;
@@ -54,143 +58,150 @@ class _AcceptPageState extends State<AcceptPage> {
         bottom: appBarUnderline,
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView(
-                physics: const BouncingScrollPhysics(),
-                padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
-                shrinkWrap: true,
+        child: Form(
+          key: _acceptFormKey,
+          child: Column(
+            children: [
+              Expanded(
+                child: ListView(
+                  physics: const BouncingScrollPhysics(),
+                  padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
+                  shrinkWrap: true,
+                  children: [
+                    hSpace(15),
+                    DateTimeDisplay(
+                      date: date,
+                      time: time,
+                    ),
+                    hSpace(15),
+                    DropdownMenuField(
+                      validator: (value) {
+                        if (value == '') {
+                          return 'Please select a value';
+                        } else {
+                          return null;
+                        }
+                      },
+                      defaultValue: '1',
+                      fieldLabel: 'Box No:',
+                      dropDownLabel: 'Select Box ',
+                      dropdownEntries: numsOneTo99
+                          .map((num) => DropdownMenuItem(
+                                value: '$num',
+                                child: Text(num.toString()),
+                              ))
+                          .toList(),
+                      onSelected: (selectedVal) {
+                        print(selectedVal.toString());
+                      },
+                    ),
+                    hSpace(15),
+                    DropdownMenuField(
+                      validator: (value) {
+                        if (value == '') {
+                          return 'Please select a value';
+                        } else {
+                          return null;
+                        }
+                      },
+                      fieldLabel: 'Size:',
+                      dropDownLabel: 'Select Size',
+                      dropdownEntries: const [
+                        DropdownMenuItem(value: '13"', child: Text('13"-15"')),
+                        DropdownMenuItem(value: '15"', child: Text('15"-19"')),
+                      ],
+                      onSelected: (selectedVal) {
+                        print(selectedVal.toString());
+                      },
+                    ),
+                    hSpace(15),
+                    DropdownMenuField(
+                      validator: (value) {
+                        if (value == '') {
+                          return 'Please select a value';
+                        } else {
+                          return null;
+                        }
+                      },
+                      fieldLabel: 'Color:',
+                      dropDownLabel: 'Select Color',
+                      dropdownEntries: const [
+                        DropdownMenuItem(value: 'RED', child: Text('Red')),
+                        DropdownMenuItem(value: 'BLACK', child: Text('Black')),
+                      ],
+                      onSelected: (selectedVal) {
+                        print(selectedVal.toString());
+                      },
+                    ),
+                    hSpace(15),
+                    DropdownMenuField(
+                      validator: (value) {
+                        if (value == '') {
+                          return 'Please select a value';
+                        } else {
+                          return null;
+                        }
+                      },
+                      fieldLabel: 'Texture:',
+                      dropDownLabel: 'Select Texture',
+                      dropdownEntries: const [
+                        DropdownMenuItem(value: 'WAVY', child: Text('WAVY')),
+                        DropdownMenuItem(value: 'SUPER STRAIGHT', child: Text('SUPER STRAIGHT')),
+                      ],
+                      onSelected: (selectedVal) {
+                        print(selectedVal.toString());
+                      },
+                    ),
+                    hSpace(15),
+                    const DynamicFieldRow(label: 'Process', value: 'RAW MATERIAL'),
+                    hSpace(25),
+                    NumberEntryField(
+                      label: 'Material Qty',
+                      controller: _quantityController,
+                      validator: (value) {
+                        if (value == '') {
+                          return 'Please enter a value';
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
+                    (_image != null) ? ImagePreviewBox(image: _image) : hSpace(15),
+                    //! ^ IMAGE PREVIEW AREA
+                    OpenImageButton(
+                      icon: Icons.camera,
+                      label: 'Take Photo',
+                      onTap: () {
+                        getImage();
+                      },
+                    ),
+                    hSpace(30),
+                  ],
+                ),
+              ),
+              // Bottom Actions Area
+              BottomActionsArea(
                 children: [
-                  hSpace(15),
-                  DateTimeDisplay(
-                    date: date,
-                    time: time,
-                  ),
-                  hSpace(15),
-                  DropdownMenuField(
-                    validator: (value) {
-                      if (value == '') {
-                        return 'Please select a value';
-                      } else {
-                        return null;
+                  SecondaryElevatedButton(
+                    icon: Icons.add,
+                    onPressed: () {
+                      if (_acceptFormKey.currentState!.validate() && _image != null) {
+                        Get.snackbar('Added Succesfully', 'message');
                       }
                     },
-                    defaultValue: '1',
-                    fieldLabel: 'Box No:',
-                    dropDownLabel: 'Select Box ',
-                    dropdownEntries: numsOneTo99
-                        .map((num) => DropdownMenuItem(
-                              value: '$num',
-                              child: Text(num.toString()),
-                            ))
-                        .toList(),
-                    onSelected: (selectedVal) {
-                      print(selectedVal.toString());
-                    },
+                    label: 'Add More',
                   ),
-                  hSpace(15),
-                  DropdownMenuField(
-                    validator: (value) {
-                      if (value == '') {
-                        return 'Please select a value';
-                      } else {
-                        return null;
-                      }
-                    },
-                    fieldLabel: 'Size:',
-                    dropDownLabel: 'Select Size',
-                    dropdownEntries: const [
-                      DropdownMenuItem(value: '13"', child: Text('1')),
-                      DropdownMenuItem(value: '15"', child: Text('2')),
-                    ],
-                    onSelected: (selectedVal) {
-                      print(selectedVal.toString());
-                    },
-                  ),
-                  hSpace(15),
-                  DropdownMenuField(
-                    validator: (value) {
-                      if (value == '') {
-                        return 'Please select a value';
-                      } else {
-                        return null;
-                      }
-                    },
-                    fieldLabel: 'Color:',
-                    dropDownLabel: 'Select Color',
-                    dropdownEntries: const [
-                      DropdownMenuItem(value: 'RED', child: Text('Red')),
-                      DropdownMenuItem(value: 'Black', child: Text('Black')),
-                    ],
-                    onSelected: (selectedVal) {
-                      print(selectedVal.toString());
-                    },
-                  ),
-                  hSpace(15),
-                  DropdownMenuField(
-                    validator: (value) {
-                      if (value == '') {
-                        return 'Please select a value';
-                      } else {
-                        return null;
-                      }
-                    },
-                    fieldLabel: 'Texture:',
-                    dropDownLabel: 'Select Texture',
-                    dropdownEntries: const [
-                      DropdownMenuItem(value: 'WAVY', child: Text('WAVY')),
-                      DropdownMenuItem(value: 'SUPER STRAIGHT', child: Text('SUPER STRAIGHT')),
-                    ],
-                    onSelected: (selectedVal) {
-                      print(selectedVal.toString());
-                    },
-                  ),
-                  hSpace(15),
-                  const DynamicFieldRow(label: 'Process', value: 'RAW MATERIAL'),
-                  hSpace(25),
-                  NumberEntryField(
-                    label: 'Material Qty',
-                    controller: _quantityController,
-                    validator: (value) {
-                      if (value == '') {
-                        return 'Please select a value';
-                      } else {
-                        return null;
-                      }
-                    },
-                  ),
-                  (_image != null) ? ImagePreviewBox(image: _image) : hSpace(15),
-                  //! ^ IMAGE PREVIEW AREA
-                  OpenImageButton(
-                    icon: Icons.camera,
-                    label: 'Take Photo',
-                    onTap: () {
-                      getImage();
-                    },
-                  ),
-                  hSpace(30),
+                  wSpace(10),
+                  Expanded(
+                    child: PrimaryElevatedButton(
+                      onPressed: () {},
+                      label: 'Submit',
+                    ),
+                  )
                 ],
               ),
-            ),
-            // Bottom Actions Area
-            BottomActionsArea(
-              children: [
-                SecondaryElevatedButton(
-                  icon: Icons.add,
-                  onPressed: () {},
-                  label: 'Add More',
-                ),
-                wSpace(10),
-                Expanded(
-                  child: PrimaryElevatedButton(
-                    onPressed: () {},
-                    label: 'Submit',
-                  ),
-                )
-              ],
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

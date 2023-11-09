@@ -29,7 +29,7 @@ class _CheckPageState extends State<CheckPage> {
     //! ONE TIME FETCHING OF ALL API INFO FROM PROVIDER DURING PAGE INITIALIZATION
     Provider.of<VendorProvider>(context, listen: false).fetchVendors();
     Provider.of<TeamProvider>(context, listen: false).fetchTeams();
-    Provider.of<DateTimeProvider>(context, listen: false).fetchDateTime();
+    // Provider.of<DateTimeProvider>(context, listen: false).fetchDateTime();
   }
 
   //^ Form Key
@@ -46,7 +46,7 @@ class _CheckPageState extends State<CheckPage> {
     // Provider
     final vendorProvider = Provider.of<VendorProvider>(context);
     final teamProvider = Provider.of<TeamProvider>(context);
-    final dateTimeProvider = Provider.of<DateTimeProvider>(context);
+    // final dateTimeProvider = Provider.of<DateTimeProvider>(context);
     // UI
     return Scaffold(
       appBar: AppBar(

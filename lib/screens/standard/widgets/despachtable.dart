@@ -18,7 +18,7 @@ class _DespachTableWidgetState extends State<DespachTableWidget> {
           border: TableBorder.all(color: Colors.black54),
           defaultVerticalAlignment: TableCellVerticalAlignment.middle,
           children: [
-            TableRow(decoration: BoxDecoration(color: Colors.indigo), children: [
+            const TableRow(decoration: BoxDecoration(color: Colors.indigo), children: [
               TableCell(
                   child: Padding(
                 padding: EdgeInsets.all(8),
@@ -47,21 +47,21 @@ class _DespachTableWidgetState extends State<DespachTableWidget> {
             ...List.generate(
               3,
               (index) => TableRow(children: [
-                TableCell(
+                const TableCell(
                     child: Padding(
                   padding: EdgeInsets.all(8),
                   child: Text('Worker '),
                 )),
-                TableCell(
+                const TableCell(
                     child: Padding(
                   padding: EdgeInsets.all(8),
                   child: Text('Completed Qty'),
                 )),
                 TableCell(
                     child: Padding(
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   child: Container(
-                    padding: EdgeInsets.only(right: 10),
+                    padding: const EdgeInsets.only(right: 10),
                     height: 30,
                     width: 60,
                     decoration: BoxDecoration(
@@ -71,9 +71,9 @@ class _DespachTableWidgetState extends State<DespachTableWidget> {
                       child: TextField(
                         textAlign: TextAlign.center,
                         controller: _quantityController,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 16, color: Colors.black, fontWeight: FontWeight.w400),
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           focusedBorder: InputBorder.none,
                         ),
                       ),
