@@ -108,7 +108,7 @@ class _CheckPageState extends State<CheckPage> {
                         .map(
                           (vendor) => DropdownMenuItem(
                             value: vendor.id.toString(),
-                            child: Text(vendor.vendorName),
+                            child: Text(vendor.vendorCode),
                           ),
                         )
                         .toList(),
