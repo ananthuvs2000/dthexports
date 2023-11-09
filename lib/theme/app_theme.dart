@@ -17,7 +17,15 @@ AppBarTheme dthAppbarTheme = AppBarTheme(
   ),
 );
 
-DropdownMenuThemeData drop = DropdownMenuThemeData();
+InputDecorationTheme inputTheme = InputDecorationTheme(
+  prefixIconColor: MaterialStateColor.resolveWith((states) {
+    if (states.contains(MaterialState.focused)) {
+      return primaryColor;
+    } else {
+      return Colors.black.withOpacity(0.1);
+    }
+  }),
+);
 
 // Final ThemeData Variable
 ThemeData dthAppTheme = ThemeData(
@@ -26,4 +34,5 @@ ThemeData dthAppTheme = ThemeData(
   fontFamily: mainFont,
   colorScheme: ColorScheme.fromSeed(seedColor: primaryColor),
   appBarTheme: dthAppbarTheme,
+  inputDecorationTheme: inputTheme,
 );

@@ -44,7 +44,8 @@ class _RecycleAddScreenState extends State<RecycleAddScreen> {
                   // Photo And Weight Entry
                   Row(
                     children: [
-                      OpenCameraButton(
+                      OpenImageButton(
+                        icon: Icons.camera,
                         label: 'Take Photo',
                         onTap: () {},
                       ),

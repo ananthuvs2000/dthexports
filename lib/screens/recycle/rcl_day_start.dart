@@ -41,7 +41,8 @@ class _RecycleDayStartPageState extends State<RecycleDayStartScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        OpenCameraButton(
+                        OpenImageButton(
+                          icon: Icons.camera,
                           label: 'Take Photo',
                           onTap: () {},
                         ),

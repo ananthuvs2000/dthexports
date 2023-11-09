@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dth/_api_endpoints/api_endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -13,23 +15,39 @@ class CheckingDataService extends ChangeNotifier {
     String quantity,
     String teamID,
   ) async {
+    //
     print({venue, vendor, quantity, teamID});
     final response = await http.post(
       Uri.parse(_checkingAPI),
       // Body
       body: {
-        "vendor_code": "V101",
-        "batch_code": "BC01",
+        "vendor_code": vendor,
+        "batch_code": generateBatchCode(),
         "venue": venue,
         "quantity_checked": quantity,
-        "team_name": "Team1"
+        "team_name": teamID,
       },
     );
+
     // print(response.body);
+    print(response.statusCode);
     if (response.statusCode == 200) {
       return true;
     } else {
+      print(response.body);
       throw Exception('Failed to post checking record');
     }
   }
+}
+
+String generateBatchCode() {
+  final year = DateTime.now().year;
+  final month = DateTime.now().month;
+  final day = DateTime.now().day;
+  final hour = DateTime.now().hour;
+  final minute = DateTime.now().minute;
+  final second = DateTime.now().second;
+  final String batchCode = 'BC$year$month$day$hour$minute$second';
+  print(batchCode);
+  return batchCode;
 }

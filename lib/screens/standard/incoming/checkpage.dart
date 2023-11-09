@@ -1,4 +1,5 @@
 import 'package:dth/_providers/checking_provider.dart';
+// import 'package:dth/_providers/datetime_provider.dart';
 import 'package:dth/_providers/team_provider.dart';
 import 'package:dth/_providers/vendor_provider.dart';
 import 'package:dth/theme/layout.dart';
@@ -35,7 +36,6 @@ class _CheckPageState extends State<CheckPage> {
   final _formKey = GlobalKey<FormState>();
   //^ Setting all form field controllers
   final _quantityController = TextEditingController();
-  //
   String _selectedVenue = '';
   String _selectedVendor = '';
   String _selectedTeam = '';
@@ -108,7 +108,7 @@ class _CheckPageState extends State<CheckPage> {
                         .map(
                           (vendor) => DropdownMenuItem(
                             value: vendor.id.toString(),
-                            child: Text(vendor.vendorName),
+                            child: Text(vendor.vendorCode),
                           ),
                         )
                         .toList(),
@@ -163,7 +163,11 @@ class _CheckPageState extends State<CheckPage> {
                     },
                   );
                 } else {
-                  return const Center(child: LoadingDisplayCaption(message: 'Loading Team Info'));
+                  return const Center(
+                    child: LoadingDisplayCaption(
+                      message: 'Loading Team Info',
+                    ),
+                  );
                 }
               }),
               hSpace(25),
@@ -181,8 +185,12 @@ class _CheckPageState extends State<CheckPage> {
                     );
                     if (await res) {
                       print('Succesfully posted');
-                      Get.snackbar('Success', 'Succesfully Posted To Checking!',
-                          snackPosition: SnackPosition.TOP, duration: const Duration(seconds: 1));
+                      Get.snackbar(
+                        'Success',
+                        'Succesfully Posted To Checking!',
+                        snackPosition: SnackPosition.TOP,
+                        duration: const Duration(seconds: 1),
+                      );
                     } else {
                       print('Post failed');
                     }
