@@ -57,12 +57,12 @@ class _AcceptPageState extends State<AcceptPage> {
         backgroundColor: Colors.white,
         bottom: appBarUnderline,
       ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: Form(
-                key: _acceptFormKey,
+      body: Form(
+        key: _acceptFormKey,
+        child: SafeArea(
+          child: Column(
+            children: [
+              Expanded(
                 child: ListView(
                   physics: const BouncingScrollPhysics(),
                   padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
@@ -76,7 +76,7 @@ class _AcceptPageState extends State<AcceptPage> {
                     hSpace(15),
                     DropdownMenuField(
                       validator: (value) {
-                        if (value == '') {
+                        if (value == null) {
                           return 'Please select a value';
                         } else {
                           return null;
@@ -97,7 +97,7 @@ class _AcceptPageState extends State<AcceptPage> {
                     hSpace(15),
                     DropdownMenuField(
                       validator: (value) {
-                        if (value == '') {
+                        if (value == null) {
                           return 'Please select a value';
                         } else {
                           return null;
@@ -116,7 +116,7 @@ class _AcceptPageState extends State<AcceptPage> {
                     hSpace(15),
                     DropdownMenuField(
                       validator: (value) {
-                        if (value == '') {
+                        if (value == null) {
                           return 'Please select a value';
                         } else {
                           return null;
@@ -135,7 +135,7 @@ class _AcceptPageState extends State<AcceptPage> {
                     hSpace(15),
                     DropdownMenuField(
                       validator: (value) {
-                        if (value == '') {
+                        if (value == null) {
                           return 'Please select a value';
                         } else {
                           return null;
@@ -178,29 +178,32 @@ class _AcceptPageState extends State<AcceptPage> {
                   ],
                 ),
               ),
-            ),
-            // Bottom Actions Area For Add / Submit
-            BottomActionsArea(
-              children: [
-                SecondaryElevatedButton(
-                  icon: Icons.add,
-                  onPressed: () {
-                    if (_acceptFormKey.currentState!.validate() == true && _image != null) {
-                      Get.snackbar('Added Succesfully', 'message');
-                    }
-                  },
-                  label: 'Add More',
-                ),
-                wSpace(10),
-                Expanded(
-                  child: PrimaryElevatedButton(
-                    onPressed: () {},
-                    label: 'Submit',
+              // Bottom Actions Area For Add / Submit
+              BottomActionsArea(
+                children: [
+                  SecondaryElevatedButton(
+                    icon: Icons.add,
+                    onPressed: () {
+                      if (_acceptFormKey.currentState!.validate()) {
+                        print('Form valid');
+                        if (_image != null) Get.snackbar('Added Succesfully', 'message');
+                      } else {
+                        print('Form invalid');
+                      }
+                    },
+                    label: 'Add More',
                   ),
-                )
-              ],
-            ),
-          ],
+                  wSpace(10),
+                  Expanded(
+                    child: PrimaryElevatedButton(
+                      onPressed: () {},
+                      label: 'Submit',
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
