@@ -41,7 +41,8 @@ class _DayEndScreenState extends State<DayEndScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        OpenCameraButton(
+                        OpenImageButton(
+                          icon: Icons.camera,
                           label: 'Take Photo',
                           onTap: () {},
                         ),
@@ -96,9 +97,7 @@ class _DayEndScreenState extends State<DayEndScreen> {
                       height: 10,
                     ),
                     hSpace(10),
-                    SecondaryElevatedButton(onPressed: () {
-                      
-                    }, label: 'PRS Completed'),
+                    SecondaryElevatedButton(onPressed: () {}, label: 'PRS Completed'),
                     // Row(
                     //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     //   children: [
@@ -135,11 +134,9 @@ class _DayEndScreenState extends State<DayEndScreen> {
                     //         child: Text('APPLY FORMULA', style: labelText())),
                     //   ],
                     // ),
-                    
+
                     hSpace(10),
-                    SecondaryElevatedButton(onPressed: () {
-                      
-                    }, label: 'Balance'),
+                    SecondaryElevatedButton(onPressed: () {}, label: 'Balance'),
                     const SizedBox(
                       height: 10,
                     ),
@@ -168,7 +165,8 @@ class _DayEndScreenState extends State<DayEndScreen> {
                     // const SizedBox(
                     //   height: 20,
                     // ),
-                    DynamicFieldRow(label: 'Total Process Wastage', value: 'Auto Calc Total% Wastage'),
+                    DynamicFieldRow(
+                        label: 'Total Process Wastage', value: 'Auto Calc Total% Wastage'),
                     hSpace(10),
                     const TableWidget(),
                     const SizedBox(

@@ -1,4 +1,5 @@
 import 'package:dth/_providers/checking_provider.dart';
+import 'package:dth/_providers/datetime_provider.dart';
 import 'package:dth/_providers/team_provider.dart';
 import 'package:dth/_providers/vendor_provider.dart';
 import 'package:dth/theme/layout.dart';
@@ -28,7 +29,7 @@ class _CheckPageState extends State<CheckPage> {
     //! ONE TIME FETCHING OF ALL API INFO FROM PROVIDER DURING PAGE INITIALIZATION
     Provider.of<VendorProvider>(context, listen: false).fetchVendors();
     Provider.of<TeamProvider>(context, listen: false).fetchTeams();
-    // Provider.of<DateTimeProvider>(context, listen: false).fetchDateTime();
+    Provider.of<DateTimeProvider>(context, listen: false).fetchDateTime();
   }
 
   //^ Form Key
@@ -45,7 +46,7 @@ class _CheckPageState extends State<CheckPage> {
     // Provider
     final vendorProvider = Provider.of<VendorProvider>(context);
     final teamProvider = Provider.of<TeamProvider>(context);
-    // final dateTimeProvider = Provider.of<DateTimeProvider>(context);
+    final dateTimeProvider = Provider.of<DateTimeProvider>(context);
     // UI
     return Scaffold(
       appBar: AppBar(
@@ -163,7 +164,11 @@ class _CheckPageState extends State<CheckPage> {
                     },
                   );
                 } else {
-                  return const Center(child: LoadingDisplayCaption(message: 'Loading Team Info'));
+                  return const Center(
+                    child: LoadingDisplayCaption(
+                      message: 'Loading Team Info',
+                    ),
+                  );
                 }
               }),
               hSpace(25),
@@ -181,8 +186,12 @@ class _CheckPageState extends State<CheckPage> {
                     );
                     if (await res) {
                       print('Succesfully posted');
-                      Get.snackbar('Success', 'Succesfully Posted To Checking!',
-                          snackPosition: SnackPosition.TOP, duration: const Duration(seconds: 1));
+                      Get.snackbar(
+                        'Success',
+                        'Succesfully Posted To Checking!',
+                        snackPosition: SnackPosition.TOP,
+                        duration: const Duration(seconds: 1),
+                      );
                     } else {
                       print('Post failed');
                     }

@@ -82,8 +82,9 @@ class _DayStartState extends State<DayStart> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    OpenCameraButton(
+                    OpenImageButton(
                       label: 'Take Photo',
+                      icon: Icons.camera,
                       onTap: () {},
                     ),
                     wSpace(20),

@@ -1,5 +1,5 @@
-// import 'package:dth/screens/standard/widgets/camera.dart';
-import 'package:dth/screens/standard/widgets/camera.dart';
+import 'package:dth/screens/standard/widgets/bottom_actions_area.dart';
+import 'package:dth/screens/standard/widgets/image_preview_container.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/widgets/appbar_underline.dart';
 import 'package:dth/widgets/date_time_display.dart';
@@ -8,26 +8,37 @@ import 'package:dth/widgets/dynamic_field_row.dart';
 import 'package:dth/widgets/number_entry_field.dart';
 import 'package:dth/widgets/open_camera_button.dart';
 import 'package:dth/widgets/primary_elevated_button.dart';
+import 'package:dth/widgets/secondary_elevated_button.dart';
 import 'package:dth/widgets/spacer.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AcceptPage extends StatefulWidget {
   const AcceptPage({
     super.key,
-    this.path,
   });
-  final String? path;
 
   @override
   State<AcceptPage> createState() => _AcceptPageState();
 }
 
 class _AcceptPageState extends State<AcceptPage> {
-  double? boxweight;
   final String date = DateTime.now().toString();
   final String time = '${DateTime.now().hour}:${DateTime.now().minute}:${DateTime.now().second}';
   final TextEditingController _quantityController = TextEditingController();
+
+  //! Initializing Image Picker
+  XFile? _image;
+  late final ImagePicker _picker = ImagePicker();
+
+  //! Picking Image from camera
+  Future getImage() async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.camera);
+
+    setState(() {
+      _image = image;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +58,7 @@ class _AcceptPageState extends State<AcceptPage> {
           children: [
             Expanded(
               child: ListView(
+                physics: const BouncingScrollPhysics(),
                 padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
                 shrinkWrap: true,
                 children: [
@@ -148,47 +160,35 @@ class _AcceptPageState extends State<AcceptPage> {
                       }
                     },
                   ),
-                  hSpace(35),
-                  OpenCameraButton(
-                    label: 'Open Camera',
+                  (_image != null) ? ImagePreviewBox(image: _image) : hSpace(15),
+                  //! ^ IMAGE PREVIEW AREA
+                  OpenImageButton(
+                    icon: Icons.camera,
+                    label: 'Take Photo',
                     onTap: () {
-                      // Get.to(const CameraScreen());
-                      showDialog(
-                        context: context,
-                        builder: (context) => CameraScreen(),
-                      );
+                      getImage();
                     },
                   ),
-                  hSpace(20),
-                  TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'Add More +',
-                        style: TextStyle(fontSize: 16),
-                      )),
                   hSpace(30),
                 ],
               ),
             ),
-            // Submit Button
-            Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: PageLayout.pagePaddingX,
-                vertical: 5,
-              ),
-              decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                BoxShadow(
-                  blurRadius: 10,
-                  color: Colors.black.withOpacity(0.25),
+            // Bottom Actions Area
+            BottomActionsArea(
+              children: [
+                SecondaryElevatedButton(
+                  icon: Icons.add,
+                  onPressed: () {},
+                  label: 'Add More',
                 ),
-              ]),
-              width: double.infinity,
-              child: PrimaryElevatedButton(
-                onPressed: () {
-                  Get.snackbar('Picture taken', widget.path.toString());
-                },
-                label: 'Submit',
-              ),
+                wSpace(10),
+                Expanded(
+                  child: PrimaryElevatedButton(
+                    onPressed: () {},
+                    label: 'Submit',
+                  ),
+                )
+              ],
             ),
           ],
         ),
