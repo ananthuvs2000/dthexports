@@ -41,6 +41,7 @@
 // }
 
 import 'package:camera/camera.dart';
+import 'package:dth/screens/standard/incoming/acceptpage.dart';
 import 'package:dth/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -86,9 +87,9 @@ class _CameraScreenState extends State<CameraScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Take Photo'),
-      ),
+      // appBar: AppBar(
+      //   title: const Text('Take Photo'),
+      // ),
       body: FutureBuilder<void>(
         future: _initializeControllerFuture,
         builder: (context, snapshot) {
@@ -115,6 +116,11 @@ class _CameraScreenState extends State<CameraScreen> {
             final XFile picture = await _cameraController!.takePicture();
             // Do something with the picture (e.g., display or save it)
             print('Picture taken at ${picture.path}');
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AcceptPage(path: picture.path),
+                ));
           } catch (e) {
             print('Error: $e');
           }

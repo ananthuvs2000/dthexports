@@ -13,7 +13,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AcceptPage extends StatefulWidget {
-  const AcceptPage({super.key});
+  const AcceptPage({
+    super.key,
+    this.path,
+  });
+  final String? path;
 
   @override
   State<AcceptPage> createState() => _AcceptPageState();
@@ -27,6 +31,8 @@ class _AcceptPageState extends State<AcceptPage> {
 
   @override
   Widget build(BuildContext context) {
+    final List<int> numsOneTo99 = List.generate(99, (index) => index + 1);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -58,13 +64,15 @@ class _AcceptPageState extends State<AcceptPage> {
                         return null;
                       }
                     },
+                    defaultValue: '1',
                     fieldLabel: 'Box No:',
                     dropDownLabel: 'Select Box ',
-                    dropdownEntries: const [
-                      DropdownMenuItem(value: '1', child: Text('1')),
-                      DropdownMenuItem(value: '2', child: Text('2')),
-                      DropdownMenuItem(value: '3', child: Text('3')),
-                    ],
+                    dropdownEntries: numsOneTo99
+                        .map((num) => DropdownMenuItem(
+                              value: '$num',
+                              child: Text(num.toString()),
+                            ))
+                        .toList(),
                     onSelected: (selectedVal) {
                       print(selectedVal.toString());
                     },
@@ -144,7 +152,11 @@ class _AcceptPageState extends State<AcceptPage> {
                   OpenCameraButton(
                     label: 'Open Camera',
                     onTap: () {
-                      Get.to(const CameraScreen());
+                      // Get.to(const CameraScreen());
+                      showDialog(
+                        context: context,
+                        builder: (context) => CameraScreen(),
+                      );
                     },
                   ),
                   hSpace(20),
@@ -171,7 +183,12 @@ class _AcceptPageState extends State<AcceptPage> {
                 ),
               ]),
               width: double.infinity,
-              child: PrimaryElevatedButton(onPressed: () {}, label: 'Submit'),
+              child: PrimaryElevatedButton(
+                onPressed: () {
+                  Get.snackbar('Picture taken', widget.path.toString());
+                },
+                label: 'Submit',
+              ),
             ),
           ],
         ),

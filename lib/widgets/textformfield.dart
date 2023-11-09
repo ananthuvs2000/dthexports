@@ -55,7 +55,6 @@ class CustomTextFormField extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         prefixIcon: icon,
-        prefixIconColor: Colors.black.withOpacity(0.5),
         label: Text(text),
         labelStyle: TextStyle(
           color: Colors.black.withOpacity(0.5),
