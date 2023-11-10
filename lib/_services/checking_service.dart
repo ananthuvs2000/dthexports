@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:dth/_api_endpoints/api_endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -24,7 +22,7 @@ class CheckingDataService extends ChangeNotifier {
         "vendor_code": vendor,
         "batch_code": generateBatchCode(),
         "venue": venue,
-        "quantity_checked": quantity,
+        "quantity_checked": double.parse(quantity),
         "team_name": teamID,
       },
     );

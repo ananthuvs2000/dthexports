@@ -1,7 +1,7 @@
 import 'package:dth/_models/employee_model.dart';
 import 'package:dth/_providers/checking_provider.dart';
 import 'package:dth/_providers/employee_provider.dart';
-import 'package:dth/_providers/team_creation_provider.dart';
+import 'package:dth/_utilites/employee_ids_to_hash.dart';
 // import 'package:dth/_providers/datetime_provider.dart';
 import 'package:dth/_providers/team_provider.dart';
 import 'package:dth/_providers/vendor_provider.dart';
@@ -44,6 +44,9 @@ class _CheckPageState extends State<CheckPage> {
   final _quantityController = TextEditingController();
   String _selectedVenue = '';
   String _selectedVendor = '';
+
+  // Temporarily added workers
+  Set<Employee> temp = {};
 
   @override
   Widget build(BuildContext context) {
@@ -176,11 +179,9 @@ class _CheckPageState extends State<CheckPage> {
                     onPressed: () async {
                       print(teamProvider.addedEmps);
                       print('Form Valid');
-                      // teamProvider.addedEmps.clear();
                       teamProvider.addedEmps.map((e) => e.id);
                       if (_formKey.currentState!.validate()) {
-                        final String hash = TeamCreationProvider()
-                            .hashEmployeeIdsIntoString(teamProvider.addedEmps);
+                        final String hash = hashEmployeeIdsIntoString(temp);
                         final resOfTeamCreation = TeamProvider().postToTeam(hash);
                         final res = CheckingProvider().postToCheck(
                           _selectedVenue,
@@ -245,14 +246,11 @@ class _CheckPageState extends State<CheckPage> {
                       return addEmployeeTile(
                         employees[index],
                         () {
-                          if (!TeamProvider().addedEmps.contains(employees[index])) {
+                          if (!temp.contains(employees[index])) {
                             setState(() {
-                              TeamProvider().addedEmps.add(employees[index]);
-                              EmployeeProvider().employees.remove(employees[index]);
+                              temp.add(employees[index]);
                             });
-                          } else {
-                            print('Already added');
-                          }
+                          } else {}
                         },
                       );
                     },
