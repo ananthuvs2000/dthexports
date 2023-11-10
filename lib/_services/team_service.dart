@@ -6,12 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class TeamDataService extends ChangeNotifier {
-  //! API ENDPOINT
+  //! API ENDPOINTS
   final String _teamAPI = '$apiHOME/team';
+  final String _teamAddAPI = '$apiHOME/team_add';
 
   Future<List<Team>> fetchTeams() async {
     final response = await http.get(Uri.parse(_teamAPI));
-    print(response.body);
+    // print(response.body);
     if (response.statusCode == 200) {
       final List<dynamic> jsonData = json.decode(response.body);
 
@@ -26,6 +27,19 @@ class TeamDataService extends ChangeNotifier {
             ),
           )
           .toList();
+    } else {
+      throw Exception('Failed to fetch vendor information');
+    }
+  }
+
+  //
+  Future<bool> teamAdd(String teamHash) async {
+    final response = await http.post(Uri.parse(_teamAddAPI), body: {
+      "team_name": teamHash,
+    });
+    // print(response.body);
+    if (response.statusCode == 200) {
+      return true;
     } else {
       throw Exception('Failed to fetch vendor information');
     }
