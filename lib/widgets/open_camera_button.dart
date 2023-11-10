@@ -11,10 +11,12 @@ class OpenImageButton extends StatelessWidget {
     required this.icon,
     required this.onTap,
     super.key,
+    this.width,
   });
   final void Function()? onTap;
   final String label;
   final IconData icon;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class OpenImageButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(borderRad),
       child: Ink(
         height: 120.h,
+        width: width,
         padding: EdgeInsets.all(15.h),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(borderRad),

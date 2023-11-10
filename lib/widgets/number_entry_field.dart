@@ -26,6 +26,7 @@ class NumberEntryField extends StatelessWidget {
             style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 15,
+              height: 0,
             ),
             maxLines: 2,
           ),

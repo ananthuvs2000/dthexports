@@ -22,7 +22,7 @@ InputDecorationTheme inputTheme = InputDecorationTheme(
     if (states.contains(MaterialState.focused)) {
       return primaryColor;
     } else {
-      return Colors.black.withOpacity(0.1);
+      return Colors.black.withOpacity(0.25);
     }
   }),
 );

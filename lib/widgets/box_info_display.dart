@@ -18,27 +18,20 @@ class BoxInfoDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // padding: const EdgeInsets.all(10),
-      margin: const EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 10,
-            color: Colors.black.withOpacity(0.25),
-          ),
-        ],
+        border: Border.all(color: Colors.black.withOpacity(0.75)),
         color: Colors.white.withOpacity(1),
-        borderRadius: BorderRadius.circular(formFieldBorderRadius),
+        borderRadius: BorderRadius.circular(globalBorderRadius + 1),
       ),
       child: Column(
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             decoration: BoxDecoration(
               color: primaryColor,
               borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(formFieldBorderRadius),
-                topRight: Radius.circular(formFieldBorderRadius),
+                topLeft: Radius.circular(globalBorderRadius),
+                topRight: Radius.circular(globalBorderRadius),
               ),
             ),
             child: const Row(
@@ -47,7 +40,7 @@ class BoxInfoDisplay extends StatelessWidget {
                   'Box Details',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 15,
+                    fontSize: 14,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -55,7 +48,7 @@ class BoxInfoDisplay extends StatelessWidget {
             ),
           ),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
               color: Colors.white.withOpacity(0.25),
               borderRadius: const BorderRadius.only(
@@ -89,5 +82,6 @@ class BoxInfoDisplay extends StatelessWidget {
 }
 
 const infoTextSize = TextStyle(
+  fontSize: 14,
   fontWeight: FontWeight.bold,
 );

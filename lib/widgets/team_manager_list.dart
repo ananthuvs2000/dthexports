@@ -31,22 +31,16 @@ class _TeamManagerWidgetState extends State<TeamManagerWidget> {
       padding: EdgeInsets.zero,
       margin: EdgeInsets.symmetric(horizontal: 10.w),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.white.withOpacity(1),
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 5,
-            color: Colors.black.withOpacity(0.25),
-          )
-        ],
-      ),
+          borderRadius: BorderRadius.circular(globalBorderRadius + 1),
+          color: Colors.white.withOpacity(1),
+          border: Border.all(color: Colors.black.withOpacity(0.75))),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
             margin: EdgeInsets.zero,
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 10.w),
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.only(
                 topRight: Radius.circular(globalBorderRadius),
@@ -72,7 +66,10 @@ class _TeamManagerWidgetState extends State<TeamManagerWidget> {
                         ),
                         onPressed: () {},
                         icon: const Icon(Icons.add),
-                        label: const Text('ADD'),
+                        label: const Text(
+                          'ADD',
+                          style: TextStyle(fontSize: 13),
+                        ),
                       )
                     : hSpace(30),
               ],
@@ -82,10 +79,7 @@ class _TeamManagerWidgetState extends State<TeamManagerWidget> {
 
           if (widget.teamList.isNotEmpty)
             ListView.builder(
-              padding: const EdgeInsets.only(
-                top: 0,
-                bottom: 20,
-              ),
+              padding: const EdgeInsets.only(bottom: 15),
               shrinkWrap: true,
               itemExtent: 50.h,
               physics: const BouncingScrollPhysics(),
