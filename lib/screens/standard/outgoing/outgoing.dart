@@ -1,9 +1,7 @@
-
 import 'package:dth/theme/layout.dart';
 import 'package:dth/widgets/appbar_underline.dart';
 import 'package:dth/widgets/drop_down_menu_field.dart';
 import 'package:dth/widgets/dynamic_field_row.dart';
-import 'package:dth/widgets/headertext.dart';
 import 'package:dth/widgets/primary_elevated_button.dart';
 import 'package:dth/widgets/spacer.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +16,8 @@ class OutGoingScreen extends StatefulWidget {
 class _OutGoingScreenState extends State<OutGoingScreen> {
   // final TextEditingController _quantityController = TextEditingController();
   String name = '';
+
+  final _formKey = GlobalKey<FormState>();
 
 //^ To be handled with state management
   void updateName() {
@@ -46,13 +46,14 @@ class _OutGoingScreenState extends State<OutGoingScreen> {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
-          child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
             child: Column(
               children: [
-                hSpace(10),
+                hSpace(15),
                 DropdownMenuField(
                   validator: (value) {
-                    return '';
+                    return null;
                   },
                   fieldLabel: 'Customer Name',
                   dropDownLabel: 'Select Customer',
@@ -64,10 +65,10 @@ class _OutGoingScreenState extends State<OutGoingScreen> {
                     print(selectedVal.toString());
                   },
                 ),
-                hSpace(10),
+                hSpace(15),
                 DropdownMenuField(
                   validator: (value) {
-                    return '';
+                    return null;
                   },
                   fieldLabel: 'Size',
                   dropDownLabel: 'Select Size',
@@ -76,10 +77,10 @@ class _OutGoingScreenState extends State<OutGoingScreen> {
                     print(selectedVal.toString());
                   },
                 ),
-                hSpace(10),
+                hSpace(15),
                 DropdownMenuField(
                   validator: (value) {
-                    return '';
+                    return null;
                   },
                   fieldLabel: 'Colour',
                   dropDownLabel: 'Select Colour',
@@ -91,10 +92,10 @@ class _OutGoingScreenState extends State<OutGoingScreen> {
                     print(selectedVal.toString());
                   },
                 ),
-                hSpace(10),
+                hSpace(15),
                 DropdownMenuField(
                   validator: (value) {
-                    return '';
+                    return null;
                   },
                   fieldLabel: 'Box No',
                   dropDownLabel: 'Select Box No',
@@ -106,10 +107,10 @@ class _OutGoingScreenState extends State<OutGoingScreen> {
                     print(selectedVal.toString());
                   },
                 ),
-                hSpace(10),
+                hSpace(15),
                 DropdownMenuField(
                   validator: (value) {
-                    return '';
+                    return null;
                   },
                   fieldLabel: 'Texture',
                   dropDownLabel: 'Select Texture',
@@ -119,15 +120,18 @@ class _OutGoingScreenState extends State<OutGoingScreen> {
                   },
                 ),
                 hSpace(10),
-                const DynamicFieldRow(label: 'Req Qty', value: ''),
+                const DynamicFieldRow(label: 'Req Qty', value: 'CALCULATED'),
                 hSpace(20),
                 const DynamicFieldRow(label: '2nd Conditioning', value: 'Yes or No'),
                 hSpace(20),
                 const DynamicFieldRow(label: 'Send For Wefting', value: 'Yes or No'),
                 hSpace(30),
-                PrimaryElevatedButton(
-                  onPressed: () {},
-                  label: 'ADD MORE',
+                SizedBox(
+                  width: double.infinity,
+                  child: PrimaryElevatedButton(
+                    onPressed: () {},
+                    label: 'ADD MORE',
+                  ),
                 ),
               ],
             ),

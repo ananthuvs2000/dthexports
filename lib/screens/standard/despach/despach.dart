@@ -2,6 +2,7 @@ import 'package:dth/screens/standard/widgets/despachtable.dart';
 
 import 'package:dth/theme/layout.dart';
 import 'package:dth/widgets/appbar_underline.dart';
+import 'package:dth/widgets/bottom_actions_area.dart';
 import 'package:dth/widgets/drop_down_menu_field.dart';
 import 'package:dth/widgets/dynamic_field_row.dart';
 
@@ -28,59 +29,59 @@ class _DespachScreenState extends State<DespachScreen> {
         title: const Text('Dispatch'),
         bottom: appBarUnderline,
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView(
-                shrinkWrap: true,
-                children: [
-                  hSpace(10),
-                  DropdownMenuField(
-                    validator: (value) {
-                      return '';
-                    },
-                    fieldLabel: 'Order No',
-                    dropDownLabel: 'Select Order No',
-                    dropdownEntries: const [],
-                    onSelected: (selectedVal) {
-                      print(selectedVal.toString());
-                    },
-                  ),
-                  hSpace(10),
-                  DynamicFieldRow(label: 'Process', value: 'Threading/Wefting'),
-                  hSpace(20),
-                  DynamicFieldRow(label: 'Box No', value: 'Display Box No'),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  OrderedItemsdisplay(
-                      boxNumber: 'Box No', boxType: 'Type', boxSize: 'Size', boxWeight: 'Weight'),
-                  hSpace(10),
-                  TeamManagerWidget(
-                    editable: true,
-                    teamList: [
-                      WorkerData(id: 10, name: 'Athul'),
-                      WorkerData(id: 15, name: 'Amal'),
-                    ],
-                  ),
-                  hSpace(10),
-                  const DespachTableWidget(),
-                ],
-              ),
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView(
+              physics: const BouncingScrollPhysics(),
+              padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
+              shrinkWrap: true,
+              children: [
+                hSpace(10),
+                DropdownMenuField(
+                  validator: (value) {
+                    return null;
+                  },
+                  fieldLabel: 'Order No',
+                  dropDownLabel: 'Select Order No',
+                  dropdownEntries: const [],
+                  onSelected: (selectedVal) {
+                    print(selectedVal.toString());
+                  },
+                ),
+                hSpace(10),
+                const DynamicFieldRow(label: 'Process', value: 'Threading/Wefting'),
+                hSpace(20),
+                const DynamicFieldRow(label: 'Box No', value: 'Display Box No'),
+                const SizedBox(
+                  height: 20,
+                ),
+                const OrderedItemsdisplay(
+                    boxNumber: 'Box No', boxType: 'Type', boxSize: 'Size', boxWeight: 'Weight'),
+                hSpace(10),
+                TeamManagerWidget(
+                  editable: true,
+                  teamList: [
+                    WorkerData(id: 10, name: 'Athul'),
+                    WorkerData(id: 15, name: 'Amal'),
+                  ],
+                ),
+                hSpace(10),
+                const DespachTableWidget(),
+              ],
             ),
-            hSpace(10),
-            SizedBox(
-              width: double.infinity,
-              child: PrimaryElevatedButton(
-                onPressed: () {},
-                label: 'SUBMIT',
+          ),
+          BottomActionsArea(
+            children: [
+              Expanded(
+                child: PrimaryElevatedButton(
+                  onPressed: () {},
+                  label: 'Submit',
+                ),
               ),
-            ),
-            hSpace(10),
-          ],
-        ),
+            ],
+          ),
+        ],
       ),
     );
   }

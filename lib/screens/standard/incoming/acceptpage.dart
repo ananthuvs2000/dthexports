@@ -186,7 +186,15 @@ class _AcceptPageState extends State<AcceptPage> {
                     onPressed: () {
                       if (_acceptFormKey.currentState!.validate()) {
                         print('Form valid');
-                        if (_image != null) Get.snackbar('Added Succesfully', 'message');
+                        if (_image != null) {
+                          //Showing success message
+                          Get.snackbar('Added Succesfully', 'message');
+
+                          // Clearing all fields and dropdowns
+                          setState(() => _image = null);
+                          _quantityController.clear();
+                          _acceptFormKey.currentState!.reset();
+                        }
                       } else {
                         print('Form invalid');
                       }

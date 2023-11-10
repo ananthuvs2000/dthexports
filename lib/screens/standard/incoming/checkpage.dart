@@ -65,7 +65,6 @@ class _CheckPageState extends State<CheckPage> {
                 shrinkWrap: true,
                 children: [
                   //! DateTime from API Consumer
-                 
 
                   // Venue
                   hSpace(20),
@@ -121,7 +120,8 @@ class _CheckPageState extends State<CheckPage> {
                         },
                       );
                     }
-                    return const Center(child: LoadingDisplayCaption(message: 'Loading Vendor Info'));
+                    return const Center(
+                        child: LoadingDisplayCaption(message: 'Loading Vendor Info'));
                   }),
                   hSpace(15),
                   NumberEntryField(
@@ -193,6 +193,9 @@ class _CheckPageState extends State<CheckPage> {
                             snackPosition: SnackPosition.TOP,
                             duration: const Duration(seconds: 1),
                           );
+                          // Clearing all fields and dropdowns
+                          _formKey.currentState!.reset();
+                          _quantityController.clear();
                         } else {
                           print('Post failed');
                         }
@@ -205,7 +208,6 @@ class _CheckPageState extends State<CheckPage> {
                   hSpace(10),
                 ],
               ),
-              
             ],
           ),
         ),
