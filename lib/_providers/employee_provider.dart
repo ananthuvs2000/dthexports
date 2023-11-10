@@ -5,6 +5,12 @@ import 'package:flutter/material.dart';
 class EmployeeProvider with ChangeNotifier {
   List<Employee> _employees = [];
 
+  // Removing an employee from the employee list
+  void removeEmployee(Employee employee) {
+    _employees.remove(employee);
+    notifyListeners();
+  }
+
   // Fetching all employees
   Future<void> fetchEmployees() async {
     final dataProvider = EmployeeDataService();

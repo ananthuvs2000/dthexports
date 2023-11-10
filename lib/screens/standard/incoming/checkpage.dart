@@ -5,6 +5,7 @@ import 'package:dth/_providers/team_creation_provider.dart';
 // import 'package:dth/_providers/datetime_provider.dart';
 import 'package:dth/_providers/team_provider.dart';
 import 'package:dth/_providers/vendor_provider.dart';
+import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/widgets/appbar_underline.dart';
 import 'package:dth/widgets/drop_down_menu_field.dart';
@@ -163,7 +164,7 @@ class _CheckPageState extends State<CheckPage> {
                           ],
                         );
                       } else {
-                        return SizedBox();
+                        return const SizedBox();
                       }
                     },
                   ),
@@ -224,6 +225,7 @@ class _CheckPageState extends State<CheckPage> {
     showDialog(
       context: context,
       builder: (context) => Dialog(
+        backgroundColor: Colors.white,
         alignment: Alignment.center,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(globalBorderRadius),
@@ -232,19 +234,22 @@ class _CheckPageState extends State<CheckPage> {
             ? Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text('Select Employees in the team'),
                   hSpace(10),
+                  const Text('Select Employees in the team'),
                   ListView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     shrinkWrap: true,
                     itemCount: employees.length,
-                    itemExtent: 65,
+                    itemExtent: 55,
                     itemBuilder: (context, index) {
                       return addEmployeeTile(
                         employees[index],
                         () {
-                          if (!addedEmployees.contains(employees[index])) {
-                            addedEmployees.add(employees[index]);
+                          if (!TeamProvider().addedEmps.contains(employees[index])) {
+                            setState(() {
+                              TeamProvider().addedEmps.add(employees[index]);
+                              EmployeeProvider().employees.remove(employees[index]);
+                            });
                           } else {
                             print('Already added');
                           }
@@ -267,13 +272,13 @@ Widget addEmployeeTile(
   return ListTile(
     leading: Text(emp.employeeCode),
     title: Text(emp.employeeName),
-    trailing: IconButton.filled(
+    trailing: IconButton(
       splashRadius: 20,
       onPressed: onAdd,
-      icon: const Icon(
+      icon: Icon(
         Icons.add,
-        size: 15,
-        color: Colors.white,
+        size: 20,
+        color: primaryColor,
       ),
     ),
   );
