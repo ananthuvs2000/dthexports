@@ -1,5 +1,6 @@
 // import 'package:dth/_providers/datetime_provider.dart';
 import 'package:dth/_providers/employee_provider.dart';
+import 'package:dth/_providers/itemcheck_provider.dart';
 import 'package:dth/_providers/team_provider.dart';
 import 'package:dth/_providers/vendor_provider.dart';
 import 'package:dth/screens/splash_screen.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => VendorProvider()),
         ChangeNotifierProvider(create: (context) => TeamProvider()),
         ChangeNotifierProvider(create: (context) => EmployeeProvider()),
+        ChangeNotifierProvider(create: (context) => ItemCheckProvider()),
         // ChangeNotifierProvider(create: (context) => DateTimeProvider()),
       ],
       builder: (context, child) => ScreenUtilInit(

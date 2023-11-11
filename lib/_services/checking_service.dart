@@ -22,7 +22,7 @@ class CheckingDataService extends ChangeNotifier {
         "vendor_code": vendor,
         "batch_code": generateBatchCode(),
         "venue": venue,
-        "quantity_checked": double.parse(quantity),
+        "quantity_checked": quantity,
         "team_name": teamID,
       },
     );

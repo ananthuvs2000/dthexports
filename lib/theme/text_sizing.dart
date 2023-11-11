@@ -10,9 +10,9 @@ class TextStyles {
   );
 
   static TextStyle veryLargeHeading = const TextStyle(
-    fontSize: 50,
+    fontSize: 45,
     fontWeight: FontWeight.bold,
-    letterSpacing: -1.2,
+    letterSpacing: -1.1,
   );
 
   static TextStyle mainHeadingStyle = const TextStyle(

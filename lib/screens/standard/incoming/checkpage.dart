@@ -225,9 +225,6 @@ class _CheckPageState extends State<CheckPage> {
                   ],
                 ),
               ), //End of Listview
-
-              //! Streambuilder for /itemcheck_add
-              // StreamBuilder(stream: stream, builder: (context, snapshot) => ,)
             ],
           ),
         ),
