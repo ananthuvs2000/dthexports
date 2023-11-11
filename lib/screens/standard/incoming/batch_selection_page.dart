@@ -8,9 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class BatchSelectionPage extends StatelessWidget {
-  const BatchSelectionPage({
-    super.key,
-  });
+  const BatchSelectionPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +22,9 @@ class BatchSelectionPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              hSpace(25),
               Text(
-                'Select Batch',
+                'Select batch',
                 style: TextStyles.veryLargeHeading,
               ),
               hSpace(5),
@@ -58,6 +57,7 @@ class BatchSelectionPage extends StatelessWidget {
                   }
                 },
               ),
+              hSpace(10),
             ],
           ),
         ),

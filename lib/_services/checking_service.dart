@@ -27,8 +27,6 @@ class CheckingDataService extends ChangeNotifier {
       },
     );
 
-    // print(response.body);
-    print(response.statusCode);
     if (response.statusCode == 200) {
       return true;
     } else {

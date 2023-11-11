@@ -1,5 +1,5 @@
 import 'package:dth/screens/standard/despach/despach.dart';
-import 'package:dth/screens/standard/incoming/acceptpage.dart';
+// import 'package:dth/screens/standard/incoming/acceptpage.dart';
 import 'package:dth/screens/standard/incoming/batch_selection_page.dart';
 import 'package:dth/screens/standard/incoming/checkpage.dart';
 import 'package:dth/screens/standard/outgoing/outgoing.dart';
@@ -49,11 +49,14 @@ class _StandardScreenState extends State<StandardScreen> {
                         actions: [
                           Center(
                             child: SubDashboardItem(
-                                onTap: () {
-                                  Get.off(const BatchSelectionPage(),
-                                      transition: Transition.upToDown);
-                                },
-                                label: 'ACCEPT'),
+                              onTap: () {
+                                Get.off(
+                                  const BatchSelectionPage(),
+                                  transition: Transition.upToDown,
+                                );
+                              },
+                              label: 'ACCEPT',
+                            ),
                           ),
                           hSpace(10),
                           Center(
