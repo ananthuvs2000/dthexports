@@ -1,23 +1,32 @@
+import 'package:dth/_models/employee_model.dart';
 import 'package:dth/_services/checking_service.dart';
 import 'package:flutter/material.dart';
 
 class CheckingProvider with ChangeNotifier {
-  bool _postResult = false;
+  // storing selected employees temporarily
+  final Set<Employee> _selectedEmployees = {};
+  // Function to add an employee into the list
+  void addEmployee(Employee e) {
+    _selectedEmployees.add(e);
+    notifyListeners();
+  }
 
+  bool _postResult = false;
+  // Posting to checking collection
   Future<bool> postToCheck(
     String venue,
     String vendor,
     String quantity,
-    String team,
+    String teamHash,
   ) async {
     final checkingProvider = CheckingDataService();
     _postResult = await checkingProvider.postCheck(
       venue,
       vendor,
       quantity,
-      team,
+      teamHash,
     );
-
+    if (_postResult) notifyListeners();
     return _postResult;
   }
 }

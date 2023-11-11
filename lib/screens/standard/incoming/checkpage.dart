@@ -7,7 +7,6 @@ import 'package:dth/_providers/team_provider.dart';
 import 'package:dth/_providers/vendor_provider.dart';
 import 'package:dth/_utilites/scaffold_snackbars.dart';
 import 'package:dth/screens/standard/incoming/widgets/employee_picker_tile.dart';
-import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/widgets/appbar_underline.dart';
 import 'package:dth/widgets/drop_down_menu_field.dart';

@@ -78,7 +78,7 @@ class LoginPg extends StatelessWidget {
                           print('Form Invalid');
                         }
                       },
-                      label: 'LOGIN',
+                      label: 'Login',
                     ),
                   ),
                   hSpace(15),

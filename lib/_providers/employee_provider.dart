@@ -3,13 +3,9 @@ import 'package:dth/_services/employee_service.dart';
 import 'package:flutter/material.dart';
 
 class EmployeeProvider with ChangeNotifier {
+  /* List to store fetched employees after converting
+  into it's dart model (done in the service) */
   List<Employee> _employees = [];
-
-  // Removing an employee from the employee list
-  void removeEmployee(Employee employee) {
-    _employees.remove(employee);
-    notifyListeners();
-  }
 
   // Fetching all employees
   Future<void> fetchEmployees() async {
@@ -19,6 +15,4 @@ class EmployeeProvider with ChangeNotifier {
   }
 
   List<Employee> get employees => _employees;
-
-  // Add an employee
 }

@@ -18,13 +18,17 @@ AppBarTheme dthAppbarTheme = AppBarTheme(
 );
 
 InputDecorationTheme inputTheme = InputDecorationTheme(
-  prefixIconColor: MaterialStateColor.resolveWith((states) {
-    if (states.contains(MaterialState.focused)) {
-      return primaryColor;
-    } else {
-      return Colors.black.withOpacity(0.25);
-    }
-  }),
+  prefixIconColor: MaterialStateColor.resolveWith(
+    (states) {
+      if (states.contains(MaterialState.focused)) {
+        return primaryColor;
+      } else if (states.contains(MaterialState.error)) {
+        return Colors.red;
+      } else {
+        return Colors.black.withOpacity(0.5);
+      }
+    },
+  ),
 );
 
 // Final ThemeData Variable
