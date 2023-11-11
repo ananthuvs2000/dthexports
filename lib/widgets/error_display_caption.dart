@@ -21,7 +21,7 @@ class _ErrorDisplayCaptionState extends State<ErrorDisplayCaption> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5),
-      padding: EdgeInsets.all(10.h),
+      padding: EdgeInsets.all(5.h),
       decoration: BoxDecoration(
         color: formFieldErrorColor.withOpacity(0.25),
         border: Border.all(color: formFieldErrorColor.withOpacity(0.5)),
@@ -32,7 +32,7 @@ class _ErrorDisplayCaptionState extends State<ErrorDisplayCaption> {
         children: [
           // Icon
           const Icon(
-            Icons.error_outline,
+            Icons.error,
             color: formFieldErrorColor,
           ),
           wSpace(10),

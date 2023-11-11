@@ -5,10 +5,13 @@ import 'package:dth/_utilites/employee_ids_to_hash.dart';
 // import 'package:dth/_providers/datetime_provider.dart';
 import 'package:dth/_providers/team_provider.dart';
 import 'package:dth/_providers/vendor_provider.dart';
+import 'package:dth/_utilites/scaffold_snackbars.dart';
+import 'package:dth/screens/standard/incoming/widgets/employee_picker_tile.dart';
 import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/widgets/appbar_underline.dart';
 import 'package:dth/widgets/drop_down_menu_field.dart';
+import 'package:dth/widgets/error_display_caption.dart';
 import 'package:dth/widgets/loading_display_caption.dart';
 import 'package:dth/widgets/number_entry_field.dart';
 import 'package:dth/widgets/primary_elevated_button.dart';
@@ -69,148 +72,163 @@ class _CheckPageState extends State<CheckPage> {
           key: _formKey,
           child: Column(
             children: [
-              ListView(
-                shrinkWrap: true,
-                children: [
-                  //! DateTime from API Consumer
+              Expanded(
+                child: ListView(
+                  shrinkWrap: true,
+                  children: [
+                    //! DateTime from API Consumer
 
-                  // Venue
-                  hSpace(20),
-                  DropdownMenuField(
-                    validator: (value) {
-                      if (value == null) {
-                        return 'Select a venue';
-                      } else {
-                        return null;
-                      }
-                    },
-                    fieldLabel: 'Venue',
-                    dropDownLabel: 'Select the venue',
-                    dropdownEntries: const [
-                      DropdownMenuItem(value: 'In-House', child: Text('In House')),
-                      DropdownMenuItem(value: 'Out-Station', child: Text('Out Station')),
-                    ],
-                    onSelected: (value) {
-                      setState(() {
-                        _selectedVenue = value;
-                      });
-                      print(_selectedVenue);
-                    },
-                  ),
-                  hSpace(15),
-
-                  //! Team List From Team API Consumer
-                  Consumer<VendorProvider>(builder: (context, vendorData, child) {
-                    if (vendorProvider.vendors.isNotEmpty) {
-                      return DropdownMenuField(
-                        validator: (value) {
-                          if (value == null) {
-                            return 'Select a vendor';
-                          } else {
-                            return null;
-                          }
-                        },
-                        fieldLabel: 'Vendor',
-                        dropDownLabel: 'Select Vendor',
-                        // from API
-                        dropdownEntries: vendorProvider.vendors
-                            .map(
-                              (vendor) => DropdownMenuItem(
-                                value: vendor.id.toString(),
-                                child: Text(vendor.vendorCode),
-                              ),
-                            )
-                            .toList(),
-                        onSelected: (value) {
-                          setState(() {
-                            _selectedVendor = value;
-                          });
-                        },
-                      );
-                    }
-                    return const Center(
-                        child: LoadingDisplayCaption(message: 'Loading Vendor Info'));
-                  }),
-                  hSpace(15),
-                  NumberEntryField(
-                    label: 'Total Qty Checked',
-                    controller: _quantityController,
-                    validator: (value) {
-                      if (value == '') {
-                        return 'Invalid Number';
-                      } else {
-                        return null;
-                      }
-                    },
-                  ),
-
-                  // Add employees button
-                  hSpace(15),
-                  //! 1. Fetching all employees from employees provider
-                  //! 2 Creating a team from the given employees (duplicate checking needed)
-                  Consumer<EmployeeProvider>(
-                    builder: (context, employeeData, child) {
-                      if (employeeData.employees.isEmpty) {
-                        return const Center(child: Text('No employees'));
-                      } else if (teamProvider.teams.isNotEmpty) {
-                        return Column(
-                          children: [
-                            SecondaryElevatedButton(
-                              onPressed: () => showEmployeePicker(
-                                context: context,
-                                employees: employeeData.employees,
-                                addedEmployees: teamProvider.addedEmps,
-                              ),
-                              label: 'Select Employees',
-                              icon: Icons.add,
-                            ),
-                          ],
-                        );
-                      } else {
-                        return const SizedBox();
-                      }
-                    },
-                  ),
-
-                  //
-                  // Submit Button
-                  hSpace(10),
-                  PrimaryElevatedButton(
-                    onPressed: () async {
-                      print(teamProvider.addedEmps);
-                      print('Form Valid');
-                      teamProvider.addedEmps.map((e) => e.id);
-                      if (_formKey.currentState!.validate()) {
-                        final String hash = hashEmployeeIdsIntoString(temp);
-                        final resOfTeamCreation = TeamProvider().postToTeam(hash);
-                        final res = CheckingProvider().postToCheck(
-                          _selectedVenue,
-                          _selectedVendor,
-                          _quantityController.text,
-                          hash,
-                        );
-                        if (await resOfTeamCreation && await res) {
-                          print('Succesfully posted');
-                          Get.snackbar(
-                            'Success',
-                            'Succesfully Posted To Checking and Created a Team with the selected employees',
-                            snackPosition: SnackPosition.TOP,
-                            duration: const Duration(seconds: 1),
-                          );
-                          // Clearing all fields and dropdowns
-                          _formKey.currentState!.reset();
-                          _quantityController.clear();
+                    // Venue
+                    hSpace(20),
+                    DropdownMenuField(
+                      validator: (value) {
+                        if (value == null) {
+                          return 'Select a venue';
                         } else {
-                          print('Post failed');
+                          return null;
                         }
-                      } else {
-                        print('Form Invalid');
+                      },
+                      fieldLabel: 'Venue',
+                      dropDownLabel: 'Select the venue',
+                      dropdownEntries: const [
+                        DropdownMenuItem(value: 'In-House', child: Text('In House')),
+                        DropdownMenuItem(value: 'Out-Station', child: Text('Out Station')),
+                      ],
+                      onSelected: (value) {
+                        setState(() {
+                          _selectedVenue = value;
+                        });
+                        print(_selectedVenue);
+                      },
+                    ),
+                    hSpace(15),
+
+                    //! Team List From Team API Consumer
+                    Consumer<VendorProvider>(builder: (context, vendorData, child) {
+                      if (vendorProvider.vendors.isNotEmpty) {
+                        return DropdownMenuField(
+                          validator: (value) {
+                            if (value == null) {
+                              return 'Select a vendor';
+                            } else {
+                              return null;
+                            }
+                          },
+                          fieldLabel: 'Vendor',
+                          dropDownLabel: 'Select Vendor',
+                          // from API
+                          dropdownEntries: vendorProvider.vendors
+                              .map(
+                                (vendor) => DropdownMenuItem(
+                                  value: vendor.id.toString(),
+                                  child: Text(vendor.vendorCode),
+                                ),
+                              )
+                              .toList(),
+                          onSelected: (value) {
+                            setState(() {
+                              _selectedVendor = value;
+                            });
+                          },
+                        );
                       }
-                    },
-                    label: 'Post',
-                  ),
-                ],
-              ), //
+                      return const Center(
+                          child: LoadingDisplayCaption(message: 'Loading Vendor Info'));
+                    }),
+                    hSpace(15),
+                    NumberEntryField(
+                      label: 'Total Qty Checked',
+                      controller: _quantityController,
+                      validator: (value) {
+                        if (value == '') {
+                          return 'Invalid Number';
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
+
+                    // Add employees button
+                    hSpace(15),
+                    //! 1. Fetching all employees from employees provider
+                    //! 2 Creating a team from the given employees (duplicate checking done with Set)
+                    Consumer<EmployeeProvider>(
+                      builder: (context, employeeData, child) {
+                        if (employeeData.employees.isEmpty) {
+                          return const Center(
+                              child: ErrorDisplayCaption(message: 'No Employees Available'));
+                        } else if (teamProvider.teams.isNotEmpty) {
+                          return Column(
+                            children: [
+                              SizedBox(
+                                width: double.infinity,
+                                child: SecondaryElevatedButton(
+                                  onPressed: () => showEmployeePicker(
+                                    context: context,
+                                    employees: employeeData.employees,
+                                    addedEmployees: temp,
+                                  ),
+                                  label: 'Select Employees',
+                                  icon: Icons.add,
+                                ),
+                              ),
+                            ],
+                          );
+                        } else {
+                          return const SizedBox();
+                        }
+                      },
+                    ),
+
+                    //
+                    // Submit Button
+                    hSpace(10),
+                    PrimaryElevatedButton(
+                      onPressed: () async {
+                        print(temp);
+                        print('Form Valid');
+                        if (_formKey.currentState!.validate()) {
+                          final String hash = hashEmployeeIdsIntoString(temp);
+                          if (hash == '') {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(errorSnackbar('Failed to assign employees'));
+                          }
+                          final resOfTeamCreation = TeamProvider().postToTeam(hash);
+                          final res = CheckingProvider().postToCheck(
+                            _selectedVenue,
+                            _selectedVendor,
+                            _quantityController.text,
+                            hash,
+                          );
+                          if (await resOfTeamCreation && await res) {
+                            print('Succesfully posted');
+                            Get.snackbar(
+                              'Success',
+                              'Succesfully Posted To Checking and Created a Team with the selected employees',
+                              snackPosition: SnackPosition.TOP,
+                              duration: const Duration(seconds: 1),
+                            );
+                            // Clearing all fields and dropdowns
+                            temp.clear();
+                            _formKey.currentState!.reset();
+                            _quantityController.clear();
+                          } else {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(errorSnackbar('Failed to post material check!'));
+                          }
+                        } else {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(errorSnackbar('Invalid Submission!'));
+                        }
+                      },
+                      label: 'Post',
+                    ),
+                  ],
+                ),
+              ), //End of Listview
+
+              //! Streambuilder for /itemcheck_add
+              // StreamBuilder(stream: stream, builder: (context, snapshot) => ,)
             ],
           ),
         ),
@@ -221,7 +239,7 @@ class _CheckPageState extends State<CheckPage> {
   showEmployeePicker({
     required BuildContext context,
     required final List<Employee> employees,
-    required final List<Employee> addedEmployees,
+    required final Set<Employee> addedEmployees,
   }) {
     showDialog(
       context: context,
@@ -243,14 +261,18 @@ class _CheckPageState extends State<CheckPage> {
                     itemCount: employees.length,
                     itemExtent: 55,
                     itemBuilder: (context, index) {
-                      return addEmployeeTile(
-                        employees[index],
-                        () {
+                      return AddEmployeeTile(
+                        emp: employees[index],
+                        onAdd: () {
                           if (!temp.contains(employees[index])) {
                             setState(() {
                               temp.add(employees[index]);
                             });
-                          } else {}
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              errorSnackbar('ERROR: Employee Already Added'),
+                            );
+                          }
                         },
                       );
                     },
@@ -261,23 +283,4 @@ class _CheckPageState extends State<CheckPage> {
       ),
     );
   }
-}
-
-Widget addEmployeeTile(
-  Employee emp,
-  void Function()? onAdd,
-) {
-  return ListTile(
-    leading: Text(emp.employeeCode),
-    title: Text(emp.employeeName),
-    trailing: IconButton(
-      splashRadius: 20,
-      onPressed: onAdd,
-      icon: Icon(
-        Icons.add,
-        size: 20,
-        color: primaryColor,
-      ),
-    ),
-  );
 }

@@ -1,4 +1,3 @@
-import 'package:dth/_models/employee_model.dart';
 import 'package:dth/_services/team_service.dart';
 import 'package:dth/_models/team_model.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +5,6 @@ import 'package:flutter/material.dart';
 //^ Change this to employee provider
 class TeamProvider with ChangeNotifier {
   List<Team> _teamList = [];
-
-  List<Employee> addedEmps = [];
 
   Future<void> fetchTeams() async {
     final dataProvider = TeamDataService();
