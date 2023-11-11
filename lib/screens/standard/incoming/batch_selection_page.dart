@@ -1,10 +1,12 @@
-import 'package:dth/_models/item_check_model.dart';
 import 'package:dth/_providers/itemcheck_provider.dart';
+import 'package:dth/screens/standard/incoming/accept_page.dart';
+import 'package:dth/screens/standard/incoming/widgets/batch_selection_tile.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/theme/text_sizing.dart';
 import 'package:dth/_common_widgets/error_display_caption.dart';
 import 'package:dth/_common_widgets/spacer.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class BatchSelectionPage extends StatelessWidget {
@@ -12,7 +14,7 @@ class BatchSelectionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final stream = Provider.of<ItemCheckProvider>(context, listen: false);
+    final stream = Provider.of<ItemCheckProvider>(context, listen: false).getItemChecks();
 
     return Scaffold(
       appBar: AppBar(),
@@ -30,19 +32,29 @@ class BatchSelectionPage extends StatelessWidget {
               hSpace(5),
               // Batch list builder
               FutureBuilder(
-                future: stream.getItemChecks(),
+                future: stream,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    final List<ItemCheck> itemChecks = snapshot.data!;
+                    final itemChecks = snapshot.data!;
                     return Expanded(
                       child: ListView.builder(
+                        physics: const BouncingScrollPhysics(),
                         shrinkWrap: true,
                         itemCount: itemChecks.length,
                         itemBuilder: (context, index) {
                           final item = itemChecks[index];
                           if (item.status == 'pending') {
-                            return ListTile(
-                              title: Text(item.batchCode),
+                            return BatchSelectionTile(
+                              batchCode: item.batchCode,
+                              vendorCode: item.vendoCode,
+                              quantityChecked: item.quantityChecked,
+                              status: item.status,
+                              onTap: () => Get.to(
+                                () => AcceptPage(batchCode: item.batchCode),
+                                transition: Transition.rightToLeft,
+                                preventDuplicates: true,
+                                duration: const Duration(milliseconds: 300),
+                              ),
                             );
                           }
                           return const ErrorDisplayCaption(message: 'No Pending Batches');

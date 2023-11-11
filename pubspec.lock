@@ -17,6 +17,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  bytes_io:
+    dependency: transitive
+    description:
+      name: bytes_io
+      sha256: "5bf4514b6d9737e469025de28acb98a5e07d5ac81a82cb3564464be0b0173ab4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   camera:
     dependency: "direct main"
     description:
@@ -320,6 +328,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  multipart:
+    dependency: "direct main"
+    description:
+      name: multipart
+      sha256: "58f625f161def56749c4fee63cfdf71db31ccae54f0ee5809972566e44290d3e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.2"
+  nanoid:
+    dependency: transitive
+    description:
+      name: nanoid
+      sha256: be3f8752d9046c825df2f3914195151eb876f3ad64b9d833dd0b799b77b8759e
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   nested:
     dependency: transitive
     description:

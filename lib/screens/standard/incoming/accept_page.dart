@@ -1,5 +1,6 @@
 import 'package:dth/_common_widgets/bottom_actions_area.dart';
 import 'package:dth/_common_widgets/image_preview_container.dart';
+import 'package:dth/_services/item_accept_temp.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/_common_widgets/appbar_underline.dart';
 // import 'package:dth/widgets/date_time_display.dart';
@@ -11,24 +12,20 @@ import 'package:dth/_common_widgets/primary_elevated_button.dart';
 import 'package:dth/_common_widgets/secondary_elevated_button.dart';
 import 'package:dth/_common_widgets/spacer.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AcceptPage extends StatefulWidget {
-  final String? batchCode;
-
   const AcceptPage({
-    this.batchCode,
+    required this.batchCode,
     super.key,
   });
 
+  final String batchCode;
   @override
   State<AcceptPage> createState() => _AcceptPageState();
 }
 
 class _AcceptPageState extends State<AcceptPage> {
-  // final String date = DateTime.now().toString();
-  // final String time = '${DateTime.now().hour}:${DateTime.now().minute}:${DateTime.now().second}';
   final TextEditingController _quantityController = TextEditingController();
 
   final _acceptFormKey = GlobalKey<FormState>();
@@ -71,10 +68,7 @@ class _AcceptPageState extends State<AcceptPage> {
                   shrinkWrap: true,
                   children: [
                     hSpace(15),
-                    // DateTimeDisplay(
-                    //   date: date,
-                    //   time: time,
-                    // ),
+                    DynamicFieldRow(label: 'Batch Code', value: widget.batchCode),
                     hSpace(15),
                     DropdownMenuField(
                       validator: (value) {
@@ -185,13 +179,14 @@ class _AcceptPageState extends State<AcceptPage> {
                 children: [
                   SecondaryElevatedButton(
                     icon: Icons.add,
-                    onPressed: () {
+                    onPressed: () async {
                       if (_acceptFormKey.currentState!.validate()) {
                         print('Form valid');
                         if (_image != null) {
                           //Showing success message
-                          Get.snackbar('Added Succesfully', 'message');
+                          // Get.snackbar('Added Succesfully', 'message');
 
+                          await ItemAcceptTempData().postTempData();
                           // Clearing all fields and dropdowns
                           setState(() => _image = null);
                           _quantityController.clear();

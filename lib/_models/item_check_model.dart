@@ -1,5 +1,5 @@
 class ItemCheck {
-  final String id;
+  final int id;
   final String vendoCode;
   final String batchCode;
   final String venue;

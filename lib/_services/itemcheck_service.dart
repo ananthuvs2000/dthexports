@@ -8,26 +8,31 @@ class ItemCheckDataService extends ChangeNotifier {
   final String _checkingPendingAPI = '$apiHOME/itemcheck';
 
   //^ Fetching all checked batches
-  Future<List<ItemCheck>> getPendingBatches() async {
+  Future<List<ItemCheck>> getCheckedBatches() async {
     final response = await http.get(
       Uri.parse(_checkingPendingAPI),
     );
 
     if (response.statusCode == 200) {
+      // print(response.body);
       final List<dynamic> jsonData = jsonDecode(response.body);
-      return jsonData
+      print(jsonData);
+      final List<ItemCheck> mapped = jsonData
           .map(
             (item) => ItemCheck(
               id: item['id'],
               batchCode: item['batch_code'],
               venue: item['venue'],
               vendoCode: item['vendor_code'],
-              quantityChecked: item['quantity'],
+              quantityChecked: item['quantity_checked'],
               teamName: item['team_name'],
               status: item['status'],
             ),
           )
           .toList();
+
+      print('>>>> $mapped');
+      return mapped;
     } else {
       throw Exception('Could not get item checks');
     }

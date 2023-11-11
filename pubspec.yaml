@@ -42,6 +42,7 @@ dependencies:
   provider:
   flutter_screenutil: ^5.9.0
   image_picker: ^1.0.4
+  multipart: ^0.1.2
 
 dev_dependencies:
   flutter_test:

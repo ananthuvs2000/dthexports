@@ -118,7 +118,15 @@ class _RecycleAddScreenState extends State<RecycleAddScreen> {
               ),
             ),
             BottomActionsArea(children: [
-              Expanded(child: PrimaryElevatedButton(onPressed: () {}, label: 'Post')),
+              Expanded(
+                  child: PrimaryElevatedButton(
+                      onPressed: () {
+                        if (!_formKey.currentState!.validate()) {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(errorSnackbar('Invalid Submission'));
+                        }
+                      },
+                      label: 'Post')),
             ]),
           ],
         ),

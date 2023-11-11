@@ -13,12 +13,12 @@ class BottomActionsArea extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: PageLayout.pagePaddingX,
-        vertical: 5,
+        vertical: 7,
       ),
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border.all(
-          color: Colors.black.withOpacity(0.5),
+          color: Colors.black.withOpacity(0.3),
         ),
       ),
       width: double.infinity,

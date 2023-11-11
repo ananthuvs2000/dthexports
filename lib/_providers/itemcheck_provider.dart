@@ -6,18 +6,12 @@ import 'package:flutter/material.dart';
 class ItemCheckProvider with ChangeNotifier {
   late List<ItemCheck> _itemCheckController = [];
 
-  List<ItemCheck> get itemCheckStream => _itemCheckController;
-
   Future<List<ItemCheck>> getItemChecks() async {
     final dataProvider = ItemCheckDataService();
-    _itemCheckController = await dataProvider.getPendingBatches();
-
+    _itemCheckController = await dataProvider.getCheckedBatches();
     notifyListeners();
     return _itemCheckController;
   }
 
-  // Dispose of the stream controller when the provider is no longer needed
-  void dispose() {
-    _itemCheckController.clear();
-  }
+  List<ItemCheck> get itemCheckStream => _itemCheckController;
 }
