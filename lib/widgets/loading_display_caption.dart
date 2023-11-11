@@ -30,12 +30,9 @@ class _LoadingDisplayCaptionState extends State<LoadingDisplayCaption> {
         children: [
           // Icon
           SizedBox(
-            height: 20,
-            width: 20,
-            child: CircularProgressIndicator(
-              color: primaryColor,
-              strokeWidth: 2,
-            ),
+            height: 16,
+            width: 16,
+            child: CircularProgressIndicator(color: primaryColor, strokeWidth: 2),
           ),
           wSpace(10),
           // DateTimeText

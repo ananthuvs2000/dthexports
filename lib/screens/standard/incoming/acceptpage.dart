@@ -2,7 +2,7 @@ import 'package:dth/widgets/bottom_actions_area.dart';
 import 'package:dth/screens/standard/widgets/image_preview_container.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/widgets/appbar_underline.dart';
-import 'package:dth/widgets/date_time_display.dart';
+// import 'package:dth/widgets/date_time_display.dart';
 import 'package:dth/widgets/drop_down_menu_field.dart';
 import 'package:dth/widgets/dynamic_field_row.dart';
 import 'package:dth/widgets/number_entry_field.dart';
@@ -15,7 +15,10 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AcceptPage extends StatefulWidget {
+  final String? batchCode;
+
   const AcceptPage({
+    this.batchCode,
     super.key,
   });
 
@@ -24,11 +27,10 @@ class AcceptPage extends StatefulWidget {
 }
 
 class _AcceptPageState extends State<AcceptPage> {
-  final String date = DateTime.now().toString();
-  final String time = '${DateTime.now().hour}:${DateTime.now().minute}:${DateTime.now().second}';
+  // final String date = DateTime.now().toString();
+  // final String time = '${DateTime.now().hour}:${DateTime.now().minute}:${DateTime.now().second}';
   final TextEditingController _quantityController = TextEditingController();
 
-  //^ Form Key
   final _acceptFormKey = GlobalKey<FormState>();
 
   //! Initializing Image Picker
@@ -69,10 +71,10 @@ class _AcceptPageState extends State<AcceptPage> {
                   shrinkWrap: true,
                   children: [
                     hSpace(15),
-                    DateTimeDisplay(
-                      date: date,
-                      time: time,
-                    ),
+                    // DateTimeDisplay(
+                    //   date: date,
+                    //   time: time,
+                    // ),
                     hSpace(15),
                     DropdownMenuField(
                       validator: (value) {

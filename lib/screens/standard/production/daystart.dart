@@ -1,3 +1,4 @@
+import 'package:dth/screens/standard/widgets/image_preview_container.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/widgets/appbar_underline.dart';
 import 'package:dth/widgets/bottom_actions_area.dart';
@@ -10,6 +11,7 @@ import 'package:dth/widgets/primary_elevated_button.dart';
 import 'package:dth/widgets/spacer.dart';
 import 'package:dth/widgets/team_manager_list.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class DayStart extends StatefulWidget {
   const DayStart({super.key});
@@ -19,6 +21,21 @@ class DayStart extends StatefulWidget {
 }
 
 class _DayStartState extends State<DayStart> {
+//! Initializing Image Picker
+  XFile? _image;
+  late final ImagePicker _picker = ImagePicker();
+
+  final _weightController = TextEditingController();
+
+  //! Picking Image from camera
+  Future getImage() async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.camera);
+
+    setState(() {
+      _image = image;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,7 +114,11 @@ class _DayStartState extends State<DayStart> {
                   OpenImageButton(
                     label: 'Take Photo',
                     icon: Icons.camera,
-                    onTap: () {},
+                    onTap: () => getImage(),
+                  ),
+                  hSpace(15),
+                  ImagePreviewBox(
+                    image: _image,
                   ),
                   hSpace(15),
                   // Field to Enter Value
@@ -108,7 +129,6 @@ class _DayStartState extends State<DayStart> {
                       return null;
                     },
                   ),
-                  hSpace(50),
                 ],
               ),
             ), // End of listview

@@ -40,7 +40,6 @@ class BatchSelectionPage extends StatelessWidget {
                         itemCount: itemChecks.length,
                         itemBuilder: (context, index) {
                           final item = itemChecks[index];
-
                           if (item.status == 'pending') {
                             return ListTile(
                               title: Text(item.batchCode),

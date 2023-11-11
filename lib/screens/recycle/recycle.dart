@@ -1,6 +1,6 @@
 import 'package:dth/screens/recycle/rcl_day_end.dart';
 import 'package:dth/screens/recycle/rcl_day_start.dart';
-import 'package:dth/screens/recycle/rcladd.dart';
+import 'package:dth/screens/recycle/rcl_add.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/theme/text_sizing.dart';
 import 'package:dth/widgets/spacer.dart';
