@@ -1,4 +1,4 @@
-import 'package:dth/widgets/dt_text_field.dart';
+import 'package:dth/_common_widgets/dt_text_field.dart';
 import 'package:flutter/material.dart';
 
 class NumberEntryField extends StatelessWidget {

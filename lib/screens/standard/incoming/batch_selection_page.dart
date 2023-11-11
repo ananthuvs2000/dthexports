@@ -2,8 +2,8 @@ import 'package:dth/_models/item_check_model.dart';
 import 'package:dth/_providers/itemcheck_provider.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/theme/text_sizing.dart';
-import 'package:dth/widgets/error_display_caption.dart';
-import 'package:dth/widgets/spacer.dart';
+import 'package:dth/_common_widgets/error_display_caption.dart';
+import 'package:dth/_common_widgets/spacer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,14 +1,14 @@
-import 'package:dth/screens/standard/widgets/image_preview_container.dart';
+import 'package:dth/_common_widgets/image_preview_container.dart';
 import 'package:dth/theme/layout.dart';
-import 'package:dth/widgets/appbar_underline.dart';
-import 'package:dth/widgets/box_info_display.dart';
-import 'package:dth/widgets/drop_down_menu_field.dart';
-import 'package:dth/widgets/dynamic_field_row.dart';
-import 'package:dth/widgets/number_entry_field.dart';
-import 'package:dth/widgets/open_camera_button.dart';
-import 'package:dth/widgets/primary_elevated_button.dart';
-import 'package:dth/widgets/spacer.dart';
-import 'package:dth/widgets/team_manager_list.dart';
+import 'package:dth/_common_widgets/appbar_underline.dart';
+import 'package:dth/_common_widgets/box_info_display.dart';
+import 'package:dth/_common_widgets/drop_down_menu_field.dart';
+import 'package:dth/_common_widgets/dynamic_field_row.dart';
+import 'package:dth/_common_widgets/number_entry_field.dart';
+import 'package:dth/_common_widgets/open_camera_button.dart';
+import 'package:dth/_common_widgets/primary_elevated_button.dart';
+import 'package:dth/_common_widgets/spacer.dart';
+import 'package:dth/_common_widgets/team_manager_list.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 

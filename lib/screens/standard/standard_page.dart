@@ -1,14 +1,14 @@
-import 'package:dth/screens/standard/despach/despach.dart';
+import 'package:dth/screens/standard/dispatch/dispatch_page.dart';
 // import 'package:dth/screens/standard/incoming/acceptpage.dart';
 import 'package:dth/screens/standard/incoming/batch_selection_page.dart';
-import 'package:dth/screens/standard/incoming/checkpage.dart';
-import 'package:dth/screens/standard/outgoing/outgoing.dart';
-import 'package:dth/screens/standard/production/productionpage.dart';
+import 'package:dth/screens/standard/incoming/check_page.dart';
+import 'package:dth/screens/standard/outgoing/outgoing_page.dart';
+import 'package:dth/screens/standard/production/production_page.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/theme/text_sizing.dart';
-import 'package:dth/widgets/main_heading.dart';
-import 'package:dth/widgets/spacer.dart';
-import 'package:dth/widgets/sub_dashboard_option.dart';
+import 'package:dth/_common_widgets/main_heading.dart';
+import 'package:dth/_common_widgets/spacer.dart';
+import 'package:dth/_common_widgets/sub_dashboard_option.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,12 +1,12 @@
 import 'package:dth/screens/login_page.dart';
-import 'package:dth/screens/recycle/recycle.dart';
+import 'package:dth/screens/recycle/recycle_page.dart';
 import 'package:dth/screens/reports/reports_page.dart';
-import 'package:dth/screens/standard/standardpage.dart';
+import 'package:dth/screens/standard/standard_page.dart';
 import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/theme/text_sizing.dart';
-import 'package:dth/widgets/dashboard_option_container.dart';
-import 'package:dth/widgets/spacer.dart';
+import 'package:dth/_common_widgets/dashboard_option_container.dart';
+import 'package:dth/_common_widgets/spacer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

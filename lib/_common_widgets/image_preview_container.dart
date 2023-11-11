@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:dth/theme/layout.dart';
-import 'package:dth/widgets/loading_display_caption.dart';
+import 'package:dth/_common_widgets/loading_display_caption.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 

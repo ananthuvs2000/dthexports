@@ -1,15 +1,15 @@
 import 'package:dth/screens/standard/widgets/despachtable.dart';
 
 import 'package:dth/theme/layout.dart';
-import 'package:dth/widgets/appbar_underline.dart';
-import 'package:dth/widgets/bottom_actions_area.dart';
-import 'package:dth/widgets/drop_down_menu_field.dart';
-import 'package:dth/widgets/dynamic_field_row.dart';
+import 'package:dth/_common_widgets/appbar_underline.dart';
+import 'package:dth/_common_widgets/bottom_actions_area.dart';
+import 'package:dth/_common_widgets/drop_down_menu_field.dart';
+import 'package:dth/_common_widgets/dynamic_field_row.dart';
 
-import 'package:dth/widgets/ordered_items_display.dart';
-import 'package:dth/widgets/primary_elevated_button.dart';
-import 'package:dth/widgets/spacer.dart';
-import 'package:dth/widgets/team_manager_list.dart';
+import 'package:dth/_common_widgets/ordered_items_display.dart';
+import 'package:dth/_common_widgets/primary_elevated_button.dart';
+import 'package:dth/_common_widgets/spacer.dart';
+import 'package:dth/_common_widgets/team_manager_list.dart';
 import 'package:flutter/material.dart';
 
 class DespachScreen extends StatefulWidget {

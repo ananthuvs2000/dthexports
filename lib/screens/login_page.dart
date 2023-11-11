@@ -1,9 +1,9 @@
 import 'package:dth/screens/home_page.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/theme/text_sizing.dart';
-import 'package:dth/widgets/primary_elevated_button.dart';
-import 'package:dth/widgets/spacer.dart';
-import 'package:dth/widgets/textformfield.dart';
+import 'package:dth/_common_widgets/primary_elevated_button.dart';
+import 'package:dth/_common_widgets/spacer.dart';
+import 'package:dth/_common_widgets/textformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

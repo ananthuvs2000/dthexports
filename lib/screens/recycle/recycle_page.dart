@@ -1,10 +1,10 @@
-import 'package:dth/screens/recycle/rcl_day_end.dart';
-import 'package:dth/screens/recycle/rcl_day_start.dart';
-import 'package:dth/screens/recycle/rcl_add.dart';
+import 'package:dth/screens/recycle/rcl_day_end_page.dart';
+import 'package:dth/screens/recycle/rcl_day_start_page.dart';
+import 'package:dth/screens/recycle/rcl_add_page.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/theme/text_sizing.dart';
-import 'package:dth/widgets/spacer.dart';
-import 'package:dth/widgets/sub_dashboard_option.dart';
+import 'package:dth/_common_widgets/spacer.dart';
+import 'package:dth/_common_widgets/sub_dashboard_option.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

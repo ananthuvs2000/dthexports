@@ -1,4 +1,4 @@
-import 'package:dth/widgets/team_manager_list.dart';
+import 'package:dth/_common_widgets/team_manager_list.dart';
 import 'package:flutter/material.dart';
 
 class TeamListItem extends StatelessWidget {

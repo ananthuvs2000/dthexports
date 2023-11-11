@@ -1,18 +1,11 @@
-// backend hosted at http://emouser.com
-//  Rest API Made With Laravel
-
-////---------------------------------------
-//^  HOME ROUTE '/'
+//!  HOME ROUTE '/'
 const apiHOME = 'http://emouser.com';
-
-//^  VENDOR ROUTES
-// 1. get all vendors
+// Vendor Routees
 const apiGetVendorsRoute = '$apiHOME/vendor';
-
-// 2. Add new vendor
 const apiAddVendorRoute = '$apiHOME/add_vendor';
+// Employee Routes
+const apiGetAllEmployees = '$apiHOME/employee';
+const apiAddEmployee = '$apiHOME/employee_add';
 
-//^ TEAM ROUTES
+// Team Routes
 const apiGetAllTeamsRoute = '$apiHOME/team';
-
-
