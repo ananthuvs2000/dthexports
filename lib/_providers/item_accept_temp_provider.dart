@@ -1,17 +1,16 @@
 import 'dart:async';
-import 'package:dth/_models/item_check_model.dart';
-import 'package:dth/_services/itemcheck_service.dart';
+import 'package:dth/_services/item_accept_temp_service.dart';
 import 'package:flutter/material.dart';
 
 class ItemAcceptTempProvider with ChangeNotifier {
-  late List<ItemCheck> _itemCheckController = [];
+  late List<int> _boxesRemaining = [];
 
-  Future<List<ItemCheck>> getItemChecks() async {
-    final dataProvider = ItemCheckDataService();
-    _itemCheckController = await dataProvider.getCheckedBatches();
+  Future<List<int>> getItemChecks(String batchCode) async {
+    final dataProvider = ItemAcceptTempService();
+    _boxesRemaining = await dataProvider.getRemainingBoxNums(batchCode);
     notifyListeners();
-    return _itemCheckController;
+    return _boxesRemaining;
   }
 
-  List<ItemCheck> get itemCheckStream => _itemCheckController;
+  List<int> get boxesRemaining => _boxesRemaining;
 }
