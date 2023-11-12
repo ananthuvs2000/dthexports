@@ -46,91 +46,87 @@ class _RecycleAddScreenState extends State<RecycleAddScreen> {
         title: const Text('Recycle Add'),
         bottom: appBarUnderline,
       ),
-      body: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView(
-                physics: const BouncingScrollPhysics(),
-                padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
-                shrinkWrap: true,
-                children: [
-                  hSpace(15),
-                  const DynamicFieldRow(label: 'Batch No.', value: 'AUTO'),
-                  hSpace(15),
-
-                  // Photo And Weight Entry
-                  OpenImageButton(
-                    label: 'Take Photo',
-                    icon: Icons.camera_alt,
-                    onTap: () => getImage(),
-                  ),
-                  hSpace(10),
-                  ImagePreviewBox(image: _image),
-                  hSpace(10),
-
-                  NumberEntryField(
-                    label: 'Enter value as shown',
-                    controller: _weightController,
-                    validator: (value) {
-                      if (value == '') {
-                        return 'Error';
-                      }
-                      return null;
-                    },
-                  ),
-
-                  hSpace(10),
-                  const Divider(),
-                  hSpace(10),
-                  DropdownMenuField(
-                    /* 
-                    ^Once posted the box sent for recycle must not appear in this dropdown
-                     */
-                    validator: (value) {
-                      if (value == '') {
-                        return 'Please select a value';
-                      }
-                      return null;
-                    },
-                    fieldLabel: 'Box No.',
-                    dropDownLabel: 'Select Box',
-                    dropdownEntries: const [
-                      DropdownMenuItem(value: '1', child: Text('1')),
-                      DropdownMenuItem(value: '2', child: Text('2')),
-                      DropdownMenuItem(value: '3', child: Text('3')),
-                    ],
-                    onSelected: (selectedVal) {},
-                  ),
-                  hSpace(15),
-                  const DynamicFieldRow(
-                    //^ Show material quantity of that box?
-                    label: 'Material QTY',
-                    value: 'CALCULATED',
-                  ),
-                  hSpace(25),
-                  const DynamicFieldRow(
-                    label: 'State',
-                    value: 'TO RECYCLE',
-                  ),
-                ],
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+         padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              hSpace(15),
+              const DynamicFieldRow(label: 'Batch No.', value: 'AUTO'),
+              hSpace(15),
+      
+              // Photo And Weight Entry
+              OpenImageButton(
+                label: 'Take Photo',
+                icon: Icons.camera_alt,
+                onTap: () => getImage(),
               ),
-            ),
-            BottomActionsArea(children: [
-              Expanded(
-                  child: PrimaryElevatedButton(
-                      onPressed: () {
-                        if (!_formKey.currentState!.validate()) {
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(errorSnackbar('Invalid Submission'));
-                        }
-                      },
-                      label: 'Post')),
-            ]),
-          ],
+              hSpace(10),
+              ImagePreviewBox(image: _image),
+              hSpace(10),
+      
+              NumberEntryField(
+                label: 'Enter value as shown',
+                controller: _weightController,
+                validator: (value) {
+                  if (value == '') {
+                    return 'Error';
+                  }
+                  return null;
+                },
+              ),
+      
+              hSpace(10),
+              const Divider(),
+              hSpace(10),
+              DropdownMenuField(
+                /* 
+                ^Once posted the box sent for recycle must not appear in this dropdown
+                 */
+                validator: (value) {
+                  if (value == '') {
+                    return 'Please select a value';
+                  }
+                  return null;
+                },
+                fieldLabel: 'Box No.',
+                dropDownLabel: 'Select Box',
+                dropdownEntries: const [
+                  DropdownMenuItem(value: '1', child: Text('1')),
+                  DropdownMenuItem(value: '2', child: Text('2')),
+                  DropdownMenuItem(value: '3', child: Text('3')),
+                ],
+                onSelected: (selectedVal) {},
+              ),
+              hSpace(15),
+              const DynamicFieldRow(
+                //^ Show material quantity of that box?
+                label: 'Material QTY',
+                value: 'CALCULATED',
+              ),
+              hSpace(25),
+              const DynamicFieldRow(
+                label: 'State',
+                value: 'TO RECYCLE',
+              ),
+             
+            ],
+          ),
         ),
       ),
+      bottomNavigationBar:  BottomActionsArea(children: [
+                Expanded(
+                    child: PrimaryElevatedButton(
+                        onPressed: () {
+                          if (!_formKey.currentState!.validate()) {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(errorSnackbar('Invalid Submission'));
+                          }
+                        },
+                        label: 'Post')),
+              ]),
     );
   }
 }

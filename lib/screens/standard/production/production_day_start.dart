@@ -48,112 +48,108 @@ class _DayStartState extends State<DayStart> {
         bottom: appBarUnderline,
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView(
-                padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
-                physics: const BouncingScrollPhysics(),
-                shrinkWrap: true,
-                children: [
-                  hSpace(20),
-                  const DynamicFieldRow(label: 'Batch No:', value: 'Display Batch No'),
-                  hSpace(15),
-                  DropdownMenuField(
-                    validator: (value) {
-                      return '';
-                    },
-                    fieldLabel: 'Box No:',
-                    dropDownLabel: 'Select Box',
-                    dropdownEntries: const [
-                      DropdownMenuItem(value: '1', child: Text('1')),
-                      DropdownMenuItem(value: '2', child: Text('2')),
-                      DropdownMenuItem(
-                        value: '3',
-                        child: Text('3'),
-                      )
-                    ],
-                    onSelected: (selectedVal) {
-                      print(selectedVal.toString());
-                    },
-                  ),
-                  hSpace(15),
-                  const BoxInfoDisplay(
-                      boxNumber: 'No.', boxType: 'Type', boxSize: 'Size', boxWeight: 'Weight'),
-                  const SizedBox(height: 20),
-                  const DynamicFieldRow(label: 'Process', value: 'Display Process'),
-                  hSpace(15),
-                  DropdownMenuField(
-                    validator: (value) {
-                      return '';
-                    },
-                    fieldLabel: 'Team',
-                    dropDownLabel: 'Select Team',
-                    dropdownEntries: const [
-                      DropdownMenuItem(value: 'Team 1', child: Text('Team 1')),
-                      DropdownMenuItem(value: 'Team 2', child: Text('Team 2')),
-                      DropdownMenuItem(value: 'Team 3', child: Text('Team 3')),
-                    ],
-                    onSelected: (selectedVal) {
-                      print(selectedVal.toString());
-                    },
-                  ),
-
-                  hSpace(15),
-                  const DynamicFieldRow(
-                      label: 'Material Weight', value: 'Calculate Weight&Display'),
-                  hSpace(15),
-                  TeamManagerWidget(
-                    editable: true,
-                    teamList: [
-                      WorkerData(id: 10, name: 'Athul'),
-                      WorkerData(id: 15, name: 'Amal'),
-                    ],
-                  ),
-
-                  hSpace(15),
-                  Consumer<CameraProvider>(
-                    builder: (context, state, child) {
-                      if (_imageProvider.image == null) {
-                        return const SizedBox();
-                      } else {
-                        return ImagePreviewBox(image: _imageProvider.image);
-                      }
-                    },
-                  ),
-                  //! ^ IMAGE PREVIEW AREA
-                  OpenImageButton(
-                    icon: Icons.camera,
-                    label: 'Take Photo',
-                    onTap: () async {
-                      await _imageProvider.getImage();
-                    },
-                  ),
-                  hSpace(15),
-                  // Field to Enter Value
-                  NumberEntryField(
-                    label: 'Enter value shown',
-                    controller: TextEditingController(),
-                    validator: (value) {
-                      return null;
-                    },
-                  ),
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
+          child: Column(
+            children: [
+              hSpace(20),
+              const DynamicFieldRow(label: 'Batch No:', value: 'Display Batch No'),
+              hSpace(15),
+              DropdownMenuField(
+                validator: (value) {
+                  return '';
+                },
+                fieldLabel: 'Box No:',
+                dropDownLabel: 'Select Box',
+                dropdownEntries: const [
+                  DropdownMenuItem(value: '1', child: Text('1')),
+                  DropdownMenuItem(value: '2', child: Text('2')),
+                  DropdownMenuItem(
+                    value: '3',
+                    child: Text('3'),
+                  )
+                ],
+                onSelected: (selectedVal) {
+                  print(selectedVal.toString());
+                },
+              ),
+              hSpace(15),
+              const BoxInfoDisplay(
+                  boxNumber: 'No.', boxType: 'Type', boxSize: 'Size', boxWeight: 'Weight'),
+              const SizedBox(height: 20),
+              const DynamicFieldRow(label: 'Process', value: 'Display Process'),
+              hSpace(15),
+              DropdownMenuField(
+                validator: (value) {
+                  return '';
+                },
+                fieldLabel: 'Team',
+                dropDownLabel: 'Select Team',
+                dropdownEntries: const [
+                  DropdownMenuItem(value: 'Team 1', child: Text('Team 1')),
+                  DropdownMenuItem(value: 'Team 2', child: Text('Team 2')),
+                  DropdownMenuItem(value: 'Team 3', child: Text('Team 3')),
+                ],
+                onSelected: (selectedVal) {
+                  print(selectedVal.toString());
+                },
+              ),
+                
+              hSpace(15),
+              const DynamicFieldRow(
+                  label: 'Material Weight', value: 'Calculate Weight&Display'),
+              hSpace(15),
+              TeamManagerWidget(
+                editable: true,
+                teamList: [
+                  WorkerData(id: 10, name: 'Athul'),
+                  WorkerData(id: 15, name: 'Amal'),
                 ],
               ),
-            ), // End of listview
-            BottomActionsArea(
-              children: [
-                Expanded(
-                  child: PrimaryElevatedButton(
-                    onPressed: () {},
-                    label: 'Submit',
-                  ),
-                ),
-              ],
-            ),
-          ],
+                
+              hSpace(15),
+              Consumer<CameraProvider>(
+                builder: (context, state, child) {
+                  if (_imageProvider.image == null) {
+                    return const SizedBox();
+                  } else {
+                    return ImagePreviewBox(image: _imageProvider.image);
+                  }
+                },
+              ),
+              //! ^ IMAGE PREVIEW AREA
+              OpenImageButton(
+                icon: Icons.camera,
+                label: 'Take Photo',
+                onTap: () async {
+                  await _imageProvider.getImage();
+                },
+              ),
+              hSpace(15),
+              // Field to Enter Value
+              NumberEntryField(
+                label: 'Enter value shown',
+                controller: TextEditingController(),
+                validator: (value) {
+                  return null;
+                },
+              ), // End of listview
+          
+            ],
+          ),
         ),
       ),
+      bottomNavigationBar:     BottomActionsArea(
+                  children: [
+                    Expanded(
+                      child: PrimaryElevatedButton(
+                        onPressed: () {},
+                        label: 'Submit',
+                      ),
+                    ),
+                  ],
+                ),
     );
   }
 }

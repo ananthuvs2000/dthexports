@@ -1,3 +1,4 @@
+import 'package:dth/_common_widgets/bottom_actions_area.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/_common_widgets/appbar_underline.dart';
 import 'package:dth/_common_widgets/drop_down_menu_field.dart';
@@ -44,6 +45,7 @@ class _OutGoingScreenState extends State<OutGoingScreen> {
         bottom: appBarUnderline,
       ),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
           child: Form(
@@ -126,18 +128,23 @@ class _OutGoingScreenState extends State<OutGoingScreen> {
                 hSpace(20),
                 const DynamicFieldRow(label: 'Send For Wefting', value: 'Yes or No'),
                 hSpace(30),
-                SizedBox(
-                  width: double.infinity,
-                  child: PrimaryElevatedButton(
-                    onPressed: () {},
-                    label: 'ADD MORE',
-                  ),
-                ),
+               
               ],
             ),
           ),
         ),
       ),
+      bottomNavigationBar:  BottomActionsArea(
+                children: [
+                  Expanded(
+                    child: PrimaryElevatedButton(
+                    onPressed: () {},
+                    label: 'ADD MORE',
+                  ),
+                  ),
+                ],
+              ),
     );
+    
   }
 }

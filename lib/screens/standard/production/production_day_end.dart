@@ -48,85 +48,84 @@ class _DayEndScreenState extends State<DayEndScreen> {
         bottom: appBarUnderline,
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView(
-                padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
-                physics: const BouncingScrollPhysics(),
-                shrinkWrap: true,
-                children: [
-                  hSpace(15),
-                  DropdownMenuField(
-                    validator: (value) {
-                      return null;
-                    },
-                    fieldLabel: 'Box No:',
-                    dropDownLabel: 'Select Box',
-                    dropdownEntries: const [
-                      DropdownMenuItem(value: '1', child: Text('1')),
-                      DropdownMenuItem(value: '2', child: Text('2')),
-                      DropdownMenuItem(value: '3', child: Text('3')),
-                    ],
-                    onSelected: (selectedVal) {
-                      print(selectedVal.toString());
-                    },
-                  ),
-                  hSpace(15),
-                  OpenImageButton(
-                    width: double.infinity,
-                    icon: Icons.camera,
-                    label: 'Take Photo',
-                    onTap: () => getImage(),
-                  ),
-                  hSpace(10),
-                  ImagePreviewBox(
-                    image: _image,
-                  ),
-                  hSpace(10),
-
-                  // Field to Enter Value
-                  NumberEntryField(
-                    label: 'Enter weight\nas shown',
-                    controller: TextEditingController(),
-                    validator: (value) {
-                      return null;
-                    },
-                  ),
-                  hSpace(15),
-
-                  const BoxInfoDisplay(
-                      boxNumber: 'No.', boxType: 'Type', boxSize: 'Size', boxWeight: 'Weight'),
-                  hSpace(15),
-                  const DynamicFieldRow(label: 'Material Weight', value: 'CALCULATED'),
-                  hSpace(15),
-                  SecondaryElevatedButton(onPressed: () {}, label: 'Balance'),
-                  hSpace(15),
-                  const DynamicFieldRow(label: 'Total Process Wastage', value: 'CALCULATED'),
-                  hSpace(15),
-                  const TableWidget(),
-                  hSpace(15),
-                ],
-              ),
-            ), // end of listview
-            BottomActionsArea(
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
+            child: Column(
               children: [
-                SecondaryElevatedButton(
-                  onPressed: () {},
-                  label: 'PRS Completed',
+                hSpace(15),
+                DropdownMenuField(
+                  validator: (value) {
+                    return null;
+                  },
+                  fieldLabel: 'Box No:',
+                  dropDownLabel: 'Select Box',
+                  dropdownEntries: const [
+                    DropdownMenuItem(value: '1', child: Text('1')),
+                    DropdownMenuItem(value: '2', child: Text('2')),
+                    DropdownMenuItem(value: '3', child: Text('3')),
+                  ],
+                  onSelected: (selectedVal) {
+                    print(selectedVal.toString());
+                  },
                 ),
-                wSpace(10),
-                Expanded(
-                  child: PrimaryElevatedButton(
-                    onPressed: () {},
-                    label: 'Submit',
-                  ),
+                hSpace(15),
+                OpenImageButton(
+                  width: double.infinity,
+                  icon: Icons.camera,
+                  label: 'Take Photo',
+                  onTap: () => getImage(),
                 ),
+                hSpace(10),
+                ImagePreviewBox(
+                  image: _image,
+                ),
+                hSpace(10),
+                  
+                // Field to Enter Value
+                NumberEntryField(
+                  label: 'Enter weight\nas shown',
+                  controller: TextEditingController(),
+                  validator: (value) {
+                    return null;
+                  },
+                ),
+                hSpace(15),
+                  
+                const BoxInfoDisplay(
+                    boxNumber: 'No.', boxType: 'Type', boxSize: 'Size', boxWeight: 'Weight'),
+                hSpace(15),
+                const DynamicFieldRow(label: 'Material Weight', value: 'CALCULATED'),
+                hSpace(15),
+                SecondaryElevatedButton(onPressed: () {}, label: 'Balance'),
+                hSpace(15),
+                const DynamicFieldRow(label: 'Total Process Wastage', value: 'CALCULATED'),
+                hSpace(15),
+                const TableWidget(),
+                hSpace(15), // end of listview
+               
               ],
             ),
-          ],
+          ),
         ),
+        
       ),
+      bottomNavigationBar:  BottomActionsArea(
+                  children: [
+                    SecondaryElevatedButton(
+                      onPressed: () {},
+                      label: 'PRS Completed',
+                    ),
+                    wSpace(10),
+                    Expanded(
+                      child: PrimaryElevatedButton(
+                        onPressed: () {},
+                        label: 'Submit',
+                      ),
+                    ),
+                  ],
+                ),
     );
   }
 }

@@ -29,60 +29,58 @@ class _DespachScreenState extends State<DespachScreen> {
         title: const Text('Dispatch'),
         bottom: appBarUnderline,
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView(
-              physics: const BouncingScrollPhysics(),
-              padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
-              shrinkWrap: true,
-              children: [
-                hSpace(10),
-                DropdownMenuField(
-                  validator: (value) {
-                    return null;
-                  },
-                  fieldLabel: 'Order No',
-                  dropDownLabel: 'Select Order No',
-                  dropdownEntries: const [],
-                  onSelected: (selectedVal) {
-                    print(selectedVal.toString());
-                  },
-                ),
-                hSpace(10),
-                const DynamicFieldRow(label: 'Process', value: 'Threading/Wefting'),
-                hSpace(20),
-                const DynamicFieldRow(label: 'Box No', value: 'Display Box No'),
-                const SizedBox(
-                  height: 20,
-                ),
-                const OrderedItemsdisplay(
-                    boxNumber: 'Box No', boxType: 'Type', boxSize: 'Size', boxWeight: 'Weight'),
-                hSpace(10),
-                TeamManagerWidget(
-                  editable: true,
-                  teamList: [
-                    WorkerData(id: 10, name: 'Athul'),
-                    WorkerData(id: 15, name: 'Amal'),
-                  ],
-                ),
-                hSpace(10),
-                const DespachTableWidget(),
-              ],
-            ),
-          ),
-          BottomActionsArea(
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
+          child: Column(
             children: [
-              Expanded(
-                child: PrimaryElevatedButton(
-                  onPressed: () {},
-                  label: 'Submit',
-                ),
+              hSpace(10),
+              DropdownMenuField(
+                validator: (value) {
+                  return null;
+                },
+                fieldLabel: 'Order No',
+                dropDownLabel: 'Select Order No',
+                dropdownEntries: const [],
+                onSelected: (selectedVal) {
+                  print(selectedVal.toString());
+                },
               ),
+              hSpace(10),
+              const DynamicFieldRow(label: 'Process', value: 'Threading/Wefting'),
+              hSpace(20),
+              const DynamicFieldRow(label: 'Box No', value: 'Display Box No'),
+              const SizedBox(
+                height: 20,
+              ),
+              const OrderedItemsdisplay(
+                  boxNumber: 'Box No', boxType: 'Type', boxSize: 'Size', boxWeight: 'Weight'),
+              hSpace(10),
+              TeamManagerWidget(
+                editable: true,
+                teamList: [
+                  WorkerData(id: 10, name: 'Athul'),
+                  WorkerData(id: 15, name: 'Amal'),
+                ],
+              ),
+              hSpace(10),
+              const DespachTableWidget(),
+             
             ],
           ),
-        ],
+        ),
       ),
+      bottomNavigationBar:  BottomActionsArea(
+                children: [
+                  Expanded(
+                    child: PrimaryElevatedButton(
+                      onPressed: () {},
+                      label: 'Submit',
+                    ),
+                  ),
+                ],
+              ),
     );
   }
 }
