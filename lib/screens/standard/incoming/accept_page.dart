@@ -94,28 +94,36 @@ class _AcceptPageState extends State<AcceptPage> {
 
                   // Consumer to get remaining box nums from temp api
                   Consumer<ItemAcceptTempProvider>(
-                    builder: (context, boxNumberDropDownState, _) => DropdownMenuField(
-                      key: _dropdownKey,
-                      validator: (value) {
-                        if (value == null) {
-                          return 'Please select a value';
-                        } else {
-                          return null;
-                        }
-                      },
-                      fieldLabel: 'Box No',
-                      dropDownLabel: 'Select Box ',
-                      dropdownEntries: boxNumberDropDownState.boxesRemaining
-                          .map((boxNum) => DropdownMenuItem(
-                                value: '$boxNum',
-                                child: Text('$boxNum'),
-                              ))
-                          .toList(),
-                      onSelected: (selectedVal) {
-                        dropdownState.updateBoxNumber = selectedVal;
-                        print(dropdownState.box);
-                      },
-                    ),
+                    builder: (context, boxNumberDropDownState, _) => FutureBuilder(
+                        future: boxNumberDropDownState.getRemainingBoxes(widget.batchCode),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            return DropdownMenuField(
+                              key: _dropdownKey,
+                              validator: (value) {
+                                if (value == null) {
+                                  return 'Please select a value';
+                                } else {
+                                  return null;
+                                }
+                              },
+                              fieldLabel: 'Box No',
+                              dropDownLabel: 'Select Box ',
+                              dropdownEntries: snapshot.data!
+                                  .map((boxNum) => DropdownMenuItem(
+                                        value: '$boxNum',
+                                        child: Text('$boxNum'),
+                                      ))
+                                  .toList(),
+                              onSelected: (selectedVal) {
+                                dropdownState.updateBoxNumber = selectedVal;
+                                print(dropdownState.box);
+                              },
+                            );
+                          } else {
+                            return ErrorDisplayCaption(message: 'Failed to fetch boxes');
+                          }
+                        }),
                   ),
                   hSpace(15),
                   DropdownMenuField(
@@ -129,9 +137,13 @@ class _AcceptPageState extends State<AcceptPage> {
                     fieldLabel: 'Size',
                     dropDownLabel: 'Select Size',
                     dropdownEntries: const [
-                      DropdownMenuItem(value: '13-15', child: Text('13"-15"')),
-                      DropdownMenuItem(value: '16-19', child: Text('16"-19"')),
-                      DropdownMenuItem(value: '20-23', child: Text('20"-23"')),
+                      DropdownMenuItem(value: '10-14', child: Text('10” - 14”')),
+                      DropdownMenuItem(value: '15-18', child: Text('15” - 18”')),
+                      DropdownMenuItem(value: '19-22', child: Text('19” - 22”')),
+                      DropdownMenuItem(value: '23-26', child: Text('23” - 26”')),
+                      DropdownMenuItem(value: '27-30', child: Text('27” - 30”')),
+                      DropdownMenuItem(value: '31-34', child: Text('31” - 34”')),
+                      DropdownMenuItem(value: '35+', child: Text('35” & Above')),
                     ],
                     onSelected: (selectedVal) {
                       dropdownState.updateSize = selectedVal;
@@ -150,8 +162,9 @@ class _AcceptPageState extends State<AcceptPage> {
                     fieldLabel: 'Color',
                     dropDownLabel: 'Select Color',
                     dropdownEntries: const [
-                      DropdownMenuItem(value: 'red', child: Text('RED')),
                       DropdownMenuItem(value: 'black', child: Text('BLACK')),
+                      DropdownMenuItem(value: 'grey', child: Text('GREY')),
+                      DropdownMenuItem(value: 'dye', child: Text('DYE')),
                     ],
                     onSelected: (selectedVal) {
                       dropdownState.updateColor = selectedVal;
@@ -170,7 +183,8 @@ class _AcceptPageState extends State<AcceptPage> {
                     fieldLabel: 'Texture',
                     dropDownLabel: 'Select Texture',
                     dropdownEntries: const [
-                      DropdownMenuItem(value: 'wavy', child: Text('WAVY')),
+                      DropdownMenuItem(value: 'sraight/wavy', child: Text('STRAIGHT/WAVY')),
+                      DropdownMenuItem(value: 'curly', child: Text('CURLY')),
                       DropdownMenuItem(value: 'super_straight', child: Text('SUPER STRAIGHT')),
                     ],
                     onSelected: (selectedVal) {
@@ -248,7 +262,7 @@ class _AcceptPageState extends State<AcceptPage> {
                             ),
                           );
                         }
-                        return const CircularProgressIndicator.adaptive();
+                        return const Center(child: CircularProgressIndicator.adaptive());
                       },
                     ),
                   ),

@@ -14,25 +14,23 @@ class BatchSelectionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final stream = Provider.of<ItemCheckProvider>(context, listen: false).getItemChecks();
-
     return Scaffold(
       appBar: AppBar(),
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              hSpace(25),
-              Text(
-                'Select batch',
-                style: TextStyles.veryLargeHeading,
-              ),
-              hSpace(5),
-              // Batch list builder
-              FutureBuilder(
-                future: stream,
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            hSpace(25),
+            Text(
+              'Select batch',
+              style: TextStyles.veryLargeHeading,
+            ),
+            hSpace(10),
+            // Batch list builder
+            Consumer<ItemCheckProvider>(
+              builder: (context, state, child) => FutureBuilder(
+                future: state.getItemChecks(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     final itemChecks = snapshot.data!;
@@ -43,21 +41,18 @@ class BatchSelectionPage extends StatelessWidget {
                         itemCount: itemChecks.length,
                         itemBuilder: (context, index) {
                           final item = itemChecks[index];
-                          if (item.status == 'pending') {
-                            return BatchSelectionTile(
-                              batchCode: item.batchCode,
-                              vendorCode: item.vendoCode,
-                              quantityChecked: item.quantityChecked,
-                              status: item.status,
-                              onTap: () => Get.to(
-                                () => AcceptPage(batchCode: item.batchCode),
-                                transition: Transition.rightToLeft,
-                                preventDuplicates: true,
-                                duration: const Duration(milliseconds: 300),
-                              ),
-                            );
-                          }
-                          return const ErrorDisplayCaption(message: 'No Pending Batches');
+
+                          return BatchSelectionTile(
+                            batchCode: item.batchCode,
+                            vendorCode: item.vendoCode,
+                            quantityChecked: item.quantityChecked,
+                            status: item.status,
+                            onTap: () => Get.to(
+                              () => AcceptPage(batchCode: item.batchCode),
+                              transition: Transition.rightToLeft,
+                              preventDuplicates: true,
+                            ),
+                          );
                         },
                       ),
                     );
@@ -68,9 +63,9 @@ class BatchSelectionPage extends StatelessWidget {
                   }
                 },
               ),
-              hSpace(10),
-            ],
-          ),
+            ),
+            hSpace(10),
+          ],
         ),
       ),
     );

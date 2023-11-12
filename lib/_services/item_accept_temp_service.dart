@@ -105,7 +105,6 @@ class ItemAcceptTempService extends ChangeNotifier {
   }
 
   //^ FINALIZE ACCEPT PROCESS OF A BATCH
-  // Removing one box from accepted temp list
   Future<bool> finalizeBatchAccept(String batchCode) async {
     final response = await http.post(
       Uri.parse(_uriAcceptFinalize),

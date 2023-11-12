@@ -156,7 +156,7 @@ class _CheckPageState extends State<CheckPage> {
                         if (employeeData.employees.isEmpty) {
                           return const Center(
                               child: ErrorDisplayCaption(message: 'No Employees Available'));
-                        } else if (teamProvider.teams.isNotEmpty) {
+                        } else {
                           return Column(
                             children: [
                               SizedBox(
@@ -173,8 +173,6 @@ class _CheckPageState extends State<CheckPage> {
                               ),
                             ],
                           );
-                        } else {
-                          return const SizedBox();
                         }
                       },
                     ),
