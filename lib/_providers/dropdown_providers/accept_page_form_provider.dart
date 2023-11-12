@@ -23,11 +23,12 @@ class AcceptPageDropDownProvider with ChangeNotifier {
   }
 
   set updateTexture(String value) {
-    _color = value;
+    _texture = value;
     notifyListeners();
   }
 
-  void clearDropdowns() {
+  void clearAll() {
+    _box = '';
     _size = '';
     _color = '';
     _texture = '';

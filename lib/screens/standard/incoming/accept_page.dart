@@ -2,6 +2,7 @@ import 'package:dth/_common_widgets/bottom_actions_area.dart';
 import 'package:dth/_common_widgets/image_preview_container.dart';
 import 'package:dth/_providers/dropdown_providers/accept_page_form_provider.dart';
 import 'package:dth/_providers/image_provider.dart';
+import 'package:dth/_providers/item_accept_temp_provider.dart';
 import 'package:dth/_services/image_upload_service.dart';
 import 'package:dth/_services/item_accept_temp_service.dart';
 import 'package:dth/_utilites/scaffold_snackbars.dart';
@@ -34,12 +35,13 @@ class AcceptPage extends StatefulWidget {
 class _AcceptPageState extends State<AcceptPage> {
   late CameraProvider _imageProvider;
   late AcceptPageDropDownProvider _dropDownProvider;
+  late ItemAcceptTempProvider _itemAcceptTemp;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _imageProvider = Provider.of<CameraProvider>(context, listen: false);
-    _dropDownProvider = Provider.of<AcceptPageDropDownProvider>(context, listen: false);
+    _itemAcceptTemp = Provider.of<ItemAcceptTempProvider>(context, listen: false);
   }
 
   @override
@@ -48,17 +50,19 @@ class _AcceptPageState extends State<AcceptPage> {
     super.dispose();
     Future.delayed(Duration.zero, () {
       _imageProvider.clearImage();
-      _dropDownProvider.clearDropdowns();
+      _dropDownProvider.clearAll();
     });
   }
 
 // Controllers and form key
   final TextEditingController _quantityController = TextEditingController();
   final _acceptFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormFieldState<String>> _dropdownKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
-    final List<int> numsOneTo99 = List.generate(99, (index) => index + 1);
+    _itemAcceptTemp.getRemainingBoxes(widget.batchCode);
+    _dropDownProvider = Provider.of<AcceptPageDropDownProvider>(context, listen: true);
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -86,26 +90,29 @@ class _AcceptPageState extends State<AcceptPage> {
                       hSpace(15),
 
                       // Consumer to get remaining box nums from temp api
-                      DropdownMenuField(
-                        validator: (value) {
-                          if (value == null) {
-                            return 'Please select a value';
-                          } else {
-                            return null;
-                          }
-                        },
-                        fieldLabel: 'Box No',
-                        dropDownLabel: 'Select Box ',
-                        dropdownEntries: numsOneTo99
-                            .map((number) => DropdownMenuItem(
-                                  value: '$number',
-                                  child: Text(number.toString()),
-                                ))
-                            .toList(),
-                        onSelected: (selectedVal) {
-                          dropdownState.updateBoxNumber = selectedVal;
-                          print(dropdownState.box);
-                        },
+                      Consumer<ItemAcceptTempProvider>(
+                        builder: (context, state, _) => DropdownMenuField(
+                          key: _dropdownKey,
+                          validator: (value) {
+                            if (value == null) {
+                              return 'Please select a value';
+                            } else {
+                              return null;
+                            }
+                          },
+                          fieldLabel: 'Box No',
+                          dropDownLabel: 'Select Box ',
+                          dropdownEntries: state.boxesRemaining
+                              .map((boxNum) => DropdownMenuItem(
+                                    value: '$boxNum',
+                                    child: Text('$boxNum'),
+                                  ))
+                              .toList(),
+                          onSelected: (selectedVal) {
+                            dropdownState.updateBoxNumber = selectedVal;
+                            print(dropdownState.box);
+                          },
+                        ),
                       ),
                       hSpace(15),
                       DropdownMenuField(
@@ -116,15 +123,15 @@ class _AcceptPageState extends State<AcceptPage> {
                             return null;
                           }
                         },
-                        fieldLabel: 'Size:',
+                        fieldLabel: 'Size',
                         dropDownLabel: 'Select Size',
-                        defaultValue: '1',
                         dropdownEntries: const [
-                          DropdownMenuItem(value: '1', child: Text('13"-15"')),
-                          DropdownMenuItem(value: '2', child: Text('15"-19"')),
-                          DropdownMenuItem(value: '3', child: Text('19"-23"')),
+                          DropdownMenuItem(value: '13-15', child: Text('13"-15"')),
+                          DropdownMenuItem(value: '16-19', child: Text('16"-19"')),
+                          DropdownMenuItem(value: '20-23', child: Text('20"-23"')),
                         ],
                         onSelected: (selectedVal) {
+                          dropdownState.updateSize = selectedVal;
                           print(selectedVal.toString());
                         },
                       ),
@@ -137,14 +144,14 @@ class _AcceptPageState extends State<AcceptPage> {
                             return null;
                           }
                         },
-                        fieldLabel: 'Color:',
+                        fieldLabel: 'Color',
                         dropDownLabel: 'Select Color',
-                        defaultValue: '1',
                         dropdownEntries: const [
-                          DropdownMenuItem(value: '1', child: Text('Red')),
-                          DropdownMenuItem(value: '2', child: Text('Black')),
+                          DropdownMenuItem(value: 'red', child: Text('RED')),
+                          DropdownMenuItem(value: 'black', child: Text('BLACK')),
                         ],
                         onSelected: (selectedVal) {
+                          dropdownState.updateColor = selectedVal;
                           print(selectedVal.toString());
                         },
                       ),
@@ -157,15 +164,15 @@ class _AcceptPageState extends State<AcceptPage> {
                             return null;
                           }
                         },
-                        fieldLabel: 'Texture:',
+                        fieldLabel: 'Texture',
                         dropDownLabel: 'Select Texture',
-                        defaultValue: '1',
                         dropdownEntries: const [
-                          DropdownMenuItem(value: '1', child: Text('WAVY')),
-                          DropdownMenuItem(value: '2', child: Text('SUPER STRAIGHT')),
+                          DropdownMenuItem(value: 'wavy', child: Text('WAVY')),
+                          DropdownMenuItem(value: 'super_straight', child: Text('SUPER STRAIGHT')),
                         ],
-                        onSelected: (value) {
-                          print(value.toString());
+                        onSelected: (selectedVal) {
+                          dropdownState.updateTexture = selectedVal;
+                          print(selectedVal.toString());
                         },
                       ),
                       hSpace(15),
@@ -210,19 +217,20 @@ class _AcceptPageState extends State<AcceptPage> {
                         style: TextStyles.mainHeadingStyle,
                       ),
                       //! Builder for added boxes of this batch
-                      ListView.builder(
-                        itemCount: 1,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          if (false) {
-                          } else {
-                            return const Text('No Boxes');
-                          }
-                        },
+                      Consumer<ItemAcceptTempProvider>(
+                        builder: (context, state, _) => ListView.builder(
+                          itemCount: state.acceptedBoxes.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            return Text(state.acceptedBoxes[index].boxRef);
+                          },
+                        ),
                       ),
+                      hSpace(200),
                     ],
                   ),
                 ),
+                hSpace(15),
                 // Bottom Actions Area For Add / Submit
                 BottomActionsArea(
                   children: [
@@ -231,16 +239,15 @@ class _AcceptPageState extends State<AcceptPage> {
                       onPressed: () async {
                         if (_acceptFormKey.currentState!.validate()) {
                           if (_imageProvider.image != null) {
-                            //Showing success message
-                            // Get.snackbar('Added Succesfully', 'message');
                             final imageUploadRes =
                                 await ImageUploadService().uploadImage(_imageProvider.image!.path);
                             if (imageUploadRes.imagePath != '') {
                               await ItemAcceptTempService().postTempData(
                                 batchCode: widget.batchCode,
-                                boxRef: "2",
-                                colorRef: "2",
-                                sizeRef: "2",
+                                boxRef: _dropDownProvider.box,
+                                colorRef: _dropDownProvider.color,
+                                textureRef: _dropDownProvider.texture,
+                                sizeRef: _dropDownProvider.size,
                                 materialQty: _quantityController.text,
                                 imagePath: imageUploadRes.imagePath,
                               );
