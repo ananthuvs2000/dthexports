@@ -1,5 +1,7 @@
 // import 'package:dth/_providers/datetime_provider.dart';
+import 'package:dth/_providers/dropdown_providers/accept_page_form_provider.dart';
 import 'package:dth/_providers/employee_provider.dart';
+import 'package:dth/_providers/image_provider.dart';
 import 'package:dth/_providers/itemcheck_provider.dart';
 import 'package:dth/_providers/team_provider.dart';
 import 'package:dth/_providers/vendor_provider.dart';
@@ -36,7 +38,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => TeamProvider()),
         ChangeNotifierProvider(create: (context) => EmployeeProvider()),
         ChangeNotifierProvider(create: (context) => ItemCheckProvider()),
+        ChangeNotifierProvider(create: (context) => CameraProvider()),
         // ChangeNotifierProvider(create: (context) => DateTimeProvider()),
+
+        //^ DropDownProviders
+        ChangeNotifierProvider(create: (context) => AcceptPageDropDownProvider()),
       ],
       builder: (context, child) => ScreenUtilInit(
         ensureScreenSize: true,

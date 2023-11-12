@@ -1,6 +1,9 @@
 import 'package:dth/_common_widgets/bottom_actions_area.dart';
 import 'package:dth/_common_widgets/image_preview_container.dart';
+import 'package:dth/_providers/dropdown_providers/accept_page_form_provider.dart';
+import 'package:dth/_providers/image_provider.dart';
 import 'package:dth/_services/item_accept_temp.dart';
+import 'package:dth/_utilites/scaffold_snackbars.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/_common_widgets/appbar_underline.dart';
 // import 'package:dth/widgets/date_time_display.dart';
@@ -11,8 +14,10 @@ import 'package:dth/_common_widgets/open_camera_button.dart';
 import 'package:dth/_common_widgets/primary_elevated_button.dart';
 import 'package:dth/_common_widgets/secondary_elevated_button.dart';
 import 'package:dth/_common_widgets/spacer.dart';
+import 'package:dth/theme/text_sizing.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class AcceptPage extends StatefulWidget {
   const AcceptPage({
@@ -26,22 +31,29 @@ class AcceptPage extends StatefulWidget {
 }
 
 class _AcceptPageState extends State<AcceptPage> {
-  final TextEditingController _quantityController = TextEditingController();
+  late CameraProvider _imageProvider;
+  late AcceptPageDropDownProvider _dropDownProvider;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _imageProvider = Provider.of<CameraProvider>(context, listen: false);
+    _dropDownProvider = Provider.of<AcceptPageDropDownProvider>(context, listen: false);
+  }
 
-  final _acceptFormKey = GlobalKey<FormState>();
-
-  //! Initializing Image Picker
-  XFile? _image;
-  late final ImagePicker _picker = ImagePicker();
-
-  //! Picking Image from camera
-  Future getImage() async {
-    final XFile? image = await _picker.pickImage(source: ImageSource.camera);
-
-    setState(() {
-      _image = image;
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    Future.delayed(Duration.zero, () {
+      _imageProvider.clearImage();
+      _dropDownProvider.clearDropdowns();
     });
   }
+
+// Controllers and form key
+  final TextEditingController _quantityController = TextEditingController();
+  final _acceptFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +90,8 @@ class _AcceptPageState extends State<AcceptPage> {
                           return null;
                         }
                       },
-                      fieldLabel: 'Box No:',
+                      defaultValue: '1',
+                      fieldLabel: 'Box No',
                       dropDownLabel: 'Select Box ',
                       dropdownEntries: numsOneTo99
                           .map((num) => DropdownMenuItem(
@@ -101,9 +114,11 @@ class _AcceptPageState extends State<AcceptPage> {
                       },
                       fieldLabel: 'Size:',
                       dropDownLabel: 'Select Size',
+                      defaultValue: '1',
                       dropdownEntries: const [
-                        DropdownMenuItem(value: '13-15', child: Text('13"-15"')),
-                        DropdownMenuItem(value: '15-19"', child: Text('15"-19"')),
+                        DropdownMenuItem(value: '1', child: Text('13"-15"')),
+                        DropdownMenuItem(value: '2', child: Text('15"-19"')),
+                        DropdownMenuItem(value: '3', child: Text('19"-23"')),
                       ],
                       onSelected: (selectedVal) {
                         print(selectedVal.toString());
@@ -120,9 +135,10 @@ class _AcceptPageState extends State<AcceptPage> {
                       },
                       fieldLabel: 'Color:',
                       dropDownLabel: 'Select Color',
+                      defaultValue: '1',
                       dropdownEntries: const [
-                        DropdownMenuItem(value: 'RED', child: Text('Red')),
-                        DropdownMenuItem(value: 'BLACK', child: Text('Black')),
+                        DropdownMenuItem(value: '1', child: Text('Red')),
+                        DropdownMenuItem(value: '2', child: Text('Black')),
                       ],
                       onSelected: (selectedVal) {
                         print(selectedVal.toString());
@@ -139,9 +155,10 @@ class _AcceptPageState extends State<AcceptPage> {
                       },
                       fieldLabel: 'Texture:',
                       dropDownLabel: 'Select Texture',
+                      defaultValue: '1',
                       dropdownEntries: const [
-                        DropdownMenuItem(value: 'WAVY', child: Text('WAVY')),
-                        DropdownMenuItem(value: 'SUPER STRAIGHT', child: Text('SUPER STRAIGHT')),
+                        DropdownMenuItem(value: '1', child: Text('WAVY')),
+                        DropdownMenuItem(value: '2', child: Text('SUPER STRAIGHT')),
                       ],
                       onSelected: (value) {
                         print(value.toString());
@@ -161,16 +178,44 @@ class _AcceptPageState extends State<AcceptPage> {
                         }
                       },
                     ),
-                    (_image != null) ? ImagePreviewBox(image: _image) : hSpace(15),
+                    hSpace(15),
                     //! ^ IMAGE PREVIEW AREA
-                    OpenImageButton(
-                      icon: Icons.camera,
-                      label: 'Take Photo',
-                      onTap: () {
-                        getImage();
+                    Consumer<CameraProvider>(
+                      builder: (context, state, _) {
+                        if (_imageProvider.image == null) {
+                          return const SizedBox();
+                        } else {
+                          return ImagePreviewBox(image: _imageProvider.image);
+                        }
                       },
                     ),
-                    hSpace(30),
+                    OpenImageButton(
+                      icon: CupertinoIcons.camera_fill,
+                      label: (Provider.of<CameraProvider>(context).image == null)
+                          ? 'Take Photo'
+                          : 'Take Again',
+                      onTap: () async {
+                        await _imageProvider.getImage();
+                      },
+                    ),
+                    hSpace(25),
+
+                    //? Consumer for boxes in accepted batch here
+                    Text(
+                      'Boxes added to this batch',
+                      style: TextStyles.mainHeadingStyle,
+                    ),
+                    //! Builder for added boxes of this batch
+                    ListView.builder(
+                      itemCount: 1,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        if (false) {
+                        } else {
+                          return const Text('No Boxes');
+                        }
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -181,19 +226,27 @@ class _AcceptPageState extends State<AcceptPage> {
                     icon: Icons.add,
                     onPressed: () async {
                       if (_acceptFormKey.currentState!.validate()) {
-                        print('Form valid');
-                        if (_image != null) {
+                        if (_imageProvider.image != null) {
                           //Showing success message
                           // Get.snackbar('Added Succesfully', 'message');
 
-                          await ItemAcceptTempData().postTempData();
+                          await ItemAcceptTempService().postTempData(
+                            batchCode: widget.batchCode,
+                            boxRef: "2",
+                            colorRef: "2",
+                            sizeRef: "2",
+                            materialQty: _quantityController.text,
+                            imagePath: _imageProvider.image!.path,
+                          );
                           // Clearing all fields and dropdowns
-                          setState(() => _image = null);
                           _quantityController.clear();
                           _acceptFormKey.currentState!.reset();
+                          _imageProvider.clearImage();
                         }
                       } else {
-                        print('Form invalid');
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          errorSnackbar('Invalid Submission'),
+                        );
                       }
                     },
                     label: 'Add More',

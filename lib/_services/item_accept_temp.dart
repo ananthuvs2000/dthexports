@@ -2,26 +2,48 @@ import 'package:dth/_api_endpoints/api_endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class ItemAcceptTempData extends ChangeNotifier {
+class ItemAcceptTempService extends ChangeNotifier {
   //! API ENDPOINTS
-  final String _uri = '$apiHOME/item_accept_temp';
   final String _uriAdd = '$apiHOME/item_accept_tmp_add';
 
-  Future<bool> postTempData() async {
-    final response = await http.post(Uri.parse(_uriAdd), body: {
-      "batch_code": "B02",
-      "box_ref": "2",
-      "color_ref": "2",
-      "size_ref": "2",
-      "material_qty": "200",
-      "image_path": "test",
-      "process": "raw_material"
-    });
-    // print(response.body);
-    if (response.statusCode == 200) {
-      return true;
-    } else {
-      throw Exception('Failed to post ${response.statusCode}');
+  Future<bool> postTempData({
+    required String batchCode,
+    required String boxRef,
+    required String colorRef,
+    required String sizeRef,
+    required String materialQty,
+    required String imagePath,
+  }) async {
+    var request = http.MultipartRequest('POST', Uri.parse(_uriAdd));
+
+    // Add text fields
+    request.fields['batch_code'] = batchCode;
+    request.fields['box_ref'] = boxRef;
+    request.fields['color_ref'] = colorRef;
+    request.fields['size_ref'] = sizeRef;
+    request.fields['material_qty'] = materialQty;
+    request.fields['image_path'] = imagePath;
+    request.fields['process'] = 'raw_material';
+
+    // Add image file
+    var imageFile = await http.MultipartFile.fromPath('image', imagePath);
+    request.files.add(imageFile);
+
+    try {
+      var response = await request.send();
+
+      if (response.statusCode == 200) {
+        // Successful response
+        return true;
+      } else {
+        // Handle other status codes
+        print('Failed to post ${response.statusCode}');
+        return false;
+      }
+    } catch (error) {
+      // Handle errors during the request
+      print('Error during POST request: $error');
+      return false;
     }
   }
 }

@@ -18,7 +18,7 @@ class TextStyles {
   static TextStyle mainHeadingStyle = const TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.bold,
-    letterSpacing: -1,
+    letterSpacing: 0,
   );
 
   // Labels and plain text

@@ -3,7 +3,7 @@ import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:flutter/material.dart';
 
-class DropdownMenuField extends StatefulWidget {
+class DropdownMenuField extends StatelessWidget {
   const DropdownMenuField({
     required this.fieldLabel,
     required this.dropDownLabel,
@@ -21,11 +21,6 @@ class DropdownMenuField extends StatefulWidget {
   final String? Function(dynamic value) validator;
 
   @override
-  State<DropdownMenuField> createState() => _DropdownMenuFieldState();
-}
-
-class _DropdownMenuFieldState extends State<DropdownMenuField> {
-  @override
   Widget build(BuildContext context) {
     return Flex(
       direction: Axis.horizontal,
@@ -35,7 +30,7 @@ class _DropdownMenuFieldState extends State<DropdownMenuField> {
         Flexible(
           flex: 2,
           child: Text(
-            widget.fieldLabel,
+            fieldLabel,
             style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 15,
@@ -109,16 +104,16 @@ class _DropdownMenuFieldState extends State<DropdownMenuField> {
               labelStyle: const TextStyle(fontSize: 12),
             ),
             hint: Text(
-              widget.dropDownLabel,
+              dropDownLabel,
               style: const TextStyle(
                 fontSize: 14,
               ),
             ),
             iconSize: 25,
-            items: widget.dropdownEntries,
-            validator: (value) => widget.validator(value),
-            onChanged: (value) => widget.onSelected(value),
-            value: widget.defaultValue,
+            items: dropdownEntries,
+            validator: (value) => validator(value),
+            onChanged: (value) => onSelected(value),
+            value: defaultValue,
           ),
         ),
       ],

@@ -1,4 +1,5 @@
 import 'package:dth/_common_widgets/image_preview_container.dart';
+import 'package:dth/_providers/image_provider.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/_common_widgets/appbar_underline.dart';
 import 'package:dth/_common_widgets/bottom_actions_area.dart';
@@ -11,7 +12,7 @@ import 'package:dth/_common_widgets/primary_elevated_button.dart';
 import 'package:dth/_common_widgets/spacer.dart';
 import 'package:dth/_common_widgets/team_manager_list.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class DayStart extends StatefulWidget {
   const DayStart({super.key});
@@ -21,19 +22,19 @@ class DayStart extends StatefulWidget {
 }
 
 class _DayStartState extends State<DayStart> {
-//! Initializing Image Picker
-  XFile? _image;
-  late final ImagePicker _picker = ImagePicker();
+  late CameraProvider _imageProvider;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _imageProvider = Provider.of<CameraProvider>(context, listen: false);
+  }
 
-  final _weightController = TextEditingController();
-
-  //! Picking Image from camera
-  Future getImage() async {
-    final XFile? image = await _picker.pickImage(source: ImageSource.camera);
-
-    setState(() {
-      _image = image;
-    });
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    Future.delayed(Duration.zero, () => _imageProvider.clearImage());
   }
 
   @override
@@ -111,14 +112,22 @@ class _DayStartState extends State<DayStart> {
                   ),
 
                   hSpace(15),
-                  OpenImageButton(
-                    label: 'Take Photo',
-                    icon: Icons.camera,
-                    onTap: () => getImage(),
+                  Consumer<CameraProvider>(
+                    builder: (context, state, child) {
+                      if (_imageProvider.image == null) {
+                        return const SizedBox();
+                      } else {
+                        return ImagePreviewBox(image: _imageProvider.image);
+                      }
+                    },
                   ),
-                  hSpace(15),
-                  ImagePreviewBox(
-                    image: _image,
+                  //! ^ IMAGE PREVIEW AREA
+                  OpenImageButton(
+                    icon: Icons.camera,
+                    label: 'Take Photo',
+                    onTap: () async {
+                      await _imageProvider.getImage();
+                    },
                   ),
                   hSpace(15),
                   // Field to Enter Value
