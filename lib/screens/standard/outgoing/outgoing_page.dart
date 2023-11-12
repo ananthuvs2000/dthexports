@@ -1,4 +1,5 @@
 import 'package:dth/_common_widgets/bottom_actions_area.dart';
+import 'package:dth/_common_widgets/switch_tile.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/_common_widgets/appbar_underline.dart';
 import 'package:dth/_common_widgets/drop_down_menu_field.dart';
@@ -124,9 +125,12 @@ class _OutGoingScreenState extends State<OutGoingScreen> {
                 hSpace(10),
                 const DynamicFieldRow(label: 'Req Qty', value: 'CALCULATED'),
                 hSpace(20),
-                const DynamicFieldRow(label: '2nd Conditioning', value: 'Yes or No'),
+                CustomSwitchTile(title: '2nd Contitioning'),
+                // const DynamicFieldRow(label: '2nd Conditioning', value: 'Yes or No'),
                 hSpace(20),
-                const DynamicFieldRow(label: 'Send For Wefting', value: 'Yes or No'),
+                // const DynamicFieldRow(label: 'Send For Wefting', value: 'Yes or No'),
+                
+                CustomSwitchTile(title: 'Send for Wefting'),
                 hSpace(30),
                
               ],

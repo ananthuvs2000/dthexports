@@ -1,4 +1,7 @@
 import 'package:dth/_common_widgets/image_preview_container.dart';
+import 'package:dth/_providers/dropdown_providers/accept_page_form_provider.dart';
+import 'package:dth/_providers/image_provider.dart';
+import 'package:dth/_providers/item_accept_temp_provider.dart';
 import 'package:dth/screens/standard/widgets/table.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/_common_widgets/appbar_underline.dart';
@@ -11,8 +14,10 @@ import 'package:dth/_common_widgets/open_camera_button.dart';
 import 'package:dth/_common_widgets/primary_elevated_button.dart';
 import 'package:dth/_common_widgets/secondary_elevated_button.dart';
 import 'package:dth/_common_widgets/spacer.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class DayEndScreen extends StatefulWidget {
   const DayEndScreen({super.key});
@@ -34,6 +39,26 @@ class _DayEndScreenState extends State<DayEndScreen> {
 
     setState(() {
       _image = image;
+    });
+  }
+   late CameraProvider _imageProvider;
+  late AcceptPageDropDownProvider _dropDownProvider;
+  
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _imageProvider = Provider.of<CameraProvider>(context, listen: false);
+   
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    Future.delayed(Duration.zero, () {
+      _imageProvider.clearImage();
+    
     });
   }
 
@@ -71,16 +96,35 @@ class _DayEndScreenState extends State<DayEndScreen> {
                   },
                 ),
                 hSpace(15),
-                OpenImageButton(
-                  width: double.infinity,
-                  icon: Icons.camera,
-                  label: 'Take Photo',
-                  onTap: () => getImage(),
-                ),
-                hSpace(10),
-                ImagePreviewBox(
-                  image: _image,
-                ),
+                // OpenImageButton(
+                //   width: double.infinity,
+                //   icon: Icons.camera,
+                //   label: 'Take Photo',
+                //   onTap: () => getImage(),
+                // ),
+                // hSpace(10),
+                // ImagePreviewBox(
+                //   image: _image,
+                // ),
+                 Consumer<CameraProvider>(
+                    builder: (context, state, _) {
+                      if (_imageProvider.image == null) {
+                        return const SizedBox();
+                      } else {
+                        return ImagePreviewBox(image: _imageProvider.image);
+                      }
+                    },
+                  ),
+                  OpenImageButton(
+                    width: double.infinity,
+                    icon: CupertinoIcons.camera_fill,
+                    label: (Provider.of<CameraProvider>(context).image == null)
+                        ? 'Take Photo'
+                        : 'Take Again',
+                    onTap: () async {
+                      await _imageProvider.getImage();
+                    },
+                  ),
                 hSpace(10),
                   
                 // Field to Enter Value
