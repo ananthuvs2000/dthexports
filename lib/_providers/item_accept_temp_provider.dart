@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 class ItemAcceptTempProvider with ChangeNotifier {
   late List<dynamic> _boxesRemaining = [];
   late List<AcceptedBox> _acceptedBoxesOfBatch = [];
+  late bool _resultAcceptedBoxDeletion;
 
   Future<List<dynamic>> getRemainingBoxes(String batchCode) async {
     final dataProvider = ItemAcceptTempService();
@@ -21,6 +22,14 @@ class ItemAcceptTempProvider with ChangeNotifier {
     return _acceptedBoxesOfBatch;
   }
 
+  Future<bool> deleteOneAcceptedBox(String batchCode, String boxRef) async {
+    final dataProvider = ItemAcceptTempService();
+    _resultAcceptedBoxDeletion = await dataProvider.deleteBoxFromAccepted(batchCode, boxRef);
+    notifyListeners();
+    return _resultAcceptedBoxDeletion;
+  }
+
   List<dynamic> get boxesRemaining => _boxesRemaining;
   List<AcceptedBox> get acceptedBoxes => _acceptedBoxesOfBatch;
+  bool get boxDeleteResult => _resultAcceptedBoxDeletion;
 }

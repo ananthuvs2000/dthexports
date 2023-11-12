@@ -8,10 +8,9 @@ class ItemAcceptTempService extends ChangeNotifier {
   //! API ENDPOINTS
   final String _uriAdd = '$apiHOME/item_accept_tmp_add';
   final String _uriGetAcceptedBoxesOfBatch = '$apiHOME/item_accept_tmp';
-  final String _uriDeleteOneAcceptedBox = '$apiHOME/item_accept_tmp_delete';
-  final String _uriAcceptTempConfirme = '$apiHOME/accept_tmp_store_confirm';
-
+  final String _uriDeleteOneAcceptedBox = '$apiHOME/item_accept_tmp_remove';
   final String _uriGetRemainingBoxNums = '$apiHOME/get_batchcode_available_boxes';
+  final String _uriAcceptFinalize = '$apiHOME/accept_tmp_store_confirm';
 
   Future<List<dynamic>> getRemainingBoxNums(String batchCode) async {
     final response = await http.post(
@@ -86,28 +85,20 @@ class ItemAcceptTempService extends ChangeNotifier {
   }
 
   // Removing one box from accepted temp list
-  Future<List<AcceptedBox>> deleteBoxFromAccepted(String batchCode) async {
+  Future<bool> deleteBoxFromAccepted(
+    String batchCode,
+    String boxNumber,
+  ) async {
     final response = await http.post(
       Uri.parse(_uriDeleteOneAcceptedBox),
-      body: {'batch_code': batchCode},
+      body: {
+        'batch_code': batchCode,
+        'box_ref': boxNumber,
+      },
     );
-    print(response.body);
 
     if (response.statusCode == 200) {
-      final List<dynamic> result = jsonDecode(response.body);
-      final List<AcceptedBox> list = result
-          .map(
-            (item) => AcceptedBox(
-              boxRef: item['box_ref'],
-              colorRef: item['color_ref'],
-              sizeRef: item['size_ref'],
-              textureRef: item['texture_ref'],
-              materialQty: item['material_qty'],
-            ),
-          )
-          .toList();
-
-      return list;
+      return true;
     } else {
       throw Exception('Failed to get temp box info');
     }
@@ -115,28 +106,15 @@ class ItemAcceptTempService extends ChangeNotifier {
 
   //^ FINALIZE ACCEPT PROCESS OF A BATCH
   // Removing one box from accepted temp list
-  Future<List<AcceptedBox>> finalizeBatchAccept(String batchCode) async {
+  Future<bool> finalizeBatchAccept(String batchCode) async {
     final response = await http.post(
-      Uri.parse(_uriDeleteOneAcceptedBox),
+      Uri.parse(_uriAcceptFinalize),
       body: {'batch_code': batchCode},
     );
     print(response.body);
 
     if (response.statusCode == 200) {
-      final List<dynamic> result = jsonDecode(response.body);
-      final List<AcceptedBox> list = result
-          .map(
-            (item) => AcceptedBox(
-              boxRef: item['box_ref'],
-              colorRef: item['color_ref'],
-              sizeRef: item['size_ref'],
-              textureRef: item['texture_ref'],
-              materialQty: item['material_qty'],
-            ),
-          )
-          .toList();
-
-      return list;
+      return true;
     } else {
       throw Exception('Failed to get temp box info');
     }

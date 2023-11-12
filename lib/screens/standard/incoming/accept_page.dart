@@ -1,11 +1,14 @@
 import 'package:dth/_common_widgets/bottom_actions_area.dart';
+import 'package:dth/_common_widgets/error_display_caption.dart';
 import 'package:dth/_common_widgets/image_preview_container.dart';
+import 'package:dth/_models/accepted_box_of_batch.dart';
 import 'package:dth/_providers/dropdown_providers/accept_page_form_provider.dart';
 import 'package:dth/_providers/image_provider.dart';
 import 'package:dth/_providers/item_accept_temp_provider.dart';
 import 'package:dth/_services/image_upload_service.dart';
 import 'package:dth/_services/item_accept_temp_service.dart';
 import 'package:dth/_utilites/scaffold_snackbars.dart';
+import 'package:dth/screens/standard/incoming/batch_selection_page.dart';
 import 'package:dth/screens/standard/incoming/widgets/accepted_box_tile.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/_common_widgets/appbar_underline.dart';
@@ -20,6 +23,7 @@ import 'package:dth/_common_widgets/spacer.dart';
 import 'package:dth/theme/text_sizing.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class AcceptPage extends StatefulWidget {
@@ -63,7 +67,6 @@ class _AcceptPageState extends State<AcceptPage> {
   @override
   Widget build(BuildContext context) {
     _itemAcceptTemp.getRemainingBoxes(widget.batchCode);
-    _itemAcceptTemp.getAcceptedBoxes(widget.batchCode);
     _dropDownProvider = Provider.of<AcceptPageDropDownProvider>(context, listen: true);
 
     return Scaffold(
@@ -91,7 +94,7 @@ class _AcceptPageState extends State<AcceptPage> {
 
                   // Consumer to get remaining box nums from temp api
                   Consumer<ItemAcceptTempProvider>(
-                    builder: (context, state, _) => DropdownMenuField(
+                    builder: (context, boxNumberDropDownState, _) => DropdownMenuField(
                       key: _dropdownKey,
                       validator: (value) {
                         if (value == null) {
@@ -102,7 +105,7 @@ class _AcceptPageState extends State<AcceptPage> {
                       },
                       fieldLabel: 'Box No',
                       dropDownLabel: 'Select Box ',
-                      dropdownEntries: state.boxesRemaining
+                      dropdownEntries: boxNumberDropDownState.boxesRemaining
                           .map((boxNum) => DropdownMenuItem(
                                 value: '$boxNum',
                                 child: Text('$boxNum'),
@@ -220,27 +223,34 @@ class _AcceptPageState extends State<AcceptPage> {
                   //! Builder for added boxes of this batch
                   hSpace(10),
                   Consumer<ItemAcceptTempProvider>(
-                    builder: (context, state, _) {
-                      if (state.acceptedBoxes.isEmpty) {
-                        return const Center(child: Text('No boxes added'));
-                      } else {
-                        return ListView.builder(
-                          itemCount: state.acceptedBoxes.length,
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
-                            final box = state.acceptedBoxes[index];
-                            return AcceptedBoxTile(
-                              boxNum: box.boxRef,
-                              color: box.colorRef,
-                              texture: box.textureRef,
-                              quantityChecked: box.materialQty,
-                              size: box.sizeRef,
-                              onDelete: () => print('Delete Clicked'),
-                            );
-                          },
-                        );
-                      }
-                    },
+                    builder: (context, state, child) => FutureBuilder(
+                      future: ItemAcceptTempService().getAcceptedBoxes(widget.batchCode),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasError) {
+                          return const ErrorDisplayCaption(message: 'Failed to fetch added boxes');
+                        } else if (snapshot.hasData) {
+                          final List<AcceptedBox> boxes = snapshot.data!;
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: boxes.length,
+                            itemBuilder: (context, index) => AcceptedBoxTile(
+                              boxNum: boxes[index].boxRef,
+                              color: boxes[index].boxRef,
+                              texture: boxes[index].boxRef,
+                              quantityChecked: boxes[index].boxRef,
+                              size: boxes[index].boxRef,
+                              onDelete: () async {
+                                await state.deleteOneAcceptedBox(
+                                  widget.batchCode,
+                                  boxes[index].boxRef,
+                                );
+                              },
+                            ),
+                          );
+                        }
+                        return const CircularProgressIndicator.adaptive();
+                      },
+                    ),
                   ),
 
                   hSpace(200),
@@ -269,15 +279,15 @@ class _AcceptPageState extends State<AcceptPage> {
                       materialQty: _quantityController.text,
                       imagePath: imageUploadRes.imagePath,
                     );
-
+                    // Clearing all fields and dropdowns
+                    _acceptFormKey.currentState!.reset();
+                    _quantityController.clear();
+                    _imageProvider.clearImage();
+                    _itemAcceptTemp.getAcceptedBoxes(widget.batchCode);
                     // Showing success message
                     ScaffoldMessenger.of(context).showSnackBar(
                       successSnackbar('Box Accepted Succesfully!'),
                     );
-                    // Clearing all fields and dropdowns
-                    _quantityController.clear();
-                    _acceptFormKey.currentState!.reset();
-                    _imageProvider.clearImage();
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       errorSnackbar('Image Upload Failed'),
@@ -299,7 +309,23 @@ class _AcceptPageState extends State<AcceptPage> {
           wSpace(10),
           Expanded(
             child: PrimaryElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                final resOfAtleastOneBoxAccepted =
+                    await _itemAcceptTemp.getAcceptedBoxes(widget.batchCode);
+                if (resOfAtleastOneBoxAccepted.isNotEmpty) {
+                  if (await ItemAcceptTempService().finalizeBatchAccept(widget.batchCode)) {
+                    Get.to(() => const BatchSelectionPage(), arguments: [
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(successSnackbar('Finalized batch succesfully'))
+                    ]);
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(errorSnackbar('Failed to finalize'));
+                  }
+                } else {
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(errorSnackbar('Alteast One Box Is Needed'));
+                }
+              },
               label: 'Submit',
             ),
           ),
