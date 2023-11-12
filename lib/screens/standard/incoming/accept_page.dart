@@ -6,6 +6,7 @@ import 'package:dth/_providers/item_accept_temp_provider.dart';
 import 'package:dth/_services/image_upload_service.dart';
 import 'package:dth/_services/item_accept_temp_service.dart';
 import 'package:dth/_utilites/scaffold_snackbars.dart';
+import 'package:dth/screens/standard/incoming/widgets/accepted_box_tile.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/_common_widgets/appbar_underline.dart';
 // import 'package:dth/widgets/date_time_display.dart';
@@ -62,6 +63,7 @@ class _AcceptPageState extends State<AcceptPage> {
   @override
   Widget build(BuildContext context) {
     _itemAcceptTemp.getRemainingBoxes(widget.batchCode);
+    _itemAcceptTemp.getAcceptedBoxes(widget.batchCode);
     _dropDownProvider = Provider.of<AcceptPageDropDownProvider>(context, listen: true);
 
     return Scaffold(
@@ -216,15 +218,31 @@ class _AcceptPageState extends State<AcceptPage> {
                     style: TextStyles.mainHeadingStyle,
                   ),
                   //! Builder for added boxes of this batch
+                  hSpace(10),
                   Consumer<ItemAcceptTempProvider>(
-                    builder: (context, state, _) => ListView.builder(
-                      itemCount: state.acceptedBoxes.length,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        return Text(state.acceptedBoxes[index].boxRef);
-                      },
-                    ),
+                    builder: (context, state, _) {
+                      if (state.acceptedBoxes.isEmpty) {
+                        return const Center(child: Text('No boxes added'));
+                      } else {
+                        return ListView.builder(
+                          itemCount: state.acceptedBoxes.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            final box = state.acceptedBoxes[index];
+                            return AcceptedBoxTile(
+                              boxNum: box.boxRef,
+                              color: box.colorRef,
+                              texture: box.textureRef,
+                              quantityChecked: box.materialQty,
+                              size: box.sizeRef,
+                              onDelete: () => print('Delete Clicked'),
+                            );
+                          },
+                        );
+                      }
+                    },
                   ),
+
                   hSpace(200),
                 ],
               ),

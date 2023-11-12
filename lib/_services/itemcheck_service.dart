@@ -14,9 +14,7 @@ class ItemCheckDataService extends ChangeNotifier {
     });
 
     if (response.statusCode == 200) {
-      // print(response.body);
       final List<dynamic> jsonData = jsonDecode(response.body);
-      print(jsonData);
       final List<ItemCheck> mapped = jsonData
           .map(
             (item) => ItemCheck(
@@ -31,7 +29,6 @@ class ItemCheckDataService extends ChangeNotifier {
           )
           .toList();
 
-      print('>>>> $mapped');
       return mapped;
     } else {
       throw Exception('Could not get item checks');
