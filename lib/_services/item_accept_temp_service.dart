@@ -5,6 +5,16 @@ import 'package:http/http.dart' as http;
 class ItemAcceptTempService extends ChangeNotifier {
   //! API ENDPOINTS
   final String _uriAdd = '$apiHOME/item_accept_tmp_add';
+  final String _uriGetRemainingBoxNums = '$apiHOME/item_accept_tmp';
+
+  Future<List<int>> getRemainingBoxNums(String batchCode) async {
+    final result = http.post(
+      Uri.parse(_uriGetRemainingBoxNums),
+      body: {'batch_code': batchCode},
+    );
+
+    return [];
+  }
 
   Future<bool> postTempData({
     required String batchCode,
@@ -24,10 +34,6 @@ class ItemAcceptTempService extends ChangeNotifier {
     request.fields['material_qty'] = materialQty;
     request.fields['image_path'] = imagePath;
     request.fields['process'] = 'raw_material';
-
-    // Add image file
-    var imageFile = await http.MultipartFile.fromPath('image', imagePath);
-    request.files.add(imageFile);
 
     try {
       var response = await request.send();

@@ -5,13 +5,13 @@ import 'package:dth/_models/item_check_model.dart';
 import 'package:flutter/material.dart';
 
 class ItemCheckDataService extends ChangeNotifier {
-  final String _checkingPendingAPI = '$apiHOME/itemcheck';
+  final String _checkingPendingAPI = '$apiHOME/filter_check_status';
 
   //^ Fetching all checked batches
   Future<List<ItemCheck>> getCheckedBatches() async {
-    final response = await http.get(
-      Uri.parse(_checkingPendingAPI),
-    );
+    final response = await http.post(Uri.parse(_checkingPendingAPI), body: {
+      "filter_data": "pending",
+    });
 
     if (response.statusCode == 200) {
       // print(response.body);

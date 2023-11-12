@@ -2,21 +2,27 @@ import 'package:flutter/material.dart';
 
 class AcceptPageDropDownProvider with ChangeNotifier {
   // Initial Values
+  String _box = '';
   String _size = '';
   String _color = '';
   String _texture = '';
 
-  void updateSize(String value) {
+  set updateBoxNumber(String value) {
+    _box = value;
+    notifyListeners();
+  }
+
+  set updateSize(String value) {
     _size = value;
     notifyListeners();
   }
 
-  void updateColor(String value) {
+  set updateColor(String value) {
     _color = value;
     notifyListeners();
   }
 
-  void updateTexture(String value) {
+  set updateTexture(String value) {
     _color = value;
     notifyListeners();
   }
@@ -30,4 +36,5 @@ class AcceptPageDropDownProvider with ChangeNotifier {
   String get size => _size;
   String get color => _color;
   String get texture => _texture;
+  String get box => _box;
 }
