@@ -77,216 +77,215 @@ class _AcceptPageState extends State<AcceptPage> {
         builder: (context, dropdownState, _) => Form(
           key: _acceptFormKey,
           child: SafeArea(
-            child: Column(
-              children: [
-                Expanded(
-                  child: ListView(
-                    physics: const BouncingScrollPhysics(),
-                    padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
-                    shrinkWrap: true,
-                    children: [
-                      hSpace(15),
-                      DynamicFieldRow(label: 'Batch Code', value: widget.batchCode),
-                      hSpace(15),
+            child: SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  hSpace(15),
+                  DynamicFieldRow(label: 'Batch Code', value: widget.batchCode),
+                  hSpace(15),
 
-                      // Consumer to get remaining box nums from temp api
-                      Consumer<ItemAcceptTempProvider>(
-                        builder: (context, state, _) => DropdownMenuField(
-                          key: _dropdownKey,
-                          validator: (value) {
-                            if (value == null) {
-                              return 'Please select a value';
-                            } else {
-                              return null;
-                            }
-                          },
-                          fieldLabel: 'Box No',
-                          dropDownLabel: 'Select Box ',
-                          dropdownEntries: state.boxesRemaining
-                              .map((boxNum) => DropdownMenuItem(
-                                    value: '$boxNum',
-                                    child: Text('$boxNum'),
-                                  ))
-                              .toList(),
-                          onSelected: (selectedVal) {
-                            dropdownState.updateBoxNumber = selectedVal;
-                            print(dropdownState.box);
-                          },
-                        ),
-                      ),
-                      hSpace(15),
-                      DropdownMenuField(
-                        validator: (value) {
-                          if (value == null) {
-                            return 'Please select a value';
-                          } else {
-                            return null;
-                          }
-                        },
-                        fieldLabel: 'Size',
-                        dropDownLabel: 'Select Size',
-                        dropdownEntries: const [
-                          DropdownMenuItem(value: '13-15', child: Text('13"-15"')),
-                          DropdownMenuItem(value: '16-19', child: Text('16"-19"')),
-                          DropdownMenuItem(value: '20-23', child: Text('20"-23"')),
-                        ],
-                        onSelected: (selectedVal) {
-                          dropdownState.updateSize = selectedVal;
-                          print(selectedVal.toString());
-                        },
-                      ),
-                      hSpace(15),
-                      DropdownMenuField(
-                        validator: (value) {
-                          if (value == null) {
-                            return 'Please select a value';
-                          } else {
-                            return null;
-                          }
-                        },
-                        fieldLabel: 'Color',
-                        dropDownLabel: 'Select Color',
-                        dropdownEntries: const [
-                          DropdownMenuItem(value: 'red', child: Text('RED')),
-                          DropdownMenuItem(value: 'black', child: Text('BLACK')),
-                        ],
-                        onSelected: (selectedVal) {
-                          dropdownState.updateColor = selectedVal;
-                          print(selectedVal.toString());
-                        },
-                      ),
-                      hSpace(15),
-                      DropdownMenuField(
-                        validator: (value) {
-                          if (value == null) {
-                            return 'Please select a value';
-                          } else {
-                            return null;
-                          }
-                        },
-                        fieldLabel: 'Texture',
-                        dropDownLabel: 'Select Texture',
-                        dropdownEntries: const [
-                          DropdownMenuItem(value: 'wavy', child: Text('WAVY')),
-                          DropdownMenuItem(value: 'super_straight', child: Text('SUPER STRAIGHT')),
-                        ],
-                        onSelected: (selectedVal) {
-                          dropdownState.updateTexture = selectedVal;
-                          print(selectedVal.toString());
-                        },
-                      ),
-                      hSpace(15),
-                      const DynamicFieldRow(label: 'Process', value: 'RAW MATERIAL'),
-                      hSpace(15),
-                      NumberEntryField(
-                        label: 'Material Qty',
-                        controller: _quantityController,
-                        validator: (value) {
-                          if (value == '') {
-                            return 'Please enter a value';
-                          } else {
-                            return null;
-                          }
-                        },
-                      ),
-                      hSpace(15),
-                      //! ^ IMAGE PREVIEW AREA
-                      Consumer<CameraProvider>(
-                        builder: (context, state, _) {
-                          if (_imageProvider.image == null) {
-                            return const SizedBox();
-                          } else {
-                            return ImagePreviewBox(image: _imageProvider.image);
-                          }
-                        },
-                      ),
-                      OpenImageButton(
-                        icon: CupertinoIcons.camera_fill,
-                        label: (Provider.of<CameraProvider>(context).image == null)
-                            ? 'Take Photo'
-                            : 'Take Again',
-                        onTap: () async {
-                          await _imageProvider.getImage();
-                        },
-                      ),
-                      hSpace(25),
-
-                      //? Consumer for boxes in accepted batch here
-                      Text(
-                        'Boxes added to this batch',
-                        style: TextStyles.mainHeadingStyle,
-                      ),
-                      //! Builder for added boxes of this batch
-                      Consumer<ItemAcceptTempProvider>(
-                        builder: (context, state, _) => ListView.builder(
-                          itemCount: state.acceptedBoxes.length,
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
-                            return Text(state.acceptedBoxes[index].boxRef);
-                          },
-                        ),
-                      ),
-                      hSpace(200),
-                    ],
-                  ),
-                ),
-                hSpace(15),
-                // Bottom Actions Area For Add / Submit
-                BottomActionsArea(
-                  children: [
-                    SecondaryElevatedButton(
-                      icon: Icons.add,
-                      onPressed: () async {
-                        if (_acceptFormKey.currentState!.validate()) {
-                          if (_imageProvider.image != null) {
-                            final imageUploadRes =
-                                await ImageUploadService().uploadImage(_imageProvider.image!.path);
-                            if (imageUploadRes.imagePath != '') {
-                              await ItemAcceptTempService().postTempData(
-                                batchCode: widget.batchCode,
-                                boxRef: _dropDownProvider.box,
-                                colorRef: _dropDownProvider.color,
-                                textureRef: _dropDownProvider.texture,
-                                sizeRef: _dropDownProvider.size,
-                                materialQty: _quantityController.text,
-                                imagePath: imageUploadRes.imagePath,
-                              );
-
-                              // Showing success message
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                successSnackbar('Box Accepted Succesfully!'),
-                              );
-                              // Clearing all fields and dropdowns
-                              _quantityController.clear();
-                              _acceptFormKey.currentState!.reset();
-                              _imageProvider.clearImage();
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                errorSnackbar('Image Upload Failed'),
-                              );
-                            }
-                          }
+                  // Consumer to get remaining box nums from temp api
+                  Consumer<ItemAcceptTempProvider>(
+                    builder: (context, state, _) => DropdownMenuField(
+                      key: _dropdownKey,
+                      validator: (value) {
+                        if (value == null) {
+                          return 'Please select a value';
                         } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            errorSnackbar('Invalid Submission'),
-                          );
+                          return null;
                         }
                       },
-                      label: 'Add More',
+                      fieldLabel: 'Box No',
+                      dropDownLabel: 'Select Box ',
+                      dropdownEntries: state.boxesRemaining
+                          .map((boxNum) => DropdownMenuItem(
+                                value: '$boxNum',
+                                child: Text('$boxNum'),
+                              ))
+                          .toList(),
+                      onSelected: (selectedVal) {
+                        dropdownState.updateBoxNumber = selectedVal;
+                        print(dropdownState.box);
+                      },
                     ),
-                    wSpace(10),
-                    Expanded(
-                      child: PrimaryElevatedButton(
-                        onPressed: () {},
-                        label: 'Submit',
-                      ),
-                    )
-                  ],
-                ),
-              ],
+                  ),
+                  hSpace(15),
+                  DropdownMenuField(
+                    validator: (value) {
+                      if (value == null) {
+                        return 'Please select a value';
+                      } else {
+                        return null;
+                      }
+                    },
+                    fieldLabel: 'Size',
+                    dropDownLabel: 'Select Size',
+                    dropdownEntries: const [
+                      DropdownMenuItem(value: '13-15', child: Text('13"-15"')),
+                      DropdownMenuItem(value: '16-19', child: Text('16"-19"')),
+                      DropdownMenuItem(value: '20-23', child: Text('20"-23"')),
+                    ],
+                    onSelected: (selectedVal) {
+                      dropdownState.updateSize = selectedVal;
+                      print(selectedVal.toString());
+                    },
+                  ),
+                  hSpace(15),
+                  DropdownMenuField(
+                    validator: (value) {
+                      if (value == null) {
+                        return 'Please select a value';
+                      } else {
+                        return null;
+                      }
+                    },
+                    fieldLabel: 'Color',
+                    dropDownLabel: 'Select Color',
+                    dropdownEntries: const [
+                      DropdownMenuItem(value: 'red', child: Text('RED')),
+                      DropdownMenuItem(value: 'black', child: Text('BLACK')),
+                    ],
+                    onSelected: (selectedVal) {
+                      dropdownState.updateColor = selectedVal;
+                      print(selectedVal.toString());
+                    },
+                  ),
+                  hSpace(15),
+                  DropdownMenuField(
+                    validator: (value) {
+                      if (value == null) {
+                        return 'Please select a value';
+                      } else {
+                        return null;
+                      }
+                    },
+                    fieldLabel: 'Texture',
+                    dropDownLabel: 'Select Texture',
+                    dropdownEntries: const [
+                      DropdownMenuItem(value: 'wavy', child: Text('WAVY')),
+                      DropdownMenuItem(value: 'super_straight', child: Text('SUPER STRAIGHT')),
+                    ],
+                    onSelected: (selectedVal) {
+                      dropdownState.updateTexture = selectedVal;
+                      print(selectedVal.toString());
+                    },
+                  ),
+                  hSpace(15),
+                  const DynamicFieldRow(label: 'Process', value: 'RAW MATERIAL'),
+                  hSpace(15),
+                  NumberEntryField(
+                    label: 'Material Qty',
+                    controller: _quantityController,
+                    validator: (value) {
+                      if (value == '') {
+                        return 'Please enter a value';
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+                  hSpace(15),
+                  //! ^ IMAGE PREVIEW AREA
+                  Consumer<CameraProvider>(
+                    builder: (context, state, _) {
+                      if (_imageProvider.image == null) {
+                        return const SizedBox();
+                      } else {
+                        return ImagePreviewBox(image: _imageProvider.image);
+                      }
+                    },
+                  ),
+                  OpenImageButton(
+                    width: double.infinity,
+                    icon: CupertinoIcons.camera_fill,
+                    label: (Provider.of<CameraProvider>(context).image == null)
+                        ? 'Take Photo'
+                        : 'Take Again',
+                    onTap: () async {
+                      await _imageProvider.getImage();
+                    },
+                  ),
+                  hSpace(25),
+
+                  //? Consumer for boxes in accepted batch here
+                  Text(
+                    'Boxes added to this batch',
+                    style: TextStyles.mainHeadingStyle,
+                  ),
+                  //! Builder for added boxes of this batch
+                  Consumer<ItemAcceptTempProvider>(
+                    builder: (context, state, _) => ListView.builder(
+                      itemCount: state.acceptedBoxes.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return Text(state.acceptedBoxes[index].boxRef);
+                      },
+                    ),
+                  ),
+                  hSpace(200),
+                ],
+              ),
             ),
           ),
         ),
+      ),
+      bottomNavigationBar: BottomActionsArea(
+        children: [
+          SecondaryElevatedButton(
+            icon: Icons.add,
+            onPressed: () async {
+              if (_acceptFormKey.currentState!.validate()) {
+                if (_imageProvider.image != null) {
+                  final imageUploadRes =
+                      await ImageUploadService().uploadImage(_imageProvider.image!.path);
+                  if (imageUploadRes.imagePath != '') {
+                    await ItemAcceptTempService().postTempData(
+                      batchCode: widget.batchCode,
+                      boxRef: _dropDownProvider.box,
+                      colorRef: _dropDownProvider.color,
+                      textureRef: _dropDownProvider.texture,
+                      sizeRef: _dropDownProvider.size,
+                      materialQty: _quantityController.text,
+                      imagePath: imageUploadRes.imagePath,
+                    );
+
+                    // Showing success message
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      successSnackbar('Box Accepted Succesfully!'),
+                    );
+                    // Clearing all fields and dropdowns
+                    _quantityController.clear();
+                    _acceptFormKey.currentState!.reset();
+                    _imageProvider.clearImage();
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      errorSnackbar('Image Upload Failed'),
+                    );
+                  }
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    errorSnackbar('Error: Did not take a picture'),
+                  );
+                }
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  errorSnackbar('Invalid Submission'),
+                );
+              }
+            },
+            label: 'Add More',
+          ),
+          wSpace(10),
+          Expanded(
+            child: PrimaryElevatedButton(
+              onPressed: () {},
+              label: 'Submit',
+            ),
+          ),
+        ],
       ),
     );
   }

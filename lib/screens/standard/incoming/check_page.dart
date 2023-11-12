@@ -184,8 +184,6 @@ class _CheckPageState extends State<CheckPage> {
                     hSpace(10),
                     PrimaryElevatedButton(
                       onPressed: () async {
-                        print(temp);
-                        print('Form Valid');
                         if (_formKey.currentState!.validate()) {
                           final String hash = hashEmployeeIdsIntoString(temp);
                           if (hash == '') {

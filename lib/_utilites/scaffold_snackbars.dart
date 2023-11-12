@@ -7,6 +7,7 @@ const BorderRadius _borderRadius = BorderRadius.all(Radius.circular(10));
 
 SnackBar errorSnackbar(String message) {
   return SnackBar(
+    elevation: 0,
     behavior: SnackBarBehavior.floating,
     margin: _margin,
     showCloseIcon: true,
@@ -29,6 +30,7 @@ SnackBar errorSnackbar(String message) {
 
 SnackBar successSnackbar(String message) {
   return SnackBar(
+    elevation: 0,
     behavior: SnackBarBehavior.floating,
     margin: _margin,
     showCloseIcon: true,
@@ -37,7 +39,7 @@ SnackBar successSnackbar(String message) {
       borderRadius: _borderRadius,
     ),
     padding: _padding,
-    backgroundColor: Colors.teal.shade500,
+    backgroundColor: Colors.teal,
     content: Text(
       message,
       style: const TextStyle(
