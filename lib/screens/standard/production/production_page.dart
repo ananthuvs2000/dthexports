@@ -7,6 +7,7 @@ import 'package:dth/_common_widgets/spacer.dart';
 import 'package:dth/_common_widgets/sub_dashboard_option.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class ProductionPage extends StatefulWidget {
@@ -17,17 +18,10 @@ class ProductionPage extends StatefulWidget {
 }
 
 class _ProductionPageState extends State<ProductionPage> {
-
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: inversePrimaryColor,
-        foregroundColor: Colors.black,
-      ),
+      appBar: AppBar(),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
         child: Column(
@@ -42,25 +36,29 @@ class _ProductionPageState extends State<ProductionPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SubDashboardItem(
-                    icon: CupertinoIcons.sun_max_fill,
-                    onTap: () {
-                      Get.to(
-                        const DayStart(),
-                        transition: Transition.rightToLeft,
-                      );
-                    },
-                    label: 'Day Start'),
-                wSpace(15),
-                SubDashboardItem(
-                    icon: CupertinoIcons.moon_fill,
-                    onTap: () {
-                      Get.to(
-                        const DayEndScreen(),
-                        transition: Transition.rightToLeft,
-                      );
-                    },
-                    label: 'Day End'),
+                Expanded(
+                  child: SubDashboardItem(
+                      icon: CupertinoIcons.sun_max_fill,
+                      onTap: () {
+                        Get.to(
+                          const DayStart(),
+                          transition: Transition.rightToLeft,
+                        );
+                      },
+                      label: 'Day Start'),
+                ),
+                wSpace(10),
+                Expanded(
+                  child: SubDashboardItem(
+                      icon: CupertinoIcons.moon_fill,
+                      onTap: () {
+                        Get.to(
+                          const DayEndScreen(),
+                          transition: Transition.rightToLeft,
+                        );
+                      },
+                      label: 'Day End'),
+                ),
               ],
             ),
             hSpace(50),
