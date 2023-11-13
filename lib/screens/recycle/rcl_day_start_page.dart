@@ -38,13 +38,13 @@ class _RecycleDayStartPageState extends State<RecycleDayStartScreen> {
       _image = image;
     });
   }
+
   late CameraProvider _imageProvider;
-   @override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _imageProvider = Provider.of<CameraProvider>(context, listen: false);
-   
   }
 
   @override
@@ -53,7 +53,6 @@ class _RecycleDayStartPageState extends State<RecycleDayStartScreen> {
     super.dispose();
     Future.delayed(Duration.zero, () {
       _imageProvider.clearImage();
-    
     });
   }
 
@@ -69,10 +68,8 @@ class _RecycleDayStartPageState extends State<RecycleDayStartScreen> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(
-            
-          ),
-           padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
+          physics: BouncingScrollPhysics(),
+          padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
           child: Column(
             children: [
               hSpace(10),
@@ -85,26 +82,26 @@ class _RecycleDayStartPageState extends State<RecycleDayStartScreen> {
               // hSpace(10),
               // ImagePreviewBox(image: _image),
               Consumer<CameraProvider>(
-                    builder: (context, state, _) {
-                      if (_imageProvider.image == null) {
-                        return const SizedBox();
-                      } else {
-                        return ImagePreviewBox(image: _imageProvider.image);
-                      }
-                    },
-                  ),
-                  OpenImageButton(
-                    width: double.infinity,
-                    icon: CupertinoIcons.camera_fill,
-                    label: (Provider.of<CameraProvider>(context).image == null)
-                        ? 'Take Photo'
-                        : 'Take Again',
-                    onTap: () async {
-                      await _imageProvider.getImage();
-                    },
-                  ),
+                builder: (context, state, _) {
+                  if (_imageProvider.image == null) {
+                    return const SizedBox();
+                  } else {
+                    return ImagePreviewBox(image: _imageProvider.image);
+                  }
+                },
+              ),
+              OpenImageButton(
+                width: double.infinity,
+                icon: CupertinoIcons.camera_fill,
+                label: (Provider.of<CameraProvider>(context).image == null)
+                    ? 'Take Photo'
+                    : 'Take Again',
+                onTap: () async {
+                  await _imageProvider.getImage();
+                },
+              ),
               hSpace(10),
-        
+
               NumberEntryField(
                 label: 'Enter value as shown',
                 controller: _weightController,
@@ -115,7 +112,7 @@ class _RecycleDayStartPageState extends State<RecycleDayStartScreen> {
                   return null;
                 },
               ),
-        
+
               hSpace(15),
               DropdownMenuField(
                 validator: (value) {
@@ -130,22 +127,23 @@ class _RecycleDayStartPageState extends State<RecycleDayStartScreen> {
                 ],
                 onSelected: (selectedVal) {},
               ),
-        
+
               /// Details of Stored Info Of Selected Box
               hSpace(15),
               const BoxInfoDisplay(
-                boxNumber: '111',
-                boxType: '111',
+                title: 'Box Details',
+                boxColor: '111',
+                boxTexture: '111',
                 boxSize: '111',
                 boxWeight: '111',
               ),
               // Auto Calculated Field
-        
+
               hSpace(15),
               const DynamicFieldRow(label: 'Material QTY:', value: 'Calculated'),
               hSpace(15),
               const DynamicFieldRow(label: 'Process:', value: 'Displayed'),
-        
+
               //! Worker Team Area'
               hSpace(15),
               TeamManagerWidget(
@@ -155,28 +153,27 @@ class _RecycleDayStartPageState extends State<RecycleDayStartScreen> {
                   WorkerData(id: 10, name: 'Arjun'),
                 ],
               ),
-        
+
               hSpace(15),
-        
+
               // No. Of Days Counter
               const DynamicFieldRow(label: 'No of days', value: '1'),
-        
+
               // End of listview
               hSpace(15),
               // Main submit button goes here
-             
             ],
           ),
         ),
       ),
-      bottomNavigationBar:  BottomActionsArea(children: [
-                Expanded(
-                  child: PrimaryElevatedButton(
-                    label: 'Post',
-                    onPressed: () {},
-                  ),
-                )
-              ]),
+      bottomNavigationBar: BottomActionsArea(children: [
+        Expanded(
+          child: PrimaryElevatedButton(
+            label: 'Post',
+            onPressed: () {},
+          ),
+        )
+      ]),
     );
   }
 }
