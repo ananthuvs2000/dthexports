@@ -1,5 +1,4 @@
 import 'package:dth/_providers/image_provider.dart';
-import 'package:dth/_providers/item_accept_temp_provider.dart';
 import 'package:dth/_utilites/scaffold_snackbars.dart';
 import 'package:dth/_common_widgets/image_preview_container.dart';
 import 'package:dth/theme/layout.dart';
@@ -13,7 +12,7 @@ import 'package:dth/_common_widgets/primary_elevated_button.dart';
 import 'package:dth/_common_widgets/spacer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class RecycleAddScreen extends StatefulWidget {
@@ -51,6 +50,7 @@ class _RecycleAddScreenState extends State<RecycleAddScreen> {
       appBar: AppBar(
         elevation: 0,
         scrolledUnderElevation: 0,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         title: const Text('Recycle Add'),
         bottom: appBarUnderline,
       ),

@@ -13,6 +13,7 @@ import 'package:dth/_common_widgets/spacer.dart';
 import 'package:dth/_common_widgets/team_manager_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
@@ -63,6 +64,7 @@ class _RecycleDayEndPageState extends State<RecycleDayEndScreen> {
         scrolledUnderElevation: 0,
         elevation: 0,
         title: const Text('Recycle Day End'),
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         bottom: appBarUnderline,
       ),
       body: SafeArea(

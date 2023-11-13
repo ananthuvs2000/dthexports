@@ -1,3 +1,4 @@
+import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,14 @@ class BottomActionsArea extends StatelessWidget {
         horizontal: PageLayout.pagePaddingX,
         vertical: 7,
       ),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
+        border: Border(top: BorderSide(color: primaryColor.withOpacity(0.5))),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.25),
+            blurRadius: 10,
+          ),
+        ],
         color: Colors.white,
       ),
       width: double.infinity,

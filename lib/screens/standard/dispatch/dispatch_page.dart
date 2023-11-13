@@ -1,16 +1,14 @@
 import 'package:dth/screens/standard/widgets/despachtable.dart';
-
 import 'package:dth/theme/layout.dart';
-import 'package:dth/_common_widgets/appbar_underline.dart';
 import 'package:dth/_common_widgets/bottom_actions_area.dart';
 import 'package:dth/_common_widgets/drop_down_menu_field.dart';
 import 'package:dth/_common_widgets/dynamic_field_row.dart';
-
 import 'package:dth/_common_widgets/ordered_items_display.dart';
 import 'package:dth/_common_widgets/primary_elevated_button.dart';
 import 'package:dth/_common_widgets/spacer.dart';
 import 'package:dth/_common_widgets/team_manager_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class DespachScreen extends StatefulWidget {
   const DespachScreen({super.key});
@@ -26,11 +24,11 @@ class _DespachScreenState extends State<DespachScreen> {
       appBar: AppBar(
         elevation: 0,
         scrolledUnderElevation: 0,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         title: const Text('Dispatch'),
-        bottom: appBarUnderline,
       ),
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
           child: Column(
@@ -66,21 +64,20 @@ class _DespachScreenState extends State<DespachScreen> {
               ),
               hSpace(10),
               const DespachTableWidget(),
-             
             ],
           ),
         ),
       ),
-      bottomNavigationBar:  BottomActionsArea(
-                children: [
-                  Expanded(
-                    child: PrimaryElevatedButton(
-                      onPressed: () {},
-                      label: 'Submit',
-                    ),
-                  ),
-                ],
-              ),
+      bottomNavigationBar: BottomActionsArea(
+        children: [
+          Expanded(
+            child: PrimaryElevatedButton(
+              onPressed: () {},
+              label: 'Submit',
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

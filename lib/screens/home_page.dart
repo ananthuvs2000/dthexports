@@ -4,7 +4,6 @@ import 'package:dth/screens/reports/reports_page.dart';
 import 'package:dth/screens/standard/standard_page.dart';
 import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
-import 'package:dth/theme/text_sizing.dart';
 import 'package:dth/_common_widgets/dashboard_option_container.dart';
 import 'package:dth/_common_widgets/spacer.dart';
 import 'package:flutter/cupertino.dart';
@@ -44,7 +43,7 @@ class _HomePageState extends State<HomePage> {
                 crossAxisCount: 2,
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 10,
-                childAspectRatio: 2.0,
+                childAspectRatio: 1.5,
                 children: [
                   DashboardOptionContainer(
                     gradient: primaryButtonGradient,

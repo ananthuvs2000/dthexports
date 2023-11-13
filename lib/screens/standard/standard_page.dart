@@ -1,14 +1,10 @@
 import 'package:dth/screens/standard/dispatch/dispatch_page.dart';
-import 'package:dth/screens/standard/incoming/accept_page.dart';
-// import 'package:dth/screens/standard/incoming/acceptpage.dart';
-import 'package:dth/screens/standard/incoming/batch_selection_page.dart';
 import 'package:dth/screens/standard/incoming/check_page.dart';
 import 'package:dth/screens/standard/outgoing/outgoing_page.dart';
+import 'package:dth/screens/standard/production/accepted_batch_selection.dart';
 import 'package:dth/screens/standard/production/production_page.dart';
-import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/theme/text_sizing.dart';
-import 'package:dth/_common_widgets/main_heading.dart';
 import 'package:dth/_common_widgets/spacer.dart';
 import 'package:dth/_common_widgets/sub_dashboard_option.dart';
 import 'package:flutter/cupertino.dart';
@@ -45,42 +41,23 @@ class _StandardScreenState extends State<StandardScreen> {
               crossAxisCount: 2,
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
-              childAspectRatio: 1.5,
+              childAspectRatio: 1.4,
               children: [
                 SubDashboardItem(
                   icon: CupertinoIcons.down_arrow,
-                  onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        actions: [
-                          Center(
-                            child: SubDashboardItem(
-                              icon: CupertinoIcons.check_mark,
-                              onTap: () {
-                                Get.off(
-                                  const BatchSelectionPage(),
-                                  transition: Transition.upToDown,
-                                );
-                              },
-                              label: 'ACCEPT',
-                            ),
-                          ),
-                          hSpace(10),
-                          Center(
-                            child: SubDashboardItem(
-                              icon: CupertinoIcons.search_circle_fill,
-                              onTap: () {
-                                Get.off(const CheckPage(), transition: Transition.downToUp);
-                              },
-                              label: 'CHECK',
-                            ),
-                          ),
-                        ],
-                        title: const Center(child: MainHeading(text: 'Incoming')),
+                  onTap: () => showModalBottomSheet(
+                    constraints: BoxConstraints.tight(const Size.fromHeight(160)),
+                    context: context,
+                    builder: (context) => BottomSheet(
+                      onClosing: () => {},
+                      elevation: 0,
+                      backgroundColor: Colors.white,
+                      builder: (context) => incomingModalSheet(
+                        destination1: const CheckPage(),
+                        destination2: const AccepedBatchSelectionPage(),
                       ),
-                    );
-                  },
+                    ),
+                  ),
                   label: 'Incoming',
                 ),
                 SubDashboardItem(
@@ -113,3 +90,33 @@ class _StandardScreenState extends State<StandardScreen> {
     );
   }
 }
+
+incomingModalSheet({
+  required Widget destination1,
+  required Widget destination2,
+}) =>
+    Padding(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          hSpace(5),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                  child: SubDashboardItem(
+                      onTap: () => Get.to(() => destination1, transition: Transition.downToUp),
+                      label: 'Checking',
+                      icon: Icons.search)),
+              wSpace(10),
+              Expanded(
+                  child: SubDashboardItem(
+                      onTap: () => Get.to(() => destination2, transition: Transition.downToUp),
+                      label: 'Accepting',
+                      icon: Icons.check)),
+            ],
+          ),
+        ],
+      ),
+    );

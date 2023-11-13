@@ -1,5 +1,6 @@
 import 'package:dth/_common_widgets/image_preview_container.dart';
 import 'package:dth/_providers/image_provider.dart';
+import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/_common_widgets/appbar_underline.dart';
 import 'package:dth/_common_widgets/bottom_actions_area.dart';
@@ -13,6 +14,7 @@ import 'package:dth/_common_widgets/spacer.dart';
 import 'package:dth/_common_widgets/team_manager_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
@@ -62,7 +64,8 @@ class _RecycleDayStartPageState extends State<RecycleDayStartScreen> {
       appBar: AppBar(
         scrolledUnderElevation: 0,
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: primaryColor,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         bottom: appBarUnderline,
         title: const Text('Recycle Day Start'),
       ),

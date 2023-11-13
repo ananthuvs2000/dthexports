@@ -1,4 +1,5 @@
 import 'package:dth/theme/colors.dart';
+import 'package:dth/theme/layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -49,24 +50,22 @@ class _DthTextFieldState extends State<DthTextField> {
           borderSide: BorderSide(
             color: formFieldEnabledBorderColor,
           ),
-          borderRadius: const BorderRadius.all(Radius.circular(formFieldBorderRadius)),
+          borderRadius: const BorderRadius.all(Radius.circular(globalBorderRadius)),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: primaryColor),
-          borderRadius: const BorderRadius.all(Radius.circular(formFieldBorderRadius)),
+          borderRadius: const BorderRadius.all(Radius.circular(globalBorderRadius)),
         ),
         focusedErrorBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: formFieldErrorColor),
-          borderRadius: BorderRadius.all(Radius.circular(formFieldBorderRadius)),
+          borderRadius: BorderRadius.all(Radius.circular(globalBorderRadius)),
         ),
         errorBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: formFieldErrorColor),
-          borderRadius: BorderRadius.all(Radius.circular(formFieldBorderRadius)),
+          borderRadius: BorderRadius.all(Radius.circular(globalBorderRadius)),
         ),
         contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       ),
     );
   }
 }
-
-const double formFieldBorderRadius = 10;

@@ -26,7 +26,6 @@ class DashboardOptionContainer extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(globalBorderRadius),
       child: Ink(
-        width: 250.w,
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
           boxShadow: [
@@ -38,15 +37,16 @@ class DashboardOptionContainer extends StatelessWidget {
           gradient: gradient,
           borderRadius: BorderRadius.circular(globalBorderRadius),
         ),
-        child: Row(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               icon,
               size: 30,
               color: Colors.white,
             ),
-            wSpace(15),
+            wSpace(20),
             Text(
               text,
               style: const TextStyle(

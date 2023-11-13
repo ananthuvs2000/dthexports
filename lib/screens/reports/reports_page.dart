@@ -6,6 +6,7 @@ import 'package:dth/_common_widgets/drop_down_menu_field.dart';
 import 'package:dth/_common_widgets/primary_elevated_button.dart';
 import 'package:dth/_common_widgets/spacer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class ReportsPage extends StatefulWidget {
   const ReportsPage({super.key});
@@ -19,6 +20,9 @@ class _ReportsPageState extends State<ReportsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         title: const Text('Report'),
         bottom: appBarUnderline,
       ),
@@ -138,12 +142,11 @@ class _ReportsPageState extends State<ReportsPage> {
                 ),
               ),
               //
-             
             ],
           ),
         ),
       ),
-     bottomNavigationBar: BottomActionsArea(children: [
+      bottomNavigationBar: BottomActionsArea(children: [
         Expanded(
           child: PrimaryElevatedButton(
             label: 'Generate',

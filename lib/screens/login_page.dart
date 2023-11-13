@@ -4,7 +4,6 @@ import 'package:dth/theme/text_sizing.dart';
 import 'package:dth/_common_widgets/primary_elevated_button.dart';
 import 'package:dth/_common_widgets/spacer.dart';
 import 'package:dth/_common_widgets/textformfield.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -20,85 +19,102 @@ class LoginPg extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX + 12.w),
-          child: Form(
-            key: _formKey,
-            child: SingleChildScrollView(
-              child: Column(
-                // shrinkWrap: true,
-                children: [
-                  hSpace(180),
-                  Image.asset(
-                    'assets/images/appbar.jpg',
-                    fit: BoxFit.contain,
-                    width: 150.h,
-                  ),
-                  hSpace(50),
-                  CustomTextFormField(
-                    keyboardType: TextInputType.emailAddress,
-                    controller: _emailController,
-                    validator: (val) {
-                      if (val == '') {
-                        return 'Invalid Email';
-                      }
-                      return null;
-                    },
-                    icon: const Icon(
-                      Icons.mail,
-                      size: 22,
+      resizeToAvoidBottomInset: false,
+      body: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              hSpace(200.h),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.15),
+                      blurRadius: 30,
                     ),
-                    text: 'Email Address',
+                  ],
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(
+                    globalBorderRadius + 10,
                   ),
-                  hSpace(20),
-                  CustomTextFormField(
-                    isPassword: true,
-                    validator: (val) {
-                      if (val == '') {
-                        return 'Please enter a password';
-                      }
-                      return null;
-                    },
-                    controller: _passwordController,
-                    icon: const Icon(
-                      Icons.lock,
-                      size: 22,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    hSpace(50),
+                    Image.asset(
+                      'assets/images/appbar.jpg',
+                      fit: BoxFit.contain,
+                      width: 125.h,
                     ),
-                    text: 'Password',
-                  ),
-                  hSpace(20),
-                  SizedBox(
-                    width: 150.w,
-                    child: PrimaryElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          _emailController.clear();
-                          _passwordController.clear();
-                          Get.to(
-                            const HomePage(),
-                            transition: Transition.downToUp,
-                            curve: Curves.easeInOut,
-                          );
-                        } else {
-                          print('Form Invalid');
+                    hSpace(20),
+                    CustomTextFormField(
+                      keyboardType: TextInputType.emailAddress,
+                      controller: _emailController,
+                      validator: (val) {
+                        if (val == '') {
+                          return 'Invalid Email';
                         }
+                        return null;
                       },
-                      label: 'Login',
+                      icon: const Icon(
+                        Icons.mail,
+                        size: 22,
+                      ),
+                      text: 'Email Address',
                     ),
-                  ),
-                  hSpace(15),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Forgot Password",
-                      style: TextStyles.textButtonLabelStyle,
+                    hSpace(15),
+                    CustomTextFormField(
+                      keyboardType: TextInputType.text,
+                      isPassword: true,
+                      validator: (val) {
+                        if (val == '') {
+                          return 'Please enter a password';
+                        }
+                        return null;
+                      },
+                      controller: _passwordController,
+                      icon: const Icon(
+                        Icons.lock,
+                        size: 22,
+                      ),
+                      text: 'Password',
                     ),
-                  ),
-                ],
-              ),
-            ),
+                    hSpace(15),
+                    SizedBox(
+                      width: 150.w,
+                      child: PrimaryElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            _emailController.clear();
+                            _passwordController.clear();
+                            Get.to(
+                              const HomePage(),
+                              transition: Transition.downToUp,
+                              curve: Curves.easeInOut,
+                            );
+                          } else {
+                            print('Form Invalid');
+                          }
+                        },
+                        label: 'Login',
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        "Forgot Password",
+                        style: TextStyles.textButtonLabelStyle,
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
           ),
         ),
       ),

@@ -41,11 +41,11 @@ class SubDashboardItem extends StatelessWidget {
                 size: 30,
                 color: Colors.white,
               ),
-              hSpace(5),
+              hSpace(10),
               Text(
                 label,
                 style: const TextStyle(
-                  fontSize: 15,
+                  fontSize: 16,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 0,

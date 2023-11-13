@@ -5,10 +5,10 @@ import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/_common_widgets/appbar_underline.dart';
 import 'package:dth/_common_widgets/drop_down_menu_field.dart';
-import 'package:dth/_common_widgets/dynamic_field_row.dart';
 import 'package:dth/_common_widgets/primary_elevated_button.dart';
 import 'package:dth/_common_widgets/spacer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class OutGoingScreen extends StatefulWidget {
   const OutGoingScreen({super.key});
@@ -36,8 +36,9 @@ class _OutGoingScreenState extends State<OutGoingScreen> {
       selectedOption = value;
     });
   }
-   bool _secondCond=false;
-   bool _sndWftng=false;
+
+  bool _secondCond = false;
+  bool _sndWftng = false;
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +46,10 @@ class _OutGoingScreenState extends State<OutGoingScreen> {
       appBar: AppBar(
         elevation: 0,
         scrolledUnderElevation: 0,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         backgroundColor: primaryColor,
         foregroundColor: inversePrimaryColor,
         title: const Text('Outgoing'),
-        bottom: appBarUnderline,
       ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
@@ -66,10 +67,8 @@ class _OutGoingScreenState extends State<OutGoingScreen> {
                   fieldLabel: 'Customer Name',
                   dropDownLabel: 'Select Customer',
                   dropdownEntries: const [
-                    DropdownMenuItem(
-                        value: 'Customer 1', child: Text('Customer 1')),
-                    DropdownMenuItem(
-                        value: 'Customer 2', child: Text('Customer 2')),
+                    DropdownMenuItem(value: 'Customer 1', child: Text('Customer 1')),
+                    DropdownMenuItem(value: 'Customer 2', child: Text('Customer 2')),
                   ],
                   onSelected: (selectedVal) {
                     print(selectedVal.toString());
@@ -111,8 +110,7 @@ class _OutGoingScreenState extends State<OutGoingScreen> {
                   dropDownLabel: 'Select Box No',
                   dropdownEntries: const [
                     DropdownMenuItem(value: '15', child: Text('Customer 15')),
-                    DropdownMenuItem(
-                        value: 'Customer 25', child: Text('Customer 25')),
+                    DropdownMenuItem(value: 'Customer 25', child: Text('Customer 25')),
                   ],
                   onSelected: (selectedVal) {
                     print(selectedVal.toString());
@@ -131,16 +129,20 @@ class _OutGoingScreenState extends State<OutGoingScreen> {
                   },
                 ),
                 hSpace(10),
-                NumberEntryField(label: 'Req Quantity', controller: TextEditingController(), validator: (value) {
-                  return null;
-                },),
+                NumberEntryField(
+                  label: 'Req Quantity',
+                  controller: TextEditingController(),
+                  validator: (value) {
+                    return null;
+                  },
+                ),
                 hSpace(20),
                 CustomSwitchTile(
                   value: _secondCond,
                   title: '2nd Contitioning',
                   onChanged: (value) {
                     setState(() {
-                      _secondCond=value;
+                      _secondCond = value;
                     });
                   },
                 ),
@@ -149,13 +151,13 @@ class _OutGoingScreenState extends State<OutGoingScreen> {
                 // const DynamicFieldRow(label: 'Send For Wefting', value: 'Yes or No'),
 
                 CustomSwitchTile(
-                  onChanged: (value) {
-                    setState(() {
-                      _sndWftng=value;
-                    });
-                  },
-                  value: _sndWftng,
-                  title: 'Send for Wefting'),
+                    onChanged: (value) {
+                      setState(() {
+                        _sndWftng = value;
+                      });
+                    },
+                    value: _sndWftng,
+                    title: 'Send for Wefting'),
                 hSpace(30),
               ],
             ),

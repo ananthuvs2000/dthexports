@@ -1,3 +1,4 @@
+import 'package:dth/theme/layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -16,7 +17,7 @@ class _WeightEntryFieldState extends State<WeightEntryField> {
       height: 30.h,
       width: 60.w,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(globalBorderRadius),
         border: Border.all(color: Colors.transparent),
       ),
       child: const Center(
