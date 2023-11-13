@@ -1,4 +1,5 @@
 import 'package:dth/_common_widgets/image_preview_container.dart';
+import 'package:dth/_providers/dropdown_providers/accept_page_form_provider.dart';
 import 'package:dth/_providers/image_provider.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/_common_widgets/appbar_underline.dart';
@@ -11,6 +12,7 @@ import 'package:dth/_common_widgets/open_camera_button.dart';
 import 'package:dth/_common_widgets/primary_elevated_button.dart';
 import 'package:dth/_common_widgets/spacer.dart';
 import 'package:dth/_common_widgets/team_manager_list.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,19 +24,25 @@ class DayStart extends StatefulWidget {
 }
 
 class _DayStartState extends State<DayStart> {
-  late CameraProvider _imageProvider;
+   late CameraProvider _imageProvider;
+  late AcceptPageDropDownProvider _dropDownProvider;
+  
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _imageProvider = Provider.of<CameraProvider>(context, listen: false);
+   
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    Future.delayed(Duration.zero, () => _imageProvider.clearImage());
+    Future.delayed(Duration.zero, () {
+      _imageProvider.clearImage();
+    
+    });
   }
 
   @override
@@ -109,32 +117,54 @@ class _DayStartState extends State<DayStart> {
               ),
                 
               hSpace(15),
-              Consumer<CameraProvider>(
-                builder: (context, state, child) {
-                  if (_imageProvider.image == null) {
-                    return const SizedBox();
-                  } else {
-                    return ImagePreviewBox(image: _imageProvider.image);
-                  }
-                },
-              ),
+              // Consumer<CameraProvider>(
+              //   builder: (context, state, child) {
+              //     if (_imageProvider.image == null) {
+              //       return const SizedBox();
+              //     } else {
+              //       return ImagePreviewBox(image: _imageProvider.image);
+              //     }
+              //   },
+              // ),
               //! ^ IMAGE PREVIEW AREA
-              OpenImageButton(
-                icon: Icons.camera,
-                label: 'Take Photo',
-                onTap: () async {
-                  await _imageProvider.getImage();
-                },
-              ),
-              hSpace(15),
-              // Field to Enter Value
-              NumberEntryField(
-                label: 'Enter value shown',
-                controller: TextEditingController(),
-                validator: (value) {
-                  return null;
-                },
-              ), // End of listview
+              // OpenImageButton(
+              //   icon: Icons.camera,
+              //   label: 'Take Photo',
+              //   onTap: () async {
+              //     await _imageProvider.getImage();
+              //   },
+              // ),
+              // hSpace(15),
+              // // Field to Enter Value
+              // NumberEntryField(
+              //   label: 'Enter value shown',
+              //   controller: TextEditingController(),
+              //   validator: (value) {
+              //     return null;
+              //   },
+              // ), 
+               Consumer<CameraProvider>(
+                    builder: (context, state, _) {
+                      if (_imageProvider.image == null) {
+                        return const SizedBox();
+                      } else {
+                        return ImagePreviewBox(image: _imageProvider.image);
+                      }
+                    },
+                  ),
+                  OpenImageButton(
+                    width: double.infinity,
+                    icon: CupertinoIcons.camera_fill,
+                    label: (Provider.of<CameraProvider>(context).image == null)
+                        ? 'Take Photo'
+                        : 'Take Again',
+                    onTap: () async {
+                      await _imageProvider.getImage();
+                    },
+                  ),
+                hSpace(10),
+             
+              // End of listview
           
             ],
           ),

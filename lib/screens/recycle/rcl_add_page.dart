@@ -1,3 +1,4 @@
+import 'package:dth/_providers/image_provider.dart';
 import 'package:dth/_utilites/scaffold_snackbars.dart';
 import 'package:dth/_common_widgets/image_preview_container.dart';
 import 'package:dth/theme/layout.dart';
@@ -9,8 +10,10 @@ import 'package:dth/_common_widgets/number_entry_field.dart';
 import 'package:dth/_common_widgets/open_camera_button.dart';
 import 'package:dth/_common_widgets/primary_elevated_button.dart';
 import 'package:dth/_common_widgets/spacer.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class RecycleAddScreen extends StatefulWidget {
   const RecycleAddScreen({super.key});
@@ -36,6 +39,24 @@ class _RecycleAddScreenState extends State<RecycleAddScreen> {
       _image = image;
     });
   }
+  late CameraProvider _imageProvider;
+   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _imageProvider = Provider.of<CameraProvider>(context, listen: false);
+   
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    Future.delayed(Duration.zero, () {
+      _imageProvider.clearImage();
+    
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,13 +79,32 @@ class _RecycleAddScreenState extends State<RecycleAddScreen> {
               hSpace(15),
       
               // Photo And Weight Entry
-              OpenImageButton(
-                label: 'Take Photo',
-                icon: Icons.camera_alt,
-                onTap: () => getImage(),
-              ),
-              hSpace(10),
-              ImagePreviewBox(image: _image),
+              // OpenImageButton(
+              //   label: 'Take Photo',
+              //   icon: Icons.camera_alt,
+              //   onTap: () => getImage(),
+              // ),
+              // hSpace(10),
+              // ImagePreviewBox(image: _image),
+               Consumer<CameraProvider>(
+                    builder: (context, state, _) {
+                      if (_imageProvider.image == null) {
+                        return const SizedBox();
+                      } else {
+                        return ImagePreviewBox(image: _imageProvider.image);
+                      }
+                    },
+                  ),
+                  OpenImageButton(
+                    width: double.infinity,
+                    icon: CupertinoIcons.camera_fill,
+                    label: (Provider.of<CameraProvider>(context).image == null)
+                        ? 'Take Photo'
+                        : 'Take Again',
+                    onTap: () async {
+                      await _imageProvider.getImage();
+                    },
+                  ),
               hSpace(10),
       
               NumberEntryField(
