@@ -1,6 +1,7 @@
 import 'package:dth/screens/recycle/rcl_day_end_page.dart';
 import 'package:dth/screens/recycle/rcl_day_start_page.dart';
 import 'package:dth/screens/recycle/rcl_add_page.dart';
+import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/theme/text_sizing.dart';
 import 'package:dth/_common_widgets/spacer.dart';
@@ -20,7 +21,10 @@ class _ProductionPageState extends State<RecyclePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: inversePrimaryColor,
+        foregroundColor: Colors.black,
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: PageLayout.pagePaddingX + 20,
