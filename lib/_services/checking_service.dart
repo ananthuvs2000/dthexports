@@ -31,7 +31,7 @@ class CheckingDataService extends ChangeNotifier {
       return true;
     } else {
       print(response.body);
-      throw Exception('Failed to post checking record');
+      throw Exception('${response.statusCode} Failed to post checking record');
     }
   }
 }

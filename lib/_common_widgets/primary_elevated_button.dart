@@ -1,4 +1,5 @@
 import 'package:dth/theme/colors.dart';
+import 'package:dth/theme/layout.dart';
 import 'package:flutter/material.dart';
 
 class PrimaryElevatedButton extends StatelessWidget {
@@ -22,7 +23,7 @@ class PrimaryElevatedButton extends StatelessWidget {
             width: 1,
             color: primaryColor,
           ),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(globalBorderRadius),
         ),
         padding: const EdgeInsets.symmetric(
           horizontal: 20,

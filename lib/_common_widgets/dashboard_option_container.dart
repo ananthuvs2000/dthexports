@@ -1,3 +1,4 @@
+import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/_common_widgets/spacer.dart';
 import 'package:flutter/material.dart';
@@ -8,13 +9,15 @@ class DashboardOptionContainer extends StatelessWidget {
     required this.icon,
     required this.text,
     required this.onTap,
-    required this.color,
+    required this.shadowColor,
     super.key,
+    required this.gradient,
   });
 
   final IconData icon;
   final String text;
-  final Color color;
+  final Color shadowColor;
+  final LinearGradient gradient;
   final void Function() onTap;
 
   @override
@@ -26,7 +29,13 @@ class DashboardOptionContainer extends StatelessWidget {
         width: 250.w,
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
-          color: color,
+          boxShadow: [
+            BoxShadow(
+              color: shadowColor.withOpacity(0.75),
+              blurRadius: 7,
+            ),
+          ],
+          gradient: gradient,
           borderRadius: BorderRadius.circular(globalBorderRadius),
         ),
         child: Row(
@@ -34,7 +43,7 @@ class DashboardOptionContainer extends StatelessWidget {
           children: [
             Icon(
               icon,
-              size: 25,
+              size: 30,
               color: Colors.white,
             ),
             wSpace(15),

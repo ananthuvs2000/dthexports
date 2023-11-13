@@ -29,4 +29,11 @@ class CheckingProvider with ChangeNotifier {
     if (_postResult) notifyListeners();
     return _postResult;
   }
+
+  void clearEmployees() {
+    _selectedEmployees.clear();
+    notifyListeners();
+  }
+
+  Set<Employee> get addedEmpoyees => _selectedEmployees;
 }

@@ -7,6 +7,7 @@ import 'package:dth/theme/layout.dart';
 import 'package:dth/theme/text_sizing.dart';
 import 'package:dth/_common_widgets/dashboard_option_container.dart';
 import 'package:dth/_common_widgets/spacer.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -37,21 +38,18 @@ class _HomePageState extends State<HomePage> {
                   fit: BoxFit.fitHeight,
                 ),
               ),
-              hSpace(25),
-              Text(
-                'Dashboard',
-                style: TextStyles.veryLargeHeading,
-              ),
+              hSpace(50),
               GridView.count(
                 shrinkWrap: true,
                 crossAxisCount: 2,
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 10,
-                childAspectRatio: 2.5,
+                childAspectRatio: 2.0,
                 children: [
                   DashboardOptionContainer(
-                    color: primaryColor,
-                    icon: Icons.factory_outlined,
+                    gradient: primaryButtonGradient,
+                    shadowColor: secondaryColor,
+                    icon: CupertinoIcons.building_2_fill,
                     text: 'Standard',
                     onTap: () {
                       Get.to(
@@ -61,7 +59,8 @@ class _HomePageState extends State<HomePage> {
                     },
                   ),
                   DashboardOptionContainer(
-                    color: Colors.teal,
+                    gradient: dashboardOptionGrad2,
+                    shadowColor: Colors.green,
                     icon: Icons.recycling_outlined,
                     text: 'Recycle',
                     onTap: () {
@@ -72,8 +71,9 @@ class _HomePageState extends State<HomePage> {
                     },
                   ),
                   DashboardOptionContainer(
-                    color: Colors.pink,
-                    icon: Icons.list_alt_sharp,
+                    gradient: dashboardOptionGrad3,
+                    shadowColor: Colors.deepPurple,
+                    icon: CupertinoIcons.doc_chart_fill,
                     text: 'Reports',
                     onTap: () {
                       Get.to(
@@ -83,8 +83,9 @@ class _HomePageState extends State<HomePage> {
                     },
                   ),
                   DashboardOptionContainer(
-                    color: Colors.grey.shade800,
-                    icon: Icons.logout,
+                    gradient: dashboardOptionGrad1,
+                    shadowColor: Colors.deepOrange,
+                    icon: CupertinoIcons.arrow_right_to_line_alt,
                     text: 'Log Out',
                     onTap: () {
                       Get.offAll(LoginPg());
@@ -92,7 +93,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-              hSpace(100),
+              hSpace(150),
             ],
           ),
         ),

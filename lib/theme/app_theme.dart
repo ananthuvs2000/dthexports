@@ -6,12 +6,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 const mainFont = 'Instrument';
 
 AppBarTheme dthAppbarTheme = AppBarTheme(
+  backgroundColor: primaryColor,
+  foregroundColor: Colors.white,
   toolbarHeight: 50.sp,
   systemOverlayStyle: SystemUiOverlayStyle.dark,
   centerTitle: true,
   titleTextStyle: const TextStyle(
     fontWeight: FontWeight.bold,
-    color: Colors.black,
+    color: Colors.white,
     fontFamily: mainFont,
     fontSize: 20,
   ),

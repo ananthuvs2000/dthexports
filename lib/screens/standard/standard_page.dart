@@ -5,11 +5,13 @@ import 'package:dth/screens/standard/incoming/batch_selection_page.dart';
 import 'package:dth/screens/standard/incoming/check_page.dart';
 import 'package:dth/screens/standard/outgoing/outgoing_page.dart';
 import 'package:dth/screens/standard/production/production_page.dart';
+import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/theme/text_sizing.dart';
 import 'package:dth/_common_widgets/main_heading.dart';
 import 'package:dth/_common_widgets/spacer.dart';
 import 'package:dth/_common_widgets/sub_dashboard_option.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,7 +26,10 @@ class _StandardScreenState extends State<StandardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.black,
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
         child: Column(
@@ -40,9 +45,10 @@ class _StandardScreenState extends State<StandardScreen> {
               crossAxisCount: 2,
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
-              childAspectRatio: 2,
+              childAspectRatio: 1.5,
               children: [
                 SubDashboardItem(
+                  icon: CupertinoIcons.down_arrow,
                   onTap: () {
                     showDialog(
                       context: context,
@@ -50,6 +56,7 @@ class _StandardScreenState extends State<StandardScreen> {
                         actions: [
                           Center(
                             child: SubDashboardItem(
+                              icon: CupertinoIcons.check_mark,
                               onTap: () {
                                 Get.off(
                                   const BatchSelectionPage(),
@@ -62,10 +69,12 @@ class _StandardScreenState extends State<StandardScreen> {
                           hSpace(10),
                           Center(
                             child: SubDashboardItem(
-                                onTap: () {
-                                  Get.off(const CheckPage(), transition: Transition.downToUp);
-                                },
-                                label: 'CHECK'),
+                              icon: CupertinoIcons.search_circle_fill,
+                              onTap: () {
+                                Get.off(const CheckPage(), transition: Transition.downToUp);
+                              },
+                              label: 'CHECK',
+                            ),
                           ),
                         ],
                         title: const Center(child: MainHeading(text: 'Incoming')),
@@ -75,18 +84,21 @@ class _StandardScreenState extends State<StandardScreen> {
                   label: 'Incoming',
                 ),
                 SubDashboardItem(
+                  icon: CupertinoIcons.hammer_fill,
                   onTap: () {
                     Get.to(const ProductionPage(), transition: Transition.rightToLeft);
                   },
                   label: 'Production',
                 ),
                 SubDashboardItem(
+                  icon: Icons.fire_truck,
                   onTap: () {
                     Get.to(const DespachScreen(), transition: Transition.rightToLeft);
                   },
                   label: 'Dispatch',
                 ),
                 SubDashboardItem(
+                  icon: CupertinoIcons.up_arrow,
                   onTap: () {
                     Get.to(const OutGoingScreen(), transition: Transition.rightToLeft);
                   },

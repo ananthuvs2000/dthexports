@@ -5,6 +5,7 @@ import 'package:dth/theme/layout.dart';
 import 'package:dth/theme/text_sizing.dart';
 import 'package:dth/_common_widgets/spacer.dart';
 import 'package:dth/_common_widgets/sub_dashboard_option.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -35,6 +36,7 @@ class _ProductionPageState extends State<RecyclePage> {
               ),
               hSpace(10),
               SubDashboardItem(
+                  icon: CupertinoIcons.add,
                   onTap: () {
                     Get.to(
                       const RecycleAddScreen(),
@@ -44,6 +46,7 @@ class _ProductionPageState extends State<RecyclePage> {
                   label: 'RCL-ADD'),
               hSpace(15),
               SubDashboardItem(
+                  icon: Icons.recycling,
                   onTap: () {
                     Get.to(
                       const RecycleDayStartScreen(),
@@ -53,6 +56,7 @@ class _ProductionPageState extends State<RecyclePage> {
                   label: 'RCL-DAY START'),
               hSpace(15),
               SubDashboardItem(
+                icon: Icons.recycling,
                 onTap: () {
                   Get.to(
                     const RecycleDayEndScreen(),

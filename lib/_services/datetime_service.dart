@@ -10,7 +10,6 @@ class DateTimeService extends ChangeNotifier {
 
   Future fetchDateTime() async {
     final response = await http.get(Uri.parse(_dateTimeAPI));
-    print(response.body);
     if (response.statusCode == 200) {
       final Map<String, dynamic> jsonData = json.decode(response.body);
       // Mapping to a Dart Model

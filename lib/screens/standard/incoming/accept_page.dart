@@ -281,9 +281,13 @@ class _AcceptPageState extends State<AcceptPage> {
             onPressed: () async {
               if (_acceptFormKey.currentState!.validate()) {
                 if (_imageProvider.image != null) {
+                  print('image taken');
+
                   final imageUploadRes =
                       await ImageUploadService().uploadImage(_imageProvider.image!.path);
                   if (imageUploadRes.imagePath != '') {
+                    print('image uploaded correctly');
+
                     await ItemAcceptTempService().postTempData(
                       batchCode: widget.batchCode,
                       boxRef: _dropDownProvider.box,

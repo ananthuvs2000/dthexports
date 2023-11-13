@@ -4,6 +4,7 @@ import 'package:dth/theme/layout.dart';
 import 'package:dth/theme/text_sizing.dart';
 import 'package:dth/_common_widgets/spacer.dart';
 import 'package:dth/_common_widgets/sub_dashboard_option.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,6 +16,10 @@ class ProductionPage extends StatefulWidget {
 }
 
 class _ProductionPageState extends State<ProductionPage> {
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,23 +34,31 @@ class _ProductionPageState extends State<ProductionPage> {
               'Production',
               style: TextStyles.veryLargeHeading,
             ),
-            SubDashboardItem(
-                onTap: () {
-                  Get.to(
-                    const DayStart(),
-                    transition: Transition.rightToLeft,
-                  );
-                },
-                label: 'Day Start'),
-            hSpace(15),
-            SubDashboardItem(
-                onTap: () {
-                  Get.to(
-                    const DayEndScreen(),
-                    transition: Transition.rightToLeft,
-                  );
-                },
-                label: 'Day End'),
+            hSpace(5),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SubDashboardItem(
+                    icon: CupertinoIcons.sun_max_fill,
+                    onTap: () {
+                      Get.to(
+                        const DayStart(),
+                        transition: Transition.rightToLeft,
+                      );
+                    },
+                    label: 'Day Start'),
+                wSpace(15),
+                SubDashboardItem(
+                    icon: CupertinoIcons.moon_fill,
+                    onTap: () {
+                      Get.to(
+                        const DayEndScreen(),
+                        transition: Transition.rightToLeft,
+                      );
+                    },
+                    label: 'Day End'),
+              ],
+            ),
             hSpace(50),
           ],
         ),
