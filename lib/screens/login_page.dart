@@ -4,6 +4,7 @@ import 'package:dth/theme/text_sizing.dart';
 import 'package:dth/_common_widgets/primary_elevated_button.dart';
 import 'package:dth/_common_widgets/spacer.dart';
 import 'package:dth/_common_widgets/textformfield.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -33,9 +34,9 @@ class LoginPg extends StatelessWidget {
                   Image.asset(
                     'assets/images/appbar.jpg',
                     fit: BoxFit.contain,
-                    width: 200.h,
+                    width: 150.h,
                   ),
-                  hSpace(25),
+                  hSpace(50),
                   CustomTextFormField(
                     keyboardType: TextInputType.emailAddress,
                     controller: _emailController,
@@ -45,7 +46,10 @@ class LoginPg extends StatelessWidget {
                       }
                       return null;
                     },
-                    icon: const Icon(Icons.email_outlined),
+                    icon: const Icon(
+                      Icons.mail,
+                      size: 22,
+                    ),
                     text: 'Email Address',
                   ),
                   hSpace(20),
@@ -58,7 +62,10 @@ class LoginPg extends StatelessWidget {
                       return null;
                     },
                     controller: _passwordController,
-                    icon: const Icon(Icons.lock_open_rounded),
+                    icon: const Icon(
+                      Icons.lock,
+                      size: 22,
+                    ),
                     text: 'Password',
                   ),
                   hSpace(20),

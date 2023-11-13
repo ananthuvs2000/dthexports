@@ -1,4 +1,5 @@
 import 'package:dth/_providers/image_provider.dart';
+import 'package:dth/_providers/item_accept_temp_provider.dart';
 import 'package:dth/_utilites/scaffold_snackbars.dart';
 import 'package:dth/_common_widgets/image_preview_container.dart';
 import 'package:dth/theme/layout.dart';
@@ -27,25 +28,12 @@ class _RecycleAddScreenState extends State<RecycleAddScreen> {
 
   final _formKey = GlobalKey<FormState>();
 
-  //! Initializing Image Picker
-  XFile? _image;
-  late final ImagePicker _picker = ImagePicker();
-
-  //! Picking Image from camera
-  Future getImage() async {
-    final XFile? image = await _picker.pickImage(source: ImageSource.camera);
-
-    setState(() {
-      _image = image;
-    });
-  }
   late CameraProvider _imageProvider;
-   @override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _imageProvider = Provider.of<CameraProvider>(context, listen: false);
-   
   }
 
   @override
@@ -54,7 +42,6 @@ class _RecycleAddScreenState extends State<RecycleAddScreen> {
     super.dispose();
     Future.delayed(Duration.zero, () {
       _imageProvider.clearImage();
-    
     });
   }
 
@@ -68,8 +55,8 @@ class _RecycleAddScreenState extends State<RecycleAddScreen> {
         bottom: appBarUnderline,
       ),
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-         padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
+        physics: const BouncingScrollPhysics(),
+        padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
         child: Form(
           key: _formKey,
           child: Column(
@@ -77,36 +64,26 @@ class _RecycleAddScreenState extends State<RecycleAddScreen> {
               hSpace(15),
               const DynamicFieldRow(label: 'Batch No.', value: 'AUTO'),
               hSpace(15),
-      
-              // Photo And Weight Entry
-              // OpenImageButton(
-              //   label: 'Take Photo',
-              //   icon: Icons.camera_alt,
-              //   onTap: () => getImage(),
-              // ),
-              // hSpace(10),
-              // ImagePreviewBox(image: _image),
-               Consumer<CameraProvider>(
-                    builder: (context, state, _) {
-                      if (_imageProvider.image == null) {
-                        return const SizedBox();
-                      } else {
-                        return ImagePreviewBox(image: _imageProvider.image);
-                      }
-                    },
-                  ),
-                  OpenImageButton(
-                    width: double.infinity,
-                    icon: CupertinoIcons.camera_fill,
-                    label: (Provider.of<CameraProvider>(context).image == null)
-                        ? 'Take Photo'
-                        : 'Take Again',
-                    onTap: () async {
-                      await _imageProvider.getImage();
-                    },
-                  ),
+              Consumer<CameraProvider>(
+                builder: (context, state, _) {
+                  if (_imageProvider.image == null) {
+                    return const SizedBox();
+                  } else {
+                    return ImagePreviewBox(image: _imageProvider.image);
+                  }
+                },
+              ),
+              OpenImageButton(
+                width: double.infinity,
+                icon: CupertinoIcons.camera_fill,
+                label: (Provider.of<CameraProvider>(context).image == null)
+                    ? 'Take Photo'
+                    : 'Take Again',
+                onTap: () async {
+                  await _imageProvider.getImage();
+                },
+              ),
               hSpace(10),
-      
               NumberEntryField(
                 label: 'Enter value as shown',
                 controller: _weightController,
@@ -117,7 +94,6 @@ class _RecycleAddScreenState extends State<RecycleAddScreen> {
                   return null;
                 },
               ),
-      
               hSpace(10),
               const Divider(),
               hSpace(10),
@@ -151,22 +127,20 @@ class _RecycleAddScreenState extends State<RecycleAddScreen> {
                 label: 'State',
                 value: 'TO RECYCLE',
               ),
-             
             ],
           ),
         ),
       ),
-      bottomNavigationBar:  BottomActionsArea(children: [
-                Expanded(
-                    child: PrimaryElevatedButton(
-                        onPressed: () {
-                          if (!_formKey.currentState!.validate()) {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(errorSnackbar('Invalid Submission'));
-                          }
-                        },
-                        label: 'Post')),
-              ]),
+      bottomNavigationBar: BottomActionsArea(children: [
+        Expanded(
+            child: PrimaryElevatedButton(
+                onPressed: () {
+                  if (!_formKey.currentState!.validate()) {
+                    ScaffoldMessenger.of(context).showSnackBar(errorSnackbar('Invalid Submission'));
+                  }
+                },
+                label: 'Post')),
+      ]),
     );
   }
 }

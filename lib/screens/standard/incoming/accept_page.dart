@@ -10,6 +10,7 @@ import 'package:dth/_services/item_accept_temp_service.dart';
 import 'package:dth/_utilites/scaffold_snackbars.dart';
 import 'package:dth/screens/standard/incoming/batch_selection_page.dart';
 import 'package:dth/screens/standard/incoming/widgets/accepted_box_tile.dart';
+import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/_common_widgets/appbar_underline.dart';
 // import 'package:dth/widgets/date_time_display.dart';
@@ -75,7 +76,8 @@ class _AcceptPageState extends State<AcceptPage> {
         scrolledUnderElevation: 0,
         title: const Text('Accept'),
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: primaryColor,
+        foregroundColor: inversePrimaryColor,
         bottom: appBarUnderline,
       ),
       body: Consumer<AcceptPageDropDownProvider>(

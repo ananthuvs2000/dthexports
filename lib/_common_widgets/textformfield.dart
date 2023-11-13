@@ -1,4 +1,5 @@
 import 'package:dth/theme/colors.dart';
+import 'package:dth/theme/layout.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
@@ -40,19 +41,19 @@ class CustomTextFormField extends StatelessWidget {
             width: 1,
             color: Colors.black.withOpacity(0.15),
           ),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(globalBorderRadius),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: primaryColor),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(globalBorderRadius),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderSide: BorderSide(color: primaryColor),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(globalBorderRadius),
         ),
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: formFieldErrorColor),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(globalBorderRadius),
         ),
         prefixIcon: icon,
         label: Text(text),
@@ -64,8 +65,8 @@ class CustomTextFormField extends StatelessWidget {
         fillColor: Colors.black.withOpacity(0.05),
         filled: true,
         contentPadding: const EdgeInsets.symmetric(
-          horizontal: 10,
-          vertical: 12,
+          horizontal: 15,
+          vertical: 15,
         ),
       ),
     );
