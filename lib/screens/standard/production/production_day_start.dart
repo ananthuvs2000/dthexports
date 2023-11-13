@@ -123,32 +123,7 @@ class _DayStartState extends State<DayStart> {
               ),
 
               hSpace(15),
-              // Consumer<CameraProvider>(
-              //   builder: (context, state, child) {
-              //     if (_imageProvider.image == null) {
-              //       return const SizedBox();
-              //     } else {
-              //       return ImagePreviewBox(image: _imageProvider.image);
-              //     }
-              //   },
-              // ),
-              //! ^ IMAGE PREVIEW AREA
-              // OpenImageButton(
-              //   icon: Icons.camera,
-              //   label: 'Take Photo',
-              //   onTap: () async {
-              //     await _imageProvider.getImage();
-              //   },
-              // ),
-              // hSpace(15),
-              // // Field to Enter Value
-              // NumberEntryField(
-              //   label: 'Enter value shown',
-              //   controller: TextEditingController(),
-              //   validator: (value) {
-              //     return null;
-              //   },
-              // ),
+              
               Consumer<CameraProvider>(
                 builder: (context, state, _) {
                   if (_imageProvider.image == null) {
