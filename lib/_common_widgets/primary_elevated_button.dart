@@ -16,6 +16,12 @@ class PrimaryElevatedButton extends StatelessWidget {
     return Container(
       padding: EdgeInsets.zero,
       decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: primaryColor.withOpacity(0.5),
+            blurRadius: 3,
+          )
+        ],
         borderRadius: BorderRadius.circular(globalBorderRadius),
         gradient: primaryButtonGradient,
       ),
@@ -27,7 +33,7 @@ class PrimaryElevatedButton extends StatelessWidget {
           backgroundColor: Colors.transparent,
           foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(globalBorderRadius),
+            borderRadius: BorderRadius.circular(globalBorderRadius - 1),
           ),
           padding: const EdgeInsets.symmetric(
             horizontal: 20,

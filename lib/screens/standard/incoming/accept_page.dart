@@ -24,6 +24,7 @@ import 'package:dth/_common_widgets/spacer.dart';
 import 'package:dth/theme/text_sizing.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
@@ -78,6 +79,7 @@ class _AcceptPageState extends State<AcceptPage> {
         elevation: 0,
         backgroundColor: primaryColor,
         foregroundColor: inversePrimaryColor,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         bottom: appBarUnderline,
       ),
       body: Consumer<AcceptPageDropDownProvider>(

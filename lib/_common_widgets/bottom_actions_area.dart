@@ -15,11 +15,8 @@ class BottomActionsArea extends StatelessWidget {
         horizontal: PageLayout.pagePaddingX,
         vertical: 7,
       ),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
-        border: Border.all(
-          color: Colors.black.withOpacity(0.3),
-        ),
       ),
       width: double.infinity,
       child: Row(
