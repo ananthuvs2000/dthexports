@@ -3,6 +3,7 @@ import 'package:dth/_providers/dropdown_providers/accept_page_form_provider.dart
 import 'package:dth/_providers/image_provider.dart';
 import 'package:dth/_providers/item_accept_temp_provider.dart';
 import 'package:dth/screens/standard/widgets/table.dart';
+import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/_common_widgets/appbar_underline.dart';
 import 'package:dth/_common_widgets/bottom_actions_area.dart';
@@ -68,7 +69,8 @@ class _DayEndScreenState extends State<DayEndScreen> {
       appBar: AppBar(
         scrolledUnderElevation: 0,
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: primaryColor,
+        foregroundColor: inversePrimaryColor,
         title: const Text('Production Day End'),
         bottom: appBarUnderline,
       ),

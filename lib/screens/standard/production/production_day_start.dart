@@ -1,6 +1,7 @@
 import 'package:dth/_common_widgets/image_preview_container.dart';
 import 'package:dth/_providers/dropdown_providers/accept_page_form_provider.dart';
 import 'package:dth/_providers/image_provider.dart';
+import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/_common_widgets/appbar_underline.dart';
 import 'package:dth/_common_widgets/bottom_actions_area.dart';
@@ -51,7 +52,8 @@ class _DayStartState extends State<DayStart> {
       appBar: AppBar(
         elevation: 0,
         scrolledUnderElevation: 0,
-        backgroundColor: Colors.white,
+         backgroundColor: primaryColor,
+        foregroundColor: inversePrimaryColor,
         title: const Text('Production Day Start'),
         bottom: appBarUnderline,
       ),
