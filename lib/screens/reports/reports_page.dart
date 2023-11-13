@@ -1,3 +1,4 @@
+import 'package:dth/_common_widgets/bottom_actions_area.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/_common_widgets/appbar_underline.dart';
 import 'package:dth/_common_widgets/date_range_picker_field.dart';
@@ -137,19 +138,19 @@ class _ReportsPageState extends State<ReportsPage> {
                 ),
               ),
               //
-              hSpace(10),
-              SizedBox(
-                width: double.infinity,
-                child: PrimaryElevatedButton(
-                  onPressed: () {},
-                  label: 'Generate',
-                ),
-              ),
-              hSpace(10),
+             
             ],
           ),
         ),
       ),
+     bottomNavigationBar: BottomActionsArea(children: [
+        Expanded(
+          child: PrimaryElevatedButton(
+            label: 'Generate',
+            onPressed: () {},
+          ),
+        )
+      ]),
     );
   }
 }
