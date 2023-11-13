@@ -1,3 +1,4 @@
+import 'package:dth/_models/checking_model.dart';
 import 'package:dth/_models/employee_model.dart';
 import 'package:dth/_services/checking_service.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,8 @@ import 'package:flutter/material.dart';
 class CheckingProvider with ChangeNotifier {
   // storing selected employees temporarily
   final Set<Employee> _selectedEmployees = {};
+   
+
   // Function to add an employee into the list
   void addEmployee(Employee e) {
     _selectedEmployees.add(e);
@@ -35,5 +38,8 @@ class CheckingProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  
+
   Set<Employee> get addedEmpoyees => _selectedEmployees;
+
 }

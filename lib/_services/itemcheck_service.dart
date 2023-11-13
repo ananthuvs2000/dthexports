@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 
 class ItemCheckDataService extends ChangeNotifier {
   final String _checkingPendingAPI = '$apiHOME/filter_check_status';
+  final String _acceptedCheckAPI = '$apiHOME/filter_check_status';
+  
 
   //^ Fetching all checked batches
   Future<List<ItemCheck>> getCheckedBatches() async {
@@ -33,5 +35,27 @@ class ItemCheckDataService extends ChangeNotifier {
     } else {
       throw Exception('Could not get item checks');
     }
+  }
+    Future<List<ItemCheck>> getAcceptedCheck() async {
+    final response = await http.post(Uri.parse(_acceptedCheckAPI),body: {
+      'filter_data':'accepted'
+    });
+    if (response.statusCode == 200) {
+      print(response.body);
+      final List<dynamic> result = jsonDecode(response.body);
+      return result
+          .map((check) => ItemCheck(
+                id: check['id'],
+                venue: check['venue'],
+            vendoCode: check['vendor_code'],
+            batchCode: check['batch_code'],
+            quantityChecked: check['quantity_checked'],
+            status: check['status'],
+            teamName:check['team_name'] 
+
+              ))
+          .toList();
+    }
+    throw Exception('Failed to Load Accepted');
   }
 }

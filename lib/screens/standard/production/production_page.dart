@@ -1,3 +1,4 @@
+import 'package:dth/screens/standard/production/accepted_batch_selection.dart';
 import 'package:dth/screens/standard/production/production_day_end.dart';
 import 'package:dth/screens/standard/production/production_day_start.dart';
 import 'package:dth/theme/colors.dart';
@@ -44,7 +45,7 @@ class _ProductionPageState extends State<ProductionPage> {
                       icon: CupertinoIcons.sun_max_fill,
                       onTap: () {
                         Get.to(
-                          const DayStart(),
+                          const AccepedBatchSelectionPage(),
                           transition: Transition.rightToLeft,
                         );
                       },

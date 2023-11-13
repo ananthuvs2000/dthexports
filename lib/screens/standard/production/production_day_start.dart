@@ -1,4 +1,5 @@
 import 'package:dth/_common_widgets/image_preview_container.dart';
+import 'package:dth/_providers/checking_provider.dart';
 import 'package:dth/_providers/dropdown_providers/accept_page_form_provider.dart';
 import 'package:dth/_providers/image_provider.dart';
 import 'package:dth/theme/colors.dart';
@@ -18,7 +19,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class DayStart extends StatefulWidget {
-  const DayStart({super.key});
+  const DayStart({super.key, required this.batchCode});
+
+  final String batchCode;
 
   @override
   State<DayStart> createState() => _DayStartState();
@@ -27,6 +30,7 @@ class DayStart extends StatefulWidget {
 class _DayStartState extends State<DayStart> {
   late CameraProvider _imageProvider;
   late AcceptPageDropDownProvider _dropDownProvider;
+  late CheckingProvider _checkingProvider;
 
   @override
   void initState() {
@@ -53,7 +57,7 @@ class _DayStartState extends State<DayStart> {
         backgroundColor: primaryColor,
         foregroundColor: inversePrimaryColor,
         title: const Text('Production Day Start'),
-        bottom: appBarUnderline,
+        
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -63,25 +67,21 @@ class _DayStartState extends State<DayStart> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               hSpace(20),
-              const DynamicFieldRow(label: 'Batch No:', value: 'Display Batch No'),
+               DynamicFieldRow(label: 'Batch No:', value: widget.batchCode),
               hSpace(15),
-              DropdownMenuField(
-                validator: (value) {
-                  return '';
-                },
-                fieldLabel: 'Box No:',
-                dropDownLabel: 'Select Box',
-                dropdownEntries: const [
-                  DropdownMenuItem(value: '1', child: Text('1')),
-                  DropdownMenuItem(value: '2', child: Text('2')),
-                  DropdownMenuItem(
-                    value: '3',
-                    child: Text('3'),
-                  )
-                ],
-                onSelected: (selectedVal) {
-                  print(selectedVal.toString());
-                },
+              Consumer<CheckingProvider>(
+                builder: (context, checkState, child) => 
+                DropdownMenuField(
+                  validator: (value) {
+                    return '';
+                  },
+                  fieldLabel: 'Box No:',
+                  dropDownLabel: 'Select Box',
+                  dropdownEntries: [],
+                  onSelected: (selectedVal) {
+                    print(selectedVal.toString());
+                  },
+                ),
               ),
               hSpace(15),
 
