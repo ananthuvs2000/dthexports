@@ -43,6 +43,7 @@ dependencies:
   flutter_screenutil: ^5.9.0
   image_picker: ^1.0.4
   multipart: ^0.1.2
+  font_awesome_flutter: ^10.6.0
 
 dev_dependencies:
   flutter_test:

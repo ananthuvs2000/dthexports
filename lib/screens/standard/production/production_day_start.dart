@@ -25,15 +25,14 @@ class DayStart extends StatefulWidget {
 }
 
 class _DayStartState extends State<DayStart> {
-   late CameraProvider _imageProvider;
+  late CameraProvider _imageProvider;
   late AcceptPageDropDownProvider _dropDownProvider;
-  
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _imageProvider = Provider.of<CameraProvider>(context, listen: false);
-   
   }
 
   @override
@@ -42,7 +41,6 @@ class _DayStartState extends State<DayStart> {
     super.dispose();
     Future.delayed(Duration.zero, () {
       _imageProvider.clearImage();
-    
     });
   }
 
@@ -52,16 +50,17 @@ class _DayStartState extends State<DayStart> {
       appBar: AppBar(
         elevation: 0,
         scrolledUnderElevation: 0,
-         backgroundColor: primaryColor,
+        backgroundColor: primaryColor,
         foregroundColor: inversePrimaryColor,
         title: const Text('Production Day Start'),
         bottom: appBarUnderline,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               hSpace(20),
               const DynamicFieldRow(label: 'Batch No:', value: 'Display Batch No'),
@@ -85,8 +84,14 @@ class _DayStartState extends State<DayStart> {
                 },
               ),
               hSpace(15),
+
               const BoxInfoDisplay(
-                  boxNumber: 'No.', boxType: 'Type', boxSize: 'Size', boxWeight: 'Weight'),
+                title: 'Box Details',
+                boxColor: 'Red',
+                boxTexture: 'Curly',
+                boxSize: '13-15',
+                boxWeight: '300 kg',
+              ),
               const SizedBox(height: 20),
               const DynamicFieldRow(label: 'Process', value: 'Display Process'),
               hSpace(15),
@@ -105,10 +110,9 @@ class _DayStartState extends State<DayStart> {
                   print(selectedVal.toString());
                 },
               ),
-                
+
               hSpace(15),
-              const DynamicFieldRow(
-                  label: 'Material Weight', value: 'Calculate Weight&Display'),
+              const DynamicFieldRow(label: 'Material Weight', value: 'Calculate Weight&Display'),
               hSpace(15),
               TeamManagerWidget(
                 editable: true,
@@ -117,7 +121,7 @@ class _DayStartState extends State<DayStart> {
                   WorkerData(id: 15, name: 'Amal'),
                 ],
               ),
-                
+
               hSpace(15),
               // Consumer<CameraProvider>(
               //   builder: (context, state, child) {
@@ -144,44 +148,43 @@ class _DayStartState extends State<DayStart> {
               //   validator: (value) {
               //     return null;
               //   },
-              // ), 
-               Consumer<CameraProvider>(
-                    builder: (context, state, _) {
-                      if (_imageProvider.image == null) {
-                        return const SizedBox();
-                      } else {
-                        return ImagePreviewBox(image: _imageProvider.image);
-                      }
-                    },
-                  ),
-                  OpenImageButton(
-                    width: double.infinity,
-                    icon: CupertinoIcons.camera_fill,
-                    label: (Provider.of<CameraProvider>(context).image == null)
-                        ? 'Take Photo'
-                        : 'Take Again',
-                    onTap: () async {
-                      await _imageProvider.getImage();
-                    },
-                  ),
-                hSpace(10),
-             
+              // ),
+              Consumer<CameraProvider>(
+                builder: (context, state, _) {
+                  if (_imageProvider.image == null) {
+                    return const SizedBox();
+                  } else {
+                    return ImagePreviewBox(image: _imageProvider.image);
+                  }
+                },
+              ),
+              OpenImageButton(
+                width: double.infinity,
+                icon: CupertinoIcons.camera_fill,
+                label: (Provider.of<CameraProvider>(context).image == null)
+                    ? 'Take Photo'
+                    : 'Take Again',
+                onTap: () async {
+                  await _imageProvider.getImage();
+                },
+              ),
+              hSpace(10),
+
               // End of listview
-          
             ],
           ),
         ),
       ),
-      bottomNavigationBar:     BottomActionsArea(
-                  children: [
-                    Expanded(
-                      child: PrimaryElevatedButton(
-                        onPressed: () {},
-                        label: 'Submit',
-                      ),
-                    ),
-                  ],
-                ),
+      bottomNavigationBar: BottomActionsArea(
+        children: [
+          Expanded(
+            child: PrimaryElevatedButton(
+              onPressed: () {},
+              label: 'Submit',
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

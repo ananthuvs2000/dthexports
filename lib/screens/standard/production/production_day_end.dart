@@ -42,15 +42,15 @@ class _DayEndScreenState extends State<DayEndScreen> {
       _image = image;
     });
   }
-   late CameraProvider _imageProvider;
+
+  late CameraProvider _imageProvider;
   late AcceptPageDropDownProvider _dropDownProvider;
-  
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _imageProvider = Provider.of<CameraProvider>(context, listen: false);
-   
   }
 
   @override
@@ -59,7 +59,6 @@ class _DayEndScreenState extends State<DayEndScreen> {
     super.dispose();
     Future.delayed(Duration.zero, () {
       _imageProvider.clearImage();
-    
     });
   }
 
@@ -108,27 +107,27 @@ class _DayEndScreenState extends State<DayEndScreen> {
                 // ImagePreviewBox(
                 //   image: _image,
                 // ),
-                 Consumer<CameraProvider>(
-                    builder: (context, state, _) {
-                      if (_imageProvider.image == null) {
-                        return const SizedBox();
-                      } else {
-                        return ImagePreviewBox(image: _imageProvider.image);
-                      }
-                    },
-                  ),
-                  OpenImageButton(
-                    width: double.infinity,
-                    icon: CupertinoIcons.camera_fill,
-                    label: (Provider.of<CameraProvider>(context).image == null)
-                        ? 'Take Photo'
-                        : 'Take Again',
-                    onTap: () async {
-                      await _imageProvider.getImage();
-                    },
-                  ),
+                Consumer<CameraProvider>(
+                  builder: (context, state, _) {
+                    if (_imageProvider.image == null) {
+                      return const SizedBox();
+                    } else {
+                      return ImagePreviewBox(image: _imageProvider.image);
+                    }
+                  },
+                ),
+                OpenImageButton(
+                  width: double.infinity,
+                  icon: CupertinoIcons.camera_fill,
+                  label: (Provider.of<CameraProvider>(context).image == null)
+                      ? 'Take Photo'
+                      : 'Take Again',
+                  onTap: () async {
+                    await _imageProvider.getImage();
+                  },
+                ),
                 hSpace(10),
-                  
+
                 // Field to Enter Value
                 NumberEntryField(
                   label: 'Enter weight\nas shown',
@@ -138,9 +137,14 @@ class _DayEndScreenState extends State<DayEndScreen> {
                   },
                 ),
                 hSpace(15),
-                  
+
                 const BoxInfoDisplay(
-                    boxNumber: 'No.', boxType: 'Type', boxSize: 'Size', boxWeight: 'Weight'),
+                  title: 'Box Details',
+                  boxColor: 'No.',
+                  boxTexture: 'Type',
+                  boxSize: 'Size',
+                  boxWeight: 'Weight',
+                ),
                 hSpace(15),
                 const DynamicFieldRow(label: 'Material Weight', value: 'CALCULATED'),
                 hSpace(15),
@@ -150,28 +154,26 @@ class _DayEndScreenState extends State<DayEndScreen> {
                 hSpace(15),
                 const TableWidget(),
                 hSpace(15), // end of listview
-               
               ],
             ),
           ),
         ),
-        
       ),
-      bottomNavigationBar:  BottomActionsArea(
-                  children: [
-                    SecondaryElevatedButton(
-                      onPressed: () {},
-                      label: 'PRS Completed',
-                    ),
-                    wSpace(10),
-                    Expanded(
-                      child: PrimaryElevatedButton(
-                        onPressed: () {},
-                        label: 'Submit',
-                      ),
-                    ),
-                  ],
-                ),
+      bottomNavigationBar: BottomActionsArea(
+        children: [
+          SecondaryElevatedButton(
+            onPressed: () {},
+            label: 'PRS Completed',
+          ),
+          wSpace(10),
+          Expanded(
+            child: PrimaryElevatedButton(
+              onPressed: () {},
+              label: 'Submit',
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

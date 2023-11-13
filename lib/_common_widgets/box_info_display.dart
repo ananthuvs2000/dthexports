@@ -1,87 +1,107 @@
-import 'package:dth/theme/colors.dart';
-import 'package:dth/theme/layout.dart';
+import 'package:dth/_common_widgets/spacer.dart';
+import 'package:dth/theme/text_sizing.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BoxInfoDisplay extends StatelessWidget {
   const BoxInfoDisplay({
-    required this.boxNumber,
-    required this.boxType,
+    required this.title,
+    required this.boxColor,
+    required this.boxTexture,
     required this.boxSize,
     required this.boxWeight,
     super.key,
   });
-  final String boxNumber;
+  final String title;
+  final String boxColor;
   final String boxSize;
-  final String boxType;
+  final String boxTexture;
   final String boxWeight;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.black.withOpacity(0.75)),
-        color: Colors.white.withOpacity(1),
-        borderRadius: BorderRadius.circular(globalBorderRadius + 1),
-      ),
-      child: Column(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: TextStyles.mainHeadingStyle,
+        ),
+        const Divider(),
+        GridView.count(
+          padding: EdgeInsets.zero,
+          shrinkWrap: true,
+          childAspectRatio: 5,
+          crossAxisCount: 2,
+          children: [
+            Center(
+              child: InfoItem(
+                icon: FontAwesomeIcons.weightHanging,
+                label: boxWeight,
+              ),
+            ),
+            Center(
+              child: InfoItem(
+                icon: Icons.texture,
+                label: boxTexture,
+              ),
+            ),
+            Center(
+              child: InfoItem(
+                icon: CupertinoIcons.resize,
+                label: boxSize,
+              ),
+            ),
+            Center(
+              child: InfoItem(
+                icon: Icons.palette,
+                label: boxColor,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+  // texture, weight, size, color
+}
+
+const infoTextSize = TextStyle(
+  fontSize: 16,
+  fontWeight: FontWeight.bold,
+);
+
+class InfoItem extends StatelessWidget {
+  InfoItem({
+    super.key,
+    required this.icon,
+    required this.label,
+  });
+
+  final IconData icon;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 200,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            decoration: BoxDecoration(
-              color: primaryColor,
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(globalBorderRadius),
-                topRight: Radius.circular(globalBorderRadius),
-              ),
-            ),
-            child: const Row(
-              children: [
-                Text(
-                  'Box Details',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
+          Icon(
+            icon,
+            size: 18,
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.25),
-              borderRadius: const BorderRadius.only(
-                bottomLeft: Radius.circular(formFieldBorderRadius),
-                bottomRight: Radius.circular(formFieldBorderRadius),
-              ),
-            ),
-            height: 50,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  boxType,
-                  style: infoTextSize,
-                ),
-                Text(
-                  '$boxSize"',
-                  style: infoTextSize,
-                ),
-                Text(
-                  '$boxWeight KG',
-                  style: infoTextSize,
-                ),
-              ],
-            ),
+          wSpace(10),
+          Text(
+            label,
+            style: infoTextSize,
           ),
         ],
       ),
     );
   }
 }
-
-const infoTextSize = TextStyle(
-  fontSize: 14,
-  fontWeight: FontWeight.bold,
-);

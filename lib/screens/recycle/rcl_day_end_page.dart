@@ -38,13 +38,13 @@ class _RecycleDayEndPageState extends State<RecycleDayEndScreen> {
       _image = image;
     });
   }
+
   late CameraProvider _imageProvider;
-   @override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _imageProvider = Provider.of<CameraProvider>(context, listen: false);
-   
   }
 
   @override
@@ -53,7 +53,6 @@ class _RecycleDayEndPageState extends State<RecycleDayEndScreen> {
     super.dispose();
     Future.delayed(Duration.zero, () {
       _imageProvider.clearImage();
-    
     });
   }
 
@@ -83,27 +82,27 @@ class _RecycleDayEndPageState extends State<RecycleDayEndScreen> {
                 // hSpace(10),
                 // ImagePreviewBox(image: _image),
                 Consumer<CameraProvider>(
-                    builder: (context, state, _) {
-                      if (_imageProvider.image == null) {
-                        return const SizedBox();
-                      } else {
-                        return ImagePreviewBox(image: _imageProvider.image);
-                      }
-                    },
-                  ),
-                  OpenImageButton(
-                    width: double.infinity,
-                    icon: CupertinoIcons.camera_fill,
-                    label: (Provider.of<CameraProvider>(context).image == null)
-                        ? 'Take Photo'
-                        : 'Take Again',
-                    onTap: () async {
-                      await _imageProvider.getImage();
-                    },
-                  ),
+                  builder: (context, state, _) {
+                    if (_imageProvider.image == null) {
+                      return const SizedBox();
+                    } else {
+                      return ImagePreviewBox(image: _imageProvider.image);
+                    }
+                  },
+                ),
+                OpenImageButton(
+                  width: double.infinity,
+                  icon: CupertinoIcons.camera_fill,
+                  label: (Provider.of<CameraProvider>(context).image == null)
+                      ? 'Take Photo'
+                      : 'Take Again',
+                  onTap: () async {
+                    await _imageProvider.getImage();
+                  },
+                ),
 
                 hSpace(10),
-        
+
                 NumberEntryField(
                   label: 'Enter value as shown',
                   controller: _weightController,
@@ -114,7 +113,7 @@ class _RecycleDayEndPageState extends State<RecycleDayEndScreen> {
                     return null;
                   },
                 ),
-        
+
                 hSpace(15),
                 DropdownMenuField(
                   validator: (value) {
@@ -129,18 +128,19 @@ class _RecycleDayEndPageState extends State<RecycleDayEndScreen> {
                   ],
                   onSelected: (selectedVal) {},
                 ),
-        
+
                 /// Details of Stored Info Of Selected Box
                 hSpace(15),
                 const BoxInfoDisplay(
-                  boxNumber: '12134',
-                  boxType: '25425',
+                  title: 'Box Details',
+                  boxColor: '12134',
+                  boxTexture: '25425',
                   boxSize: '235245',
                   boxWeight: '355',
                 ),
                 // Auto Calculated Field
                 hSpace(15),
-        
+
                 SizedBox(
                   height: 300,
                   child: Column(
@@ -166,26 +166,26 @@ class _RecycleDayEndPageState extends State<RecycleDayEndScreen> {
                     WorkerData(id: 10, name: 'Arjun'),
                   ],
                 ),
-        
+
                 // End of listview
                 hSpace(15),
                 // Main submit button goes here
                 hSpace(10),
-               
+
                 hSpace(10),
               ],
             ),
           ),
         ),
       ),
-      bottomNavigationBar:  BottomActionsArea(children: [
-                Expanded(
-                  child: PrimaryElevatedButton(
-                    label: 'Post',
-                    onPressed: () {},
-                  ),
-                )
-              ]),
+      bottomNavigationBar: BottomActionsArea(children: [
+        Expanded(
+          child: PrimaryElevatedButton(
+            label: 'Post',
+            onPressed: () {},
+          ),
+        )
+      ]),
     );
   }
 }
