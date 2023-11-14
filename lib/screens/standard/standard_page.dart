@@ -23,80 +23,88 @@ class StandardScreen extends StatefulWidget {
 class _StandardScreenState extends State<StandardScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        foregroundColor: Colors.black,
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(image: AssetImage(
+          'assets/images/loginbg.png',
+        ),fit: BoxFit.cover)
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Standard',
-              style: TextStyles.veryLargeHeading,
-            ),
-            GridView.count(
-              shrinkWrap: true,
-              crossAxisCount: 2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              childAspectRatio: 1.4,
-              children: [
-                SubDashboardItem(
-                  icon: CupertinoIcons.down_arrow,
-                  onTap: () => showModalBottomSheet(
-                    constraints: BoxConstraints.tight(const Size.fromHeight(160)),
-                    context: context,
-                    builder: (context) => BottomSheet(
-                      onClosing: () => {},
-                      elevation: 0,
-                      backgroundColor: Colors.white,
-                      builder: (context) => incomingModalSheet(
-                        destination1: const CheckPage(),
-                        destination2: const AccepedBatchSelectionPage(),
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          foregroundColor: Colors.black,
+        ),
+        backgroundColor: Colors.transparent,
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Standard',
+                style: TextStyles.veryLargeHeading,
+              ),
+              GridView.count(
+                shrinkWrap: true,
+                crossAxisCount: 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                childAspectRatio: 1.4,
+                children: [
+                  SubDashboardItem(
+                    icon: CupertinoIcons.down_arrow,
+                    onTap: () => showModalBottomSheet(
+                      constraints: BoxConstraints.tight(const Size.fromHeight(160)),
+                      context: context,
+                      builder: (context) => BottomSheet(
+                        onClosing: () => {},
+                        elevation: 0,
+                        backgroundColor: Colors.white,
+                        builder: (context) => incomingModalSheet(
+                          destination1: const CheckPage(),
+                          destination2: const AccepedBatchSelectionPage(),
+                        ),
                       ),
                     ),
+                    label: 'Incoming',
                   ),
-                  label: 'Incoming',
-                ),
-                SubDashboardItem(
-                  icon: CupertinoIcons.hammer_fill,
-                  onTap: () => showModalBottomSheet(
-                    constraints: BoxConstraints.tight(const Size.fromHeight(160)),
-                    context: context,
-                    builder: (context) => BottomSheet(
-                      onClosing: () => {},
-                      elevation: 0,
-                      backgroundColor: Colors.white,
-                      builder: (context) => productionModal(
-                        destination1: const BatchSelectionPage(),
-                        destination2: const DayEndScreen(),
+                  SubDashboardItem(
+                    icon: CupertinoIcons.hammer_fill,
+                    onTap: () => showModalBottomSheet(
+                      constraints: BoxConstraints.tight(const Size.fromHeight(160)),
+                      context: context,
+                      builder: (context) => BottomSheet(
+                        onClosing: () => {},
+                        elevation: 0,
+                        backgroundColor: Colors.white,
+                        builder: (context) => productionModal(
+                          destination1: const BatchSelectionPage(),
+                          destination2: const DayEndScreen(),
+                        ),
                       ),
                     ),
+                    label: 'Production',
                   ),
-                  label: 'Production',
-                ),
-                SubDashboardItem(
-                  icon: Icons.fire_truck,
-                  onTap: () {
-                    Get.to(const DespachScreen(), transition: Transition.rightToLeft);
-                  },
-                  label: 'Dispatch',
-                ),
-                SubDashboardItem(
-                  icon: CupertinoIcons.up_arrow,
-                  onTap: () {
-                    Get.to(const OutGoingScreen(), transition: Transition.rightToLeft);
-                  },
-                  label: 'Outgoing',
-                ),
-              ],
-            ),
-            hSpace(100),
-          ],
+                  SubDashboardItem(
+                    icon: Icons.fire_truck,
+                    onTap: () {
+                      Get.to(const DespachScreen(), transition: Transition.rightToLeft);
+                    },
+                    label: 'Dispatch',
+                  ),
+                  SubDashboardItem(
+                    icon: CupertinoIcons.up_arrow,
+                    onTap: () {
+                      Get.to(const OutGoingScreen(), transition: Transition.rightToLeftWithFade,duration: Duration(microseconds: 500));
+                    },
+                    label: 'Outgoing',
+                  ),
+                ],
+              ),
+              hSpace(100),
+            ],
+          ),
         ),
       ),
     );

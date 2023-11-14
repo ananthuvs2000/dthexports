@@ -21,79 +21,90 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Image.asset(
-                  'assets/images/appbar.jpg',
-                  height: 75.h,
-                  fit: BoxFit.fitHeight,
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(image: AssetImage(
+          'assets/images/loginbg.png',
+        ),fit: BoxFit.cover)
+      ),
+      child: Scaffold(
+       backgroundColor: Colors.transparent,
+        body: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX+10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                
+                hSpace(70),
+                GridView.count(
+                  shrinkWrap: true,
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  childAspectRatio: 1.5,
+                  children: [
+                    DashboardOptionContainer(
+                      gradient: primaryButtonGradient,
+                      shadowColor: secondaryColor,
+                      icon: CupertinoIcons.building_2_fill,
+                      text: 'Standard',
+                      onTap: () {
+                        Get.to(
+                          const StandardScreen(),
+                          transition: Transition.rightToLeft,
+                        );
+                      },
+                    ),
+                    DashboardOptionContainer(
+                      gradient: dashboardOptionGrad2,
+                      shadowColor: Colors.green,
+                      icon: Icons.recycling_outlined,
+                      text: 'Recycle',
+                      onTap: () {
+                        Get.to(
+                          const RecyclePage(),
+                          transition: Transition.rightToLeft,
+                        );
+                      },
+                    ),
+                    DashboardOptionContainer(
+                      gradient: dashboardOptionGrad3,
+                      shadowColor: Colors.deepPurple,
+                      icon: CupertinoIcons.doc_chart_fill,
+                      text: 'Reports',
+                      onTap: () {
+                        Get.to(
+                          const ReportsPage(),
+                          transition: Transition.rightToLeft,
+                        );
+                      },
+                    ),
+                    DashboardOptionContainer(
+                      gradient: dashboardOptionGrad1,
+                      shadowColor: Colors.deepOrange,
+                      icon: CupertinoIcons.arrow_right_to_line_alt,
+                      text: 'Log Out',
+                      onTap: () {
+                        Get.offAll(LoginPg());
+                      },
+                    ),
+                  ],
                 ),
-              ),
-              hSpace(50),
-              GridView.count(
-                shrinkWrap: true,
-                crossAxisCount: 2,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                childAspectRatio: 1.5,
-                children: [
-                  DashboardOptionContainer(
-                    gradient: primaryButtonGradient,
-                    shadowColor: secondaryColor,
-                    icon: CupertinoIcons.building_2_fill,
-                    text: 'Standard',
-                    onTap: () {
-                      Get.to(
-                        const StandardScreen(),
-                        transition: Transition.rightToLeft,
-                      );
-                    },
-                  ),
-                  DashboardOptionContainer(
-                    gradient: dashboardOptionGrad2,
-                    shadowColor: Colors.green,
-                    icon: Icons.recycling_outlined,
-                    text: 'Recycle',
-                    onTap: () {
-                      Get.to(
-                        const RecyclePage(),
-                        transition: Transition.rightToLeft,
-                      );
-                    },
-                  ),
-                  DashboardOptionContainer(
-                    gradient: dashboardOptionGrad3,
-                    shadowColor: Colors.deepPurple,
-                    icon: CupertinoIcons.doc_chart_fill,
-                    text: 'Reports',
-                    onTap: () {
-                      Get.to(
-                        const ReportsPage(),
-                        transition: Transition.rightToLeft,
-                      );
-                    },
-                  ),
-                  DashboardOptionContainer(
-                    gradient: dashboardOptionGrad1,
-                    shadowColor: Colors.deepOrange,
-                    icon: CupertinoIcons.arrow_right_to_line_alt,
-                    text: 'Log Out',
-                    onTap: () {
-                      Get.offAll(LoginPg());
-                    },
-                  ),
-                ],
-              ),
-              hSpace(150),
-            ],
+                hSpace(60),
+                Row(mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/appbar.jpg',
+                      height: 40.h,
+                      fit: BoxFit.fitHeight,
+                    ),
+                  ],
+                ),
+               
+              ],
+            ),
           ),
         ),
       ),

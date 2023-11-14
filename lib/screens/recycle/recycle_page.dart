@@ -20,57 +20,65 @@ class RecyclePage extends StatefulWidget {
 class _ProductionPageState extends State<RecyclePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: inversePrimaryColor,
-        foregroundColor: Colors.black,
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(image: AssetImage(
+          'assets/images/loginbg.png',
+        ),fit: BoxFit.cover)
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: PageLayout.pagePaddingX + 20,
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          foregroundColor: Colors.black,
         ),
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Recycle',
-                style: TextStyles.veryLargeHeading,
-              ),
-              hSpace(10),
-              SubDashboardItem(
-                  icon: CupertinoIcons.add,
-                  onTap: () {
-                    Get.to(
-                      const RecycleAddScreen(),
-                      transition: Transition.rightToLeft,
-                    );
-                  },
-                  label: 'RCL-ADD'),
-              hSpace(15),
-              SubDashboardItem(
+        body: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: PageLayout.pagePaddingX + 20,
+          ),
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Recycle',
+                  style: TextStyles.veryLargeHeading,
+                ),
+                hSpace(10),
+                SubDashboardItem(
+                    icon: CupertinoIcons.add,
+                    onTap: () {
+                      Get.to(
+                        const RecycleAddScreen(),
+                        transition: Transition.rightToLeft,
+                      );
+                    },
+                    label: 'RCL-ADD'),
+                hSpace(15),
+                SubDashboardItem(
+                    icon: Icons.recycling,
+                    onTap: () {
+                      Get.to(
+                        const RecycleDayStartScreen(),
+                        transition: Transition.rightToLeft,
+                      );
+                    },
+                    label: 'RCL-DAY START'),
+                hSpace(15),
+                SubDashboardItem(
                   icon: Icons.recycling,
                   onTap: () {
                     Get.to(
-                      const RecycleDayStartScreen(),
+                      const RecycleDayEndScreen(),
                       transition: Transition.rightToLeft,
                     );
                   },
-                  label: 'RCL-DAY START'),
-              hSpace(15),
-              SubDashboardItem(
-                icon: Icons.recycling,
-                onTap: () {
-                  Get.to(
-                    const RecycleDayEndScreen(),
-                    transition: Transition.rightToLeft,
-                  );
-                },
-                label: 'RCL-DAY END',
-              ),
-              hSpace(75),
-            ],
+                  label: 'RCL-DAY END',
+                ),
+                hSpace(75),
+              ],
+            ),
           ),
         ),
       ),
