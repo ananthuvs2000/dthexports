@@ -36,7 +36,7 @@ class _StandardScreenState extends State<StandardScreen> {
         ),
         backgroundColor: Colors.transparent,
         body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
+          padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX+10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,7 +50,7 @@ class _StandardScreenState extends State<StandardScreen> {
                 crossAxisCount: 2,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
-                childAspectRatio: 1.4,
+                childAspectRatio: 1.6,
                 children: [
                   SubDashboardItem(
                     icon: CupertinoIcons.down_arrow,

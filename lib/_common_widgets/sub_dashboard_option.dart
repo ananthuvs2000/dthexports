@@ -25,8 +25,8 @@ class SubDashboardItem extends StatelessWidget {
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.5),
-              blurRadius: 2.5,
+              color: primaryColor.withOpacity(0.4),
+              blurRadius: 10,
             ),
           ],
           gradient: subDashboardOptionGrad,

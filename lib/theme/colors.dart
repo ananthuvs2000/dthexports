@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 final Color primaryColor = Color.fromRGBO(70, 20, 203, 1);
-final Color secondaryColor = Color.fromRGBO(141, 103, 250, 1);
+final Color secondaryColor = Color.fromRGBO(100, 103, 250, 1);
 const Color inversePrimaryColor = Colors.white;
 
 // Form Styles
@@ -47,8 +47,8 @@ LinearGradient dashboardOptionGrad4 = const LinearGradient(
 //
 LinearGradient subDashboardOptionGrad = LinearGradient(
   colors: [
-    Colors.grey.shade700,
-    const Color.fromRGBO(50, 50, 50, 1),
+    primaryColor,
+    secondaryColor
   ],
   begin: Alignment.topLeft,
   end: Alignment.bottomCenter,

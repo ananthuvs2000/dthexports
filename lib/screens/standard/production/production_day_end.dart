@@ -17,6 +17,7 @@ import 'package:dth/_common_widgets/secondary_elevated_button.dart';
 import 'package:dth/_common_widgets/spacer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
@@ -71,7 +72,8 @@ class _DayEndScreenState extends State<DayEndScreen> {
         backgroundColor: primaryColor,
         foregroundColor: inversePrimaryColor,
         title: const Text('Production Day End'),
-        bottom: appBarUnderline,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
+        
       ),
       body: SafeArea(
         child: SingleChildScrollView(

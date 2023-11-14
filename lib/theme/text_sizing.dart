@@ -1,3 +1,4 @@
+import 'package:dth/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -9,10 +10,11 @@ class TextStyles {
     letterSpacing: 0,
   );
 
-  static TextStyle veryLargeHeading = const TextStyle(
+  static TextStyle veryLargeHeading =  TextStyle(
     fontSize: 45,
     fontWeight: FontWeight.bold,
     letterSpacing: -1.1,
+    color: primaryColor
   );
 
   static TextStyle mainHeadingStyle = const TextStyle(
