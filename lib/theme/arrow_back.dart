@@ -16,7 +16,7 @@ class ArrowBack extends StatelessWidget {
         padding: const EdgeInsets.only(left: 15, top: 5),
         child: CircleAvatar(
           backgroundColor: primaryColor.withOpacity(0.25),
-          foregroundColor: primaryColor.withOpacity(0.5),
+          foregroundColor: primaryColor.withOpacity(0.75),
           radius: 30,
           child: const Icon(FontAwesomeIcons.arrowLeft),
         ),
