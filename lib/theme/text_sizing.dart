@@ -14,7 +14,7 @@ class TextStyles {
     fontSize: 45,
     fontWeight: FontWeight.bold,
     letterSpacing: -1.1,
-    color: primaryColor
+    color: Colors.deepPurple
   );
 
   static TextStyle mainHeadingStyle = const TextStyle(
