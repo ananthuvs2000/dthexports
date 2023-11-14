@@ -12,9 +12,9 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   changeScreen() {
     Future.delayed(
-      const Duration(seconds: 1),
+      const Duration(seconds: 2),
       () {
-        Get.to(LoginPg(), transition: Transition.zoom);
+        Get.to(LoginPg(), transition: Transition.rightToLeft);
       },
     );
   }
@@ -32,8 +32,10 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: Colors.white,
       body: Center(
         child: Image.asset(
-          'assets/images/loginpage.jpg',
-          fit: BoxFit.fill,
+          'assets/images/appbar.jpg',
+          fit: BoxFit.contain,
+          height: 200,
+          width: 200,
         ),
       ),
     );

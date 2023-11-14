@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-final Color primaryColor = Colors.indigo.shade600;
-final Color secondaryColor = Colors.indigo.shade400;
+final Color primaryColor = Color.fromRGBO(70, 20, 203, 1);
+final Color secondaryColor = Color.fromRGBO(141, 103, 250, 1);
 const Color inversePrimaryColor = Colors.white;
 
 // Form Styles
@@ -60,6 +60,6 @@ LinearGradient primaryButtonGradient = LinearGradient(
     secondaryColor,
     primaryColor,
   ],
-  begin: Alignment.topLeft,
+  begin: Alignment.topCenter,
   end: Alignment.bottomRight,
 );
