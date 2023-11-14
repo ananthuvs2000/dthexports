@@ -40,14 +40,14 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       alignment: Alignment.topCenter,
       children: [
         AnimatedContainer(
-          height: 55,
+          height: 50,
           duration: const Duration(milliseconds: 100),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(globalBorderRadius),
             boxShadow: focusNode.hasFocus
                 ? [
                     BoxShadow(
-                      color: primaryColor.withOpacity(0.5),
+                      color: primaryColor.withOpacity(0.25),
                       blurRadius: 10,
                     )
                   ]

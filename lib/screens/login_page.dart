@@ -20,10 +20,11 @@ class LoginPg extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage(
-          'assets/images/loginbg.png',
-        ),fit: BoxFit.cover)
-      ),
+          image: DecorationImage(
+              image: AssetImage(
+                'assets/images/loginbg.png',
+              ),
+              fit: BoxFit.cover)),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Form(
@@ -31,19 +32,17 @@ class LoginPg extends StatelessWidget {
           child: SingleChildScrollView(
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             child: Padding(
-              padding:  EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX+15),
+              padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX + 15),
               child: Column(
-                
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  hSpace(200.h),
-                  hSpace(50),
+                  hSpace(200),
                   Image.asset(
                     'assets/images/appbar.jpg',
                     fit: BoxFit.contain,
-                    width: 125.h,
+                    width: 100.h,
                   ),
-                  hSpace(20),
+                  hSpace(75),
                   CustomTextFormField(
                     keyboardType: TextInputType.emailAddress,
                     controller: _emailController,
@@ -96,6 +95,7 @@ class LoginPg extends StatelessWidget {
                       label: 'Login',
                     ),
                   ),
+                  hSpace(15),
                   TextButton(
                     onPressed: () {},
                     child: Text(
