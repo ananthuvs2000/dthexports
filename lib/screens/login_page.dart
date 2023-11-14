@@ -18,103 +18,94 @@ class LoginPg extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Form(
-        key: _formKey,
-        child: SingleChildScrollView(
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              hSpace(200.h),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.15),
-                      blurRadius: 30,
-                    ),
-                  ],
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(
-                    globalBorderRadius + 10,
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(image: AssetImage(
+          'assets/images/loginbg.png',
+        ),fit: BoxFit.cover)
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Form(
+          key: _formKey,
+          child: SingleChildScrollView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            child: Padding(
+              padding:  EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX+15),
+              child: Column(
+                
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  hSpace(200.h),
+                  hSpace(50),
+                  Image.asset(
+                    'assets/images/appbar.jpg',
+                    fit: BoxFit.contain,
+                    width: 125.h,
                   ),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    hSpace(50),
-                    Image.asset(
-                      'assets/images/appbar.jpg',
-                      fit: BoxFit.contain,
-                      width: 125.h,
+                  hSpace(20),
+                  CustomTextFormField(
+                    keyboardType: TextInputType.emailAddress,
+                    controller: _emailController,
+                    validator: (val) {
+                      if (val == '') {
+                        return 'Invalid Email';
+                      }
+                      return null;
+                    },
+                    icon: const Icon(
+                      Icons.mail,
+                      size: 22,
                     ),
-                    hSpace(20),
-                    CustomTextFormField(
-                      keyboardType: TextInputType.emailAddress,
-                      controller: _emailController,
-                      validator: (val) {
-                        if (val == '') {
-                          return 'Invalid Email';
+                    text: 'Email Address',
+                  ),
+                  hSpace(15),
+                  CustomTextFormField(
+                    keyboardType: TextInputType.text,
+                    isPassword: true,
+                    validator: (val) {
+                      if (val == '') {
+                        return 'Please enter a password';
+                      }
+                      return null;
+                    },
+                    controller: _passwordController,
+                    icon: const Icon(
+                      Icons.lock,
+                      size: 22,
+                    ),
+                    text: 'Password',
+                  ),
+                  hSpace(15),
+                  SizedBox(
+                    width: 150.w,
+                    child: PrimaryElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          _emailController.clear();
+                          _passwordController.clear();
+                          Get.to(
+                            const HomePage(),
+                            transition: Transition.downToUp,
+                            curve: Curves.easeInOut,
+                          );
+                        } else {
+                          print('Form Invalid');
                         }
-                        return null;
                       },
-                      icon: const Icon(
-                        Icons.mail,
-                        size: 22,
-                      ),
-                      text: 'Email Address',
+                      label: 'Login',
                     ),
-                    hSpace(15),
-                    CustomTextFormField(
-                      keyboardType: TextInputType.text,
-                      isPassword: true,
-                      validator: (val) {
-                        if (val == '') {
-                          return 'Please enter a password';
-                        }
-                        return null;
-                      },
-                      controller: _passwordController,
-                      icon: const Icon(
-                        Icons.lock,
-                        size: 22,
-                      ),
-                      text: 'Password',
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Forgot Password",
+                      style: TextStyles.textButtonLabelStyle,
                     ),
-                    hSpace(15),
-                    SizedBox(
-                      width: 150.w,
-                      child: PrimaryElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            _emailController.clear();
-                            _passwordController.clear();
-                            Get.to(
-                              const HomePage(),
-                              transition: Transition.downToUp,
-                              curve: Curves.easeInOut,
-                            );
-                          } else {
-                            print('Form Invalid');
-                          }
-                        },
-                        label: 'Login',
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Forgot Password",
-                        style: TextStyles.textButtonLabelStyle,
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            ],
+                  )
+                ],
+              ),
+            ),
           ),
         ),
       ),
