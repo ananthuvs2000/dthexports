@@ -5,6 +5,7 @@ import 'package:dth/screens/standard/outgoing/outgoing_page.dart';
 import 'package:dth/screens/standard/production/accepted_batch_selection.dart';
 import 'package:dth/screens/standard/production/production_day_end.dart';
 import 'package:dth/screens/standard/production/production_day_start.dart';
+import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/theme/text_sizing.dart';
 import 'package:dth/_common_widgets/spacer.dart';
@@ -32,7 +33,7 @@ class _StandardScreenState extends State<StandardScreen> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          foregroundColor: Colors.black,
+          foregroundColor: primaryColor,
         ),
         backgroundColor: Colors.transparent,
         body: Padding(

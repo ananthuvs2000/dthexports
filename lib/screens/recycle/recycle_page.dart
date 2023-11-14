@@ -30,7 +30,7 @@ class _ProductionPageState extends State<RecyclePage> {
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          foregroundColor: Colors.black,
+          foregroundColor: primaryColor,
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(
