@@ -64,7 +64,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           focusNode: focusNode,
           // Styles
           style: const TextStyle(
-            fontSize: 15,
+            fontSize: 14,
             fontWeight: FontWeight.w500,
             letterSpacing: 0,
           ),
@@ -93,11 +93,16 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             ),
             prefixIcon: widget.icon,
             hintText: widget.text,
-            helperStyle: TextStyle(
-              color: Colors.black.withOpacity(0.25),
-              fontSize: 15,
+            hintStyle: TextStyle(
+              color: Colors.black.withOpacity(0.5),
+              fontSize: 14,
               letterSpacing: 0,
               fontWeight: FontWeight.normal,
+            ),
+            errorStyle: TextStyle(
+              color: formFieldErrorColor,
+              fontSize: 12,
+              letterSpacing: 0,
             ),
             filled: true,
             fillColor: inversePrimaryColor,

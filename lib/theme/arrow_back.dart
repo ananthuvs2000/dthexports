@@ -13,11 +13,14 @@ class ArrowBack extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.only(left: 15, top: 5),
+        padding: const EdgeInsets.only(
+          left: 15,
+          top: 5,
+        ),
         child: CircleAvatar(
           backgroundColor: primaryColor.withOpacity(0.25),
           foregroundColor: primaryColor.withOpacity(0.75),
-          radius: 30,
+          radius: 35,
           child: const Icon(FontAwesomeIcons.arrowLeft),
         ),
       ),

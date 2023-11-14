@@ -6,7 +6,7 @@ const double formFieldBorderRadius = globalBorderRadius;
 const double teamManagerBorderRadius = globalBorderRadius;
 const double dashboardItemBorderRadius = globalBorderRadius;
 
-const double globalBorderRadius = 15;
+const double globalBorderRadius = 20;
 
 class PageLayout {
   static double get pagePaddingX => 20.w;

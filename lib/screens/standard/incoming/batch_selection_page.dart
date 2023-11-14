@@ -1,6 +1,7 @@
 import 'package:dth/_providers/itemcheck_provider.dart';
 import 'package:dth/screens/standard/incoming/accept_page.dart';
 import 'package:dth/screens/standard/incoming/widgets/batch_selection_tile.dart';
+import 'package:dth/theme/arrow_back.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/theme/text_sizing.dart';
 import 'package:dth/_common_widgets/error_display_caption.dart';
@@ -18,6 +19,11 @@ class BatchSelectionPage extends StatelessWidget {
       appBar: AppBar(
         foregroundColor: Colors.black,
         backgroundColor: Colors.transparent,
+        automaticallyImplyLeading: false,
+        leading: ArrowBack(
+          onTap: () => Get.back(),
+        ),
+        toolbarHeight: 60,
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),

@@ -1,8 +1,7 @@
-import 'package:dth/_providers/checking_provider.dart';
 import 'package:dth/_providers/itemcheck_provider.dart';
-import 'package:dth/screens/standard/incoming/accept_page.dart';
 import 'package:dth/screens/standard/incoming/widgets/batch_selection_tile.dart';
 import 'package:dth/screens/standard/production/production_day_start.dart';
+import 'package:dth/theme/arrow_back.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/theme/text_sizing.dart';
 import 'package:dth/_common_widgets/error_display_caption.dart';
@@ -20,6 +19,11 @@ class AccepedBatchSelectionPage extends StatelessWidget {
       appBar: AppBar(
         foregroundColor: Colors.black,
         backgroundColor: Colors.transparent,
+        automaticallyImplyLeading: false,
+        toolbarHeight: 60,
+        leading: ArrowBack(
+          onTap: () => Get.back(),
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
@@ -53,8 +57,8 @@ class AccepedBatchSelectionPage extends StatelessWidget {
                             quantityChecked: item.quantityChecked,
                             status: item.status,
                             onTap: () => Get.to(
-                              () => DayStart(batchCode: item.batchCode,
-
+                              () => DayStart(
+                                batchCode: item.batchCode,
                               ),
                               transition: Transition.rightToLeft,
                               preventDuplicates: true,
