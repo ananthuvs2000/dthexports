@@ -8,7 +8,7 @@ const mainFont = 'Instrument';
 AppBarTheme dthAppbarTheme = AppBarTheme(
   backgroundColor: primaryColor,
   foregroundColor: Colors.white,
-  toolbarHeight: 50.sp,
+  toolbarHeight: 55.h,
   systemOverlayStyle: SystemUiOverlayStyle.dark,
   centerTitle: true,
   titleTextStyle: const TextStyle(

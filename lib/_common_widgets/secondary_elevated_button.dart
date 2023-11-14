@@ -16,42 +16,54 @@ class SecondaryElevatedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
-    return (icon == null)
-        ? ElevatedButton(
-            onPressed: onPressed,
-            style: secondaryElevatedButtonTheme,
-            child: Text(
-              label,
-              style: TextStyle(
-                fontSize: 15,
-                color: theme.primary,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(globalBorderRadius),
+        boxShadow: [
+          BoxShadow(
+            color: primaryColor.withOpacity(0.15),
+            offset: const Offset(-2, 2),
+            blurRadius: 5,
           )
-        : ElevatedButton.icon(
-            onPressed: onPressed,
-            icon: Icon(
-              icon!,
-              size: 21,
-            ),
-            label: Text(
-              label,
-              style: TextStyle(
-                fontSize: 15,
-                color: theme.primary,
-                fontWeight: FontWeight.bold,
+        ],
+      ),
+      child: (icon == null)
+          ? ElevatedButton(
+              onPressed: onPressed,
+              style: secondaryElevatedButtonTheme,
+              child: Text(
+                label,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: theme.primary,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
+            )
+          : ElevatedButton.icon(
+              onPressed: onPressed,
+              icon: Icon(
+                icon!,
+                size: 21,
+              ),
+              label: Text(
+                label,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: theme.primary,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              style: secondaryElevatedButtonTheme,
             ),
-            style: secondaryElevatedButtonTheme,
-          );
+    );
   }
 }
 
 ButtonStyle secondaryElevatedButtonTheme = ElevatedButton.styleFrom(
   elevation: 0,
   shadowColor: Colors.transparent,
-  backgroundColor: Colors.transparent,
+  backgroundColor: inversePrimaryColor,
   foregroundColor: primaryColor,
   shape: RoundedRectangleBorder(
     side: BorderSide(
