@@ -1,8 +1,10 @@
 import 'package:dth/screens/standard/dispatch/dispatch_page.dart';
+import 'package:dth/screens/standard/incoming/batch_selection_page.dart';
 import 'package:dth/screens/standard/incoming/check_page.dart';
 import 'package:dth/screens/standard/outgoing/outgoing_page.dart';
 import 'package:dth/screens/standard/production/accepted_batch_selection.dart';
-import 'package:dth/screens/standard/production/production_page.dart';
+import 'package:dth/screens/standard/production/production_day_end.dart';
+import 'package:dth/screens/standard/production/production_day_start.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/theme/text_sizing.dart';
 import 'package:dth/_common_widgets/spacer.dart';
@@ -62,9 +64,19 @@ class _StandardScreenState extends State<StandardScreen> {
                 ),
                 SubDashboardItem(
                   icon: CupertinoIcons.hammer_fill,
-                  onTap: () {
-                    Get.to(const ProductionPage(), transition: Transition.rightToLeft);
-                  },
+                  onTap: () => showModalBottomSheet(
+                    constraints: BoxConstraints.tight(const Size.fromHeight(160)),
+                    context: context,
+                    builder: (context) => BottomSheet(
+                      onClosing: () => {},
+                      elevation: 0,
+                      backgroundColor: Colors.white,
+                      builder: (context) => productionModal(
+                        destination1: const BatchSelectionPage(),
+                        destination2: const DayEndScreen(),
+                      ),
+                    ),
+                  ),
                   label: 'Production',
                 ),
                 SubDashboardItem(
@@ -115,6 +127,36 @@ incomingModalSheet({
                       onTap: () => Get.to(() => destination2, transition: Transition.downToUp),
                       label: 'Accepting',
                       icon: Icons.check)),
+            ],
+          ),
+        ],
+      ),
+    );
+
+productionModal({
+  required Widget destination1,
+  required Widget destination2,
+}) =>
+    Padding(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          hSpace(5),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                  child: SubDashboardItem(
+                      onTap: () => Get.to(() => destination1, transition: Transition.downToUp),
+                      label: 'Day Start',
+                      icon: Icons.sunny)),
+              wSpace(10),
+              Expanded(
+                  child: SubDashboardItem(
+                      onTap: () => Get.to(() => destination2, transition: Transition.downToUp),
+                      label: 'Day End',
+                      icon: Icons.nightlight_round)),
             ],
           ),
         ],
