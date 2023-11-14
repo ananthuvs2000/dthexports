@@ -50,7 +50,7 @@ class _StandardScreenState extends State<StandardScreen> {
                 crossAxisCount: 2,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
-                childAspectRatio: 1.6,
+                childAspectRatio: 1.5,
                 children: [
                   SubDashboardItem(
                     icon: CupertinoIcons.down_arrow,
