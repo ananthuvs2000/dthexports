@@ -30,8 +30,8 @@ class DashboardOptionContainer extends StatelessWidget {
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: shadowColor.withOpacity(0.75),
-              blurRadius: 7,
+              color: shadowColor.withOpacity(0.5),
+              blurRadius: 10,
             ),
           ],
           gradient: gradient,
@@ -46,7 +46,7 @@ class DashboardOptionContainer extends StatelessWidget {
               size: 30,
               color: Colors.white,
             ),
-            wSpace(20),
+            hSpace(5),
             Text(
               text,
               style: const TextStyle(

@@ -19,18 +19,18 @@ class SubDashboardItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(dashboardItemBorderRadius + 10),
+      borderRadius: BorderRadius.circular(globalBorderRadius),
       child: Ink(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: primaryColor.withOpacity(0.4),
+              color: primaryColor.withOpacity(0.3),
               blurRadius: 10,
             ),
           ],
           gradient: subDashboardOptionGrad,
-          borderRadius: BorderRadius.circular(dashboardItemBorderRadius + 10),
+          borderRadius: BorderRadius.circular(globalBorderRadius),
         ),
         child: Center(
           child: Column(

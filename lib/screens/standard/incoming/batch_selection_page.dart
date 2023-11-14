@@ -17,13 +17,13 @@ class BatchSelectionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: Colors.black,
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
         leading: ArrowBack(
           onTap: () => Get.back(),
         ),
         toolbarHeight: 60,
+        leadingWidth: 70,
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),

@@ -53,10 +53,10 @@ class LoginPg extends StatelessWidget {
                       return null;
                     },
                     icon: const Icon(
-                      Icons.mail,
+                      Icons.mail_outline_rounded,
                       size: 22,
                     ),
-                    text: 'Email Address',
+                    hint: 'Email Address',
                   ),
                   hSpace(15),
                   CustomTextFormField(
@@ -70,10 +70,10 @@ class LoginPg extends StatelessWidget {
                     },
                     controller: _passwordController,
                     icon: const Icon(
-                      Icons.lock,
+                      Icons.lock_outline_rounded,
                       size: 22,
                     ),
-                    text: 'Password',
+                    hint: 'Password',
                   ),
                   hSpace(15),
                   SizedBox(

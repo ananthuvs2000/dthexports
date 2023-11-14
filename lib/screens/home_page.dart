@@ -22,32 +22,39 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage(
-          'assets/images/loginbg.png',
-        ),fit: BoxFit.cover)
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(
+            'assets/images/loginbg.png',
+          ),
+          fit: BoxFit.cover,
+        ),
       ),
       child: Scaffold(
-       backgroundColor: Colors.transparent,
+        backgroundColor: Colors.transparent,
         body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX+10),
+            padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX + 10),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                
-                hSpace(70),
+                Image.asset(
+                  'assets/images/appbar.jpg',
+                  height: 50.h,
+                  fit: BoxFit.fitHeight,
+                ),
+                hSpace(50),
                 GridView.count(
                   shrinkWrap: true,
                   crossAxisCount: 2,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 15,
+                  crossAxisSpacing: 15,
                   childAspectRatio: 1.5,
                   children: [
                     DashboardOptionContainer(
-                      gradient: primaryButtonGradient,
-                      shadowColor: secondaryColor,
+                      gradient: dashboardOptionGrad3,
+                      shadowColor: primaryColor,
                       icon: CupertinoIcons.building_2_fill,
                       text: 'Standard',
                       onTap: () {
@@ -70,8 +77,8 @@ class _HomePageState extends State<HomePage> {
                       },
                     ),
                     DashboardOptionContainer(
-                      gradient: dashboardOptionGrad3,
-                      shadowColor: Colors.deepPurple,
+                      gradient: primaryButtonGradient,
+                      shadowColor: Colors.indigo,
                       icon: CupertinoIcons.doc_chart_fill,
                       text: 'Reports',
                       onTap: () {
@@ -93,16 +100,6 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 hSpace(60),
-                Row(mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/images/appbar.jpg',
-                      height: 40.h,
-                      fit: BoxFit.fitHeight,
-                    ),
-                  ],
-                ),
-               
               ],
             ),
           ),

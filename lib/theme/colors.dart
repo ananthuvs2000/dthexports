@@ -47,7 +47,7 @@ LinearGradient dashboardOptionGrad4 = const LinearGradient(
 //
 LinearGradient subDashboardOptionGrad = LinearGradient(
   colors: [
-    Colors.purple,
+    Colors.deepPurple.shade300,
     Colors.deepPurple,
   ],
   begin: Alignment.topLeft,

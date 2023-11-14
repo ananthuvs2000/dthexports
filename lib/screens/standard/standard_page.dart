@@ -4,7 +4,6 @@ import 'package:dth/screens/standard/incoming/check_page.dart';
 import 'package:dth/screens/standard/outgoing/outgoing_page.dart';
 import 'package:dth/screens/standard/production/accepted_batch_selection.dart';
 import 'package:dth/screens/standard/production/production_day_end.dart';
-import 'package:dth/screens/standard/production/production_day_start.dart';
 import 'package:dth/theme/arrow_back.dart';
 import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
@@ -26,7 +25,7 @@ class _StandardScreenState extends State<StandardScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           image: DecorationImage(
               image: AssetImage(
                 'assets/images/loginbg.png',
@@ -34,7 +33,7 @@ class _StandardScreenState extends State<StandardScreen> {
               fit: BoxFit.cover)),
       child: Scaffold(
         appBar: AppBar(
-          leadingWidth: 60,
+          leadingWidth: 70,
           toolbarHeight: 60,
           leading: ArrowBack(
             onTap: () => Get.back(),
@@ -53,6 +52,7 @@ class _StandardScreenState extends State<StandardScreen> {
                 'Standard',
                 style: TextStyles.veryLargeHeading,
               ),
+              hSpace(5),
               GridView.count(
                 shrinkWrap: true,
                 crossAxisCount: 2,
@@ -104,9 +104,10 @@ class _StandardScreenState extends State<StandardScreen> {
                   SubDashboardItem(
                     icon: CupertinoIcons.up_arrow,
                     onTap: () {
-                      Get.to(const OutGoingScreen(),
-                          transition: Transition.rightToLeftWithFade,
-                          duration: Duration(microseconds: 500));
+                      Get.to(
+                        const OutGoingScreen(),
+                        transition: Transition.rightToLeft,
+                      );
                     },
                     label: 'Outgoing',
                   ),
@@ -139,7 +140,7 @@ incomingModalSheet({
                       onTap: () => Get.to(() => destination1, transition: Transition.downToUp),
                       label: 'Checking',
                       icon: Icons.search)),
-              wSpace(10),
+              wSpace(15),
               Expanded(
                   child: SubDashboardItem(
                       onTap: () => Get.to(() => destination2, transition: Transition.downToUp),
@@ -169,7 +170,7 @@ productionModal({
                       onTap: () => Get.to(() => destination1, transition: Transition.downToUp),
                       label: 'Day Start',
                       icon: Icons.sunny)),
-              wSpace(10),
+              wSpace(15),
               Expanded(
                   child: SubDashboardItem(
                       onTap: () => Get.to(() => destination2, transition: Transition.downToUp),

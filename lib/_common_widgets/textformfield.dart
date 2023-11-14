@@ -1,13 +1,15 @@
+import 'package:dth/_common_widgets/spacer.dart';
 import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
-    required this.icon,
-    required this.text,
+    required this.hint,
     required this.controller,
     required this.validator,
+    this.textAlign,
+    this.icon,
     this.keyboardType,
     this.isPassword,
     super.key,
@@ -17,8 +19,9 @@ class CustomTextFormField extends StatefulWidget {
   final bool? isPassword;
   final TextEditingController controller;
   final String? Function(String?) validator;
-  final Icon icon;
-  final String text;
+  final Icon? icon;
+  final String hint;
+  final TextAlign? textAlign;
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -26,6 +29,7 @@ class CustomTextFormField extends StatefulWidget {
 
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
   late FocusNode focusNode;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -47,8 +51,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             boxShadow: focusNode.hasFocus
                 ? [
                     BoxShadow(
-                      color: primaryColor.withOpacity(0.25),
-                      blurRadius: 10,
+                      color: primaryColor.withOpacity(0.2),
+                      blurRadius: 7,
                     )
                   ]
                 : null,
@@ -61,6 +65,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           keyboardType: widget.keyboardType ?? TextInputType.text,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           expands: false,
+          textAlign: widget.textAlign ?? TextAlign.left,
           focusNode: focusNode,
           // Styles
           style: const TextStyle(
@@ -92,7 +97,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               borderRadius: BorderRadius.circular(globalBorderRadius),
             ),
             prefixIcon: widget.icon,
-            hintText: widget.text,
+            prefix: (widget.icon == null) ? null : wSpace(5),
+            hintText: widget.hint,
             hintStyle: TextStyle(
               color: Colors.black.withOpacity(0.5),
               fontSize: 14,
@@ -108,7 +114,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             fillColor: inversePrimaryColor,
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 10,
-              vertical: 10,
+              vertical: 12,
             ),
           ),
         ),

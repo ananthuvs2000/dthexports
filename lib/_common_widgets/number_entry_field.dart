@@ -1,4 +1,4 @@
-import 'package:dth/_common_widgets/dt_text_field.dart';
+import 'package:dth/_common_widgets/textformfield.dart';
 import 'package:flutter/material.dart';
 
 class NumberEntryField extends StatelessWidget {
@@ -32,9 +32,12 @@ class NumberEntryField extends StatelessWidget {
           ),
         ),
         Flexible(
-          flex: 2,
-          child: DthTextField(
-            hintText: 'XX.XX KG',
+          flex: 1,
+          child: CustomTextFormField(
+            icon: null,
+            keyboardType: TextInputType.number,
+            hint: 'XX.XX KG',
+            textAlign: TextAlign.center,
             controller: controller,
             validator: (value) => validator(value),
           ),

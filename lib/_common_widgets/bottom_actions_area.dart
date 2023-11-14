@@ -17,7 +17,11 @@ class BottomActionsArea extends StatelessWidget {
         vertical: 7,
       ),
       decoration: BoxDecoration(
-        border: Border(top: BorderSide(color: primaryColor.withOpacity(0.5))),
+        border: Border(
+          top: BorderSide(
+            color: primaryColor.withOpacity(0.2),
+          ),
+        ),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.25),

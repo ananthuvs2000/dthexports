@@ -21,6 +21,7 @@ class AccepedBatchSelectionPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
         toolbarHeight: 60,
+        leadingWidth: 60,
         leading: ArrowBack(
           onTap: () => Get.back(),
         ),
