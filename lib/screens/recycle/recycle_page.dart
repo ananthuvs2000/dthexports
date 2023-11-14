@@ -1,6 +1,7 @@
 import 'package:dth/screens/recycle/rcl_day_end_page.dart';
 import 'package:dth/screens/recycle/rcl_day_start_page.dart';
 import 'package:dth/screens/recycle/rcl_add_page.dart';
+import 'package:dth/theme/arrow_back.dart';
 import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/theme/text_sizing.dart';
@@ -29,6 +30,11 @@ class _ProductionPageState extends State<RecyclePage> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
+          leadingWidth: 60,
+          toolbarHeight: 60,
+          leading: ArrowBack(
+            onTap: () => Get.back(),
+          ),
           backgroundColor: Colors.transparent,
           foregroundColor: primaryColor,
         ),
