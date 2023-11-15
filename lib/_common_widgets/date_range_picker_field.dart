@@ -1,5 +1,4 @@
-import 'package:dth/theme/colors.dart';
-import 'package:dth/theme/layout.dart';
+import 'package:dth/_common_widgets/textformfield.dart';
 import 'package:dth/theme/text_sizing.dart';
 import 'package:flutter/material.dart';
 
@@ -8,11 +7,13 @@ class DateRangePicker extends StatefulWidget {
     required this.label,
     required this.controller,
     required this.onTap,
+    this.validator,
     super.key,
   });
   final TextEditingController controller;
   final void Function() onTap;
   final String label;
+  final String? Function(String?)? validator;
 
   @override
   State<DateRangePicker> createState() => _DateRangePickerState();
@@ -35,43 +36,14 @@ class _DateRangePickerState extends State<DateRangePicker> {
         ),
         Flexible(
           flex: 2,
-          child: TextFormField(
-            controller: widget.controller,
+          child: CustomTextFormField(
             onTap: widget.onTap,
-            readOnly: true,
-            style: const TextStyle(),
-            decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.black.withOpacity(0.5),
-                ),
-                borderRadius: const BorderRadius.all(Radius.circular(formFieldBorderRadius)),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: AppColors.primaryColor,
-                ),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(formFieldBorderRadius),
-                ),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(formFieldBorderRadius),
-                ),
-                borderSide: BorderSide(
-                  color: AppColors.formFieldErrorColor,
-                ),
-              ),
-              hintText: 'Date Range',
-              hintStyle: const TextStyle(fontSize: 14),
-              errorStyle: TextStyle(color: AppColors.formFieldErrorColor),
-              suffixIcon: const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Icon(Icons.date_range),
-              ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
-            ),
+            hint: 'Period',
+            controller: widget.controller,
+            isReadOnly: true,
+            suffixIcon: const Icon(Icons.calendar_month),
+            textAlign: TextAlign.center,
+            validator: (value) => widget.validator!(value),
           ),
         ),
       ],

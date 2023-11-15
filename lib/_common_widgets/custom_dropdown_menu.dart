@@ -78,11 +78,11 @@ class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
           decoration: InputDecoration(
             filled: true,
             fillColor: AppColors.inversePrimaryColor,
-            errorStyle: const TextStyle(
+            errorStyle: TextStyle(
               fontSize: 12,
               height: 1,
               fontFamily: mainFont,
-              color: Colors.red,
+              color: AppColors.formFieldErrorColor,
             ),
             hoverColor: AppColors.primaryColor,
             focusColor: AppColors.primaryColor,

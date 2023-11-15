@@ -10,26 +10,30 @@ class ArrowBack extends StatelessWidget {
   final void Function() onTap;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      customBorder: const CircleBorder(),
-      onTap: onTap,
-      child: Container(
-        margin: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          color: AppColors.primaryColor,
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.primaryColor.withOpacity(0.4),
-              blurRadius: 5,
-            )
-          ],
-        ),
+    return Container(
+      margin: const EdgeInsets.all(9),
+      decoration: BoxDecoration(
+        color: AppColors.secondaryColor,
+        shape: BoxShape.circle,
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.primaryColor.withOpacity(0.5),
+            blurRadius: 7,
+            offset: const Offset(-2, 1),
+          )
+        ],
+      ),
+      child: InkWell(
+        customBorder: const CircleBorder(),
+        onTap: onTap,
         child: CircleAvatar(
           backgroundColor: AppColors.primaryColor,
           foregroundColor: AppColors.inversePrimaryColor,
           radius: 35,
-          child: const Icon(FontAwesomeIcons.arrowLeft),
+          child: const Icon(
+            FontAwesomeIcons.arrowLeft,
+            size: 20,
+          ),
         ),
       ),
     );

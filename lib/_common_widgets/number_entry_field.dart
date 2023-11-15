@@ -34,12 +34,12 @@ class NumberEntryField extends StatelessWidget {
         Flexible(
           flex: 1,
           child: CustomTextFormField(
-            icon: null,
+            prefixIcon: null,
             keyboardType: TextInputType.number,
             hint: 'XX.XX KG',
             textAlign: TextAlign.center,
             controller: controller,
-            validator: (value) => validator(value),
+            validator: (value) => validator(value)!,
           ),
         ),
       ],

@@ -66,182 +66,193 @@ class _CheckPageState extends State<CheckPage> {
     final checkProvider = Provider.of<CheckingProvider>(context);
     // final dateTimeProvider = Provider.of<DateTimeProvider>(context);
     // UI
-    return Scaffold(
-      appBar: AppBar(
-        systemOverlayStyle: SystemUiOverlayStyle.light,
-        elevation: 0,
-        scrolledUnderElevation: 0,
-        title: const Text('Checking'),
-        bottom: appBarUnderline,
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage(
+              'assets/images/bg_pattern_hex.png',
+            ),
+            fit: BoxFit.cover),
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
-        child: Form(
-          key: _formKey,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                //! DateTime from API Consumer
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          systemOverlayStyle: SystemUiOverlayStyle.light,
+          elevation: 0,
+          scrolledUnderElevation: 0,
+          title: const Text('Checking'),
+          bottom: appBarUnderline,
+        ),
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
+          child: Form(
+            key: _formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  //! DateTime from API Consumer
 
-                // Venue
-                hSpace(20),
-                DropdownMenuField(
-                  validator: (value) {
-                    if (value == null) {
-                      return 'Select a venue';
-                    } else {
-                      return null;
-                    }
-                  },
-                  fieldLabel: 'Venue',
-                  dropDownLabel: 'Select the venue',
-                  dropdownEntries: const [
-                    DropdownMenuItem(value: 'In-House', child: Text('In House')),
-                    DropdownMenuItem(value: 'Out-Station', child: Text('Out Station')),
-                  ],
-                  onSelected: (value) {
-                    setState(() {
-                      _selectedVenue = value;
-                    });
-                    print(_selectedVenue);
-                  },
-                ),
-                hSpace(15),
+                  // Venue
+                  hSpace(20),
+                  DropdownMenuField(
+                    validator: (value) {
+                      if (value == null) {
+                        return 'Select a venue';
+                      } else {
+                        return null;
+                      }
+                    },
+                    fieldLabel: 'Venue',
+                    dropDownLabel: 'Select the venue',
+                    dropdownEntries: const [
+                      DropdownMenuItem(value: 'In-House', child: Text('In House')),
+                      DropdownMenuItem(value: 'Out-Station', child: Text('Out Station')),
+                    ],
+                    onSelected: (value) {
+                      setState(() {
+                        _selectedVenue = value;
+                      });
+                      print(_selectedVenue);
+                    },
+                  ),
+                  hSpace(15),
 
-                //! Team List From Team API Consumer
-                Consumer<VendorProvider>(builder: (context, vendorData, child) {
-                  if (vendorProvider.vendors.isNotEmpty) {
-                    return DropdownMenuField(
-                      validator: (value) {
-                        if (value == null) {
-                          return 'Select a vendor';
-                        } else {
-                          return null;
-                        }
-                      },
-                      fieldLabel: 'Vendor',
-                      dropDownLabel: 'Select Vendor',
-                      // from API
-                      dropdownEntries: vendorProvider.vendors
-                          .map(
-                            (vendor) => DropdownMenuItem(
-                              value: vendor.id.toString(),
-                              child: Text(vendor.vendorCode),
-                            ),
-                          )
-                          .toList(),
-                      onSelected: (value) {
-                        setState(() {
-                          _selectedVendor = value;
-                        });
-                      },
-                    );
-                  }
-                  return const Center(child: LoadingDisplayCaption(message: 'Loading Vendor Info'));
-                }),
-                hSpace(15),
-                NumberEntryField(
-                  label: 'Total Qty Checked',
-                  controller: _quantityController,
-                  validator: (value) {
-                    if (value == '') {
-                      return 'Invalid Number';
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-
-                // Add employees button
-                hSpace(15),
-                //! 1. Fetching all employees from employees provider
-                //! 2 Creating a team from the given employees (duplicate checking done with Set)
-                Consumer<EmployeeProvider>(
-                  builder: (context, employeeData, child) {
-                    if (employeeData.employees.isEmpty) {
-                      return const Center(
-                          child: ErrorDisplayCaption(message: 'No Employees Available'));
-                    } else {
-                      return Column(
-                        children: [
-                          SizedBox(
-                            width: double.infinity,
-                            child: SecondaryElevatedButton(
-                              onPressed: () => showEmployeePicker(
-                                context: context,
-                                employees: employeeData.employees,
-                                addedEmployees: checkProvider.addedEmpoyees,
+                  //! Team List From Team API Consumer
+                  Consumer<VendorProvider>(builder: (context, vendorData, child) {
+                    if (vendorProvider.vendors.isNotEmpty) {
+                      return DropdownMenuField(
+                        validator: (value) {
+                          if (value == null) {
+                            return 'Select a vendor';
+                          } else {
+                            return null;
+                          }
+                        },
+                        fieldLabel: 'Vendor',
+                        dropDownLabel: 'Select Vendor',
+                        // from API
+                        dropdownEntries: vendorProvider.vendors
+                            .map(
+                              (vendor) => DropdownMenuItem(
+                                value: vendor.id.toString(),
+                                child: Text(vendor.vendorCode),
                               ),
-                              label: 'Select Employees',
-                              icon: Icons.add,
-                            ),
-                          ),
-                        ],
-                      );
-                    }
-                  },
-                ),
-                hSpace(15),
-                // Future for fetching picked employees
-                Consumer<CheckingProvider>(
-                  builder: (context, selectedEmployeeState, _) {
-                    if (selectedEmployeeState.addedEmpoyees.isEmpty) {
-                      return const Center(
-                        child: ErrorDisplayCaption(
-                          message: 'Please select Employees',
-                        ),
-                      );
-                    } else {
-                      return Column(
-                        children: selectedEmployeeState.addedEmpoyees
-                            .map((e) => SelecteEmployeeTile(employee: e))
+                            )
                             .toList(),
+                        onSelected: (value) {
+                          setState(() {
+                            _selectedVendor = value;
+                          });
+                        },
                       );
                     }
-                  },
-                )
-              ],
+                    return const Center(
+                        child: LoadingDisplayCaption(message: 'Loading Vendor Info'));
+                  }),
+                  hSpace(15),
+                  NumberEntryField(
+                    label: 'Total Qty Checked',
+                    controller: _quantityController,
+                    validator: (value) {
+                      if (value == '') {
+                        return 'Invalid Number';
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+
+                  // Add employees button
+                  hSpace(15),
+                  //! 1. Fetching all employees from employees provider
+                  //! 2 Creating a team from the given employees (duplicate checking done with Set)
+                  Consumer<EmployeeProvider>(
+                    builder: (context, employeeData, child) {
+                      if (employeeData.employees.isEmpty) {
+                        return const Center(
+                            child: ErrorDisplayCaption(message: 'No Employees Available'));
+                      } else {
+                        return Column(
+                          children: [
+                            SizedBox(
+                              width: double.infinity,
+                              child: SecondaryElevatedButton(
+                                onPressed: () => showEmployeePicker(
+                                  context: context,
+                                  employees: employeeData.employees,
+                                  addedEmployees: checkProvider.addedEmpoyees,
+                                ),
+                                label: 'Select Employees',
+                                icon: Icons.add,
+                              ),
+                            ),
+                          ],
+                        );
+                      }
+                    },
+                  ),
+                  hSpace(15),
+                  // Future for fetching picked employees
+                  Consumer<CheckingProvider>(
+                    builder: (context, selectedEmployeeState, _) {
+                      if (selectedEmployeeState.addedEmpoyees.isEmpty) {
+                        return const Center(
+                          child: ErrorDisplayCaption(
+                            message: 'Please select Employees',
+                          ),
+                        );
+                      } else {
+                        return Column(
+                          children: selectedEmployeeState.addedEmpoyees
+                              .map((e) => SelecteEmployeeTile(employee: e))
+                              .toList(),
+                        );
+                      }
+                    },
+                  )
+                ],
+              ),
             ),
           ),
         ),
-      ),
-      bottomNavigationBar: BottomActionsArea(children: [
-        Expanded(
-          child: PrimaryElevatedButton(
-            onPressed: () async {
-              if (_formKey.currentState!.validate()) {
-                final String hash = hashEmployeeIdsIntoString(checkProvider.addedEmpoyees);
-                if (hash == '') {
-                  ScaffoldMessenger.of(context)
-                      .showSnackBar(errorSnackbar('Failed to assign employees'));
-                }
-                final resOfTeamCreation = TeamProvider().postToTeam(hash);
-                final res = CheckingProvider().postToCheck(
-                  _selectedVenue,
-                  _selectedVendor,
-                  _quantityController.text,
-                  hash,
-                );
-                if (await resOfTeamCreation && await res) {
-                  ScaffoldMessenger.of(context)
-                      .showSnackBar(successSnackbar('Succesfully Posted!'));
+        bottomNavigationBar: BottomActionsArea(children: [
+          Expanded(
+            child: PrimaryElevatedButton(
+              onPressed: () async {
+                if (_formKey.currentState!.validate()) {
+                  final String hash = hashEmployeeIdsIntoString(checkProvider.addedEmpoyees);
+                  if (hash == '') {
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(errorSnackbar('Failed to assign employees'));
+                  }
+                  final resOfTeamCreation = TeamProvider().postToTeam(hash);
+                  final res = CheckingProvider().postToCheck(
+                    _selectedVenue,
+                    _selectedVendor,
+                    _quantityController.text,
+                    hash,
+                  );
+                  if (await resOfTeamCreation && await res) {
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(successSnackbar('Succesfully Posted!'));
 
-                  // Clearing all fields and dropdowns
-                  checkProvider.addedEmpoyees.clear();
-                  _formKey.currentState!.reset();
-                  _quantityController.clear();
+                    // Clearing all fields and dropdowns
+                    checkProvider.addedEmpoyees.clear();
+                    _formKey.currentState!.reset();
+                    _quantityController.clear();
+                  } else {
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(errorSnackbar('Failed to post material check!'));
+                  }
                 } else {
-                  ScaffoldMessenger.of(context)
-                      .showSnackBar(errorSnackbar('Failed to post material check!'));
+                  ScaffoldMessenger.of(context).showSnackBar(errorSnackbar('Invalid Submission!'));
                 }
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(errorSnackbar('Invalid Submission!'));
-              }
-            },
-            label: 'Post',
+              },
+              label: 'Post',
+            ),
           ),
-        ),
-      ]),
+        ]),
+      ),
     );
   }
 

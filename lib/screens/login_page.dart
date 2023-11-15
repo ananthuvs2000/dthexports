@@ -52,7 +52,7 @@ class LoginPg extends StatelessWidget {
                       }
                       return null;
                     },
-                    icon: const Icon(
+                    prefixIcon: const Icon(
                       Icons.mail_outline_rounded,
                       size: 22,
                     ),
@@ -69,7 +69,7 @@ class LoginPg extends StatelessWidget {
                       return null;
                     },
                     controller: _passwordController,
-                    icon: const Icon(
+                    prefixIcon: const Icon(
                       Icons.lock_outline_rounded,
                       size: 22,
                     ),

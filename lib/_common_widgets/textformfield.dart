@@ -7,21 +7,27 @@ class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
     required this.hint,
     required this.controller,
-    required this.validator,
+    this.validator,
     this.textAlign,
-    this.icon,
+    this.prefixIcon,
+    this.suffixIcon,
     this.keyboardType,
     this.isPassword,
+    this.isReadOnly,
+    this.onTap,
     super.key,
   });
 
   final TextInputType? keyboardType;
   final bool? isPassword;
   final TextEditingController controller;
-  final String? Function(String?) validator;
-  final Icon? icon;
+  final String? Function(String?)? validator;
+  final Icon? prefixIcon;
+  final Icon? suffixIcon;
   final String hint;
   final TextAlign? textAlign;
+  final void Function()? onTap;
+  final bool? isReadOnly;
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -59,14 +65,16 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           ),
         ),
         TextFormField(
+          onTap: widget.onTap,
           controller: widget.controller,
-          validator: (value) => widget.validator(value),
+          validator: (value) => widget.validator!(value),
           obscureText: widget.isPassword ?? false,
           keyboardType: widget.keyboardType ?? TextInputType.text,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           expands: false,
           textAlign: widget.textAlign ?? TextAlign.left,
           focusNode: focusNode,
+          readOnly: widget.isReadOnly ?? false,
           // Styles
           style: const TextStyle(
             fontSize: 14,
@@ -93,11 +101,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               borderRadius: BorderRadius.circular(globalBorderRadius),
             ),
             errorBorder: OutlineInputBorder(
-              borderSide:  BorderSide(color: AppColors.formFieldErrorColor),
+              borderSide: BorderSide(color: AppColors.formFieldErrorColor),
               borderRadius: BorderRadius.circular(globalBorderRadius),
             ),
-            prefixIcon: widget.icon,
-            prefix: (widget.icon == null) ? null : wSpace(5),
+            prefixIcon: widget.prefixIcon,
+            suffixIcon: widget.suffixIcon,
             hintText: widget.hint,
             hintStyle: TextStyle(
               color: Colors.black.withOpacity(0.5),

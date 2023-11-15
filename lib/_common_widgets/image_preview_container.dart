@@ -18,6 +18,13 @@ class ImagePreviewBox extends StatelessWidget {
             height: 250,
             margin: const EdgeInsets.symmetric(vertical: 10),
             decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.3),
+                  offset: const Offset(-1, 1),
+                  blurRadius: 15,
+                )
+              ],
               borderRadius: BorderRadius.circular(globalBorderRadius),
               image: DecorationImage(
                 fit: BoxFit.cover,

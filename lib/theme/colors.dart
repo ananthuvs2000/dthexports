@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static Color get primaryColor => Color.fromRGBO(70, 20, 203, 1);
-  static Color get secondaryColor => Color.fromRGBO(100, 103, 250, 1);
+  static Color get primaryColor => const Color.fromRGBO(70, 20, 203, 1);
+  static Color get secondaryColor => const Color.fromRGBO(100, 103, 250, 1);
   static Color get inversePrimaryColor => Colors.white;
 
-// Form Styles
-  static Color get formFieldErrorColor => Color.fromARGB(255, 222, 50, 80);
+// Form Colors
+  static Color get formFieldErrorColor => const Color.fromARGB(255, 222, 50, 80);
   static Color get formFieldHintColor => Colors.black.withOpacity(0.3);
   static Color get formFieldPrefixIconColor => Colors.black.withOpacity(0.5);
   static Color get formFieldEnabledBorderColor => Colors.black.withOpacity(0.5);
@@ -14,11 +14,10 @@ class AppColors {
 }
 
 class AppGradients {
-  //? Gradients
   static LinearGradient get dashboardOptionGrad1 => LinearGradient(
         colors: [
-          Colors.deepOrange.shade400,
           Colors.red.shade600,
+          Colors.deepOrange.shade400,
         ],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
@@ -26,16 +25,16 @@ class AppGradients {
 
   static LinearGradient get dashboardOptionGrad2 => LinearGradient(
         colors: [
-          Colors.green.shade500,
           Colors.teal.shade600,
+          Colors.green.shade500,
         ],
         begin: Alignment.topLeft,
         end: Alignment.bottomCenter,
       );
-  static LinearGradient get dashboardOptionGrad3 => const LinearGradient(
+  static LinearGradient get dashboardOptionGrad3 => LinearGradient(
         colors: [
-          Colors.purple,
           Colors.deepPurple,
+          Colors.purple.shade500,
         ],
         begin: Alignment.topLeft,
         end: Alignment.bottomCenter,
@@ -46,7 +45,6 @@ class AppGradients {
         end: Alignment.bottomCenter,
       );
 
-//
   static LinearGradient get subDashboardOptionGrad => LinearGradient(
         colors: [
           Colors.deepPurple.shade500,
@@ -56,11 +54,10 @@ class AppGradients {
         end: Alignment.bottomCenter,
       );
 
-// Primary
   static LinearGradient get primaryButtonGradient => LinearGradient(
         colors: [
-          AppColors.secondaryColor,
           AppColors.primaryColor,
+          AppColors.secondaryColor,
         ],
         begin: Alignment.topCenter,
         end: Alignment.bottomRight,

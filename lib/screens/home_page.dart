@@ -44,13 +44,13 @@ class _HomePageState extends State<HomePage> {
                   height: 50.h,
                   fit: BoxFit.fitHeight,
                 ),
-                hSpace(50),
+                hSpace(40),
                 GridView.count(
                   shrinkWrap: true,
                   crossAxisCount: 2,
                   mainAxisSpacing: 15,
                   crossAxisSpacing: 15,
-                  childAspectRatio: 1.5,
+                  childAspectRatio: 1.45,
                   children: [
                     DashboardOptionContainer(
                       gradient: AppGradients.dashboardOptionGrad3,

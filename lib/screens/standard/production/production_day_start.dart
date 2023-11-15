@@ -4,12 +4,10 @@ import 'package:dth/_providers/dropdown_providers/accept_page_form_provider.dart
 import 'package:dth/_providers/image_provider.dart';
 import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
-import 'package:dth/_common_widgets/appbar_underline.dart';
 import 'package:dth/_common_widgets/bottom_actions_area.dart';
 import 'package:dth/_common_widgets/box_info_display.dart';
 import 'package:dth/_common_widgets/drop_down_menu_field.dart';
 import 'package:dth/_common_widgets/dynamic_field_row.dart';
-import 'package:dth/_common_widgets/number_entry_field.dart';
 import 'package:dth/_common_widgets/open_camera_button.dart';
 import 'package:dth/_common_widgets/primary_elevated_button.dart';
 import 'package:dth/_common_widgets/spacer.dart';

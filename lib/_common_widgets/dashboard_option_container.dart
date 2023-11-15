@@ -1,8 +1,6 @@
-import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/_common_widgets/spacer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DashboardOptionContainer extends StatelessWidget {
   const DashboardOptionContainer({
@@ -31,6 +29,7 @@ class DashboardOptionContainer extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: shadowColor.withOpacity(0.5),
+              offset: const Offset(-2, 2),
               blurRadius: 10,
             ),
           ],
@@ -51,7 +50,7 @@ class DashboardOptionContainer extends StatelessWidget {
               text,
               style: const TextStyle(
                 color: Colors.white,
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
