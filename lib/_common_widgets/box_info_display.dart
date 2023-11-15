@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class BoxInfoDisplay extends StatelessWidget {
+class BoxInfoDisplay extends StatefulWidget {
   const BoxInfoDisplay({
     required this.title,
     required this.boxColor,
@@ -20,12 +20,17 @@ class BoxInfoDisplay extends StatelessWidget {
   final String boxWeight;
 
   @override
+  State<BoxInfoDisplay> createState() => _BoxInfoDisplayState();
+}
+
+class _BoxInfoDisplayState extends State<BoxInfoDisplay> {
+  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          title,
+          widget.title,
           style: TextStyles.mainHeadingStyle,
         ),
         const Divider(),
@@ -38,25 +43,25 @@ class BoxInfoDisplay extends StatelessWidget {
             Center(
               child: InfoItem(
                 icon: FontAwesomeIcons.weightHanging,
-                label: boxWeight,
+                label: widget.boxWeight,
               ),
             ),
             Center(
               child: InfoItem(
                 icon: Icons.texture,
-                label: boxTexture,
+                label: widget.boxTexture,
               ),
             ),
             Center(
               child: InfoItem(
                 icon: CupertinoIcons.resize,
-                label: boxSize,
+                label: widget.boxSize,
               ),
             ),
             Center(
               child: InfoItem(
                 icon: Icons.palette,
-                label: boxColor,
+                label: widget.boxColor,
               ),
             ),
           ],
@@ -64,7 +69,6 @@ class BoxInfoDisplay extends StatelessWidget {
       ],
     );
   }
-  // texture, weight, size, color
 }
 
 const infoTextSize = TextStyle(

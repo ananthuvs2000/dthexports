@@ -1,7 +1,7 @@
 import 'package:dth/_common_widgets/image_preview_container.dart';
-import 'package:dth/_providers/checking_provider.dart';
-import 'package:dth/_providers/dropdown_providers/accept_page_form_provider.dart';
+import 'package:dth/_models/production_daystart_model.dart';
 import 'package:dth/_providers/image_provider.dart';
+import 'package:dth/_providers/production_daystart_provider.dart';
 import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/_common_widgets/bottom_actions_area.dart';
@@ -28,8 +28,6 @@ class DayStart extends StatefulWidget {
 
 class _DayStartState extends State<DayStart> {
   late CameraProvider _imageProvider;
-  late AcceptPageDropDownProvider _dropDownProvider;
-  late CheckingProvider _checkingProvider;
 
   @override
   void initState() {
@@ -49,6 +47,9 @@ class _DayStartState extends State<DayStart> {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<ProductionDayStartProvider>(context, listen: true)
+        .fetchDataAndUpdateState(widget.batchCode);
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -68,29 +69,44 @@ class _DayStartState extends State<DayStart> {
               hSpace(20),
               DynamicFieldRow(label: 'Batch No:', value: widget.batchCode),
               hSpace(15),
-              Consumer<CheckingProvider>(
-                builder: (context, checkState, child) => DropdownMenuField(
-                  validator: (value) {
-                    return '';
-                  },
-                  fieldLabel: 'Box No:',
-                  dropDownLabel: 'Select Box',
-                  dropdownEntries: [],
-                  onSelected: (selectedVal) {
-                    print(selectedVal.toString());
-                  },
-                ),
+              Consumer<ProductionDayStartProvider>(
+                builder: (context, provider, _) {
+                  return Column(
+                    children: [
+                      DropdownMenuField(
+                        validator: (value) {
+                          return null;
+                        },
+                        fieldLabel: 'Box No:',
+                        dropDownLabel: 'Select Box',
+                        dropdownEntries: provider.boxDataList
+                            .map(
+                              (box) => DropdownMenuItem(
+                                value: box.boxRef,
+                                child: Text(box.boxRef),
+                              ),
+                            )
+                            .toList(),
+                        onSelected: (selectedVal) {
+                          // Fetch box data based on selected boxRef
+                          provider.findBoxByBoxRef(selectedVal);
+                        },
+                      ),
+                      // Update BoxInfoDisplay parameters
+                      (provider.selectedBox != null)
+                          ? BoxInfoDisplay(
+                              title: 'Box Details',
+                              boxColor: provider.selectedBox!.colorRef,
+                              boxTexture: provider.selectedBox!.textureRef,
+                              boxSize: provider.selectedBox!.sizeRef,
+                              boxWeight: provider.selectedBox!.materialQty,
+                            )
+                          : SizedBox(),
+                    ],
+                  );
+                },
               ),
-              hSpace(15),
-
-              const BoxInfoDisplay(
-                title: 'Box Details',
-                boxColor: 'Red',
-                boxTexture: 'Curly',
-                boxSize: '13-15',
-                boxWeight: '300 kg',
-              ),
-              const SizedBox(height: 20),
+              hSpace(20),
               const DynamicFieldRow(label: 'Process', value: 'Display Process'),
               hSpace(15),
               DropdownMenuField(
