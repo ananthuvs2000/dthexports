@@ -16,6 +16,7 @@ import 'package:dth/_common_widgets/spacer.dart';
 import 'package:dth/_common_widgets/team_manager_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class DayStart extends StatefulWidget {
@@ -57,6 +58,7 @@ class _DayStartState extends State<DayStart> {
         backgroundColor: primaryColor,
         foregroundColor: inversePrimaryColor,
         title: const Text('Production Day Start'),
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         
       ),
       body: SafeArea(

@@ -23,10 +23,16 @@ class BatchSelectionTile extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
+          gradient: subDashboardOptionGrad,
           borderRadius: BorderRadius.circular(globalBorderRadius),
-          border: Border.all(
-            color: Colors.black.withOpacity(0.25),
-          )),
+          boxShadow: [
+            BoxShadow(
+              color: secondaryColor.withOpacity(0.25),
+              blurRadius: 10,
+              offset: const Offset(-3, 3)
+            )
+          ]
+          ),
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
         focusColor: primaryColor.withOpacity(0.25),
@@ -50,7 +56,7 @@ class BatchSelectionTile extends StatelessWidget {
           textAlign: TextAlign.center,
           style: _trailingStyle,
         ),
-        titleAlignment: ListTileTitleAlignment.bottom,
+        titleAlignment: ListTileTitleAlignment.center,
       ),
     );
   }
@@ -59,13 +65,17 @@ class BatchSelectionTile extends StatelessWidget {
 const TextStyle _batchCodeStyle = TextStyle(
   fontWeight: FontWeight.bold,
   fontSize: 15,
+  color: inversePrimaryColor
 );
-const TextStyle _subtitleStyle = TextStyle(
-  fontWeight: FontWeight.normal,
+ TextStyle _subtitleStyle = TextStyle(
+  fontWeight: FontWeight.w500,
   height: 0,
   fontSize: 13,
+  color: Colors.white.withOpacity(.75)
 );
 const TextStyle _trailingStyle = TextStyle(
   fontWeight: FontWeight.normal,
   fontSize: 10,
+  color: inversePrimaryColor
+
 );
