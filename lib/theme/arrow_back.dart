@@ -14,20 +14,20 @@ class ArrowBack extends StatelessWidget {
       customBorder: const CircleBorder(),
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.all(7),
+        margin: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: primaryColor,
+          color: AppColors.primaryColor,
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
-              color: primaryColor.withOpacity(0.4),
+              color: AppColors.primaryColor.withOpacity(0.4),
               blurRadius: 5,
             )
           ],
         ),
         child: CircleAvatar(
-          backgroundColor: primaryColor,
-          foregroundColor: inversePrimaryColor,
+          backgroundColor: AppColors.primaryColor,
+          foregroundColor: AppColors.inversePrimaryColor,
           radius: 35,
           child: const Icon(FontAwesomeIcons.arrowLeft),
         ),

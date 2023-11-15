@@ -47,7 +47,7 @@ class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
             boxShadow: (focusNode.hasFocus)
                 ? [
                     BoxShadow(
-                      color: primaryColor.withOpacity(0.25),
+                      color: AppColors.primaryColor.withOpacity(0.25),
                       blurRadius: 10,
                     )
                   ]
@@ -63,7 +63,7 @@ class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
           borderRadius: BorderRadius.circular(globalBorderRadius),
           alignment: Alignment.centerLeft,
           padding: EdgeInsets.zero,
-          focusColor: primaryColor,
+          focusColor: AppColors.primaryColor,
           icon: const Icon(Icons.keyboard_arrow_down),
           elevation: 1,
           style: const TextStyle(
@@ -77,15 +77,15 @@ class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
           // Dropdown decoration
           decoration: InputDecoration(
             filled: true,
-            fillColor: inversePrimaryColor,
+            fillColor: AppColors.inversePrimaryColor,
             errorStyle: const TextStyle(
               fontSize: 12,
               height: 1,
               fontFamily: mainFont,
               color: Colors.red,
             ),
-            hoverColor: primaryColor,
-            focusColor: primaryColor,
+            hoverColor: AppColors.primaryColor,
+            focusColor: AppColors.primaryColor,
             isDense: true,
             alignLabelWithHint: false,
             floatingLabelAlignment: FloatingLabelAlignment.center,
@@ -114,7 +114,7 @@ class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
               borderRadius: BorderRadius.circular(globalBorderRadius),
               borderSide: BorderSide(
                 width: 1,
-                color: primaryColor,
+                color: AppColors.primaryColor,
               ),
             ),
             hintStyle: const TextStyle(fontSize: 12),

@@ -15,29 +15,29 @@ class _TableWidgetState extends State<TableWidget> {
       border: TableBorder.all(color: Colors.black54),
       defaultVerticalAlignment: TableCellVerticalAlignment.middle,
       children: [
-        TableRow(decoration: BoxDecoration(color: primaryColor), children: const [
+        TableRow(decoration: BoxDecoration(color: AppColors.primaryColor), children: [
           TableCell(
               child: Padding(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             child: Text(
               'WORKER',
-              style: TextStyle(color: inversePrimaryColor),
+              style: TextStyle(color: AppColors.inversePrimaryColor),
             ),
           )),
           TableCell(
               child: Padding(
-            padding: EdgeInsets.all(8),
-            child: Text('QTY USED', style: TextStyle(color: inversePrimaryColor)),
+            padding: const EdgeInsets.all(8),
+            child: Text('QTY USED', style: TextStyle(color: AppColors.inversePrimaryColor)),
           )),
           TableCell(
               child: Padding(
-            padding: EdgeInsets.all(8),
-            child: Text('OUTPUT', style: TextStyle(color: inversePrimaryColor)),
+            padding: const EdgeInsets.all(8),
+            child: Text('OUTPUT', style: TextStyle(color: AppColors.inversePrimaryColor)),
           )),
           TableCell(
               child: Padding(
-            padding: EdgeInsets.all(8),
-            child: Text('% WASTAGE', style: TextStyle(color: inversePrimaryColor)),
+            padding: const EdgeInsets.all(8),
+            child: Text('% WASTAGE', style: TextStyle(color: AppColors.inversePrimaryColor)),
           ))
         ]),
         ...List.generate(

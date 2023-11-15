@@ -48,21 +48,21 @@ class _DthTextFieldState extends State<DthTextField> {
         //
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: formFieldEnabledBorderColor,
+            color: AppColors.formFieldEnabledBorderColor,
           ),
-          borderRadius: const BorderRadius.all(Radius.circular(globalBorderRadius)),
+          borderRadius:  const BorderRadius.all(Radius.circular(globalBorderRadius)),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: primaryColor),
+          borderSide: BorderSide(color: AppColors.primaryColor),
+          borderRadius:  const BorderRadius.all(Radius.circular(globalBorderRadius)),
+        ),
+        focusedErrorBorder:  OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.formFieldErrorColor),
           borderRadius: const BorderRadius.all(Radius.circular(globalBorderRadius)),
         ),
-        focusedErrorBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: formFieldErrorColor),
-          borderRadius: BorderRadius.all(Radius.circular(globalBorderRadius)),
-        ),
-        errorBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: formFieldErrorColor),
-          borderRadius: BorderRadius.all(Radius.circular(globalBorderRadius)),
+        errorBorder:  OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.formFieldErrorColor),
+          borderRadius: const BorderRadius.all(Radius.circular(globalBorderRadius)),
         ),
         contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       ),

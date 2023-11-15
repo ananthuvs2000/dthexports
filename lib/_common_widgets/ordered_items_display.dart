@@ -35,7 +35,7 @@ class OrderedItemsdisplay extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             decoration: BoxDecoration(
-              color: primaryColor,
+              color: AppColors.primaryColor,
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(formFieldBorderRadius),
                 topRight: Radius.circular(formFieldBorderRadius),

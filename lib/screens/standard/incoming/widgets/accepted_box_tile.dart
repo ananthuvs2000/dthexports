@@ -32,11 +32,11 @@ class AcceptedBoxTile extends StatelessWidget {
           )),
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
-        focusColor: primaryColor.withOpacity(0.25),
-        splashColor: primaryColor,
-        hoverColor: primaryColor,
-        selectedTileColor: primaryColor,
-        selectedColor: primaryColor,
+        focusColor: AppColors.primaryColor.withOpacity(0.25),
+        splashColor: AppColors.primaryColor,
+        hoverColor: AppColors.primaryColor,
+        selectedTileColor: AppColors.primaryColor,
+        selectedColor: AppColors.primaryColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(globalBorderRadius)),
         title: Text(
           'Box No. $boxNum',

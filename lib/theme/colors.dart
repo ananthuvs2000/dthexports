@@ -1,65 +1,68 @@
 import 'package:flutter/material.dart';
 
-final Color primaryColor = Color.fromRGBO(70, 20, 203, 1);
-final Color secondaryColor = Color.fromRGBO(100, 103, 250, 1);
-const Color inversePrimaryColor = Colors.white;
+class AppColors {
+  static Color get primaryColor => Color.fromRGBO(70, 20, 203, 1);
+  static Color get secondaryColor => Color.fromRGBO(100, 103, 250, 1);
+  static Color get inversePrimaryColor => Colors.white;
 
 // Form Styles
-const Color formFieldErrorColor = Color.fromARGB(255, 222, 50, 80);
-final Color formFieldHintColor = Colors.black.withOpacity(0.3);
-final Color formFieldPrefixIconColor = Colors.black.withOpacity(0.5);
-final Color formFieldEnabledBorderColor = Colors.black.withOpacity(0.5);
-final Color formFieldFocusedBorderColor = primaryColor;
+  static Color get formFieldErrorColor => Color.fromARGB(255, 222, 50, 80);
+  static Color get formFieldHintColor => Colors.black.withOpacity(0.3);
+  static Color get formFieldPrefixIconColor => Colors.black.withOpacity(0.5);
+  static Color get formFieldEnabledBorderColor => Colors.black.withOpacity(0.5);
+  static Color get formFieldFocusedBorderColor => primaryColor;
+}
 
-//? Gradients
-//Dashboard
-LinearGradient dashboardOptionGrad1 = LinearGradient(
-  colors: [
-    Colors.deepOrange.shade400,
-    Colors.red.shade600,
-  ],
-  begin: Alignment.topLeft,
-  end: Alignment.bottomRight,
-);
+class AppGradients {
+  //? Gradients
+  static LinearGradient get dashboardOptionGrad1 => LinearGradient(
+        colors: [
+          Colors.deepOrange.shade400,
+          Colors.red.shade600,
+        ],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      );
 
-LinearGradient dashboardOptionGrad2 = LinearGradient(
-  colors: [
-    Colors.green.shade500,
-    Colors.teal.shade600,
-  ],
-  begin: Alignment.topLeft,
-  end: Alignment.bottomCenter,
-);
-LinearGradient dashboardOptionGrad3 = const LinearGradient(
-  colors: [
-    Colors.purple,
-    Colors.deepPurple,
-  ],
-  begin: Alignment.topLeft,
-  end: Alignment.bottomCenter,
-);
-LinearGradient dashboardOptionGrad4 = const LinearGradient(
-  colors: [],
-  begin: Alignment.topLeft,
-  end: Alignment.bottomCenter,
-);
+  static LinearGradient get dashboardOptionGrad2 => LinearGradient(
+        colors: [
+          Colors.green.shade500,
+          Colors.teal.shade600,
+        ],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomCenter,
+      );
+  static LinearGradient get dashboardOptionGrad3 => const LinearGradient(
+        colors: [
+          Colors.purple,
+          Colors.deepPurple,
+        ],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomCenter,
+      );
+  static LinearGradient get dashboardOptionGrad4 => const LinearGradient(
+        colors: [],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomCenter,
+      );
 
 //
-LinearGradient subDashboardOptionGrad = LinearGradient(
-  colors: [
-    Colors.deepPurple.shade300,
-    Colors.deepPurple,
-  ],
-  begin: Alignment.topLeft,
-  end: Alignment.bottomCenter,
-);
+  static LinearGradient get subDashboardOptionGrad => LinearGradient(
+        colors: [
+          Colors.deepPurple.shade500,
+          Colors.deepPurple.shade400,
+        ],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomCenter,
+      );
 
 // Primary
-LinearGradient primaryButtonGradient = LinearGradient(
-  colors: [
-    secondaryColor,
-    primaryColor,
-  ],
-  begin: Alignment.topCenter,
-  end: Alignment.bottomRight,
-);
+  static LinearGradient get primaryButtonGradient => LinearGradient(
+        colors: [
+          AppColors.secondaryColor,
+          AppColors.primaryColor,
+        ],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomRight,
+      );
+}

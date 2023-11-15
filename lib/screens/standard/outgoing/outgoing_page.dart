@@ -46,12 +46,12 @@ class _OutGoingScreenState extends State<OutGoingScreen> {
         elevation: 0,
         scrolledUnderElevation: 0,
         systemOverlayStyle: SystemUiOverlayStyle.light,
-        backgroundColor: primaryColor,
-        foregroundColor: inversePrimaryColor,
+        backgroundColor: AppColors.primaryColor,
+        foregroundColor: AppColors.inversePrimaryColor,
         title: const Text('Outgoing'),
       ),
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
           child: Form(

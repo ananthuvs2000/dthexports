@@ -53,8 +53,8 @@ class _HomePageState extends State<HomePage> {
                   childAspectRatio: 1.5,
                   children: [
                     DashboardOptionContainer(
-                      gradient: dashboardOptionGrad3,
-                      shadowColor: primaryColor,
+                      gradient: AppGradients.dashboardOptionGrad3,
+                      shadowColor: AppColors.primaryColor,
                       icon: CupertinoIcons.building_2_fill,
                       text: 'Standard',
                       onTap: () {
@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                       },
                     ),
                     DashboardOptionContainer(
-                      gradient: dashboardOptionGrad2,
+                      gradient: AppGradients.dashboardOptionGrad2,
                       shadowColor: Colors.green,
                       icon: Icons.recycling_outlined,
                       text: 'Recycle',
@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                       },
                     ),
                     DashboardOptionContainer(
-                      gradient: primaryButtonGradient,
+                      gradient: AppGradients.primaryButtonGradient,
                       shadowColor: Colors.indigo,
                       icon: CupertinoIcons.doc_chart_fill,
                       text: 'Reports',
@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                       },
                     ),
                     DashboardOptionContainer(
-                      gradient: dashboardOptionGrad1,
+                      gradient: AppGradients.dashboardOptionGrad1,
                       shadowColor: Colors.deepOrange,
                       icon: CupertinoIcons.arrow_right_to_line_alt,
                       text: 'Log Out',

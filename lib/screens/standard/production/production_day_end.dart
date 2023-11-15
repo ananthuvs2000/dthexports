@@ -69,15 +69,15 @@ class _DayEndScreenState extends State<DayEndScreen> {
       appBar: AppBar(
         scrolledUnderElevation: 0,
         elevation: 0,
-        backgroundColor: primaryColor,
-        foregroundColor: inversePrimaryColor,
+        backgroundColor: AppColors.primaryColor,
+        foregroundColor: AppColors.inversePrimaryColor,
         title: const Text('Production Day End'),
         systemOverlayStyle: SystemUiOverlayStyle.light,
         
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
             child: Column(

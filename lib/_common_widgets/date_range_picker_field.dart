@@ -49,23 +49,23 @@ class _DateRangePickerState extends State<DateRangePicker> {
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: primaryColor,
+                  color: AppColors.primaryColor,
                 ),
                 borderRadius: const BorderRadius.all(
                   Radius.circular(formFieldBorderRadius),
                 ),
               ),
-              errorBorder: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(
+              errorBorder: OutlineInputBorder(
+                borderRadius: const BorderRadius.all(
                   Radius.circular(formFieldBorderRadius),
                 ),
                 borderSide: BorderSide(
-                  color: formFieldErrorColor,
+                  color: AppColors.formFieldErrorColor,
                 ),
               ),
               hintText: 'Date Range',
               hintStyle: const TextStyle(fontSize: 14),
-              errorStyle: const TextStyle(color: formFieldErrorColor),
+              errorStyle: TextStyle(color: AppColors.formFieldErrorColor),
               suffixIcon: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 child: Icon(Icons.date_range),

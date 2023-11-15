@@ -39,7 +39,7 @@ class _StandardScreenState extends State<StandardScreen> {
             onTap: () => Get.back(),
           ),
           backgroundColor: Colors.transparent,
-          foregroundColor: primaryColor,
+          foregroundColor: AppColors.primaryColor,
         ),
         backgroundColor: Colors.transparent,
         body: Padding(
@@ -56,9 +56,9 @@ class _StandardScreenState extends State<StandardScreen> {
               GridView.count(
                 shrinkWrap: true,
                 crossAxisCount: 2,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                childAspectRatio: 1.5,
+                crossAxisSpacing: 15,
+                mainAxisSpacing: 15,
+                childAspectRatio: 1.4,
                 children: [
                   SubDashboardItem(
                     icon: CupertinoIcons.down_arrow,
@@ -71,7 +71,7 @@ class _StandardScreenState extends State<StandardScreen> {
                         backgroundColor: Colors.white,
                         builder: (context) => incomingModalSheet(
                           destination1: const CheckPage(),
-                          destination2: const AccepedBatchSelectionPage(),
+                          destination2: const BatchSelectionPage(),
                         ),
                       ),
                     ),
@@ -87,7 +87,7 @@ class _StandardScreenState extends State<StandardScreen> {
                         elevation: 0,
                         backgroundColor: Colors.white,
                         builder: (context) => productionModal(
-                          destination1: const BatchSelectionPage(),
+                          destination1: const AccepedBatchSelectionPage(),
                           destination2: const DayEndScreen(),
                         ),
                       ),

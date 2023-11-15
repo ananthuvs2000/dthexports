@@ -17,7 +17,7 @@ class SelecteEmployeeTile extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 10),
       child: ListTile(
         minVerticalPadding: 0,
-        tileColor: primaryColor,
+        tileColor: AppColors.primaryColor,
         contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(globalBorderRadius)),
@@ -26,7 +26,7 @@ class SelecteEmployeeTile extends StatelessWidget {
           radius: 35,
           child: Icon(
             CupertinoIcons.person_fill,
-            color: primaryColor,
+            color: AppColors.primaryColor,
             size: 30,
           ),
         ),

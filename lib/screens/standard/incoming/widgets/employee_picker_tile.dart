@@ -23,7 +23,7 @@ class AddEmployeeTile extends StatelessWidget {
         icon: Icon(
           Icons.add,
           size: 20,
-          color: primaryColor,
+          color: AppColors.primaryColor,
         ),
       ),
     );

@@ -23,16 +23,16 @@ class _ErrorDisplayCaptionState extends State<ErrorDisplayCaption> {
       margin: const EdgeInsets.symmetric(vertical: 5),
       padding: EdgeInsets.all(5.h),
       decoration: BoxDecoration(
-        color: formFieldErrorColor,
+        color: AppColors.formFieldErrorColor,
         borderRadius: BorderRadius.circular(globalBorderRadius),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // Icon
-          const Icon(
+          Icon(
             Icons.error,
-            color: inversePrimaryColor,
+            color: AppColors.inversePrimaryColor,
           ),
           wSpace(5),
           // DateTimeText
@@ -41,8 +41,8 @@ class _ErrorDisplayCaptionState extends State<ErrorDisplayCaption> {
             children: [
               Text(
                 widget.message,
-                style: const TextStyle(
-                  color: inversePrimaryColor,
+                style: TextStyle(
+                  color: AppColors.inversePrimaryColor,
                   fontWeight: FontWeight.w600,
                   fontSize: 14,
                 ),

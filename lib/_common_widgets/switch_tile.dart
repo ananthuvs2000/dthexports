@@ -24,7 +24,8 @@ class _CustomSwitchTileState extends State<CustomSwitchTile> {
       child: SwitchListTile(
         contentPadding: EdgeInsets.zero,
         inactiveThumbColor: Colors.black54,
-        activeColor: primaryColor,
+        activeColor: AppColors.primaryColor,
+        
         title: Text(
           '${widget.title}',
           style: const TextStyle(

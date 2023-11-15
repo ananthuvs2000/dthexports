@@ -22,11 +22,12 @@ class _ProductionPageState extends State<RecyclePage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage(
-          'assets/images/loginbg.png',
-        ),fit: BoxFit.cover)
-      ),
+      decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage(
+                'assets/images/loginbg.png',
+              ),
+              fit: BoxFit.cover)),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
@@ -36,7 +37,7 @@ class _ProductionPageState extends State<RecyclePage> {
             onTap: () => Get.back(),
           ),
           backgroundColor: Colors.transparent,
-          foregroundColor: primaryColor,
+          foregroundColor: AppColors.primaryColor,
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(

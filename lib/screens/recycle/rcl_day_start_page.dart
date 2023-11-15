@@ -64,14 +64,14 @@ class _RecycleDayStartPageState extends State<RecycleDayStartScreen> {
       appBar: AppBar(
         scrolledUnderElevation: 0,
         elevation: 0,
-        backgroundColor: primaryColor,
+        backgroundColor: AppColors.primaryColor,
         systemOverlayStyle: SystemUiOverlayStyle.light,
         bottom: appBarUnderline,
         title: const Text('Recycle Day Start'),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
           child: Column(
             children: [

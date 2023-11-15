@@ -51,7 +51,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             boxShadow: focusNode.hasFocus
                 ? [
                     BoxShadow(
-                      color: primaryColor.withOpacity(0.2),
+                      color: AppColors.primaryColor.withOpacity(0.2),
                       blurRadius: 7,
                     )
                   ]
@@ -84,16 +84,16 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                color: primaryColor,
+                color: AppColors.primaryColor,
               ),
               borderRadius: BorderRadius.circular(globalBorderRadius),
             ),
             focusedErrorBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: primaryColor),
+              borderSide: BorderSide(color: AppColors.primaryColor),
               borderRadius: BorderRadius.circular(globalBorderRadius),
             ),
             errorBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: formFieldErrorColor),
+              borderSide:  BorderSide(color: AppColors.formFieldErrorColor),
               borderRadius: BorderRadius.circular(globalBorderRadius),
             ),
             prefixIcon: widget.icon,
@@ -106,12 +106,12 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               fontWeight: FontWeight.normal,
             ),
             errorStyle: TextStyle(
-              color: formFieldErrorColor,
+              color: AppColors.formFieldErrorColor,
               fontSize: 12,
               letterSpacing: 0,
             ),
             filled: true,
-            fillColor: inversePrimaryColor,
+            fillColor: AppColors.inversePrimaryColor,
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 10,
               vertical: 12,

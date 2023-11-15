@@ -55,11 +55,10 @@ class _DayStartState extends State<DayStart> {
       appBar: AppBar(
         elevation: 0,
         scrolledUnderElevation: 0,
-        backgroundColor: primaryColor,
-        foregroundColor: inversePrimaryColor,
+        backgroundColor: AppColors.primaryColor,
+        foregroundColor: AppColors.inversePrimaryColor,
         title: const Text('Production Day Start'),
         systemOverlayStyle: SystemUiOverlayStyle.light,
-        
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -69,11 +68,10 @@ class _DayStartState extends State<DayStart> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               hSpace(20),
-               DynamicFieldRow(label: 'Batch No:', value: widget.batchCode),
+              DynamicFieldRow(label: 'Batch No:', value: widget.batchCode),
               hSpace(15),
               Consumer<CheckingProvider>(
-                builder: (context, checkState, child) => 
-                DropdownMenuField(
+                builder: (context, checkState, child) => DropdownMenuField(
                   validator: (value) {
                     return '';
                   },
@@ -125,7 +123,7 @@ class _DayStartState extends State<DayStart> {
               ),
 
               hSpace(15),
-              
+
               Consumer<CameraProvider>(
                 builder: (context, state, _) {
                   if (_imageProvider.image == null) {

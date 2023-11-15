@@ -21,7 +21,7 @@ class _LoadingDisplayCaptionState extends State<LoadingDisplayCaption> {
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: primaryColor.withOpacity(0.25),
+        color: AppColors.primaryColor.withOpacity(0.25),
         borderRadius: BorderRadius.circular(globalBorderRadius),
       ),
       child: Row(
@@ -32,7 +32,7 @@ class _LoadingDisplayCaptionState extends State<LoadingDisplayCaption> {
           SizedBox(
             height: 15,
             width: 15,
-            child: CircularProgressIndicator(color: primaryColor, strokeWidth: 2.5),
+            child: CircularProgressIndicator(color: AppColors.primaryColor, strokeWidth: 2.5),
           ),
           wSpace(10),
           // DateTimeText
@@ -42,7 +42,7 @@ class _LoadingDisplayCaptionState extends State<LoadingDisplayCaption> {
               Text(
                 widget.message,
                 style: TextStyle(
-                  color: primaryColor,
+                  color: AppColors.primaryColor,
                   fontWeight: FontWeight.w600,
                   fontSize: 14,
                 ),

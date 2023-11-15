@@ -19,7 +19,7 @@ class BottomActionsArea extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(
-            color: primaryColor.withOpacity(0.2),
+            color: AppColors.primaryColor.withOpacity(0.2),
           ),
         ),
         boxShadow: [

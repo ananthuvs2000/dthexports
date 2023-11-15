@@ -21,7 +21,7 @@ class SecondaryElevatedButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(globalBorderRadius),
         boxShadow: [
           BoxShadow(
-            color: primaryColor.withOpacity(0.15),
+            color: AppColors.primaryColor.withOpacity(0.15),
             offset: const Offset(-2, 2),
             blurRadius: 5,
           )
@@ -63,12 +63,12 @@ class SecondaryElevatedButton extends StatelessWidget {
 ButtonStyle secondaryElevatedButtonTheme = ElevatedButton.styleFrom(
   elevation: 0,
   shadowColor: Colors.transparent,
-  backgroundColor: inversePrimaryColor,
-  foregroundColor: primaryColor,
+  backgroundColor: AppColors.inversePrimaryColor,
+  foregroundColor: AppColors.primaryColor,
   shape: RoundedRectangleBorder(
     side: BorderSide(
       width: 1,
-      color: primaryColor,
+      color: AppColors.primaryColor,
     ),
     borderRadius: BorderRadius.circular(globalBorderRadius),
   ),

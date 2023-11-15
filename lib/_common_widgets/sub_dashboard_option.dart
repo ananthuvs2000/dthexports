@@ -25,11 +25,12 @@ class SubDashboardItem extends StatelessWidget {
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: primaryColor.withOpacity(0.3),
+              color: AppColors.primaryColor.withOpacity(0.4),
+              offset: const Offset(-2, 2),
               blurRadius: 10,
             ),
           ],
-          gradient: subDashboardOptionGrad,
+          gradient: AppGradients.subDashboardOptionGrad,
           borderRadius: BorderRadius.circular(globalBorderRadius),
         ),
         child: Center(
@@ -38,7 +39,7 @@ class SubDashboardItem extends StatelessWidget {
             children: [
               Icon(
                 icon,
-                size: 30,
+                size: 28,
                 color: Colors.white,
               ),
               hSpace(10),

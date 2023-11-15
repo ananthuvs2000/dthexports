@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 const mainFont = 'Instrument';
 
 AppBarTheme dthAppbarTheme = AppBarTheme(
-  backgroundColor: primaryColor,
+  backgroundColor: AppColors.primaryColor,
   foregroundColor: Colors.white,
   toolbarHeight: 55.h,
   systemOverlayStyle: SystemUiOverlayStyle.dark,
@@ -23,7 +23,7 @@ InputDecorationTheme inputTheme = InputDecorationTheme(
   prefixIconColor: MaterialStateColor.resolveWith(
     (states) {
       if (states.contains(MaterialState.focused)) {
-        return primaryColor;
+        return AppColors.primaryColor;
       } else if (states.contains(MaterialState.error)) {
         return Colors.red;
       } else {
@@ -38,7 +38,7 @@ ThemeData dthAppTheme = ThemeData(
   useMaterial3: true,
   brightness: Brightness.light,
   fontFamily: mainFont,
-  colorScheme: ColorScheme.fromSeed(seedColor: primaryColor),
+  colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
   appBarTheme: dthAppbarTheme,
   inputDecorationTheme: inputTheme,
 );

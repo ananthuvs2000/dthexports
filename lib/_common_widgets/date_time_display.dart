@@ -23,8 +23,8 @@ class _DateTimeDisplayState extends State<DateTimeDisplay> {
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: primaryColor.withOpacity(0.25),
-        border: Border.all(color: primaryColor.withOpacity(0.5)),
+        color: AppColors.primaryColor.withOpacity(0.25),
+        border: Border.all(color: AppColors.primaryColor.withOpacity(0.5)),
         borderRadius: BorderRadius.circular(formFieldBorderRadius),
       ),
       child: Row(
@@ -33,7 +33,7 @@ class _DateTimeDisplayState extends State<DateTimeDisplay> {
           // Icon
           Icon(
             Icons.watch_later_outlined,
-            color: primaryColor,
+            color: AppColors.primaryColor,
             size: 20,
           ),
           wSpace(10),
@@ -44,7 +44,7 @@ class _DateTimeDisplayState extends State<DateTimeDisplay> {
               SelectableText(
                 widget.date,
                 style: TextStyle(
-                  color: primaryColor,
+                  color: AppColors.primaryColor,
                   fontWeight: FontWeight.w500,
                   fontSize: 15,
                 ),
@@ -53,7 +53,7 @@ class _DateTimeDisplayState extends State<DateTimeDisplay> {
               SelectableText(
                 widget.time,
                 style: TextStyle(
-                  color: primaryColor,
+                  color: AppColors.primaryColor,
                   fontWeight: FontWeight.w500,
                   fontSize: 15,
                 ),
