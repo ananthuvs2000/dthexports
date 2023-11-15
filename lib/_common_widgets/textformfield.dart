@@ -1,4 +1,3 @@
-import 'package:dth/_common_widgets/spacer.dart';
 import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +6,7 @@ class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
     required this.hint,
     required this.controller,
-    this.validator,
+    required this.validator,
     this.textAlign,
     this.prefixIcon,
     this.suffixIcon,
@@ -67,7 +66,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         TextFormField(
           onTap: widget.onTap,
           controller: widget.controller,
-          validator: (value) => widget.validator!(value),
+          validator: widget.validator,
           obscureText: widget.isPassword ?? false,
           keyboardType: widget.keyboardType ?? TextInputType.text,
           autovalidateMode: AutovalidateMode.onUserInteraction,

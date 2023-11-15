@@ -39,7 +39,7 @@ class NumberEntryField extends StatelessWidget {
             hint: 'XX.XX KG',
             textAlign: TextAlign.center,
             controller: controller,
-            validator: (value) => validator(value)!,
+            validator: (value) => validator(value),
           ),
         ),
       ],

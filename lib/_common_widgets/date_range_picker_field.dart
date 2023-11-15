@@ -7,7 +7,7 @@ class DateRangePicker extends StatefulWidget {
     required this.label,
     required this.controller,
     required this.onTap,
-    this.validator,
+    required this.validator,
     super.key,
   });
   final TextEditingController controller;
@@ -43,7 +43,7 @@ class _DateRangePickerState extends State<DateRangePicker> {
             isReadOnly: true,
             suffixIcon: const Icon(Icons.calendar_month),
             textAlign: TextAlign.center,
-            validator: (value) => widget.validator!(value),
+            validator: widget.validator,
           ),
         ),
       ],

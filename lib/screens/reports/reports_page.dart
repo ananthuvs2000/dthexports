@@ -51,6 +51,9 @@ class _ReportsPageState extends State<ReportsPage> {
                     ),
                     hSpace(15),
                     DateRangePicker(
+                      validator: (p0) {
+                        return null;
+                      },
                       label: 'Period',
                       controller: TextEditingController(),
                       onTap: () {
