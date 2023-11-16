@@ -42,7 +42,7 @@ class _CheckPageState extends State<CheckPage> {
     Provider.of<TeamProvider>(context, listen: false).fetchTeams();
     Provider.of<EmployeeProvider>(context, listen: false).fetchEmployees();
     // Provider.of<DateTimeProvider>(context, listen: false).fetchDateTime();
-    final checkingProvider = Provider.of<CheckingProvider>(context, listen: false);
+    checkingProvider = Provider.of<CheckingProvider>(context, listen: false);
   }
 
   @override
@@ -64,7 +64,7 @@ class _CheckPageState extends State<CheckPage> {
   Widget build(BuildContext context) {
     // Provider init
     final vendorProvider = Provider.of<VendorProvider>(context);
-    final checkingProvider = Provider.of<CheckingProvider>(context);
+    // final checkingProvider = Provider.of<CheckingProvider>(context);
     // final dateTimeProvider = Provider.of<DateTimeProvider>(context);
     // UI
     return Scaffold(
