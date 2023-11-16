@@ -12,7 +12,6 @@ import 'package:dth/_common_widgets/dynamic_field_row.dart';
 import 'package:dth/_common_widgets/open_camera_button.dart';
 import 'package:dth/_common_widgets/primary_elevated_button.dart';
 import 'package:dth/_common_widgets/spacer.dart';
-import 'package:dth/_common_widgets/team_manager_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

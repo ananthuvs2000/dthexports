@@ -30,12 +30,13 @@ class BatchSelectionPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            hSpace(25),
+            hSpace(15),
             Text(
               'Select batch',
               style: TextStyles.veryLargeHeading,
             ),
-            hSpace(10),
+            Text('All batches undergone checking will be listed here.'),
+            hSpace(15),
             // Batch list builder
             Consumer<ItemCheckProvider>(
               builder: (context, state, child) => FutureBuilder(
@@ -51,15 +52,18 @@ class BatchSelectionPage extends StatelessWidget {
                         itemBuilder: (context, index) {
                           final item = itemChecks[index];
 
-                          return BatchSelectionTile(
-                            batchCode: item.batchCode,
-                            vendorCode: item.vendoCode,
-                            quantityChecked: item.quantityChecked,
-                            status: item.status,
-                            onTap: () => Get.to(
-                              () => AcceptPage(batchCode: item.batchCode),
-                              transition: Transition.rightToLeft,
-                              preventDuplicates: true,
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 15),
+                            child: BatchSelectionTile(
+                              batchCode: item.batchCode,
+                              vendorCode: item.vendoCode,
+                              quantityChecked: item.quantityChecked,
+                              status: item.status,
+                              onTap: () => Get.to(
+                                () => AcceptPage(batchCode: item.batchCode),
+                                transition: Transition.rightToLeft,
+                                preventDuplicates: true,
+                              ),
                             ),
                           );
                         },

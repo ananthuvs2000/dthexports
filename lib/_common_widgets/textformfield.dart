@@ -30,7 +30,7 @@ class CustomTextFormField extends StatefulWidget {
   final String hint;
   final TextAlign? textAlign;
   final void Function()? onTap;
-  final void Function(String)? onChanged;
+  final void Function(String?)? onChanged;
   final bool? isReadOnly;
   final List<TextInputFormatter>? inputFormatter;
 
@@ -72,7 +72,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         TextFormField(
           // Events
           onTap: widget.onTap,
-          onChanged: (value) => widget.onChanged!(value),
+          onChanged: (widget.onChanged != null) ? (value) => widget.onChanged!(value) : null,
           inputFormatters: widget.inputFormatter,
           //
           controller: widget.controller,

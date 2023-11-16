@@ -26,10 +26,16 @@ class AcceptedBoxTile extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(globalBorderRadius),
-          border: Border.all(
-            color: Colors.black.withOpacity(0.25),
-          )),
+        borderRadius: BorderRadius.circular(globalBorderRadius),
+        gradient: AppGradients.subDashboardOptionGrad,
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.secondaryColor.withOpacity(0.5),
+            offset: const Offset(-2, 2),
+            blurRadius: 10,
+          ),
+        ],
+      ),
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
         focusColor: AppColors.primaryColor.withOpacity(0.25),
@@ -46,7 +52,12 @@ class AcceptedBoxTile extends StatelessWidget {
           'Quantity: $quantityChecked Size: $size Color: $color',
           style: _subtitleStyle,
         ),
-        trailing: IconButton(onPressed: onDelete, icon: const Icon(CupertinoIcons.clear)),
+        trailing: IconButton(
+            onPressed: onDelete,
+            icon: const Icon(
+              CupertinoIcons.clear,
+              color: Colors.white,
+            )),
         titleAlignment: ListTileTitleAlignment.center,
       ),
     );
@@ -55,10 +66,12 @@ class AcceptedBoxTile extends StatelessWidget {
 
 const TextStyle _batchCodeStyle = TextStyle(
   fontWeight: FontWeight.bold,
+  color: Colors.white,
   fontSize: 15,
 );
-const TextStyle _subtitleStyle = TextStyle(
+TextStyle _subtitleStyle = TextStyle(
   fontWeight: FontWeight.normal,
+  color: Colors.white.withOpacity(0.5),
   height: 0,
   fontSize: 13,
 );

@@ -13,6 +13,7 @@ class TextStyles {
         fontSize: 45,
         fontWeight: FontWeight.bold,
         letterSpacing: -1.1,
+        height: 0,
         color: Colors.deepPurple.shade700,
       );
 

@@ -40,7 +40,7 @@ class NumberEntryField extends StatelessWidget {
           flex: 2,
           child: CustomTextFormField(
             inputFormatter: inputFormatter,
-            onChanged: (value) => onChanged!(value),
+            onChanged: (onChanged != null) ? (value) => onChanged!(value!) : null,
             prefixIcon: null,
             keyboardType: TextInputType.number,
             hint: 'XX.XX KG',

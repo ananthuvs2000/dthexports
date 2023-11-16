@@ -292,7 +292,7 @@ class _AcceptPageState extends State<AcceptPage> {
                   if (imageUploadRes.imagePath != '') {
                     print('image uploaded correctly');
 
-                    await ItemAcceptTempService().postTempData(
+                    if (await ItemAcceptTempService().postTempData(
                       batchCode: widget.batchCode,
                       boxRef: _dropDownProvider.box,
                       colorRef: _dropDownProvider.color,
@@ -300,16 +300,20 @@ class _AcceptPageState extends State<AcceptPage> {
                       sizeRef: _dropDownProvider.size,
                       materialQty: _quantityController.text,
                       imagePath: imageUploadRes.imagePath,
-                    );
-                    // Clearing all fields and dropdowns
-                    _acceptFormKey.currentState!.reset();
-                    _quantityController.clear();
-                    _imageProvider.clearImage();
-                    _itemAcceptTemp.getAcceptedBoxes(widget.batchCode);
-                    // Showing success message
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      successSnackbar('Box Accepted Succesfully!'),
-                    );
+                    )) {
+                      // Clearing all fields and dropdowns
+                      _acceptFormKey.currentState!.reset();
+                      _quantityController.clear();
+                      _imageProvider.clearImage();
+                      _itemAcceptTemp.getAcceptedBoxes(widget.batchCode);
+                      // Showing success message
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        successSnackbar('Box Accepted Succesfully!'),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(errorSnackbar('Failed to accept!'));
+                    }
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       errorSnackbar('Image Upload Failed'),
