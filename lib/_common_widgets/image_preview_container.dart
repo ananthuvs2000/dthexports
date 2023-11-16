@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/_common_widgets/loading_display_caption.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class ImagePreviewBox extends StatelessWidget {
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.5),
+                  color: AppColors.primaryColor.withOpacity(0.35),
                   offset: const Offset(-2, 2),
                   blurRadius: 15,
                 )

@@ -1,6 +1,7 @@
 import 'package:dth/_common_widgets/image_preview_container.dart';
 import 'package:dth/_models/production_daystart_model.dart';
 import 'package:dth/_providers/image_provider.dart';
+import 'package:dth/_providers/production_daystart_provider.dart';
 import 'package:dth/screens/standard/widgets/table.dart';
 import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
@@ -30,12 +31,14 @@ class DayEndScreen extends StatefulWidget {
 
 class _DayEndScreenState extends State<DayEndScreen> {
   late CameraProvider _imageProvider;
+  late ProductionDayStartProvider _productionDayStartProvider;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _imageProvider = Provider.of<CameraProvider>(context, listen: false);
+    _productionDayStartProvider = Provider.of<ProductionDayStartProvider>(context, listen: false);
   }
 
   @override
@@ -44,6 +47,7 @@ class _DayEndScreenState extends State<DayEndScreen> {
     super.dispose();
     Future.delayed(Duration.zero, () {
       _imageProvider.clearImage();
+      _productionDayStartProvider.clearData();
     });
   }
 
@@ -51,6 +55,7 @@ class _DayEndScreenState extends State<DayEndScreen> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    _productionDayStartProvider.fetchDataAndUpdateState(widget.batchCode);
     return Form(
       key: _formKey,
       child: Scaffold(
@@ -62,77 +67,94 @@ class _DayEndScreenState extends State<DayEndScreen> {
           title: const Text('Production Day End'),
           systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
-        body: SafeArea(
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
-              child: Column(
-                children: [
-                  hSpace(15),
-                  DropdownMenuField(
-                    validator: (value) {
-                      if (value == '' || value == null) {
-                        return 'Please select a box';
-                      }
-                      return null;
-                    },
-                    fieldLabel: 'Box No:',
-                    dropDownLabel: 'Select Box',
-                    dropdownEntries: const [
-                      DropdownMenuItem(value: '1', child: Text('1')),
-                      DropdownMenuItem(value: '2', child: Text('2')),
-                      DropdownMenuItem(value: '3', child: Text('3')),
+        body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
+            child: Column(
+              children: [
+                hSpace(15),
+                DynamicFieldRow(label: 'Batch No', value: widget.batchCode),
+                hSpace(15),
+                Consumer<ProductionDayStartProvider>(
+                  builder: (context, state, child) => Column(
+                    children: [
+                      DropdownMenuField(
+                        validator: (value) {
+                          if (value == '' || value == null) {
+                            return 'Please select a box';
+                          }
+                          return null;
+                        },
+                        fieldLabel: 'Box No:',
+                        dropDownLabel: 'Select Box',
+                        dropdownEntries: state.boxDataList
+                            .map(
+                              (box) => DropdownMenuItem(
+                                value: box.boxRef,
+                                child: Text(box.boxRef),
+                              ),
+                            )
+                            .toList(),
+                        onSelected: (selected) {
+                          print(selected.toString());
+                          state.findBoxByBoxRef(selected);
+                        },
+                      ),
+                      hSpace(15),
+                      if (state.selectedBox != null)
+                        Column(
+                          children: [
+                            BoxInfoDisplay(
+                              box: state.selectedBox!,
+                            ),
+
+                            Consumer<CameraProvider>(
+                              builder: (context, state, _) {
+                                if (_imageProvider.image == null) {
+                                  return const SizedBox();
+                                } else {
+                                  return ImagePreviewBox(image: _imageProvider.image);
+                                }
+                              },
+                            ),
+                            hSpace(10),
+                            OpenImageButton(
+                              width: double.infinity,
+                              icon: CupertinoIcons.camera_fill,
+                              label: (Provider.of<CameraProvider>(context).image == null)
+                                  ? 'Take Photo'
+                                  : 'Take Again',
+                              onTap: () async {
+                                await _imageProvider.getImage();
+                              },
+                            ),
+                            hSpace(15),
+
+                            // Field to Enter Value
+                            NumberEntryField(
+                              label: 'Enter weight as shown',
+                              controller: _weightController,
+                              validator: (value) {
+                                return null;
+                              },
+                            ),
+
+                            hSpace(15),
+                            const DynamicFieldRow(label: 'Material Weight', value: 'CALCULATED'),
+                            hSpace(15),
+                            const DynamicFieldRow(
+                                label: 'Total Process Wastage', value: 'CALCULATED'),
+                            hSpace(15),
+                            const TableWidget(),
+                            hSpace(15), // end of listview
+                          ],
+                        ),
                     ],
-                    onSelected: (selectedVal) {
-                      print(selectedVal.toString());
-                    },
                   ),
-                  hSpace(15),
-
-                  Consumer<CameraProvider>(
-                    builder: (context, state, _) {
-                      if (_imageProvider.image == null) {
-                        return const SizedBox();
-                      } else {
-                        return ImagePreviewBox(image: _imageProvider.image);
-                      }
-                    },
-                  ),
-                  OpenImageButton(
-                    width: double.infinity,
-                    icon: CupertinoIcons.camera_fill,
-                    label: (Provider.of<CameraProvider>(context).image == null)
-                        ? 'Take Photo'
-                        : 'Take Again',
-                    onTap: () async {
-                      await _imageProvider.getImage();
-                    },
-                  ),
-                  hSpace(10),
-
-                  // Field to Enter Value
-                  NumberEntryField(
-                    label: 'Enter weight as shown',
-                    controller: _weightController,
-                    validator: (value) {
-                      return null;
-                    },
-                  ),
-                  hSpace(15),
-
-                  //  BoxInfoDisplay(
-                  //   box: ,
-                  // ),
-                  hSpace(15),
-                  const DynamicFieldRow(label: 'Material Weight', value: 'CALCULATED'),
-                  hSpace(15),
-                  const DynamicFieldRow(label: 'Total Process Wastage', value: 'CALCULATED'),
-                  hSpace(15),
-                  const TableWidget(),
-                  hSpace(15), // end of listview
-                ],
-              ),
+                ),
+                hSpace(15),
+              ],
             ),
           ),
         ),

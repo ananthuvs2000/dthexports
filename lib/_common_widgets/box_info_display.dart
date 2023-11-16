@@ -1,5 +1,7 @@
 import 'package:dth/_common_widgets/spacer.dart';
 import 'package:dth/_models/production_daystart_model.dart';
+import 'package:dth/theme/colors.dart';
+import 'package:dth/theme/layout.dart';
 import 'package:dth/theme/text_sizing.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,13 +24,21 @@ class _BoxInfoDisplayState extends State<BoxInfoDisplay> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          widget.box.boxRef,
-          style: TextStyles.mainHeadingStyle,
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(globalBorderRadius - 5),
+            color: AppColors.primaryColor,
+          ),
+          child: Text(
+            'Box Number:  ${widget.box.boxRef}',
+            style: _boxInfoTitle,
+          ),
         ),
-        const Divider(),
+        hSpace(5),
         GridView.count(
-          padding: EdgeInsets.zero,
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           shrinkWrap: true,
           childAspectRatio: 5,
           crossAxisCount: 2,
@@ -70,7 +80,7 @@ const infoTextSize = TextStyle(
 );
 
 class InfoItem extends StatelessWidget {
-  InfoItem({
+  const InfoItem({
     super.key,
     required this.icon,
     required this.label,
@@ -102,3 +112,11 @@ class InfoItem extends StatelessWidget {
     );
   }
 }
+
+TextStyle _boxInfoTitle = TextStyle(
+  fontSize: 16,
+  fontWeight: FontWeight.bold,
+  height: 0,
+  letterSpacing: 0,
+  color: AppColors.inversePrimaryColor,
+);

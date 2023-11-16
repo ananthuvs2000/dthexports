@@ -1,8 +1,6 @@
-import 'package:dth/_models/production_dayend_model.dart';
 import 'package:dth/_services/production_day_end_service.dart';
 import 'package:dth/screens/standard/incoming/widgets/batch_selection_tile.dart';
 import 'package:dth/screens/standard/production/production_day_end.dart';
-import 'package:dth/screens/standard/production/production_day_start.dart';
 import 'package:dth/theme/arrow_back.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/theme/text_sizing.dart';
@@ -10,7 +8,7 @@ import 'package:dth/_common_widgets/error_display_caption.dart';
 import 'package:dth/_common_widgets/spacer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 class ProductionDayEndBatchSelectionPage extends StatelessWidget {
   const ProductionDayEndBatchSelectionPage({super.key});
@@ -43,7 +41,7 @@ class ProductionDayEndBatchSelectionPage extends StatelessWidget {
             // Batch list builder
             FutureBuilder(
               future: DayStartFilterByDateService().fetchData(
-                DateTime.now().toIso8601String(),
+                DateFormat('yyyy-MM-dd').format(DateTime.now()),
               ),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
@@ -56,17 +54,20 @@ class ProductionDayEndBatchSelectionPage extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final item = itemChecks[index];
 
-                        return BatchSelectionTile(
-                          batchCode: item.batchCode,
-                          vendorCode: item.batchCode,
-                          quantityChecked: item.weightShown,
-                          status: item.process,
-                          onTap: () => Get.to(
-                            () => DayEndScreen(
-                              batchCode: item.batchCode,
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 15),
+                          child: BatchSelectionTile(
+                            batchCode: item.batchCode,
+                            vendorCode: item.boxno,
+                            quantityChecked: item.weightShown,
+                            status: item.process,
+                            onTap: () => Get.to(
+                              () => DayEndScreen(
+                                batchCode: item.batchCode,
+                              ),
+                              transition: Transition.rightToLeft,
+                              preventDuplicates: true,
                             ),
-                            transition: Transition.rightToLeft,
-                            preventDuplicates: true,
                           ),
                         );
                       },
