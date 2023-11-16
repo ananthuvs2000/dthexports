@@ -3,6 +3,7 @@ import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class SelecteEmployeeTile extends StatelessWidget {
   const SelecteEmployeeTile({
@@ -15,36 +16,42 @@ class SelecteEmployeeTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
-      child: ListTile(
-        minVerticalPadding: 0,
-        tileColor: AppColors.primaryColor,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(globalBorderRadius)),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(globalBorderRadius),
+          gradient: AppGradients.subDashboardOptionGrad
         ),
-        leading: CircleAvatar(
-          radius: 35,
-          child: Icon(
-            CupertinoIcons.person_fill,
-            color: AppColors.primaryColor,
-            size: 30,
+        child: ListTile(
+          minVerticalPadding: 0,
+          // tileColor: AppColors.primaryColor,
+          contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(globalBorderRadius)),
           ),
+          leading: CircleAvatar(
+            radius: 35,
+            child: Icon(
+              CupertinoIcons.person_fill,
+              color: AppColors.primaryColor,
+              size: 30,
+            ),
+          ),
+          title: Text(
+            employee.employeeName,
+            style: _titleStyle,
+          ),
+          subtitle: Text(
+            employee.employeeCode,
+            style: _subtitleStyle,
+          ),
+          trailing: IconButton(
+              onPressed: () => {},
+              icon: const Icon(
+                CupertinoIcons.trash_fill,
+                color: Colors.white,
+                size: 25,
+              )),
         ),
-        title: Text(
-          employee.employeeName,
-          style: _titleStyle,
-        ),
-        subtitle: Text(
-          employee.employeeCode,
-          style: _subtitleStyle,
-        ),
-        trailing: IconButton(
-            onPressed: () => {},
-            icon: const Icon(
-              CupertinoIcons.trash_fill,
-              color: Colors.white,
-              size: 25,
-            )),
       ),
     );
   }

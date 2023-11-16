@@ -1,5 +1,6 @@
 import 'package:dth/_models/employee_model.dart';
 import 'package:dth/theme/colors.dart';
+import 'package:dth/theme/text_sizing.dart';
 import 'package:flutter/material.dart';
 
 class AddEmployeeTile extends StatelessWidget {
@@ -16,7 +17,7 @@ class AddEmployeeTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Text(emp.employeeCode),
-      title: Text(emp.employeeName),
+      title: Text(emp.employeeName,style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),),
       trailing: IconButton(
         splashRadius: 20,
         onPressed: onAdd,
