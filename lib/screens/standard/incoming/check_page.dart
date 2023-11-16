@@ -200,7 +200,13 @@ class _CheckPageState extends State<CheckPage> {
                         crossAxisCount: 2,
                         children: (selectedEmployeeState.addedEmpoyees.isNotEmpty)
                             ? selectedEmployeeState.addedEmpoyees
-                                .map((e) => SelecteEmployeeTile(employee: e))
+                                .map(
+                                  (e) => SelecteEmployeeTile(
+                                    employee: e,
+                                    onDelete: (context) =>
+                                        selectedEmployeeState.removeSelectedEmployee(e),
+                                  ),
+                                )
                                 .toList()
                             : [],
                       );

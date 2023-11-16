@@ -9,8 +9,10 @@ class SelecteEmployeeTile extends StatelessWidget {
   const SelecteEmployeeTile({
     required this.employee,
     super.key,
+    required this.onDelete,
   });
   final Employee employee;
+  final void Function(BuildContext context) onDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +20,13 @@ class SelecteEmployeeTile extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 10),
       child: Slidable(
         endActionPane: ActionPane(
-          motion: ScrollMotion(),
+          motion: const ScrollMotion(),
           children: [
             SlidableAction(
-              onPressed: (context) {},
+              onPressed: (context) => onDelete(context),
               borderRadius: BorderRadius.circular(globalBorderRadius),
               icon: CupertinoIcons.trash_fill,
-              backgroundColor: Colors.red.shade600,
+              backgroundColor: AppColors.formFieldErrorColor,
             ),
           ],
         ),
@@ -43,8 +45,7 @@ class SelecteEmployeeTile extends StatelessWidget {
             minVerticalPadding: 0,
             // tileColor: AppColors.primaryColor,
             shape: const RoundedRectangleBorder(
-              borderRadius:
-                  BorderRadius.all(Radius.circular(globalBorderRadius)),
+              borderRadius: BorderRadius.all(Radius.circular(globalBorderRadius)),
             ),
 
             title: Text(
