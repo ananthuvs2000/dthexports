@@ -1,9 +1,7 @@
 import 'package:dth/_models/employee_model.dart';
 import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 
 class SelecteEmployeeTile extends StatelessWidget {
   const SelecteEmployeeTile({
@@ -18,24 +16,22 @@ class SelecteEmployeeTile extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 10),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(globalBorderRadius),
-          gradient: AppGradients.subDashboardOptionGrad
-        ),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.primaryColor.withOpacity(0.25),
+                blurRadius: 7,
+                offset: const Offset(-2, 2),
+              )
+            ],
+            borderRadius: BorderRadius.circular(globalBorderRadius),
+            gradient: AppGradients.subDashboardOptionGrad),
         child: ListTile(
           minVerticalPadding: 0,
           // tileColor: AppColors.primaryColor,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(globalBorderRadius)),
           ),
-          leading: CircleAvatar(
-            radius: 35,
-            child: Icon(
-              CupertinoIcons.person_fill,
-              color: AppColors.primaryColor,
-              size: 30,
-            ),
-          ),
+
           title: Text(
             employee.employeeName,
             style: _titleStyle,
@@ -44,13 +40,13 @@ class SelecteEmployeeTile extends StatelessWidget {
             employee.employeeCode,
             style: _subtitleStyle,
           ),
-          trailing: IconButton(
-              onPressed: () => {},
-              icon: const Icon(
-                CupertinoIcons.trash_fill,
-                color: Colors.white,
-                size: 25,
-              )),
+          // trailing: IconButton(
+          //     onPressed: () => {},
+          //     icon: const Icon(
+          //       CupertinoIcons.trash_fill,
+          //       color: Colors.white,
+          //       size: 20,
+          //     )),
         ),
       ),
     );
@@ -60,10 +56,11 @@ class SelecteEmployeeTile extends StatelessWidget {
 const _titleStyle = TextStyle(
   color: Colors.white,
   fontWeight: FontWeight.bold,
-  fontSize: 20,
+  fontSize: 16,
   letterSpacing: 0,
 );
 
 final _subtitleStyle = TextStyle(
+  fontSize: 14,
   color: Colors.white.withOpacity(0.75),
 );
