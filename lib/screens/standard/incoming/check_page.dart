@@ -18,6 +18,7 @@ import 'package:dth/_common_widgets/number_entry_field.dart';
 import 'package:dth/_common_widgets/primary_elevated_button.dart';
 import 'package:dth/_common_widgets/secondary_elevated_button.dart';
 import 'package:dth/_common_widgets/spacer.dart';
+import 'package:dth/theme/text_sizing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -274,7 +275,10 @@ class _CheckPageState extends State<CheckPage> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   hSpace(10),
-                  const Text('Select Employees in the team'),
+                   Text('Select Employees in the team',style: TextStyles.mainHeadingStyle,),
+                  hSpace(4),
+                   appBarUnderline,
+                   hSpace(3),
                   ListView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     shrinkWrap: true,
