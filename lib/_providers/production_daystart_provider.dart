@@ -1,3 +1,4 @@
+import 'package:dth/_common_widgets/team_manager_list.dart';
 import 'package:dth/_models/production_daystart_model.dart';
 import 'package:dth/_services/production_day_start_service.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +31,16 @@ class ProductionDayStartProvider extends ChangeNotifier {
     _selectedBox = foundBox;
     notifyListeners();
     return foundBox;
+  }
+
+  bool addWorker(Workerdatum worker) {
+    if (workerDataList.contains(worker)) {
+      return false;
+    } else {
+      _dayStartData.workerdata.add(worker);
+      notifyListeners();
+      return true;
+    }
   }
 
   void clearData() {

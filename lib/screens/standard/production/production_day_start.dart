@@ -162,6 +162,20 @@ class _DayStartState extends State<DayStart> {
                               label: 'Material Weight',
                               value: '${_finalWeightController.text} kg',
                             ),
+
+                            // Worker data
+                            (provider.workerDataList.isNotEmpty)
+                                ? ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: provider.workerDataList.length,
+                                    itemBuilder: (
+                                      context,
+                                      index,
+                                    ) {
+                                      return Text(provider.workerDataList[index].employeeName);
+                                    },
+                                  )
+                                : ErrorDisplayCaption(message: 'Could not fetch worker data'),
                           ],
                         )
                       else
