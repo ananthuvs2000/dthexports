@@ -1,8 +1,19 @@
+import 'package:dth/_common_widgets/appbar_underline.dart';
 import 'package:dth/_common_widgets/error_display_caption.dart';
 import 'package:dth/_common_widgets/image_preview_container.dart';
 import 'package:dth/_common_widgets/number_entry_field.dart';
+import 'package:dth/_common_widgets/secondary_elevated_button.dart';
+import 'package:dth/_models/production_daystart_model.dart';
+import 'package:dth/_providers/employee_provider.dart';
 import 'package:dth/_providers/image_provider.dart';
 import 'package:dth/_providers/production_daystart_provider.dart';
+import 'package:dth/_services/image_upload_service.dart';
+import 'package:dth/_services/production_day_start_service.dart';
+import 'package:dth/_services/team_service.dart';
+import 'package:dth/_utilites/scaffold_snackbars.dart';
+import 'package:dth/_utilites/utility_functions.dart';
+import 'package:dth/screens/standard/incoming/widgets/employee_picker_tile.dart';
+import 'package:dth/screens/standard/incoming/widgets/selected_employee_tile.dart';
 import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/_common_widgets/bottom_actions_area.dart';
@@ -12,6 +23,7 @@ import 'package:dth/_common_widgets/dynamic_field_row.dart';
 import 'package:dth/_common_widgets/open_camera_button.dart';
 import 'package:dth/_common_widgets/primary_elevated_button.dart';
 import 'package:dth/_common_widgets/spacer.dart';
+import 'package:dth/theme/text_sizing.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,6 +42,7 @@ class DayStart extends StatefulWidget {
 class _DayStartState extends State<DayStart> {
   late CameraProvider _imageProvider;
   late ProductionDayStartProvider _productionDayStartProvider;
+  late WorkerProvider _workerDataProvider;
 
   @override
   void initState() {
@@ -37,6 +50,7 @@ class _DayStartState extends State<DayStart> {
     super.initState();
     _imageProvider = Provider.of<CameraProvider>(context, listen: false);
     _productionDayStartProvider = Provider.of<ProductionDayStartProvider>(context, listen: false);
+    _workerDataProvider = Provider.of<WorkerProvider>(context, listen: false);
     _finalWeightController.text = '0';
   }
 
@@ -57,6 +71,7 @@ class _DayStartState extends State<DayStart> {
   @override
   Widget build(BuildContext context) {
     _productionDayStartProvider.fetchDataAndUpdateState(widget.batchCode);
+    _workerDataProvider.fetchWorkers();
 
     return Form(
       key: _formKey,
@@ -84,6 +99,9 @@ class _DayStartState extends State<DayStart> {
                     children: [
                       DropdownMenuField(
                         validator: (value) {
+                          if (value == '' || value == null) {
+                            return 'Select A Box';
+                          }
                           return null;
                         },
                         fieldLabel: 'Box No:',
@@ -164,18 +182,39 @@ class _DayStartState extends State<DayStart> {
                             ),
 
                             // Worker data
-                            (provider.workerDataList.isNotEmpty)
-                                ? ListView.builder(
+                            if (provider.workerDataList.isNotEmpty)
+                              Column(
+                                children: [
+                                  hSpace(10),
+                                  Consumer<WorkerProvider>(
+                                    builder: (context, state, _) => SecondaryElevatedButton(
+                                      onPressed: () => showEmployeePicker(
+                                        context: context,
+                                        workers: state.workersList,
+                                      ),
+                                      label: 'Add More Workers',
+                                      icon: Icons.add,
+                                    ),
+                                  ),
+                                  hSpace(10),
+                                  ListView.builder(
                                     shrinkWrap: true,
                                     itemCount: provider.workerDataList.length,
                                     itemBuilder: (
                                       context,
                                       index,
                                     ) {
-                                      return Text(provider.workerDataList[index].employeeName);
+                                      return SelectedWorkerTile(
+                                        worker: provider.workerDataList[index],
+                                        onDelete: (context) =>
+                                            provider.removeWorker(provider.workerDataList[index]),
+                                      );
                                     },
-                                  )
-                                : ErrorDisplayCaption(message: 'Could not fetch worker data'),
+                                  ),
+                                ],
+                              )
+                            else
+                              const ErrorDisplayCaption(message: 'Could not fetch worker data'),
                           ],
                         )
                       else
@@ -197,9 +236,43 @@ class _DayStartState extends State<DayStart> {
           children: [
             Expanded(
               child: PrimaryElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    print('Form Valid');
+                    if (_imageProvider.image != null) {
+                      final imageUploadRes =
+                          await ImageUploadService().uploadImage(_imageProvider.image!.path);
+                      if (imageUploadRes.imagePath != '') {
+                        print('image uploaded correctly');
+
+                        if (await ProductionDayStartService().postToProductionDayStart(
+                          batchCode: widget.batchCode,
+                          boxNum: _productionDayStartProvider.selectedBox!.boxRef,
+                          team: hashEmployeeIdsIntoString(
+                              _productionDayStartProvider.workerDataList.toSet()),
+                          imageURL: imageUploadRes.imagePath,
+                          weightShown: _weightController.text,
+                          calculatedWeight: _finalWeightController.text,
+                          process: _productionDayStartProvider.selectedBox!.process,
+                        )) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            successSnackbar('Added to daystart'),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            errorSnackbar('ERROR: Failed to post to daystart'),
+                          );
+                        }
+                        //print('Form Valid');
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          errorSnackbar('ERROR: Image Upload Failed'),
+                        );
+                      }
+                    } else {}
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      errorSnackbar('ERROR: Invalid form submission'),
+                    );
                   }
                 },
                 label: 'Submit',
@@ -210,4 +283,58 @@ class _DayStartState extends State<DayStart> {
       ),
     );
   }
+}
+
+showEmployeePicker({
+  required BuildContext context,
+  required final List<Workerdatum> workers,
+}) {
+  final state = Provider.of<ProductionDayStartProvider>(context, listen: false);
+  showDialog(
+    context: context,
+    builder: (context) => Dialog(
+      backgroundColor: Colors.white,
+      alignment: Alignment.center,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(globalBorderRadius),
+      ),
+      child: (workers.isNotEmpty)
+          ? Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                hSpace(10),
+                Text(
+                  'Select Workers in the team',
+                  style: TextStyles.mainHeadingStyle,
+                ),
+                hSpace(4),
+                appBarUnderline,
+                hSpace(3),
+                ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  shrinkWrap: true,
+                  itemCount: workers.length,
+                  itemExtent: 55,
+                  itemBuilder: (context, index) {
+                    return WorkerPickerTile(
+                      worker: workers[index],
+                      onAdd: () async {
+                        if (!state.workerExists(workers[index])) {
+                          state.addWorker(workers[index]);
+                          Navigator.pop(context);
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            errorSnackbar('ERROR: Employee Already Added'),
+                          );
+                          Navigator.pop(context);
+                        }
+                      },
+                    );
+                  },
+                ),
+              ],
+            )
+          : const SizedBox(),
+    ),
+  );
 }

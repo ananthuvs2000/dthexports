@@ -1,6 +1,6 @@
-import 'package:dth/_models/employee_model.dart';
+import 'package:dth/_models/production_daystart_model.dart';
 
-String hashEmployeeIdsIntoString(final Set<Employee> employees) {
+String hashEmployeeIdsIntoString(final Set<Workerdatum> employees) {
   if (employees.isEmpty) {
     throw Exception('cant generate hash');
   } else {

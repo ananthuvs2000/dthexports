@@ -1,17 +1,17 @@
-import 'package:dth/_models/employee_model.dart';
+import 'package:dth/_models/production_daystart_model.dart';
 import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-class SelecteEmployeeTile extends StatelessWidget {
-  const SelecteEmployeeTile({
-    required this.employee,
+class SelectedWorkerTile extends StatelessWidget {
+  const SelectedWorkerTile({
+    required this.worker,
     super.key,
     required this.onDelete,
   });
-  final Employee employee;
+  final Workerdatum worker;
   final void Function(BuildContext context) onDelete;
 
   @override
@@ -49,11 +49,11 @@ class SelecteEmployeeTile extends StatelessWidget {
             ),
 
             title: Text(
-              employee.employeeName,
+              worker.employeeName,
               style: _titleStyle,
             ),
             subtitle: Text(
-              employee.employeeCode,
+              worker.employeeCode,
               style: _subtitleStyle,
             ),
             // trailing: IconButton(

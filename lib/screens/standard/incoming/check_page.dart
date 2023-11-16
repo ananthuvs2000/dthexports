@@ -1,5 +1,6 @@
 import 'package:dth/_common_widgets/bottom_actions_area.dart';
 import 'package:dth/_models/employee_model.dart';
+import 'package:dth/_models/production_daystart_model.dart';
 import 'package:dth/_providers/checking_provider.dart';
 import 'package:dth/_providers/employee_provider.dart';
 import 'package:dth/_utilites/utility_functions.dart';
@@ -40,7 +41,7 @@ class _CheckPageState extends State<CheckPage> {
     //! ONE TIME FETCHING OF ALL API INFO FROM PROVIDER DURING PAGE INITIALIZATION
     Provider.of<VendorProvider>(context, listen: false).fetchVendors();
     Provider.of<TeamProvider>(context, listen: false).fetchTeams();
-    Provider.of<EmployeeProvider>(context, listen: false).fetchEmployees();
+    Provider.of<WorkerProvider>(context, listen: false).fetchWorkers();
     // Provider.of<DateTimeProvider>(context, listen: false).fetchDateTime();
     checkingProvider = Provider.of<CheckingProvider>(context, listen: false);
   }
@@ -157,9 +158,9 @@ class _CheckPageState extends State<CheckPage> {
                 hSpace(15),
                 //! 1. Fetching all employees from employees provider
                 //! 2 Creating a team from the given employees (duplicate checking done with Set)
-                Consumer<EmployeeProvider>(
+                Consumer<WorkerProvider>(
                   builder: (context, employeeData, child) {
-                    if (employeeData.employees.isEmpty) {
+                    if (employeeData.workersList.isEmpty) {
                       return const Center(
                           child: ErrorDisplayCaption(message: 'No Employees Available'));
                     } else {
@@ -170,7 +171,7 @@ class _CheckPageState extends State<CheckPage> {
                             child: SecondaryElevatedButton(
                               onPressed: () => showEmployeePicker(
                                 context: context,
-                                employees: employeeData.employees,
+                                employees: employeeData.workersList,
                                 addedEmployees: checkingProvider.addedEmpoyees,
                               ),
                               label: 'Select Employees',
@@ -201,8 +202,8 @@ class _CheckPageState extends State<CheckPage> {
                         children: (selectedEmployeeState.addedEmpoyees.isNotEmpty)
                             ? selectedEmployeeState.addedEmpoyees
                                 .map(
-                                  (e) => SelecteEmployeeTile(
-                                    employee: e,
+                                  (e) => SelectedWorkerTile(
+                                    worker: e,
                                     onDelete: (context) =>
                                         selectedEmployeeState.removeSelectedEmployee(e),
                                   ),
@@ -260,8 +261,8 @@ class _CheckPageState extends State<CheckPage> {
 
   showEmployeePicker({
     required BuildContext context,
-    required final List<Employee> employees,
-    required final Set<Employee> addedEmployees,
+    required final List<Workerdatum> employees,
+    required final Set<Workerdatum> addedEmployees,
   }) {
     showDialog(
       context: context,
@@ -290,8 +291,8 @@ class _CheckPageState extends State<CheckPage> {
                     itemExtent: 55,
                     itemBuilder: (context, index) {
                       final checkProv = Provider.of<CheckingProvider>(context, listen: true);
-                      return AddEmployeeTile(
-                        emp: employees[index],
+                      return WorkerPickerTile(
+                        worker: employees[index],
                         onAdd: () {
                           if (!checkProv.addedEmpoyees.contains(employees[index])) {
                             checkProv.addEmployee(employees[index]);

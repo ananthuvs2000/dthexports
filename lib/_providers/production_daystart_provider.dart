@@ -1,4 +1,3 @@
-import 'package:dth/_common_widgets/team_manager_list.dart';
 import 'package:dth/_models/production_daystart_model.dart';
 import 'package:dth/_services/production_day_start_service.dart';
 import 'package:flutter/material.dart';
@@ -8,10 +7,6 @@ class ProductionDayStartProvider extends ChangeNotifier {
 
   late ProductionDayStartData _dayStartData = ProductionDayStartData(boxData: [], workerdata: []);
   BoxDatum? _selectedBox;
-
-  List<BoxDatum> get boxDataList => _dayStartData.boxData;
-
-  List<Workerdatum> get workerDataList => _dayStartData.workerdata;
 
   Future<void> fetchDataAndUpdateState(String batchCode) async {
     try {
@@ -33,14 +28,24 @@ class ProductionDayStartProvider extends ChangeNotifier {
     return foundBox;
   }
 
-  bool addWorker(Workerdatum worker) {
-    if (workerDataList.contains(worker)) {
-      return false;
-    } else {
-      _dayStartData.workerdata.add(worker);
+  void addWorker(Workerdatum worker) {
+    _dayStartData.workerdata.add(worker);
+    notifyListeners();
+  }
+
+  bool workerExists(Workerdatum worker) {
+    if (_dayStartData.workerdata.contains(worker)) {
+      print('duplicate found');
       notifyListeners();
       return true;
+    } else {
+      return false;
     }
+  }
+
+  void removeWorker(Workerdatum worker) {
+    _dayStartData.workerdata.remove(worker);
+    notifyListeners();
   }
 
   void clearData() {
@@ -49,6 +54,9 @@ class ProductionDayStartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+// ALL GETTERS
   ProductionDayStartData get dayStartData => _dayStartData;
+  List<Workerdatum> get workerDataList => _dayStartData.workerdata;
+  List<BoxDatum> get boxDataList => _dayStartData.boxData;
   BoxDatum? get selectedBox => _selectedBox;
 }

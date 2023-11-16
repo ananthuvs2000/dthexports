@@ -1,13 +1,13 @@
-import 'package:dth/_models/employee_model.dart';
+import 'package:dth/_models/production_daystart_model.dart';
 import 'package:dth/_services/checking_service.dart';
 import 'package:flutter/material.dart';
 
 class CheckingProvider with ChangeNotifier {
   // storing selected employees temporarily
-  final Set<Employee> _selectedEmployees = {};
+  final Set<Workerdatum> _selectedEmployees = {};
 
   // Function to add an employee into the list
-  void addEmployee(Employee e) {
+  void addEmployee(Workerdatum e) {
     _selectedEmployees.add(e);
     notifyListeners();
   }
@@ -31,7 +31,7 @@ class CheckingProvider with ChangeNotifier {
     return _postResult;
   }
 
-  void removeSelectedEmployee(Employee e) {
+  void removeSelectedEmployee(Workerdatum e) {
     _selectedEmployees.remove(e);
     notifyListeners();
   }
@@ -41,5 +41,5 @@ class CheckingProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Set<Employee> get addedEmpoyees => _selectedEmployees;
+  Set<Workerdatum> get addedEmpoyees => _selectedEmployees;
 }

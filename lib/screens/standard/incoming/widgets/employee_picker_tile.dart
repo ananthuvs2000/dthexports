@@ -1,23 +1,28 @@
-import 'package:dth/_models/employee_model.dart';
+import 'package:dth/_models/production_daystart_model.dart';
 import 'package:dth/theme/colors.dart';
-import 'package:dth/theme/text_sizing.dart';
 import 'package:flutter/material.dart';
 
-class AddEmployeeTile extends StatelessWidget {
-  const AddEmployeeTile({
+class WorkerPickerTile extends StatelessWidget {
+  const WorkerPickerTile({
     super.key,
-    required this.emp,
+    required this.worker,
     required this.onAdd,
   });
 
-  final Employee emp;
+  final Workerdatum worker;
   final void Function() onAdd;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Text(emp.employeeCode),
-      title: Text(emp.employeeName,style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),),
+      leading: Text(worker.employeeCode),
+      title: Text(
+        worker.employeeName,
+        style: const TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
       trailing: IconButton(
         splashRadius: 20,
         onPressed: onAdd,

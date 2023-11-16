@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => VendorProvider()),
         ChangeNotifierProvider(create: (context) => CheckingProvider()),
         ChangeNotifierProvider(create: (context) => TeamProvider()),
-        ChangeNotifierProvider(create: (context) => EmployeeProvider()),
+        ChangeNotifierProvider(create: (context) => WorkerProvider()),
         ChangeNotifierProvider(create: (context) => ItemCheckProvider()),
         ChangeNotifierProvider(create: (context) => ItemAcceptTempProvider()),
         ChangeNotifierProvider(create: (context) => DateTimeProvider()),
