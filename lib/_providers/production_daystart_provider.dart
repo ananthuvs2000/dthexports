@@ -6,7 +6,7 @@ class ProductionDayStartProvider extends ChangeNotifier {
   final ProductionDayStartService _productionDayStartService = ProductionDayStartService();
 
   late ProductionDayStartData _dayStartData = ProductionDayStartData(boxData: [], workerdata: []);
-  BoxDatum? _selectedBox;
+  BoxData? _selectedBox;
 
   Future<void> fetchDataAndUpdateState(String batchCode) async {
     try {
@@ -18,7 +18,7 @@ class ProductionDayStartProvider extends ChangeNotifier {
     }
   }
 
-  BoxDatum findBoxByBoxRef(String boxRef) {
+  BoxData findBoxByBoxRef(String boxRef) {
     // Return the box with the matching boxRef
     final foundBox = _dayStartData.boxData.firstWhere(
       (box) => box.boxRef == boxRef,
@@ -57,6 +57,6 @@ class ProductionDayStartProvider extends ChangeNotifier {
 // ALL GETTERS
   ProductionDayStartData get dayStartData => _dayStartData;
   List<Workerdatum> get workerDataList => _dayStartData.workerdata;
-  List<BoxDatum> get boxDataList => _dayStartData.boxData;
-  BoxDatum? get selectedBox => _selectedBox;
+  List<BoxData> get boxDataList => _dayStartData.boxData;
+  BoxData? get selectedBox => _selectedBox;
 }

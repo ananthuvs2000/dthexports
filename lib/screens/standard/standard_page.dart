@@ -4,6 +4,7 @@ import 'package:dth/screens/standard/incoming/check_page.dart';
 import 'package:dth/screens/standard/outgoing/outgoing_page.dart';
 import 'package:dth/screens/standard/production/accepted_batch_selection.dart';
 import 'package:dth/screens/standard/production/production_day_end.dart';
+import 'package:dth/screens/standard/production/production_day_end_batch_selection.dart';
 import 'package:dth/theme/arrow_back.dart';
 import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
@@ -88,7 +89,7 @@ class _StandardScreenState extends State<StandardScreen> {
                         backgroundColor: Colors.white,
                         builder: (context) => productionModal(
                           destination1: const AccepedBatchSelectionPage(),
-                          destination2: const DayEndScreen(),
+                          destination2: const ProductionDayEndBatchSelectionPage(),
                         ),
                       ),
                     ),

@@ -133,13 +133,13 @@ class _RecycleDayStartPageState extends State<RecycleDayStartScreen> {
 
               /// Details of Stored Info Of Selected Box
               hSpace(15),
-              const BoxInfoDisplay(
-                title: 'Box Details',
-                boxColor: '111',
-                boxTexture: '111',
-                boxSize: '111',
-                boxWeight: '111',
-              ),
+              // const BoxInfoDisplay(
+              //   title: 'Box Details',
+              //   boxColor: '111',
+              //   boxTexture: '111',
+              //   boxSize: '111',
+              //   boxWeight: '111',
+              // ),
               // Auto Calculated Field
 
               hSpace(15),

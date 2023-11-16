@@ -9,7 +9,6 @@ import 'package:dth/_providers/image_provider.dart';
 import 'package:dth/_providers/production_daystart_provider.dart';
 import 'package:dth/_services/image_upload_service.dart';
 import 'package:dth/_services/production_day_start_service.dart';
-import 'package:dth/_services/team_service.dart';
 import 'package:dth/_utilites/scaffold_snackbars.dart';
 import 'package:dth/_utilites/utility_functions.dart';
 import 'package:dth/screens/standard/incoming/widgets/employee_picker_tile.dart';
@@ -125,11 +124,7 @@ class _DayStartState extends State<DayStart> {
                           children: [
                             hSpace(20),
                             BoxInfoDisplay(
-                              title: 'Box Details (No. ${provider.selectedBox!.boxRef})',
-                              boxColor: provider.selectedBox!.colorRef,
-                              boxTexture: provider.selectedBox!.textureRef,
-                              boxSize: provider.selectedBox!.sizeRef,
-                              boxWeight: provider.selectedBox!.materialQty,
+                              box: provider.selectedBox!,
                             ),
                             hSpace(5),
 

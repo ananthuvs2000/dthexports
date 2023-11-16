@@ -10,7 +10,7 @@ ProductionDayStartData productionDayStartDataFromJson(String str) =>
 String productionDayStartDataToJson(ProductionDayStartData data) => json.encode(data.toJson());
 
 class ProductionDayStartData {
-  List<BoxDatum> boxData;
+  List<BoxData> boxData;
   List<Workerdatum> workerdata;
 
   ProductionDayStartData({
@@ -19,7 +19,7 @@ class ProductionDayStartData {
   });
 
   factory ProductionDayStartData.fromJson(Map<String, dynamic> json) => ProductionDayStartData(
-        boxData: List<BoxDatum>.from(json["box_data"].map((x) => BoxDatum.fromJson(x))),
+        boxData: List<BoxData>.from(json["box_data"].map((x) => BoxData.fromJson(x))),
         workerdata: List<Workerdatum>.from(json["workerdata"].map((x) => Workerdatum.fromJson(x))),
       );
 
@@ -29,7 +29,7 @@ class ProductionDayStartData {
       };
 }
 
-class BoxDatum {
+class BoxData {
   int id;
   String batchCode;
   String boxRef;
@@ -42,7 +42,7 @@ class BoxDatum {
   DateTime createdAt;
   DateTime updatedAt;
 
-  BoxDatum({
+  BoxData({
     required this.id,
     required this.batchCode,
     required this.boxRef,
@@ -56,7 +56,7 @@ class BoxDatum {
     required this.updatedAt,
   });
 
-  factory BoxDatum.fromJson(Map<String, dynamic> json) => BoxDatum(
+  factory BoxData.fromJson(Map<String, dynamic> json) => BoxData(
         id: json["id"],
         batchCode: json["batch_code"],
         boxRef: json["box_ref"],

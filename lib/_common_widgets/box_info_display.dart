@@ -1,4 +1,5 @@
 import 'package:dth/_common_widgets/spacer.dart';
+import 'package:dth/_models/production_daystart_model.dart';
 import 'package:dth/theme/text_sizing.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,18 +7,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BoxInfoDisplay extends StatefulWidget {
   const BoxInfoDisplay({
-    required this.title,
-    required this.boxColor,
-    required this.boxTexture,
-    required this.boxSize,
-    required this.boxWeight,
+    required this.box,
     super.key,
   });
-  final String title;
-  final String boxColor;
-  final String boxSize;
-  final String boxTexture;
-  final String boxWeight;
+  final BoxData box;
 
   @override
   State<BoxInfoDisplay> createState() => _BoxInfoDisplayState();
@@ -30,7 +23,7 @@ class _BoxInfoDisplayState extends State<BoxInfoDisplay> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          widget.title,
+          widget.box.boxRef,
           style: TextStyles.mainHeadingStyle,
         ),
         const Divider(),
@@ -43,25 +36,25 @@ class _BoxInfoDisplayState extends State<BoxInfoDisplay> {
             Center(
               child: InfoItem(
                 icon: FontAwesomeIcons.weightHanging,
-                label: widget.boxWeight,
+                label: widget.box.materialQty,
               ),
             ),
             Center(
               child: InfoItem(
                 icon: Icons.texture,
-                label: widget.boxTexture,
+                label: widget.box.textureRef,
               ),
             ),
             Center(
               child: InfoItem(
                 icon: CupertinoIcons.resize,
-                label: widget.boxSize,
+                label: widget.box.sizeRef,
               ),
             ),
             Center(
               child: InfoItem(
                 icon: Icons.palette,
-                label: widget.boxColor,
+                label: widget.box.colorRef,
               ),
             ),
           ],

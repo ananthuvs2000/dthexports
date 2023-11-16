@@ -133,13 +133,13 @@ class _RecycleDayEndPageState extends State<RecycleDayEndScreen> {
 
                 /// Details of Stored Info Of Selected Box
                 hSpace(15),
-                const BoxInfoDisplay(
-                  title: 'Box Details',
-                  boxColor: '12134',
-                  boxTexture: '25425',
-                  boxSize: '235245',
-                  boxWeight: '355',
-                ),
+                // const BoxInfoDisplay(
+                //   title: 'Box Details',
+                //   boxColor: '12134',
+                //   boxTexture: '25425',
+                //   boxSize: '235245',
+                //   boxWeight: '355',
+                // ),
                 // Auto Calculated Field
                 hSpace(15),
 
