@@ -32,6 +32,12 @@ class ProductionDayStartProvider extends ChangeNotifier {
     return foundBox;
   }
 
+  void clearData() {
+    _dayStartData = ProductionDayStartData(boxData: [], workerdata: []);
+    _selectedBox = null;
+    notifyListeners();
+  }
+
   ProductionDayStartData get dayStartData => _dayStartData;
   BoxDatum? get selectedBox => _selectedBox;
 }

@@ -25,7 +25,7 @@ class OpenImageButton extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(borderRad),
       child: Ink(
-        height: 120.h,
+        height: 100.h,
         width: width,
         padding: EdgeInsets.all(15.h),
         decoration: BoxDecoration(

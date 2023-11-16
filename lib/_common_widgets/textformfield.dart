@@ -1,6 +1,8 @@
 import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
 class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
@@ -14,6 +16,8 @@ class CustomTextFormField extends StatefulWidget {
     this.isPassword,
     this.isReadOnly,
     this.onTap,
+    this.onChanged,
+    this.inputFormatter,
     super.key,
   });
 
@@ -26,7 +30,9 @@ class CustomTextFormField extends StatefulWidget {
   final String hint;
   final TextAlign? textAlign;
   final void Function()? onTap;
+  final void Function(String)? onChanged;
   final bool? isReadOnly;
+  final List<TextInputFormatter>? inputFormatter;
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -64,7 +70,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           ),
         ),
         TextFormField(
+          // Events
           onTap: widget.onTap,
+          onChanged: (value) => widget.onChanged!(value),
+          inputFormatters: widget.inputFormatter,
+          //
           controller: widget.controller,
           validator: widget.validator,
           obscureText: widget.isPassword ?? false,
@@ -73,6 +83,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           expands: false,
           textAlign: widget.textAlign ?? TextAlign.left,
           focusNode: focusNode,
+          textInputAction: TextInputAction.done,
+
           readOnly: widget.isReadOnly ?? false,
           // Styles
           style: const TextStyle(
@@ -80,7 +92,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             fontWeight: FontWeight.w500,
             letterSpacing: 0,
           ),
-          textInputAction: TextInputAction.next,
           decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
@@ -116,7 +127,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               color: AppColors.formFieldErrorColor,
               fontSize: 12,
               letterSpacing: 0,
+              height: 1.1,
             ),
+            errorMaxLines: 2,
             filled: true,
             fillColor: AppColors.inversePrimaryColor,
             contentPadding: const EdgeInsets.symmetric(

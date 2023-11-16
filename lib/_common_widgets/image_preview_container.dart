@@ -20,8 +20,8 @@ class ImagePreviewBox extends StatelessWidget {
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.3),
-                  offset: const Offset(-1, 1),
+                  color: Colors.black.withOpacity(0.5),
+                  offset: const Offset(-2, 2),
                   blurRadius: 15,
                 )
               ],

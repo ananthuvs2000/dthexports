@@ -1,16 +1,21 @@
 import 'package:dth/_common_widgets/textformfield.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class NumberEntryField extends StatelessWidget {
   const NumberEntryField({
     required this.label,
     required this.controller,
     required this.validator,
+    this.onChanged,
+    this.inputFormatter,
     super.key,
   });
   final String label;
   final TextEditingController controller;
   final String? Function(String? value) validator;
+  final void Function(String value)? onChanged;
+  final List<TextInputFormatter>? inputFormatter;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +25,7 @@ class NumberEntryField extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Flexible(
-          flex: 2,
+          flex: 3,
           child: Text(
             label,
             style: const TextStyle(
@@ -32,8 +37,10 @@ class NumberEntryField extends StatelessWidget {
           ),
         ),
         Flexible(
-          flex: 1,
+          flex: 2,
           child: CustomTextFormField(
+            inputFormatter: inputFormatter,
+            onChanged: (value) => onChanged!(value),
             prefixIcon: null,
             keyboardType: TextInputType.number,
             hint: 'XX.XX KG',

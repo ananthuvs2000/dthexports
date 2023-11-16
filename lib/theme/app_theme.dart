@@ -19,6 +19,10 @@ AppBarTheme dthAppbarTheme = AppBarTheme(
   ),
 );
 
+DividerThemeData divTheme = DividerThemeData(
+  color: Colors.black.withOpacity(0.15),
+);
+
 InputDecorationTheme inputTheme = InputDecorationTheme(
   prefixIconColor: MaterialStateColor.resolveWith(
     (states) {
@@ -41,4 +45,5 @@ ThemeData dthAppTheme = ThemeData(
   colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
   appBarTheme: dthAppbarTheme,
   inputDecorationTheme: inputTheme,
+  dividerTheme: divTheme,
 );

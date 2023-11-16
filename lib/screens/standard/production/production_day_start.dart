@@ -1,5 +1,6 @@
+import 'package:dth/_common_widgets/error_display_caption.dart';
 import 'package:dth/_common_widgets/image_preview_container.dart';
-import 'package:dth/_models/production_daystart_model.dart';
+import 'package:dth/_common_widgets/number_entry_field.dart';
 import 'package:dth/_providers/image_provider.dart';
 import 'package:dth/_providers/production_daystart_provider.dart';
 import 'package:dth/theme/colors.dart';
@@ -15,6 +16,7 @@ import 'package:dth/_common_widgets/team_manager_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class DayStart extends StatefulWidget {
@@ -28,12 +30,15 @@ class DayStart extends StatefulWidget {
 
 class _DayStartState extends State<DayStart> {
   late CameraProvider _imageProvider;
+  late ProductionDayStartProvider _productionDayStartProvider;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _imageProvider = Provider.of<CameraProvider>(context, listen: false);
+    _productionDayStartProvider = Provider.of<ProductionDayStartProvider>(context, listen: false);
+    _finalWeightController.text = '0';
   }
 
   @override
@@ -42,25 +47,30 @@ class _DayStartState extends State<DayStart> {
     super.dispose();
     Future.delayed(Duration.zero, () {
       _imageProvider.clearImage();
+      _productionDayStartProvider.removeListener(() {});
     });
   }
 
+  final TextEditingController _weightController = TextEditingController();
+  final TextEditingController _finalWeightController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    Provider.of<ProductionDayStartProvider>(context, listen: true)
-        .fetchDataAndUpdateState(widget.batchCode);
+    _productionDayStartProvider.fetchDataAndUpdateState(widget.batchCode);
 
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        scrolledUnderElevation: 0,
-        backgroundColor: AppColors.primaryColor,
-        foregroundColor: AppColors.inversePrimaryColor,
-        title: const Text('Production Day Start'),
-        systemOverlayStyle: SystemUiOverlayStyle.light,
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
+    return Form(
+      key: _formKey,
+      child: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          scrolledUnderElevation: 0,
+          backgroundColor: AppColors.primaryColor,
+          foregroundColor: AppColors.inversePrimaryColor,
+          title: const Text('Production Day Start'),
+          systemOverlayStyle: SystemUiOverlayStyle.light,
+        ),
+        body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
           child: Column(
@@ -93,86 +103,97 @@ class _DayStartState extends State<DayStart> {
                         },
                       ),
                       // Update BoxInfoDisplay parameters
-                      (provider.selectedBox != null)
-                          ? BoxInfoDisplay(
-                              title: 'Box Details',
+                      if (provider.selectedBox != null)
+                        Column(
+                          children: [
+                            hSpace(20),
+                            BoxInfoDisplay(
+                              title: 'Box Details (No. ${provider.selectedBox!.boxRef})',
                               boxColor: provider.selectedBox!.colorRef,
                               boxTexture: provider.selectedBox!.textureRef,
                               boxSize: provider.selectedBox!.sizeRef,
                               boxWeight: provider.selectedBox!.materialQty,
-                            )
-                          : SizedBox(),
+                            ),
+                            hSpace(5),
+
+                            //^ Have cleaning form based on process value
+                            DynamicFieldRow(label: 'Process', value: provider.selectedBox!.process),
+                            hSpace(15),
+                            Consumer<CameraProvider>(
+                              builder: (context, state, _) {
+                                if (_imageProvider.image == null) {
+                                  return const SizedBox();
+                                } else {
+                                  return ImagePreviewBox(image: _imageProvider.image);
+                                }
+                              },
+                            ),
+                            OpenImageButton(
+                              width: double.infinity,
+                              icon: CupertinoIcons.camera_fill,
+                              label: (Provider.of<CameraProvider>(context).image == null)
+                                  ? 'Take Photo'
+                                  : 'Take Again',
+                              onTap: () async {
+                                await _imageProvider.getImage();
+                              },
+                            ),
+                            hSpace(10),
+                            NumberEntryField(
+                              inputFormatter: [
+                                FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,5}$')),
+                              ],
+                              label: 'Enter weight as shown',
+                              controller: _weightController,
+                              validator: (value) {
+                                if (value == '') return 'Please enter a weight';
+                                return null;
+                              },
+                              onChanged: (value) {
+                                setState(() {
+                                  _finalWeightController.text =
+                                      (double.parse(value.toString()) - 02.700)
+                                          .toPrecision(3)
+                                          .toString();
+                                });
+                              },
+                            ),
+                            hSpace(15),
+                            DynamicFieldRow(
+                              label: 'Material Weight',
+                              value: '${_finalWeightController.text} kg',
+                            ),
+                          ],
+                        )
+                      else
+                        const ErrorDisplayCaption(
+                          message: 'Please select a box',
+                        ),
                     ],
                   );
                 },
               ),
-              hSpace(20),
-              const DynamicFieldRow(label: 'Process', value: 'Display Process'),
-              hSpace(15),
-              DropdownMenuField(
-                validator: (value) {
-                  return '';
-                },
-                fieldLabel: 'Team',
-                dropDownLabel: 'Select Team',
-                dropdownEntries: const [
-                  DropdownMenuItem(value: 'Team 1', child: Text('Team 1')),
-                  DropdownMenuItem(value: 'Team 2', child: Text('Team 2')),
-                  DropdownMenuItem(value: 'Team 3', child: Text('Team 3')),
-                ],
-                onSelected: (selectedVal) {
-                  print(selectedVal.toString());
-                },
-              ),
+              const Divider(),
 
-              hSpace(15),
-              const DynamicFieldRow(label: 'Material Weight', value: 'Calculate Weight&Display'),
-              hSpace(15),
-              TeamManagerWidget(
-                editable: true,
-                teamList: [
-                  WorkerData(id: 10, name: 'Athul'),
-                  WorkerData(id: 15, name: 'Amal'),
-                ],
-              ),
-
-              hSpace(15),
-
-              Consumer<CameraProvider>(
-                builder: (context, state, _) {
-                  if (_imageProvider.image == null) {
-                    return const SizedBox();
-                  } else {
-                    return ImagePreviewBox(image: _imageProvider.image);
-                  }
-                },
-              ),
-              OpenImageButton(
-                width: double.infinity,
-                icon: CupertinoIcons.camera_fill,
-                label: (Provider.of<CameraProvider>(context).image == null)
-                    ? 'Take Photo'
-                    : 'Take Again',
-                onTap: () async {
-                  await _imageProvider.getImage();
-                },
-              ),
-              hSpace(10),
-
+              hSpace(50),
               // End of listview
             ],
           ),
         ),
-      ),
-      bottomNavigationBar: BottomActionsArea(
-        children: [
-          Expanded(
-            child: PrimaryElevatedButton(
-              onPressed: () {},
-              label: 'Submit',
+        bottomNavigationBar: BottomActionsArea(
+          children: [
+            Expanded(
+              child: PrimaryElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    print('Form Valid');
+                  }
+                },
+                label: 'Submit',
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
