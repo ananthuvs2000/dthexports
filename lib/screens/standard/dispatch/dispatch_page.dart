@@ -1,3 +1,4 @@
+import 'package:dth/screens/standard/widgets/datatable.dart';
 import 'package:dth/screens/standard/widgets/despachtable.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/_common_widgets/bottom_actions_area.dart';
@@ -63,7 +64,7 @@ class _DespachScreenState extends State<DespachScreen> {
                 ],
               ),
               hSpace(10),
-              const DespachTableWidget(),
+               CustomDataTable()
             ],
           ),
         ),

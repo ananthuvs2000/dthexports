@@ -1,3 +1,4 @@
+import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/_common_widgets/spacer.dart';
 import 'package:dth/_common_widgets/team_item_list.dart';
@@ -41,12 +42,12 @@ class _TeamManagerWidgetState extends State<TeamManagerWidget> {
           Container(
             margin: EdgeInsets.zero,
             padding: EdgeInsets.symmetric(horizontal: 10.w),
-            decoration: const BoxDecoration(
+            decoration:  BoxDecoration(
               borderRadius: BorderRadius.only(
                 topRight: Radius.circular(globalBorderRadius),
                 topLeft: Radius.circular(globalBorderRadius),
               ),
-              color: Colors.indigo,
+              color: AppColors.primaryColor,
             ),
             child: Row(
               // Heading Area
