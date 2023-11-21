@@ -7,13 +7,13 @@ import 'package:http/http.dart' as http;
 
 class VendorDataService extends ChangeNotifier {
   //! API ENDPOINT
-  final String _vendorAPI = '$apiHOME/vendor';
+  final String _vendorAPI = '$apiHOME/vendor1';
 
   //^ Fetching all vendors
   Future<List<Vendor>> fetchVendors() async {
     final response = await http.get(Uri.parse(_vendorAPI));
-    // print(response.body);
-    if (response.statusCode == 403) {
+    print(response.body);
+    if (response.statusCode == 200) {
       final List<dynamic> jsonData = json.decode(response.body);
 
       // Mapping to a Dart Model
