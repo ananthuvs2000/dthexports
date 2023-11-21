@@ -194,15 +194,15 @@ class _DayStartState extends State<DayStart> {
                                   hSpace(10),
                                   ListView.builder(
                                     shrinkWrap: true,
-                                    itemCount: provider.workerDataList.length,
+                                    itemCount: provider.workerAddedList.toList().length,
                                     itemBuilder: (
                                       context,
                                       index,
                                     ) {
                                       return SelectedWorkerTile(
-                                        worker: provider.workerDataList[index],
+                                        worker: provider.workerAddedList.toList()[index],
                                         onDelete: (context) =>
-                                            provider.removeWorker(provider.workerDataList[index]),
+                                            provider.removeWorker(provider.workerAddedList.toList()[index]),
                                       );
                                     },
                                   ),
@@ -316,6 +316,7 @@ showEmployeePicker({
                       onAdd: () async {
                         if (!state.workerExists(workers[index])) {
                           state.addWorker(workers[index]);
+                          print(workers[index].employeeName);
                           Navigator.pop(context);
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(

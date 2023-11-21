@@ -7,10 +7,14 @@ class ProductionDayStartProvider extends ChangeNotifier {
 
   late ProductionDayStartData _dayStartData = ProductionDayStartData(boxData: [], workerdata: []);
   BoxData? _selectedBox;
+   late Set<Workerdatum> _addedEmployees={};
 
   Future<void> fetchDataAndUpdateState(String batchCode) async {
     try {
       _dayStartData = await _productionDayStartService.fetchDayStartData(batchCode);
+     
+      _addedEmployees={..._dayStartData.workerdata.toSet()};
+      print(_addedEmployees);
       notifyListeners();
     } catch (error) {
       // Handle errors here
@@ -29,13 +33,16 @@ class ProductionDayStartProvider extends ChangeNotifier {
   }
 
   void addWorker(Workerdatum worker) {
-    _dayStartData.workerdata.add(worker);
+    // _dayStartData.workerdata.add(worker);
+    _addedEmployees.add(worker);
     notifyListeners();
   }
 
   bool workerExists(Workerdatum worker) {
-    if (_dayStartData.workerdata.contains(worker)) {
+    print(_dayStartData.workerdata);
+    if (_addedEmployees.contains(worker)) {
       print('duplicate found');
+      
       notifyListeners();
       return true;
     } else {
@@ -59,4 +66,5 @@ class ProductionDayStartProvider extends ChangeNotifier {
   List<Workerdatum> get workerDataList => _dayStartData.workerdata;
   List<BoxData> get boxDataList => _dayStartData.boxData;
   BoxData? get selectedBox => _selectedBox;
+  Set<Workerdatum> get workerAddedList => _addedEmployees;
 }

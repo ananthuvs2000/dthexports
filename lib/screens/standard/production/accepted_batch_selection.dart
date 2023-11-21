@@ -52,17 +52,20 @@ class AccepedBatchSelectionPage extends StatelessWidget {
                         itemBuilder: (context, index) {
                           final item = itemChecks[index];
 
-                          return BatchSelectionTile(
-                            batchCode: item.batchCode,
-                            vendorCode: item.vendoCode,
-                            quantityChecked: item.quantityChecked,
-                            status: item.status,
-                            onTap: () => Get.to(
-                              () => DayStart(
-                                batchCode: item.batchCode,
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 15),
+                            child: BatchSelectionTile(
+                              batchCode: item.batchCode,
+                              vendorCode: item.vendoCode,
+                              quantityChecked: item.quantityChecked,
+                              status: item.status,
+                              onTap: () => Get.to(
+                                () => DayStart(
+                                  batchCode: item.batchCode,
+                                ),
+                                transition: Transition.rightToLeft,
+                                preventDuplicates: true,
                               ),
-                              transition: Transition.rightToLeft,
-                              preventDuplicates: true,
                             ),
                           );
                         },

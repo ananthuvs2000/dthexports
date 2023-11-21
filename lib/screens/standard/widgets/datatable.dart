@@ -49,23 +49,20 @@ class _CustomDataTableState extends State<CustomDataTable> {
             DataColumn(
               label: Padding(
                 padding: const EdgeInsets.only(left: 10),
-                child: Text(' WORKER  ',
-                    style: TextStyle(color: AppColors.inversePrimaryColor)),
+                child: Text(' Worker  ',
+                    style: TextStyle(color: AppColors.inversePrimaryColor,fontSize: 18,fontWeight: FontWeight.w600)),
               ),
             ),
             DataColumn(
-              label: Text('  QTY USED  ',
-                  style: TextStyle(color: AppColors.inversePrimaryColor)),
+              label: Text('  Completed Qty ',
+                  style: TextStyle(color: AppColors.inversePrimaryColor,fontSize: 18,fontWeight: FontWeight.w600)),
             ),
-            DataColumn(
-              label: Text('  OUTPUT  ',
-                  style: TextStyle(color: AppColors.inversePrimaryColor)),
-            ),
+            
             DataColumn(
               label: Padding(
                 padding: const EdgeInsets.only(right: 10),
-                child: Text('  WASTAGE  ',
-                    style: TextStyle(color: AppColors.inversePrimaryColor)),
+                child: Text('  Total Qty  ',
+                    style: TextStyle(color: AppColors.inversePrimaryColor,fontSize: 18,fontWeight: FontWeight.w600)),
               ),
             ),
           ],
@@ -87,13 +84,7 @@ class _CustomDataTableState extends State<CustomDataTable> {
                 DataCell(
                   TableNumberEntry(iController: widget.outController),
                 ),
-                DataCell(
-                  Container(alignment: Alignment.center,
-                    height: 30,
-                    width: 50,
-                    child: Text('55'),
-                  ),
-                ),
+                
                 
                 
               ],
