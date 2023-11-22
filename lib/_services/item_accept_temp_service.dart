@@ -13,7 +13,8 @@ class ItemAcceptTempService extends ChangeNotifier {
   final String _uriAcceptFinalize = '$apiHOME/accept_tmp_store_confirm';
 
   Future<List<dynamic>> getRemainingBoxNums(String batchCode) async {
-    final response = await http.post(
+    try {
+      final response = await http.post(
       Uri.parse(_uriGetRemainingBoxNums),
       body: {'batch_code': batchCode},
     );
@@ -22,8 +23,12 @@ class ItemAcceptTempService extends ChangeNotifier {
       final List<dynamic> result = jsonDecode(response.body);
       final list = result.map((e) => e).toList();
       return list;
-    } else {
-      throw Exception('Failed to get  box info');
+    }
+     else {
+      return [];
+    }
+    } catch (e) {
+      throw Exception(e);
     }
   }
 
