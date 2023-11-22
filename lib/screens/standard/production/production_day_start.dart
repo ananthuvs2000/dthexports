@@ -156,24 +156,19 @@ class _DayStartState extends State<DayStart> {
                                 FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,5}$')),
                               ],
                               label: 'Enter weight as shown',
-                              controller: _weightController,
+                              controller: provider.weightController,
                               validator: (value) {
                                 if (value == '') return 'Please enter a weight';
                                 return null;
                               },
                               onChanged: (value) {
-                                setState(() {
-                                  _finalWeightController.text =
-                                      (double.parse(value.toString()) - 02.700)
-                                          .toPrecision(3)
-                                          .toString();
-                                });
+                                provider.calculateMaterialWeight(value);
                               },
                             ),
                             hSpace(15),
                             DynamicFieldRow(
                               label: 'Material Weight',
-                              value: '${_finalWeightController.text} kg',
+                              value: '${provider.finalWeightController.text} kg',
                             ),
 
                             // Worker data
@@ -233,6 +228,7 @@ class _DayStartState extends State<DayStart> {
               child: PrimaryElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
+                    final provider = Provider.of<ProductionDayStartProvider>(context);
                     if (_imageProvider.image != null) {
                       final imageUploadRes =
                           await ImageUploadService().uploadImage(_imageProvider.image!.path);
@@ -245,8 +241,8 @@ class _DayStartState extends State<DayStart> {
                           team: hashEmployeeIdsIntoString(
                               _productionDayStartProvider.workerDataList.toSet()),
                           imageURL: imageUploadRes.imagePath,
-                          weightShown: _weightController.text,
-                          calculatedWeight: _finalWeightController.text,
+                          weightShown: provider.weightController.text,
+                          calculatedWeight: provider.finalWeightController.text,
                           process: _productionDayStartProvider.selectedBox!.process,
                         )) {
                           ScaffoldMessenger.of(context).showSnackBar(

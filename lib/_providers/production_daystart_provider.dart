@@ -1,6 +1,7 @@
 import 'package:dth/_models/production_daystart_model.dart';
 import 'package:dth/_services/production_day_start_service.dart';
 import 'package:flutter/material.dart';
+import 'package:get/utils.dart';
 
 class ProductionDayStartProvider extends ChangeNotifier {
   final ProductionDayStartService _productionDayStartService = ProductionDayStartService();
@@ -8,6 +9,14 @@ class ProductionDayStartProvider extends ChangeNotifier {
   late ProductionDayStartData _dayStartData = ProductionDayStartData(boxData: [], workerdata: []);
   BoxData? _selectedBox;
   late Set<Workerdatum> _addedEmployees = {};
+
+  TextEditingController weightController = TextEditingController();
+  TextEditingController finalWeightController = TextEditingController();
+  void calculateMaterialWeight(String value) {
+    finalWeightController.text =
+        (double.parse(value.toString()) - 02.700).toPrecision(3).toString();
+    notifyListeners();
+  }
 
   Future<void> fetchDataAndUpdateState(String batchCode) async {
     try {
