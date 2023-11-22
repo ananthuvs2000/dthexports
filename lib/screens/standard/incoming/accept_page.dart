@@ -98,11 +98,9 @@ class _AcceptPageState extends State<AcceptPage> {
 
                   // Consumer to get remaining box nums from temp api
                   Consumer<ItemAcceptTempProvider>(
-                    builder: (context, boxNumberDropDownState, _) => FutureBuilder(
-                        future: boxNumberDropDownState.getRemainingBoxes(widget.batchCode),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            return DropdownMenuField(
+                    builder: (context, boxNumberDropDownState, _) =>
+                          
+                             DropdownMenuField(
                               key: _dropdownKey,
                               validator: (value) {
                                 if (value == null) {
@@ -113,7 +111,7 @@ class _AcceptPageState extends State<AcceptPage> {
                               },
                               fieldLabel: 'Box No',
                               dropDownLabel: 'Select Box ',
-                              dropdownEntries: snapshot.data!
+                              dropdownEntries: boxNumberDropDownState.boxesRemaining
                                   .map((boxNum) => DropdownMenuItem(
                                         value: '$boxNum',
                                         child: Text('$boxNum'),
@@ -123,11 +121,9 @@ class _AcceptPageState extends State<AcceptPage> {
                                 dropdownState.updateBoxNumber = selectedVal;
                                 print(dropdownState.box);
                               },
-                            );
-                          } else {
-                            return ErrorDisplayCaption(message: 'Failed to fetch boxes');
-                          }
-                        }),
+                            ),
+                          
+                       
                   ),
                   hSpace(15),
                   DropdownMenuField(

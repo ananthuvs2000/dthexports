@@ -62,7 +62,7 @@ class ItemAcceptTempService extends ChangeNotifier {
       Uri.parse(_uriGetAcceptedBoxesOfBatch),
       body: {'batch_code': batchCode},
     );
-    print(response.body);
+    // print(response.body);
 
     if (response.statusCode == 200) {
       final List<dynamic> result = jsonDecode(response.body);
