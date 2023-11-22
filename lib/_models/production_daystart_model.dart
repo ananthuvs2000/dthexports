@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:equatable/equatable.dart';
+
 ProductionDayStartData productionDayStartDataFromJson(String str) =>
     ProductionDayStartData.fromJson(json.decode(str));
 
@@ -85,7 +87,7 @@ class BoxData {
       };
 }
 
-class Workerdatum {
+class Workerdatum extends Equatable {
   int id;
   String employeeName;
   String employeeCode;
@@ -99,6 +101,9 @@ class Workerdatum {
     required this.createdAt,
     required this.updatedAt,
   });
+
+  @override
+  List<Object?> get props => [id, employeeCode, employeeName];
 
   factory Workerdatum.fromJson(Map<String, dynamic> json) => Workerdatum(
         id: json["id"],

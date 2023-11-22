@@ -98,32 +98,29 @@ class _AcceptPageState extends State<AcceptPage> {
 
                   // Consumer to get remaining box nums from temp api
                   Consumer<ItemAcceptTempProvider>(
-                    builder: (context, boxNumberDropDownState, _) =>
-                          
-                             DropdownMenuField(
-                              key: _dropdownKey,
-                              validator: (value) {
-                                if (value == null) {
-                                  return 'Please select a value';
-                                } else {
-                                  return null;
-                                }
-                              },
-                              fieldLabel: 'Box No',
-                              dropDownLabel: 'Select Box ',
-                              dropdownEntries: boxNumberDropDownState.boxesRemaining
-                                  .map((boxNum) => DropdownMenuItem(
-                                        value: '$boxNum',
-                                        child: Text('$boxNum'),
-                                      ))
-                                  .toList(),
-                              onSelected: (selectedVal) {
-                                dropdownState.updateBoxNumber = selectedVal;
-                                print(dropdownState.box);
-                              },
-                            ),
-                          
-                       
+                    builder: (context, boxNumberDropDownState, _) => DropdownMenuField(
+                      key: _dropdownKey,
+                      validator: (value) {
+                        if (value == null) {
+                          return 'Please select a value';
+                        } else {
+                          return null;
+                        }
+                      },
+                      fieldLabel: 'Box No',
+                      dropDownLabel: 'Select Box ',
+                      dropdownEntries: boxNumberDropDownState.boxesRemaining
+                          .map((boxNum) => DropdownMenuItem(
+                                value: '$boxNum',
+                                child: Text('$boxNum'),
+                              ))
+                          .toList(),
+                      onSelected: (selectedVal) {
+                        dropdownState.updateBoxNumber = selectedVal;
+                        boxNumberDropDownState.getRemainingBoxes(widget.batchCode);
+                        print(dropdownState.box);
+                      },
+                    ),
                   ),
                   hSpace(15),
                   DropdownMenuField(

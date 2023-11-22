@@ -201,8 +201,8 @@ class _DayStartState extends State<DayStart> {
                                     ) {
                                       return SelectedWorkerTile(
                                         worker: provider.workerAddedList.toList()[index],
-                                        onDelete: (context) =>
-                                            provider.removeWorker(provider.workerAddedList.toList()[index]),
+                                        onDelete: (context) => provider
+                                            .removeWorker(provider.workerAddedList.toList()[index]),
                                       );
                                     },
                                   ),
@@ -284,7 +284,7 @@ showEmployeePicker({
   required BuildContext context,
   required final List<Workerdatum> workers,
 }) {
-  final state = Provider.of<ProductionDayStartProvider>(context, listen: false);
+  final daystartState = Provider.of<ProductionDayStartProvider>(context, listen: false);
   showDialog(
     context: context,
     builder: (context) => Dialog(
@@ -314,9 +314,9 @@ showEmployeePicker({
                     return WorkerPickerTile(
                       worker: workers[index],
                       onAdd: () async {
-                        if (!state.workerExists(workers[index])) {
-                          state.addWorker(workers[index]);
-                          print(workers[index].employeeName);
+                        print(workers[index]);
+                        if (!daystartState.workerExists(workers[index])) {
+                          daystartState.addWorker(workers[index]);
                           Navigator.pop(context);
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
