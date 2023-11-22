@@ -88,13 +88,13 @@ class BoxData {
 }
 
 class Workerdatum extends Equatable {
-  int id;
-  String employeeName;
-  String employeeCode;
-  DateTime createdAt;
-  DateTime updatedAt;
+  final int id;
+  final String employeeName;
+  final String employeeCode;
+  final DateTime createdAt;
+  final DateTime updatedAt;
 
-  Workerdatum({
+  const Workerdatum({
     required this.id,
     required this.employeeName,
     required this.employeeCode,
