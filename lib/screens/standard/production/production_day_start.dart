@@ -227,8 +227,8 @@ class _DayStartState extends State<DayStart> {
             Expanded(
               child: PrimaryElevatedButton(
                 onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
-                    final provider = Provider.of<ProductionDayStartProvider>(context);
+                  final provider = context.read<ProductionDayStartProvider>();
+                  if (_formKey.currentState!.validate() && provider.selectedBox != null) {
                     if (_imageProvider.image != null) {
                       final imageUploadRes =
                           await ImageUploadService().uploadImage(_imageProvider.image!.path);
@@ -248,6 +248,8 @@ class _DayStartState extends State<DayStart> {
                           ScaffoldMessenger.of(context).showSnackBar(
                             successSnackbar('Added to daystart'),
                           );
+                          provider.clearData();
+                          provider.fetchDataAndUpdateState(widget.batchCode);
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             errorSnackbar('ERROR: Failed to post to daystart'),
@@ -256,10 +258,14 @@ class _DayStartState extends State<DayStart> {
                         //print('Form Valid');
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          errorSnackbar('ERROR: Image Upload Failed'),
+                          errorSnackbar('ERROR: Photo Upload Failed'),
                         );
                       }
-                    } else {}
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        errorSnackbar('ERROR: Photo not taken yet'),
+                      );
+                    }
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       errorSnackbar('ERROR: Invalid form submission'),

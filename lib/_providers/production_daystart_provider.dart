@@ -68,6 +68,8 @@ class ProductionDayStartProvider extends ChangeNotifier {
     _dayStartData = ProductionDayStartData(boxData: [], workerdata: []);
     _selectedBox = null;
     _addedEmployees.clear();
+    weightController.clear();
+    finalWeightController.clear();
     notifyListeners();
   }
 
