@@ -23,7 +23,7 @@ class ItemAcceptTempService extends ChangeNotifier {
       final list = result.map((e) => e).toList();
       return list;
     } else {
-      throw Exception('Failed to get temp box info');
+      throw Exception('Failed to get  box info');
     }
   }
 

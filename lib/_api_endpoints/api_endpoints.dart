@@ -4,7 +4,7 @@
 const apiHOME = 'http://emouser.com/api';
 
 // Vendor Routees
-const apiGetVendorsRoute = '$apiHOME/vendor';
+const apiGetVendorsRoute = '$apiHOME/vendor1';
 const apiAddVendorRoute = '$apiHOME/add_vendor';
 // Employee Routes
 const apiGetAllEmployees = '$apiHOME/employee';
