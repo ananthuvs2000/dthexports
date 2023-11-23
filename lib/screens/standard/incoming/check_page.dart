@@ -3,6 +3,7 @@ import 'package:dth/_models/employee_model.dart';
 import 'package:dth/_models/production_daystart_model.dart';
 import 'package:dth/_providers/checking_provider.dart';
 import 'package:dth/_providers/employee_provider.dart';
+import 'package:dth/_utilites/loading_spinner_modal.dart';
 import 'package:dth/_utilites/utility_functions.dart';
 // import 'package:dth/_providers/datetime_provider.dart';
 import 'package:dth/_providers/team_provider.dart';
@@ -224,8 +225,10 @@ class _CheckPageState extends State<CheckPage> {
           child: PrimaryElevatedButton(
             onPressed: () async {
               if (_formKey.currentState!.validate()) {
+                showLoadingSpinnerModal(context);
                 final String hash = hashEmployeeIdsIntoString(checkingProvider.addedEmpoyees);
                 if (hash == '') {
+                  Navigator.pop(context);
                   ScaffoldMessenger.of(context)
                       .showSnackBar(errorSnackbar('Failed to assign employees'));
                 }
@@ -237,6 +240,7 @@ class _CheckPageState extends State<CheckPage> {
                   hash,
                 );
                 if (await resOfTeamCreation && await res) {
+                  Navigator.pop(context);
                   ScaffoldMessenger.of(context)
                       .showSnackBar(successSnackbar('Succesfully Posted!'));
 
@@ -245,6 +249,7 @@ class _CheckPageState extends State<CheckPage> {
                   _formKey.currentState!.reset();
                   _quantityController.clear();
                 } else {
+                  Navigator.pop(context);
                   ScaffoldMessenger.of(context)
                       .showSnackBar(errorSnackbar('Failed to post material check!'));
                 }

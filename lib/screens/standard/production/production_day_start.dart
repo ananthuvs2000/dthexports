@@ -9,6 +9,7 @@ import 'package:dth/_providers/image_provider.dart';
 import 'package:dth/_providers/production_daystart_provider.dart';
 import 'package:dth/_services/image_upload_service.dart';
 import 'package:dth/_services/production_day_start_service.dart';
+import 'package:dth/_utilites/loading_spinner_modal.dart';
 import 'package:dth/_utilites/scaffold_snackbars.dart';
 import 'package:dth/_utilites/utility_functions.dart';
 import 'package:dth/screens/standard/incoming/widgets/employee_picker_tile.dart';
@@ -230,6 +231,7 @@ class _DayStartState extends State<DayStart> {
                   final provider = context.read<ProductionDayStartProvider>();
                   if (_formKey.currentState!.validate() && provider.selectedBox != null) {
                     if (_imageProvider.image != null) {
+                      showLoadingSpinnerModal(context);
                       final imageUploadRes =
                           await ImageUploadService().uploadImage(_imageProvider.image!.path);
                       if (imageUploadRes.imagePath != '') {
@@ -245,23 +247,27 @@ class _DayStartState extends State<DayStart> {
                           calculatedWeight: provider.finalWeightController.text,
                           process: _productionDayStartProvider.selectedBox!.process,
                         )) {
+                          Navigator.pop(context);
                           ScaffoldMessenger.of(context).showSnackBar(
                             successSnackbar('Added to daystart'),
                           );
                           provider.clearData();
                           provider.fetchDataAndUpdateState(widget.batchCode);
                         } else {
+                          Navigator.pop(context);
                           ScaffoldMessenger.of(context).showSnackBar(
                             errorSnackbar('ERROR: Failed to post to daystart'),
                           );
                         }
                         //print('Form Valid');
                       } else {
+                        Navigator.pop(context);
                         ScaffoldMessenger.of(context).showSnackBar(
                           errorSnackbar('ERROR: Photo Upload Failed'),
                         );
                       }
                     } else {
+                      Navigator.pop(context);
                       ScaffoldMessenger.of(context).showSnackBar(
                         errorSnackbar('ERROR: Photo not taken yet'),
                       );
