@@ -1,7 +1,7 @@
 //!  HOME ROUTE '/'
 // const apiHOME = 'http://emouser.com';
 // const apiHOME = 'http://192.168.29.125/dth';
-const apiHOME = 'http://emouser.com/api';
+const apiHOME = 'https://spizaar.com/dth/api';
 
 // Vendor Routees
 const apiGetVendorsRoute = '$apiHOME/vendor1';

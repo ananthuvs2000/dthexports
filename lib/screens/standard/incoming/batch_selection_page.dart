@@ -17,7 +17,9 @@ class BatchSelectionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        scrolledUnderElevation: 0,
         automaticallyImplyLeading: false,
         leading: ArrowBack(
           onTap: () => Get.back(),
@@ -25,61 +27,59 @@ class BatchSelectionPage extends StatelessWidget {
         toolbarHeight: 60,
         leadingWidth: 70,
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            hSpace(15),
-            Text(
-              'Select batch',
-              style: TextStyles.veryLargeHeading,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
+            width: double.infinity,
+            color: Colors.white,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                hSpace(15),
+                Text(
+                  'Select batch',
+                  style: TextStyles.veryLargeHeading,
+                ),
+                Text('All batches undergone checking will be listed here.'),
+                hSpace(15),
+              ],
             ),
-            Text('All batches undergone checking will be listed here.'),
-            hSpace(15),
-            // Batch list builder
-            Consumer<ItemCheckProvider>(
-              builder: (context, state, child) => FutureBuilder(
-                future: state.getItemChecks(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    final itemChecks = snapshot.data!;
-                    return Expanded(
-                      child: ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: itemChecks.length,
-                        itemBuilder: (context, index) {
-                          final item = itemChecks[index];
+          ),
+          // Batch list builder
+          Consumer<ItemCheckProvider>(
+            builder: (context, state, child) => Expanded(
+              child: ListView.builder(
+                padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX - 5),
+                physics: const BouncingScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: state.itemCheckStream.length,
+                itemBuilder: (context, index) {
+                  final item = state.itemCheckStream[index];
 
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: 15),
-                            child: BatchSelectionTile(
-                              batchCode: item.batchCode,
-                              vendorCode: item.vendoCode,
-                              quantityChecked: item.quantityChecked,
-                              status: item.status,
-                              onTap: () => Get.to(
-                                () => AcceptPage(batchCode: item.batchCode),
-                                transition: Transition.rightToLeft,
-                                preventDuplicates: true,
-                              ),
-                            ),
-                          );
-                        },
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 15),
+                    child: BatchSelectionTile(
+                      batchCode: item.batchCode,
+                      vendorCode: item.vendoCode,
+                      quantityChecked: item.quantityChecked,
+                      status: item.status,
+                      onTap: () => Get.to(
+                        () => AcceptPage(batchCode: item.batchCode),
+                        transition: Transition.rightToLeft,
+                        preventDuplicates: true,
                       ),
-                    );
-                  } else if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else {
-                    return const ErrorDisplayCaption(message: 'Could not fetch any batches');
-                  }
+                    ),
+                  );
                 },
               ),
             ),
-            hSpace(10),
-          ],
-        ),
+          ),
+
+          hSpace(10),
+        ],
       ),
     );
   }

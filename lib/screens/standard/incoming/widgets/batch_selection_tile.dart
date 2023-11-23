@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 class BatchSelectionTile extends StatelessWidget {
   const BatchSelectionTile({
     required this.batchCode,
-    required this.vendorCode,
-    required this.quantityChecked,
-    required this.status,
+    this.vendorCode = 'VC00',
+    this.quantityChecked = 'QTY00',
+    this.status = 'STAT00',
     required this.onTap,
     super.key,
   });
@@ -48,7 +48,7 @@ class BatchSelectionTile extends StatelessWidget {
             style: _batchCodeStyle,
           ),
           subtitle: Text(
-            'Quantity: $quantityChecked\nVendor : $vendorCode',
+            'QTY: $quantityChecked\nVendor : $vendorCode',
             style: _subtitleStyle,
           ),
           trailing: Text(

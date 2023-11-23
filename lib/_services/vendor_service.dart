@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 
 class VendorDataService extends ChangeNotifier {
   //! API ENDPOINT
-  final String _vendorAPI = '$apiHOME/vendor1';
+  final String _vendorAPI = '$apiHOME/vendor';
 
   //^ Fetching all vendors
   Future<List<Vendor>> fetchVendors() async {

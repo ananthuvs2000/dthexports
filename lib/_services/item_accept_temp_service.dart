@@ -15,18 +15,17 @@ class ItemAcceptTempService extends ChangeNotifier {
   Future<List<dynamic>> getRemainingBoxNums(String batchCode) async {
     try {
       final response = await http.post(
-      Uri.parse(_uriGetRemainingBoxNums),
-      body: {'batch_code': batchCode},
-    );
+        Uri.parse(_uriGetRemainingBoxNums),
+        body: {'batch_code': batchCode},
+      );
 
-    if (response.statusCode == 200) {
-      final List<dynamic> result = jsonDecode(response.body);
-      final list = result.map((e) => e).toList();
-      return list;
-    }
-     else {
-      return [];
-    }
+      if (response.statusCode == 200) {
+        final List<dynamic> result = jsonDecode(response.body);
+        final list = result.map((e) => e).toList();
+        return list;
+      } else {
+        return [];
+      }
     } catch (e) {
       throw Exception(e);
     }

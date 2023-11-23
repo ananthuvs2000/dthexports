@@ -7,6 +7,7 @@ import 'package:dth/_providers/image_provider.dart';
 import 'package:dth/_providers/item_accept_temp_provider.dart';
 import 'package:dth/_services/image_upload_service.dart';
 import 'package:dth/_services/item_accept_temp_service.dart';
+import 'package:dth/_utilites/loading_spinner_modal.dart';
 import 'package:dth/_utilites/scaffold_snackbars.dart';
 import 'package:dth/screens/standard/incoming/batch_selection_page.dart';
 import 'package:dth/screens/standard/incoming/widgets/accepted_box_tile.dart';
@@ -278,7 +279,7 @@ class _AcceptPageState extends State<AcceptPage> {
             onPressed: () async {
               if (_acceptFormKey.currentState!.validate()) {
                 if (_imageProvider.image != null) {
-                  print('image taken');
+                  showLoadingSpinnerModal(context);
 
                   final imageUploadRes =
                       await ImageUploadService().uploadImage(_imageProvider.image!.path);
@@ -300,28 +301,32 @@ class _AcceptPageState extends State<AcceptPage> {
                       _imageProvider.clearImage();
                       _itemAcceptTemp.getAcceptedBoxes(widget.batchCode);
                       // Showing success message
+                      Navigator.pop(context);
                       ScaffoldMessenger.of(context).showSnackBar(
                         successSnackbar('Box Accepted Succesfully!'),
                       );
                     } else {
+                      Navigator.pop(context);
                       ScaffoldMessenger.of(context)
-                          .showSnackBar(errorSnackbar('Failed to accept!'));
+                          .showSnackBar(errorSnackbar('Failed to submit!'));
                     }
                   } else {
+                    Navigator.pop(context);
                     ScaffoldMessenger.of(context).showSnackBar(
                       errorSnackbar('Image Upload Failed'),
                     );
                   }
                 } else {
+                  Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(
                     errorSnackbar('Error: Did not take a picture'),
                   );
                 }
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  errorSnackbar('Invalid Submission'),
-                );
               }
+
+              ScaffoldMessenger.of(context).showSnackBar(
+                errorSnackbar('Invalid Submission'),
+              );
             },
             label: 'Add More',
           ),

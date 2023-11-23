@@ -1,10 +1,10 @@
+import 'package:dth/_common_widgets/error_display_caption.dart';
 import 'package:dth/_providers/itemcheck_provider.dart';
 import 'package:dth/screens/standard/incoming/widgets/batch_selection_tile.dart';
 import 'package:dth/screens/standard/production/production_day_start.dart';
 import 'package:dth/theme/arrow_back.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/theme/text_sizing.dart';
-import 'package:dth/_common_widgets/error_display_caption.dart';
 import 'package:dth/_common_widgets/spacer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,10 +15,14 @@ class AccepedBatchSelectionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<ItemCheckProvider>(context).fetchAcceptedChecks();
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        scrolledUnderElevation: 0,
+        elevation: 0,
         foregroundColor: Colors.black,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         toolbarHeight: 60,
         leadingWidth: 60,
@@ -39,18 +43,15 @@ class AccepedBatchSelectionPage extends StatelessWidget {
             hSpace(10),
             // Batch list builder
             Consumer<ItemCheckProvider>(
-              builder: (context, state, child) => FutureBuilder(
-                future: state.fetchAcceptedChecks(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    final itemChecks = snapshot.data!;
-                    return Expanded(
-                      child: ListView.builder(
+              builder: (context, state, child) => SizedBox(
+                height: 500,
+                child: (state.acceptedChecks.isNotEmpty)
+                    ? ListView.builder(
                         physics: const BouncingScrollPhysics(),
                         shrinkWrap: true,
-                        itemCount: itemChecks.length,
+                        itemCount: state.acceptedChecks.length,
                         itemBuilder: (context, index) {
-                          final item = itemChecks[index];
+                          final item = state.acceptedChecks[index];
 
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 15),
@@ -69,14 +70,8 @@ class AccepedBatchSelectionPage extends StatelessWidget {
                             ),
                           );
                         },
-                      ),
-                    );
-                  } else if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else {
-                    return const ErrorDisplayCaption(message: 'Could not fetch any batches');
-                  }
-                },
+                      )
+                    : const ErrorDisplayCaption(message: 'No batches available'),
               ),
             ),
             hSpace(10),

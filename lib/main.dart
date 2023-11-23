@@ -5,6 +5,7 @@ import 'package:dth/_providers/employee_provider.dart';
 import 'package:dth/_providers/image_provider.dart';
 import 'package:dth/_providers/item_accept_temp_provider.dart';
 import 'package:dth/_providers/itemcheck_provider.dart';
+import 'package:dth/_providers/production_dayend_provider.dart';
 import 'package:dth/_providers/production_daystart_provider.dart';
 import 'package:dth/_providers/team_provider.dart';
 import 'package:dth/_providers/vendor_provider.dart';
@@ -45,8 +46,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => ItemCheckProvider()),
         ChangeNotifierProvider(create: (context) => ItemAcceptTempProvider()),
         ChangeNotifierProvider(create: (context) => DateTimeProvider()),
-        ChangeNotifierProvider(create: (context) => ProductionDayStartProvider()),
         ChangeNotifierProvider(create: (context) => AcceptPageDropDownProvider()),
+        ChangeNotifierProvider(create: (context) => ProductionDayStartProvider()),
+        ChangeNotifierProvider(create: (context) => ProductionDayEndProvider()),
       ],
       builder: (context, child) => ScreenUtilInit(
         ensureScreenSize: true,

@@ -1,12 +1,15 @@
 import 'dart:convert';
 import 'package:dth/_api_endpoints/api_endpoints.dart';
-import 'package:dth/_models/production_dayend_model.dart';
 import 'package:http/http.dart' as http;
 
-class DayStartFilterByDateService {
-  Future<List<ProductionDayStartFilterData>> fetchData(String date) async {
+class ProductionDayEndInitialDataService {
+  // Fetching boxes posted from day start by it's posted date
+  Future<List<Map<String, dynamic>>> fetchBatchCodes(String date) async {
     const apiUrl = '$apiHOME/daystart_filter_by_date';
-    final requestBody = {'date': date};
+    final requestBody = {
+      'type': 'batchcode',
+      'date': date,
+    };
 
     try {
       final response = await http.post(
@@ -18,11 +21,11 @@ class DayStartFilterByDateService {
       if (response.statusCode == 200) {
         final List<dynamic> responseData = json.decode(response.body);
 
-        // Convert the response data to a list of ProductionDayStartFilterData objects
-        final List<ProductionDayStartFilterData> filterDataList =
-            responseData.map((item) => ProductionDayStartFilterData.fromJson(item)).toList();
+        final List<Map<String, dynamic>> result = responseData.map((e) {
+          return {'batch_code': e['batch_code']};
+        }).toList();
 
-        return filterDataList;
+        return result;
       } else {
         // Handle errors here
         throw Exception('Failed to fetch data: ${response.statusCode}');
