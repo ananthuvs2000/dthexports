@@ -15,6 +15,7 @@ class BatchSelectionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<ItemCheckProvider>(context).getItemChecks();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,

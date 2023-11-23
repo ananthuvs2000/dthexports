@@ -43,36 +43,33 @@ class AccepedBatchSelectionPage extends StatelessWidget {
             hSpace(10),
             // Batch list builder
             Consumer<ItemCheckProvider>(
-              builder: (context, state, child) => SizedBox(
-                height: 500,
-                child: (state.acceptedChecks.isNotEmpty)
-                    ? ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: state.acceptedChecks.length,
-                        itemBuilder: (context, index) {
-                          final item = state.acceptedChecks[index];
+              builder: (context, state, child) => (state.acceptedChecks.isNotEmpty)
+                  ? ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: state.acceptedChecks.length,
+                      itemBuilder: (context, index) {
+                        final item = state.acceptedChecks[index];
 
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: 15),
-                            child: BatchSelectionTile(
-                              batchCode: item.batchCode,
-                              vendorCode: item.vendoCode,
-                              quantityChecked: item.quantityChecked,
-                              status: item.status,
-                              onTap: () => Get.to(
-                                () => DayStart(
-                                  batchCode: item.batchCode,
-                                ),
-                                transition: Transition.rightToLeft,
-                                preventDuplicates: true,
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 15),
+                          child: BatchSelectionTile(
+                            batchCode: item.batchCode,
+                            vendorCode: item.vendoCode,
+                            quantityChecked: item.quantityChecked,
+                            status: item.status,
+                            onTap: () => Get.to(
+                              () => DayStart(
+                                batchCode: item.batchCode,
                               ),
+                              transition: Transition.rightToLeft,
+                              preventDuplicates: true,
                             ),
-                          );
-                        },
-                      )
-                    : const ErrorDisplayCaption(message: 'No batches available'),
-              ),
+                          ),
+                        );
+                      },
+                    )
+                  : const ErrorDisplayCaption(message: 'No batches available'),
             ),
             hSpace(10),
           ],
