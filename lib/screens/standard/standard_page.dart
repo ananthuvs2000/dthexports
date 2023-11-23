@@ -138,13 +138,21 @@ incomingModalSheet({
             children: [
               Expanded(
                   child: SubDashboardItem(
-                      onTap: () => Get.to(() => destination1, transition: Transition.downToUp),
+                      onTap: (){
+                          Navigator.of(Get.overlayContext!).pop();
+                          Get.to(() => destination1, transition: Transition.downToUp);
+                          
+                      } ,
                       label: 'Checking',
                       icon: Icons.search)),
               wSpace(15),
               Expanded(
                   child: SubDashboardItem(
-                      onTap: () => Get.to(() => destination2, transition: Transition.downToUp),
+                      onTap: (){
+                          Navigator.of(Get.overlayContext!).pop();
+                          Get.to(() => destination2, transition: Transition.downToUp);
+                         
+                      } ,
                       label: 'Accepting',
                       icon: Icons.check)),
             ],
@@ -168,13 +176,20 @@ productionModal({
             children: [
               Expanded(
                   child: SubDashboardItem(
-                      onTap: () => Get.to(() => destination1, transition: Transition.downToUp),
+                      onTap: (){
+                        Navigator.of(Get.overlayContext!).pop();
+                        Get.to(() => destination1, transition: Transition.downToUp);
+                      } ,
+                      
                       label: 'Day Start',
                       icon: Icons.sunny)),
               wSpace(15),
               Expanded(
                   child: SubDashboardItem(
-                      onTap: () => Get.to(() => destination2, transition: Transition.downToUp),
+                      onTap: (){
+                        Navigator.of(Get.overlayContext!).pop();
+                        Get.to(() => destination2, transition: Transition.downToUp);
+                      } ,
                       label: 'Day End',
                       icon: Icons.nightlight_round)),
             ],

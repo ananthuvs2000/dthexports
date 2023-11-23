@@ -4,7 +4,7 @@
 const apiHOME = 'https://spizaar.com/dth/api';
 
 // Vendor Routees
-const apiGetVendorsRoute = '$apiHOME/vendor1';
+const apiGetVendorsRoute = '$apiHOME/vendor';
 const apiAddVendorRoute = '$apiHOME/add_vendor';
 // Employee Routes
 const apiGetAllEmployees = '$apiHOME/employee';
