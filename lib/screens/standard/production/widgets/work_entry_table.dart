@@ -63,10 +63,10 @@ class WorkEntryTableDayEnd extends StatelessWidget {
               color: AppColors.primaryColor.withOpacity(0.25),
               borderRadius: const BorderRadius.all(Radius.circular(globalBorderRadius / 2)),
             ),
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
             child: Flex(
               direction: Axis.horizontal,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Flexible(
                   flex: 3,
@@ -140,9 +140,11 @@ Widget _productionWorkEntry(
       children: [
         Flexible(
           flex: 4,
-          child: Text(
-            name,
-            style: _entryLabelStyle,
+          child: Expanded(
+            child: Text(
+              name,
+              style: _entryLabelStyle,
+            ),
           ),
         ),
         Flexible(

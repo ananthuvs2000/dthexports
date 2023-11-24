@@ -1,9 +1,10 @@
+import 'package:dth/_common_widgets/error_display_caption.dart';
 import 'package:dth/_common_widgets/image_preview_container.dart';
 import 'package:dth/_models/production_daystart_model.dart';
 import 'package:dth/_providers/image_provider.dart';
+import 'package:dth/_providers/production_dayend_provider.dart';
 import 'package:dth/_providers/production_daystart_provider.dart';
 import 'package:dth/screens/standard/production/widgets/work_entry_table.dart';
-import 'package:dth/screens/standard/widgets/table.dart';
 import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/_common_widgets/bottom_actions_area.dart';
@@ -59,141 +60,145 @@ class _DayEndScreenState extends State<DayEndScreen> {
     _productionDayStartProvider.fetchDataAndUpdateState(widget.batchCode);
     return Form(
       key: _formKey,
-      child: Scaffold(
-        appBar: AppBar(
-          scrolledUnderElevation: 0,
-          elevation: 0,
-          backgroundColor: AppColors.primaryColor,
-          foregroundColor: AppColors.inversePrimaryColor,
-          title: const Text('Production Day End'),
-          systemOverlayStyle: SystemUiOverlayStyle.light,
-        ),
-        body: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
-            child: Column(
-              children: [
-                hSpace(15),
-                DynamicFieldRow(label: 'Batch No', value: widget.batchCode),
-                hSpace(15),
-                Consumer<ProductionDayStartProvider>(
-                  builder: (context, state, child) => Column(
-                    children: [
-                      DropdownMenuField(
-                        validator: (value) {
-                          if (value == '' || value == null) {
-                            return 'Please select a box';
-                          }
-                          return null;
-                        },
-                        fieldLabel: 'Box No:',
-                        dropDownLabel: 'Select Box',
-                        dropdownEntries: state.boxDataList
-                            .map(
-                              (box) => DropdownMenuItem(
-                                value: box.boxRef,
-                                child: Text(box.boxRef),
-                              ),
-                            )
-                            .toList(),
-                        onSelected: (selected) {
-                          print(selected.toString());
-                          state.findBoxByBoxRef(selected);
-                        },
-                      ),
-                      hSpace(15),
-                      if (state.selectedBox != null)
-                        Column(
-                          children: [
-                            BoxInfoDisplay(
-                              box: state.selectedBox!,
-                            ),
-
-                            Consumer<CameraProvider>(
-                              builder: (context, state, _) {
-                                if (_imageProvider.image == null) {
-                                  return const SizedBox();
-                                } else {
-                                  return ImagePreviewBox(image: _imageProvider.image);
-                                }
-                              },
-                            ),
-                            hSpace(10),
-                            OpenImageButton(
-                              width: double.infinity,
-                              icon: CupertinoIcons.camera_fill,
-                              label: (Provider.of<CameraProvider>(context).image == null)
-                                  ? 'Take Photo'
-                                  : 'Take Again',
-                              onTap: () async {
-                                await _imageProvider.getImage();
-                              },
-                            ),
-                            hSpace(15),
-
-                            // Field to Enter Value
-                            NumberEntryField(
-                              label: 'Enter weight as shown',
-                              controller: _weightController,
-                              validator: (value) {
-                                return null;
-                              },
-                            ),
-
-                            hSpace(15),
-                            const DynamicFieldRow(label: 'Material Weight', value: 'CALCULATED'),
-                            hSpace(15),
-                            const DynamicFieldRow(
-                                label: 'Total Process Wastage', value: 'CALCULATED'),
-                            hSpace(15),
-                            // const TableWidget(),
-                            // ! Table widget for showing each workers contribution
-                            // !For every X weight taken from the box
-                            WorkEntryTableDayEnd(
-                              totalWastage: 75,
-                              individualWastages: [],
-                              workersList: [
-                                WorkerData(
-                                  name: 'Arun',
-                                  empCode: '001',
-                                  createdAt: DateTime.now(),
-                                ),
-                                WorkerData(
-                                  name: 'Jason',
-                                  empCode: '002',
-                                  createdAt: DateTime.now(),
-                                ),
-                              ],
-                              quantityControllers: [],
-                              outputControllers: [],
-                            ),
-
-                            hSpace(15), //^ end of listview
-                          ],
-                        ),
-                    ],
-                  ),
-                ),
-                hSpace(15),
-              ],
-            ),
+      child: Consumer<ProductionDayEndProvider>(
+        builder: (context, dayEndProvider, _) => Scaffold(
+          appBar: AppBar(
+            scrolledUnderElevation: 0,
+            elevation: 0,
+            backgroundColor: AppColors.primaryColor,
+            foregroundColor: AppColors.inversePrimaryColor,
+            title: const Text('Production Day End'),
+            systemOverlayStyle: SystemUiOverlayStyle.light,
           ),
-        ),
-        bottomNavigationBar: BottomActionsArea(
-          children: [
-            SecondaryElevatedButton(
-              onPressed: () {},
-              label: 'PRS Completed',
-            ),
-            wSpace(10),
-            Expanded(
-              child: PrimaryElevatedButton(
-                onPressed: () {},
-                label: 'Submit',
+          body: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: PageLayout.pagePaddingX),
+              child: Column(
+                children: [
+                  hSpace(15),
+                  DynamicFieldRow(label: 'Batch No', value: widget.batchCode),
+                  hSpace(15),
+                  Consumer<ProductionDayStartProvider>(
+                    builder: (context, dayStartProvider, child) => Column(
+                      children: [
+                        DropdownMenuField(
+                          validator: (value) {
+                            if (value == '' || value == null) {
+                              return 'Please select a box';
+                            }
+                            return null;
+                          },
+                          fieldLabel: 'Box No:',
+                          dropDownLabel: 'Select Box',
+                          dropdownEntries: dayStartProvider.boxDataList
+                              .map(
+                                (box) => DropdownMenuItem(
+                                  value: box.boxRef,
+                                  child: Text(box.boxRef),
+                                ),
+                              )
+                              .toList(),
+                          onSelected: (selected) {
+                            print(selected.toString());
+                            dayStartProvider.findBoxByBoxRef(selected);
+                          },
+                        ),
+                        hSpace(15),
+                        if (dayStartProvider.selectedBox != null)
+                          Column(
+                            children: [
+                              BoxInfoDisplay(
+                                box: dayStartProvider.selectedBox!,
+                              ),
+
+                              Consumer<CameraProvider>(
+                                builder: (context, state, _) {
+                                  if (_imageProvider.image == null) {
+                                    return const SizedBox();
+                                  } else {
+                                    return ImagePreviewBox(image: _imageProvider.image);
+                                  }
+                                },
+                              ),
+                              hSpace(10),
+                              OpenImageButton(
+                                width: double.infinity,
+                                icon: CupertinoIcons.camera_fill,
+                                label: (Provider.of<CameraProvider>(context).image == null)
+                                    ? 'Take Photo'
+                                    : 'Take Again',
+                                onTap: () async {
+                                  await _imageProvider.getImage();
+                                },
+                              ),
+                              hSpace(15),
+
+                              // Field to Enter Value
+                              NumberEntryField(
+                                label: 'Enter weight as shown',
+                                controller: _weightController,
+                                validator: (value) {
+                                  return null;
+                                },
+                              ),
+
+                              hSpace(15),
+                              const DynamicFieldRow(label: 'Material Weight', value: 'CALCULATED'),
+                              hSpace(15),
+                              const DynamicFieldRow(
+                                  label: 'Total Process Wastage', value: 'CALCULATED'),
+                              hSpace(15),
+                              // const TableWidget(),
+                              // ! Table widget for showing each workers contribution
+                              // !For every X weight taken from the box
+                              (6 > 5)
+                                  ? WorkEntryTableDayEnd(
+                                      totalWastage: 75,
+                                      individualWastages: [],
+                                      workersList: [
+                                        WorkerData(
+                                          name: 'Arun',
+                                          empCode: '001',
+                                          createdAt: DateTime.now(),
+                                        ),
+                                        WorkerData(
+                                          name: 'Jason',
+                                          empCode: '002',
+                                          createdAt: DateTime.now(),
+                                        ),
+                                      ],
+                                      quantityControllers: [],
+                                      outputControllers: [],
+                                    )
+                                  : const ErrorDisplayCaption(message: 'Failed to get worker data'),
+
+                              hSpace(15), //^ end of listview
+                            ],
+                          ),
+                      ],
+                    ),
+                  ),
+                  hSpace(15),
+                ],
               ),
             ),
-          ],
+          ),
+          bottomNavigationBar: BottomActionsArea(
+            children: [
+              SecondaryElevatedButton(
+                onPressed: () {},
+                label: 'PRS Completed',
+              ),
+              wSpace(10),
+              Expanded(
+                child: PrimaryElevatedButton(
+                  onPressed: () {},
+                  label: 'Submit',
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
