@@ -40,23 +40,26 @@ class ItemAcceptTempService extends ChangeNotifier {
     required String materialQty,
     required String imagePath,
   }) async {
-    final response = await http.post(Uri.parse(_uriAdd), body: {
-      // Add text fields
-      'batch_code': batchCode,
-      'box_ref': boxRef,
-      'size_ref': sizeRef,
-      'color_ref': colorRef,
-      'texture_ref': textureRef,
-      'material_qty': materialQty,
-      'image_path': imagePath,
-      'process': 'raw_material',
-    });
+    try {
+      final response = await http.post(Uri.parse(_uriAdd), body: {
+        // Add text fields
+        'batch_code': batchCode,
+        'box_ref': boxRef,
+        'size_ref': sizeRef,
+        'color_ref': colorRef,
+        'texture_ref': textureRef,
+        'material_qty': materialQty,
+        'image_path': imagePath,
+        'process': 'raw_material',
+      });
 
-    if (response.statusCode == 200) {
-      // Successful response
-      return true;
+      if (response.statusCode == 200) {
+        // Successful response
+        return true;
+      }
+    } catch (e) {
+      throw Exception('Error $e');
     }
-
     return false;
   }
 

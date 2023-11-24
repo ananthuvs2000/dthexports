@@ -27,6 +27,7 @@ class ImageUploadService extends ChangeNotifier {
         return uploadedImage;
       } else {
         // Handle other status codes
+
         throw Exception('Failed to upload image: ${response.statusCode}');
       }
     } catch (error) {

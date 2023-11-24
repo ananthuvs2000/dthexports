@@ -58,6 +58,7 @@ class _AcceptPageState extends State<AcceptPage> {
     super.dispose();
     Future.delayed(Duration.zero, () {
       _imageProvider.clearImage();
+
       _dropDownProvider.clearAll();
     });
   }
@@ -70,7 +71,6 @@ class _AcceptPageState extends State<AcceptPage> {
   @override
   Widget build(BuildContext context) {
     _itemAcceptTemp.getRemainingBoxes(widget.batchCode);
-    _dropDownProvider = Provider.of<AcceptPageDropDownProvider>(context, listen: true);
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -118,7 +118,6 @@ class _AcceptPageState extends State<AcceptPage> {
                           .toList(),
                       onSelected: (selectedVal) {
                         dropdownState.updateBoxNumber = selectedVal;
-                        boxNumberDropDownState.getRemainingBoxes(widget.batchCode);
                         print(dropdownState.box);
                       },
                     ),
@@ -299,12 +298,14 @@ class _AcceptPageState extends State<AcceptPage> {
                       _acceptFormKey.currentState!.reset();
                       _quantityController.clear();
                       _imageProvider.clearImage();
-                      _itemAcceptTemp.getAcceptedBoxes(widget.batchCode);
+
                       // Showing success message
                       Navigator.pop(context);
                       ScaffoldMessenger.of(context).showSnackBar(
                         successSnackbar('Box Accepted Succesfully!'),
                       );
+                      // Refetching an updated Remaining boxes
+                      _itemAcceptTemp.getRemainingBoxes(widget.batchCode);
                     } else {
                       Navigator.pop(context);
                       ScaffoldMessenger.of(context)

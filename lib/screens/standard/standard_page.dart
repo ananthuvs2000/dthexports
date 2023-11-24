@@ -59,7 +59,7 @@ class _StandardScreenState extends State<StandardScreen> {
                 crossAxisCount: 2,
                 crossAxisSpacing: 15,
                 mainAxisSpacing: 15,
-                childAspectRatio: 1.5,
+                childAspectRatio: 1.3,
                 children: [
                   SubDashboardItem(
                     icon: CupertinoIcons.down_arrow,
@@ -138,21 +138,19 @@ incomingModalSheet({
             children: [
               Expanded(
                   child: SubDashboardItem(
-                      onTap: (){
-                          Navigator.of(Get.overlayContext!).pop();
-                          Get.to(() => destination1, transition: Transition.downToUp);
-                          
-                      } ,
+                      onTap: () {
+                        Navigator.of(Get.overlayContext!).pop();
+                        Get.to(() => destination1, transition: Transition.downToUp);
+                      },
                       label: 'Checking',
                       icon: Icons.search)),
               wSpace(15),
               Expanded(
                   child: SubDashboardItem(
-                      onTap: (){
-                          Navigator.of(Get.overlayContext!).pop();
-                          Get.to(() => destination2, transition: Transition.downToUp);
-                         
-                      } ,
+                      onTap: () {
+                        Navigator.of(Get.overlayContext!).pop();
+                        Get.to(() => destination2, transition: Transition.downToUp);
+                      },
                       label: 'Accepting',
                       icon: Icons.check)),
             ],
@@ -176,20 +174,19 @@ productionModal({
             children: [
               Expanded(
                   child: SubDashboardItem(
-                      onTap: (){
+                      onTap: () {
                         Navigator.of(Get.overlayContext!).pop();
                         Get.to(() => destination1, transition: Transition.downToUp);
-                      } ,
-                      
+                      },
                       label: 'Day Start',
                       icon: Icons.sunny)),
               wSpace(15),
               Expanded(
                   child: SubDashboardItem(
-                      onTap: (){
+                      onTap: () {
                         Navigator.of(Get.overlayContext!).pop();
                         Get.to(() => destination2, transition: Transition.downToUp);
-                      } ,
+                      },
                       label: 'Day End',
                       icon: Icons.nightlight_round)),
             ],

@@ -146,7 +146,10 @@ class _DayEndScreenState extends State<DayEndScreen> {
                             const DynamicFieldRow(
                                 label: 'Total Process Wastage', value: 'CALCULATED'),
                             hSpace(15),
-                            const TableWidget(),
+                            // const TableWidget(),
+                            // ! Table widget for showing each workers contribution
+                            // !For every X weight taken from the box
+
                             hSpace(15), // end of listview
                           ],
                         ),

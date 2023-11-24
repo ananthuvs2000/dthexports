@@ -20,7 +20,7 @@ class ProductionDayEndInitialDataService {
 
       if (response.statusCode == 200) {
         final List<dynamic> responseData = json.decode(response.body);
-
+        
         final List<Map<String, dynamic>> result = responseData.map((e) {
           return {'batch_code': e['batch_code']};
         }).toList();
