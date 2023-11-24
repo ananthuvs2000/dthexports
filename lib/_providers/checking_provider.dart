@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 
 class CheckingProvider with ChangeNotifier {
   // storing selected employees temporarily
-  final Set<Workerdatum> _selectedEmployees = {};
+  final Set<WorkerData> _selectedEmployees = {};
 
   // Function to add an employee into the list
-  void addEmployee(Workerdatum e) {
+  void addEmployee(WorkerData e) {
     _selectedEmployees.add(e);
     notifyListeners();
   }
@@ -31,7 +31,7 @@ class CheckingProvider with ChangeNotifier {
     return _postResult;
   }
 
-  void removeSelectedEmployee(Workerdatum e) {
+  void removeSelectedEmployee(WorkerData e) {
     _selectedEmployees.remove(e);
     notifyListeners();
   }
@@ -41,5 +41,5 @@ class CheckingProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Set<Workerdatum> get addedEmpoyees => _selectedEmployees;
+  Set<WorkerData> get addedEmpoyees => _selectedEmployees;
 }

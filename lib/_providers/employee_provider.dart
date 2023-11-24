@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class WorkerProvider with ChangeNotifier {
   /* List to store fetched employees after converting
   into it's dart model (done in the service) */
-  List<Workerdatum> _workers = [];
+  List<WorkerData> _workers = [];
 
   // Fetching all employees
   Future<void> fetchWorkers() async {
@@ -14,5 +14,5 @@ class WorkerProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  List<Workerdatum> get workersList => _workers;
+  List<WorkerData> get workersList => _workers;
 }

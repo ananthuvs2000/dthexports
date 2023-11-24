@@ -8,7 +8,7 @@ class ProductionDayStartProvider extends ChangeNotifier {
 
   late ProductionDayStartData _dayStartData = ProductionDayStartData(boxData: [], workerdata: []);
   BoxData? _selectedBox;
-  late Set<Workerdatum> _addedEmployees = {};
+  late Set<WorkerData> _addedEmployees = {};
 
   TextEditingController weightController = TextEditingController();
   TextEditingController finalWeightController = TextEditingController();
@@ -41,14 +41,14 @@ class ProductionDayStartProvider extends ChangeNotifier {
     return foundBox;
   }
 
-  void addWorker(Workerdatum worker) {
+  void addWorker(WorkerData worker) {
     // _dayStartData.workerdata.add(worker);
     _addedEmployees.add(worker);
     notifyListeners();
   }
 
-  bool workerExists(Workerdatum worker) {
-    print('workerExists(${worker.employeeName})');
+  bool workerExists(WorkerData worker) {
+    print('workerExists(${worker.name})');
     if (_addedEmployees.contains(worker) || _dayStartData.workerdata.contains(worker)) {
       print('Duplicate found');
       notifyListeners();
@@ -58,7 +58,7 @@ class ProductionDayStartProvider extends ChangeNotifier {
     }
   }
 
-  void removeWorker(Workerdatum worker) {
+  void removeWorker(WorkerData worker) {
     // _dayStartData.workerdata.remove(worker);
     _addedEmployees.remove(worker);
     notifyListeners();
@@ -75,8 +75,8 @@ class ProductionDayStartProvider extends ChangeNotifier {
 
 // ALL GETTERS
   ProductionDayStartData get dayStartData => _dayStartData;
-  List<Workerdatum> get workerDataList => _dayStartData.workerdata;
+  List<WorkerData> get workerDataList => _dayStartData.workerdata;
   List<BoxData> get boxDataList => _dayStartData.boxData;
   BoxData? get selectedBox => _selectedBox;
-  Set<Workerdatum> get workerAddedList => _addedEmployees;
+  Set<WorkerData> get workerAddedList => _addedEmployees;
 }

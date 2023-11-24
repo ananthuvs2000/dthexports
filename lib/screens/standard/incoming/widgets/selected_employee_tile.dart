@@ -11,7 +11,7 @@ class SelectedWorkerTile extends StatelessWidget {
     super.key,
     required this.onDelete,
   });
-  final Workerdatum worker;
+  final WorkerData worker;
   final void Function(BuildContext context) onDelete;
 
   @override
@@ -49,11 +49,11 @@ class SelectedWorkerTile extends StatelessWidget {
             ),
 
             title: Text(
-              worker.employeeName,
+              worker.name,
               style: _titleStyle,
             ),
             subtitle: Text(
-              worker.employeeCode,
+              worker.empCode,
               style: _subtitleStyle,
             ),
             // trailing: IconButton(

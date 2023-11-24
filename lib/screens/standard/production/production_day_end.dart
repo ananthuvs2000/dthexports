@@ -150,12 +150,26 @@ class _DayEndScreenState extends State<DayEndScreen> {
                             // const TableWidget(),
                             // ! Table widget for showing each workers contribution
                             // !For every X weight taken from the box
-                            WorkEntryTable(
-                              totalPercentWastage: '12',
-                              workersList: [],
+                            WorkEntryTableDayEnd(
+                              totalWastage: 75,
+                              individualWastages: [],
+                              workersList: [
+                                WorkerData(
+                                  name: 'Arun',
+                                  empCode: '001',
+                                  createdAt: DateTime.now(),
+                                ),
+                                WorkerData(
+                                  name: 'Jason',
+                                  empCode: '002',
+                                  createdAt: DateTime.now(),
+                                ),
+                              ],
+                              quantityControllers: [],
+                              outputControllers: [],
                             ),
 
-                            hSpace(15), // end of listview
+                            hSpace(15), //^ end of listview
                           ],
                         ),
                     ],

@@ -20,14 +20,14 @@ class DynamicFieldRow extends StatelessWidget {
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             letterSpacing: 0,
-            fontSize: 15,
+            fontSize: 14,
           ),
         ),
         SelectableText(
           value,
           style: const TextStyle(
             letterSpacing: 0,
-            fontSize: 15,
+            fontSize: 14,
           ),
         ),
       ],

@@ -8,7 +8,7 @@ class WorkerDataService extends ChangeNotifier {
   //! API ENDPOINT
   final String _employeeAPI = '$apiHOME/worker';
 
-  Future<List<Workerdatum>> fetchEmployees() async {
+  Future<List<WorkerData>> fetchEmployees() async {
     final response = await http.get(Uri.parse(_employeeAPI));
     if (response.statusCode == 200) {
       final List<dynamic> jsonData = json.decode(response.body);
@@ -16,12 +16,12 @@ class WorkerDataService extends ChangeNotifier {
       // Mapping to a Dart Model
       return jsonData
           .map(
-            (item) => Workerdatum(
-              id: int.parse(item['id'].toString()),
-              employeeName: item['employee_name'],
-              employeeCode: item['employee_code'],
+            (item) => WorkerData(
+              // id: int.parse(item['id'].toString()),
+              name: item['employee_name'],
+              empCode: item['employee_code'],
               createdAt: DateTime.parse(item['created_at']),
-              updatedAt: DateTime.parse(item['updated_at']),
+              // updatedAt: DateTime.parse(item['updated_at']),
             ),
           )
           .toList();

@@ -13,7 +13,7 @@ String productionDayStartDataToJson(ProductionDayStartData data) => json.encode(
 
 class ProductionDayStartData {
   List<BoxData> boxData;
-  List<Workerdatum> workerdata;
+  List<WorkerData> workerdata;
 
   ProductionDayStartData({
     required this.boxData,
@@ -22,7 +22,7 @@ class ProductionDayStartData {
 
   factory ProductionDayStartData.fromJson(Map<String, dynamic> json) => ProductionDayStartData(
         boxData: List<BoxData>.from(json["box_data"].map((x) => BoxData.fromJson(x))),
-        workerdata: List<Workerdatum>.from(json["workerdata"].map((x) => Workerdatum.fromJson(x))),
+        workerdata: List<WorkerData>.from(json["workerdata"].map((x) => WorkerData.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -87,37 +87,37 @@ class BoxData {
       };
 }
 
-class Workerdatum extends Equatable {
-  final int id;
-  final String employeeName;
-  final String employeeCode;
+class WorkerData extends Equatable {
+  // final int id;
+  final String name;
+  final String empCode;
   final DateTime createdAt;
-  final DateTime updatedAt;
+  // final DateTime updatedAt;
 
-  const Workerdatum({
-    required this.id,
-    required this.employeeName,
-    required this.employeeCode,
+  const WorkerData({
+    // required this.id,
+    required this.name,
+    required this.empCode,
     required this.createdAt,
-    required this.updatedAt,
+    // required this.updatedAt,
   });
 
   @override
-  List<Object?> get props => [id, employeeCode, employeeName];
+  List<Object?> get props => [empCode, name];
 
-  factory Workerdatum.fromJson(Map<String, dynamic> json) => Workerdatum(
-        id: json["id"],
-        employeeName: json["employee_name"],
-        employeeCode: json["employee_code"],
+  factory WorkerData.fromJson(Map<String, dynamic> json) => WorkerData(
+        // id: json["id"],
+        name: json["employee_name"],
+        empCode: json["employee_code"],
         createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
+        // updatedAt: DateTime.parse(json["updated_at"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "employee_name": employeeName,
-        "employee_code": employeeCode,
+        // "id": id,
+        "employee_name": name,
+        "employee_code": empCode,
         "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt.toIso8601String(),
+        // "updated_at": updatedAt.toIso8601String(),
       };
 }

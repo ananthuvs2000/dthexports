@@ -9,15 +9,15 @@ class WorkerPickerTile extends StatelessWidget {
     required this.onAdd,
   });
 
-  final Workerdatum worker;
+  final WorkerData worker;
   final void Function() onAdd;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Text(worker.employeeCode),
+      leading: Text(worker.empCode),
       title: Text(
-        worker.employeeName,
+        worker.name,
         style: const TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.w500,

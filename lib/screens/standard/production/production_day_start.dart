@@ -290,7 +290,7 @@ class _DayStartState extends State<DayStart> {
 
 showEmployeePicker({
   required BuildContext context,
-  required final List<Workerdatum> workers,
+  required final List<WorkerData> workers,
 }) {
   final daystartState = Provider.of<ProductionDayStartProvider>(context, listen: false);
   showDialog(

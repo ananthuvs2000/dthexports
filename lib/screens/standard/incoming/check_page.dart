@@ -266,8 +266,8 @@ class _CheckPageState extends State<CheckPage> {
 
   showEmployeePicker({
     required BuildContext context,
-    required final List<Workerdatum> employees,
-    required final Set<Workerdatum> addedEmployees,
+    required final List<WorkerData> employees,
+    required final Set<WorkerData> addedEmployees,
   }) {
     showDialog(
       context: context,

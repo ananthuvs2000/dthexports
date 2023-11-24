@@ -4,16 +4,22 @@ import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:flutter/material.dart';
 
-class WorkEntryTable extends StatelessWidget {
-  const WorkEntryTable({
+class WorkEntryTableDayEnd extends StatelessWidget {
+  const WorkEntryTableDayEnd({
     super.key,
     required this.workersList,
-    required this.totalPercentWastage,
+    required this.totalWastage,
+    required this.quantityControllers,
+    required this.individualWastages,
+    required this.outputControllers,
   });
 
-  final String totalPercentWastage;
+  final double totalWastage;
+  final List<double> individualWastages;
 
-  final List<Workerdatum> workersList;
+  final List<WorkerData> workersList;
+  final List<TextEditingController> quantityControllers;
+  final List<TextEditingController> outputControllers;
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +40,19 @@ class WorkEntryTable extends StatelessWidget {
                   'Total Material Wastage',
                   style: _widgetTitleStyle,
                 ),
-                Text(
-                  '$totalPercentWastage%',
-                  style: _widgetTitleStyle,
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      '$totalWastage kg',
+                      style: _widgetTitleStyle,
+                    ),
+                    wSpace(10),
+                    Text(
+                      '(${totalWastage * 2 / 100} %)',
+                      style: _widgetTitleStyle,
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -50,13 +66,14 @@ class WorkEntryTable extends StatelessWidget {
             padding: const EdgeInsets.all(10),
             child: Flex(
               direction: Axis.horizontal,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Flexible(
-                  flex: 5,
+                  flex: 3,
                   child: Text(
                     'Name',
                     style: _widgetSubTitleStyle,
+                    textAlign: TextAlign.center,
                   ),
                 ),
                 Flexible(
@@ -64,6 +81,7 @@ class WorkEntryTable extends StatelessWidget {
                   child: Text(
                     'Qty Used',
                     style: _widgetSubTitleStyle,
+                    textAlign: TextAlign.center,
                   ),
                 ),
                 Flexible(
@@ -71,6 +89,7 @@ class WorkEntryTable extends StatelessWidget {
                   child: Text(
                     'Output',
                     style: _widgetSubTitleStyle,
+                    textAlign: TextAlign.center,
                   ),
                 ),
                 Flexible(
@@ -78,6 +97,7 @@ class WorkEntryTable extends StatelessWidget {
                   child: Text(
                     '% Waste',
                     style: _widgetSubTitleStyle,
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ],
@@ -86,9 +106,14 @@ class WorkEntryTable extends StatelessWidget {
           hSpace(5),
           ListView.builder(
             shrinkWrap: true,
-            itemCount: 3,
+            itemCount: workersList.length,
             itemBuilder: (context, index) {
-              return _productionWorkEntry();
+              final WorkerData worker = workersList[index];
+              return _productionWorkEntry(
+                worker.name,
+                TextEditingController(),
+                TextEditingController(),
+              );
             },
           ),
         ],
@@ -97,32 +122,36 @@ class WorkEntryTable extends StatelessWidget {
   }
 }
 
-Widget _productionWorkEntry() {
+Widget _productionWorkEntry(
+  String name,
+  TextEditingController qtyController,
+  TextEditingController outputController,
+) {
   return Container(
     margin: const EdgeInsets.only(bottom: 5),
-    padding: const EdgeInsets.all(10),
+    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(globalBorderRadius / 2),
       color: Colors.black.withOpacity(0.05),
     ),
     child: Flex(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       direction: Axis.horizontal,
       children: [
         Flexible(
-          flex: 3,
+          flex: 4,
           child: Text(
-            'Worker Name',
+            name,
             style: _entryLabelStyle,
           ),
         ),
         Flexible(
           flex: 2,
-          child: _workEntryTextField(),
+          child: _workEntryTextField(qtyController),
         ),
         Flexible(
           flex: 2,
-          child: _workEntryTextField(),
+          child: _workEntryTextField(outputController),
         ),
         const Flexible(
           flex: 2,
@@ -139,7 +168,7 @@ Widget _productionWorkEntry() {
 final _widgetTitleStyle = TextStyle(
   color: AppColors.inversePrimaryColor,
   fontWeight: FontWeight.bold,
-  fontSize: 13,
+  fontSize: 14,
 );
 final _widgetSubTitleStyle = TextStyle(
   color: AppColors.primaryColor,
@@ -154,14 +183,17 @@ const _entryLabelStyle = TextStyle(
   letterSpacing: 0,
 );
 
-Widget _workEntryTextField() {
+Widget _workEntryTextField(
+  TextEditingController controller,
+) {
   return TextFormField(
+    controller: controller,
     validator: (value) {
       if (value == null || value == '') {
-        return 'Invalid';
+        return 'Error';
       }
+      return null;
     },
-    autovalidateMode: AutovalidateMode.onUserInteraction,
     expands: false,
     keyboardType: TextInputType.number,
     textAlign: TextAlign.center,

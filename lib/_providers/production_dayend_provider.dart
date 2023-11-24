@@ -6,7 +6,6 @@ class ProductionDayEndProvider with ChangeNotifier {
   // All the fields needed in day end screen
   late List<Map<String, dynamic>> _dayEndBatchCodes = [];
   late BoxData? selectedBox;
-  late double totalPercentWastage = 0.000;
 
   // Text Editing Controllers
   final TextEditingController weightController = TextEditingController();
@@ -21,13 +20,23 @@ class ProductionDayEndProvider with ChangeNotifier {
   }
 
   // Fetching all daystart data over to dayend
-  Future fetchDataForDayEnd({
-    required String date,
-    required String batchCode,
-    required String boxNum,
-  }) async {
-    
-  }
+  Future fetchDataForDayEnd() async {}
+  // WorkersList
+  late List<WorkerData> workersList = [];
+
+  // Calculations
+  late List<double> individualWastages = [];
+  double totalWastage = 0.000;
+  double totalWastageFound = 0.000;
+
+  double totalQtyUsed = 0.000;
+  double totalOutput = 0.000;
+
+  void calculateIndividualWastage(
+    double quantityUsed,
+    double output,
+  ) {}
+  void calculateTotalWastage() {}
 
   List<Map<String, dynamic>> get dayEndBatchCodes => _dayEndBatchCodes;
 }
