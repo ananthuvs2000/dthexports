@@ -11,11 +11,15 @@ class ProductionDayStartProvider extends ChangeNotifier {
   late Set<WorkerData> _addedEmployees = {};
 
   TextEditingController weightController = TextEditingController();
-  TextEditingController finalWeightController = TextEditingController();
-  void calculateMaterialWeight(String value) {
-    finalWeightController.text =
-        (double.parse(value.toString()) - 02.700).toPrecision(3).toString();
-    notifyListeners();
+  double finalWeight = 0.000;
+
+  //
+
+  void calculateMaterialWeight(String? value) {
+    if (value != null && double.parse(value) > 2.7) {
+      finalWeight = (double.parse(value.toString()) - 02.700).toPrecision(3);
+      notifyListeners();
+    }
   }
 
   Future<void> fetchDataAndUpdateState(String batchCode) async {
@@ -23,7 +27,6 @@ class ProductionDayStartProvider extends ChangeNotifier {
       _dayStartData = await _productionDayStartService.fetchDayStartData(batchCode);
 
       _addedEmployees = {..._dayStartData.workerdata.toSet()};
-      print(_addedEmployees);
       notifyListeners();
     } catch (error) {
       // Handle errors here
@@ -48,8 +51,7 @@ class ProductionDayStartProvider extends ChangeNotifier {
   }
 
   bool workerExists(WorkerData worker) {
-    print('workerExists(${worker.name})');
-    if (_addedEmployees.contains(worker) || _dayStartData.workerdata.contains(worker)) {
+    if (_addedEmployees.contains(worker)) {
       print('Duplicate found');
       notifyListeners();
       return true;
@@ -69,14 +71,13 @@ class ProductionDayStartProvider extends ChangeNotifier {
     _selectedBox = null;
     _addedEmployees.clear();
     weightController.clear();
-    finalWeightController.clear();
+    finalWeight = 0.000;
     notifyListeners();
   }
 
 // ALL GETTERS
   ProductionDayStartData get dayStartData => _dayStartData;
-  List<WorkerData> get workerDataList => _dayStartData.workerdata;
   List<BoxData> get boxDataList => _dayStartData.boxData;
   BoxData? get selectedBox => _selectedBox;
-  Set<WorkerData> get workerAddedList => _addedEmployees;
+  Set<WorkerData> get addedEmployees => _addedEmployees;
 }

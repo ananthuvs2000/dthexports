@@ -15,7 +15,11 @@ class WorkerPickerTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Text(worker.empCode),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+      leading: Text(
+        worker.empCode,
+        style: const TextStyle(fontSize: 12),
+      ),
       title: Text(
         worker.name,
         style: const TextStyle(
@@ -24,7 +28,7 @@ class WorkerPickerTile extends StatelessWidget {
         ),
       ),
       trailing: IconButton(
-        splashRadius: 20,
+        splashRadius: 18,
         onPressed: onAdd,
         icon: Icon(
           Icons.add,
@@ -32,6 +36,7 @@ class WorkerPickerTile extends StatelessWidget {
           color: AppColors.primaryColor,
         ),
       ),
+      titleAlignment: ListTileTitleAlignment.center,
     );
   }
 }

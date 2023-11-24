@@ -27,7 +27,6 @@ import 'package:dth/theme/text_sizing.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class DayStart extends StatefulWidget {
@@ -51,7 +50,7 @@ class _DayStartState extends State<DayStart> {
     _imageProvider = Provider.of<CameraProvider>(context, listen: false);
     _productionDayStartProvider = Provider.of<ProductionDayStartProvider>(context, listen: false);
     _workerDataProvider = Provider.of<WorkerProvider>(context, listen: false);
-    _finalWeightController.text = '0';
+    _productionDayStartProvider.finalWeight = 0.000;
   }
 
   @override
@@ -64,8 +63,7 @@ class _DayStartState extends State<DayStart> {
     });
   }
 
-  final TextEditingController _weightController = TextEditingController();
-  final TextEditingController _finalWeightController = TextEditingController();
+  // final TextEditingController _finalWeightController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -169,11 +167,11 @@ class _DayStartState extends State<DayStart> {
                             hSpace(15),
                             DynamicFieldRow(
                               label: 'Material Weight',
-                              value: '${provider.finalWeightController.text} kg',
+                              value: '${provider.finalWeight} kg',
                             ),
 
                             // Worker data
-                            if (provider.workerDataList.isNotEmpty)
+                            if (provider.addedEmployees.isNotEmpty)
                               Column(
                                 children: [
                                   hSpace(10),
@@ -190,15 +188,15 @@ class _DayStartState extends State<DayStart> {
                                   hSpace(10),
                                   ListView.builder(
                                     shrinkWrap: true,
-                                    itemCount: provider.workerAddedList.toList().length,
+                                    itemCount: provider.addedEmployees.toList().length,
                                     itemBuilder: (
                                       context,
                                       index,
                                     ) {
                                       return SelectedWorkerTile(
-                                        worker: provider.workerAddedList.toList()[index],
+                                        worker: provider.addedEmployees.toList()[index],
                                         onDelete: (context) => provider
-                                            .removeWorker(provider.workerAddedList.toList()[index]),
+                                            .removeWorker(provider.addedEmployees.toList()[index]),
                                       );
                                     },
                                   ),
@@ -216,10 +214,7 @@ class _DayStartState extends State<DayStart> {
                   );
                 },
               ),
-              const Divider(),
-
-              hSpace(50),
-              // End of listview
+              hSpace(100),
             ],
           ),
         ),
@@ -240,11 +235,11 @@ class _DayStartState extends State<DayStart> {
                         if (await ProductionDayStartService().postToProductionDayStart(
                           batchCode: widget.batchCode,
                           boxNum: _productionDayStartProvider.selectedBox!.boxRef,
-                          team: hashEmployeeIdsIntoString(
-                              _productionDayStartProvider.workerDataList.toSet()),
+                          team:
+                              hashEmployeeIdsIntoString(_productionDayStartProvider.addedEmployees),
                           imageURL: imageUploadRes.imagePath,
                           weightShown: provider.weightController.text,
-                          calculatedWeight: provider.finalWeightController.text,
+                          calculatedWeight: provider.finalWeight.toString(),
                           process: _productionDayStartProvider.selectedBox!.process,
                         )) {
                           Navigator.pop(context);
@@ -299,25 +294,32 @@ showEmployeePicker({
       backgroundColor: Colors.white,
       alignment: Alignment.center,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(globalBorderRadius),
+        borderRadius: BorderRadius.circular(globalBorderRadius / 2),
       ),
       child: (workers.isNotEmpty)
           ? Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                hSpace(10),
-                Text(
-                  'Select Workers in the team',
-                  style: TextStyles.mainHeadingStyle,
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  decoration: BoxDecoration(
+                      color: AppColors.primaryColor,
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(globalBorderRadius / 2),
+                      )),
+                  width: double.infinity,
+                  child: Text(
+                    'Select workers for this task',
+                    style: TextStyles.mainHeadingStyle.copyWith(
+                      color: AppColors.inversePrimaryColor,
+                    ),
+                  ),
                 ),
-                hSpace(4),
                 appBarUnderline,
-                hSpace(3),
-                ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                ListView.separated(
+                  separatorBuilder: (context, _) => appBarUnderline,
                   shrinkWrap: true,
                   itemCount: workers.length,
-                  itemExtent: 55,
                   itemBuilder: (context, index) {
                     return WorkerPickerTile(
                       worker: workers[index],

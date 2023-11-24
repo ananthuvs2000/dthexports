@@ -1,5 +1,4 @@
 import 'package:dth/_common_widgets/bottom_actions_area.dart';
-import 'package:dth/_models/employee_model.dart';
 import 'package:dth/_models/production_daystart_model.dart';
 import 'package:dth/_providers/checking_provider.dart';
 import 'package:dth/_providers/employee_provider.dart';
