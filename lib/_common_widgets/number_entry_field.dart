@@ -30,7 +30,7 @@ class NumberEntryField extends StatelessWidget {
             label,
             style: const TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 14,
+              fontSize: 15,
               height: 0,
             ),
             maxLines: 2,

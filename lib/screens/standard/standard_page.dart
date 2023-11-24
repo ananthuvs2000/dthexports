@@ -29,7 +29,7 @@ class _StandardScreenState extends State<StandardScreen> {
       decoration: const BoxDecoration(
           image: DecorationImage(
               image: AssetImage(
-                'assets/images/loginbg.png',
+                'assets/images/loginbg_lowres.png',
               ),
               fit: BoxFit.cover)),
       child: Scaffold(

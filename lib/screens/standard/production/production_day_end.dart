@@ -2,6 +2,7 @@ import 'package:dth/_common_widgets/image_preview_container.dart';
 import 'package:dth/_models/production_daystart_model.dart';
 import 'package:dth/_providers/image_provider.dart';
 import 'package:dth/_providers/production_daystart_provider.dart';
+import 'package:dth/screens/standard/production/widgets/work_entry_table.dart';
 import 'package:dth/screens/standard/widgets/table.dart';
 import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
@@ -149,6 +150,10 @@ class _DayEndScreenState extends State<DayEndScreen> {
                             // const TableWidget(),
                             // ! Table widget for showing each workers contribution
                             // !For every X weight taken from the box
+                            WorkEntryTable(
+                              totalPercentWastage: '12',
+                              workersList: [],
+                            ),
 
                             hSpace(15), // end of listview
                           ],
