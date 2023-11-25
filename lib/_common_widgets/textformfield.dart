@@ -2,7 +2,6 @@ import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 
 class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
@@ -55,7 +54,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       alignment: Alignment.topCenter,
       children: [
         AnimatedContainer(
-          height: 50,
+          height: 40,
           duration: const Duration(milliseconds: 100),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(globalBorderRadius),
@@ -87,12 +86,14 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
           readOnly: widget.isReadOnly ?? false,
           // Styles
+
           style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w500,
             letterSpacing: 0,
           ),
           decoration: InputDecoration(
+            isDense: true,
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
                 width: 1,
@@ -134,7 +135,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             fillColor: AppColors.inversePrimaryColor,
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 10,
-              vertical: 12,
+              vertical: 10,
             ),
           ),
         ),

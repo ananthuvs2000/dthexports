@@ -8,14 +8,15 @@ import 'package:dth/_utilites/utility_functions.dart';
 import 'package:dth/_providers/team_provider.dart';
 import 'package:dth/_providers/vendor_provider.dart';
 import 'package:dth/_utilites/scaffold_snackbars.dart';
-import 'package:dth/screens/standard/incoming/widgets/employee_picker_tile.dart';
+import 'package:dth/screens/standard/incoming/widgets/worker_picker_tile.dart';
 import 'package:dth/screens/standard/incoming/widgets/selected_employee_tile.dart';
+import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';
 import 'package:dth/_common_widgets/appbar_underline.dart';
 import 'package:dth/_common_widgets/drop_down_menu_field.dart';
 import 'package:dth/_common_widgets/error_display_caption.dart';
 import 'package:dth/_common_widgets/loading_display_caption.dart';
-import 'package:dth/_common_widgets/number_entry_field.dart';
+import 'package:dth/_common_widgets/weight_entry_field.dart';
 import 'package:dth/_common_widgets/primary_elevated_button.dart';
 import 'package:dth/_common_widgets/secondary_elevated_button.dart';
 import 'package:dth/_common_widgets/spacer.dart';
@@ -274,25 +275,32 @@ class _CheckPageState extends State<CheckPage> {
         backgroundColor: Colors.white,
         alignment: Alignment.center,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(globalBorderRadius),
+          borderRadius: BorderRadius.circular(globalBorderRadius / 2),
         ),
         child: (employees.isNotEmpty)
             ? Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  hSpace(10),
-                  Text(
-                    'Select Employees in the team',
-                    style: TextStyles.mainHeadingStyle,
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    decoration: BoxDecoration(
+                        color: AppColors.primaryColor,
+                        borderRadius: const BorderRadius.vertical(
+                          top: Radius.circular(globalBorderRadius / 2),
+                        )),
+                    width: double.infinity,
+                    child: Text(
+                      'Select workers for this task',
+                      style: TextStyles.mainHeadingStyle.copyWith(
+                        color: AppColors.inversePrimaryColor,
+                      ),
+                    ),
                   ),
-                  hSpace(4),
                   appBarUnderline,
-                  hSpace(3),
-                  ListView.builder(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                  ListView.separated(
+                    separatorBuilder: (context, _) => appBarUnderline,
                     shrinkWrap: true,
                     itemCount: employees.length,
-                    itemExtent: 55,
                     itemBuilder: (context, index) {
                       final checkProv = Provider.of<CheckingProvider>(context, listen: true);
                       return WorkerPickerTile(
@@ -320,3 +328,61 @@ class _CheckPageState extends State<CheckPage> {
     );
   }
 }
+
+//   showEmployeePicker({
+//     required BuildContext context,
+//     required final List<WorkerData> employees,
+//     required final Set<WorkerData> addedEmployees,
+//   }) {
+//     showDialog(
+//       context: context,
+//       builder: (context) => Dialog(
+//         backgroundColor: Colors.white,
+//         alignment: Alignment.center,
+//         shape: RoundedRectangleBorder(
+//           borderRadius: BorderRadius.circular(globalBorderRadius),
+//         ),
+//         child: (employees.isNotEmpty)
+//             ? Column(
+//                 mainAxisSize: MainAxisSize.min,
+//                 children: [
+//                   hSpace(10),
+//                   Text(
+//                     'Select Employees in the team',
+//                     style: TextStyles.mainHeadingStyle,
+//                   ),
+//                   hSpace(4),
+//                   appBarUnderline,
+//                   hSpace(3),
+//                   ListView.builder(
+//                     padding: const EdgeInsets.symmetric(horizontal: 20),
+//                     shrinkWrap: true,
+//                     itemCount: employees.length,
+//                     itemExtent: 55,
+//                     itemBuilder: (context, index) {
+//                       final checkProv = Provider.of<CheckingProvider>(context, listen: true);
+//                       return WorkerPickerTile(
+//                         worker: employees[index],
+//                         onAdd: () {
+//                           if (!checkProv.addedEmpoyees.contains(employees[index])) {
+//                             checkProv.addEmployee(employees[index]);
+//                             print(employees[index]);
+//                             print(checkProv.addedEmpoyees);
+//                             Navigator.pop(context);
+//                           } else {
+//                             ScaffoldMessenger.of(context).showSnackBar(
+//                               errorSnackbar('ERROR: Employee Already Added'),
+//                             );
+//                             Navigator.pop(context);
+//                           }
+//                         },
+//                       );
+//                     },
+//                   ),
+//                 ],
+//               )
+//             : const SizedBox(),
+//       ),
+//     );
+//   }
+// }

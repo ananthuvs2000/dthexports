@@ -105,6 +105,7 @@ class WorkEntryTableDayEnd extends StatelessWidget {
           ),
           hSpace(5),
           ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemCount: workersList.length,
             itemBuilder: (context, index) {
@@ -138,13 +139,11 @@ Widget _productionWorkEntry(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       direction: Axis.horizontal,
       children: [
-        Flexible(
-          flex: 4,
-          child: Expanded(
-            child: Text(
-              name,
-              style: _entryLabelStyle,
-            ),
+        Expanded(
+          flex: 1,
+          child: Text(
+            name,
+            style: _entryLabelStyle,
           ),
         ),
         Flexible(

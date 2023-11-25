@@ -35,7 +35,6 @@ class AccepedBatchSelectionPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            hSpace(25),
             Text(
               'Select batch',
               style: TextStyles.veryLargeHeading,

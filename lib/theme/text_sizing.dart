@@ -4,13 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class TextStyles {
   // Appbar and headings
   static TextStyle get appBarHeading => TextStyle(
-        fontSize: 20.sp,
+        fontSize: 18.sp,
         fontWeight: FontWeight.bold,
         letterSpacing: 0,
       );
 
   static TextStyle get veryLargeHeading => TextStyle(
-        fontSize: 45,
+        fontSize: 40,
         fontWeight: FontWeight.bold,
         letterSpacing: -1.1,
         height: 0,
@@ -26,11 +26,11 @@ class TextStyles {
 
   // Labels and plain text
   static TextStyle get labelStyle => const TextStyle(
-        fontSize: 15,
+        fontSize: 14,
         fontWeight: FontWeight.w500,
       );
   static TextStyle get dynamicFieldLabelStyle => const TextStyle(
-        fontSize: 15,
+        fontSize: 14,
         fontWeight: FontWeight.bold,
         letterSpacing: 0,
         color: Colors.black,
@@ -39,6 +39,6 @@ class TextStyles {
   // Text Button style
   static TextStyle get textButtonLabelStyle => const TextStyle(
         fontWeight: FontWeight.w500,
-        fontSize: 15,
+        fontSize: 14,
       );
 }

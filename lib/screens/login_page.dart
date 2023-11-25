@@ -20,11 +20,13 @@ class LoginPg extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage(
-                'assets/images/loginbg_lowres.png',
-              ),
-              fit: BoxFit.cover)),
+        image: DecorationImage(
+          image: AssetImage(
+            'assets/images/loginbg_lowres.png',
+          ),
+          fit: BoxFit.cover,
+        ),
+      ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Form(
@@ -40,9 +42,9 @@ class LoginPg extends StatelessWidget {
                   Image.asset(
                     'assets/images/appbar.jpg',
                     fit: BoxFit.contain,
-                    width: 100.h,
+                    width: 120.h,
                   ),
-                  hSpace(75),
+                  hSpace(50),
                   CustomTextFormField(
                     keyboardType: TextInputType.emailAddress,
                     controller: _emailController,

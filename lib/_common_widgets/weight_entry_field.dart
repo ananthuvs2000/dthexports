@@ -1,6 +1,7 @@
 import 'package:dth/_common_widgets/textformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class NumberEntryField extends StatelessWidget {
   const NumberEntryField({
@@ -41,10 +42,13 @@ class NumberEntryField extends StatelessWidget {
           child: CustomTextFormField(
             inputFormatter: inputFormatter,
             onChanged: (onChanged != null) ? (value) => onChanged!(value!) : null,
-            prefixIcon: null,
+            prefixIcon: const Icon(
+              FontAwesomeIcons.weightHanging,
+              size: 15,
+            ),
             keyboardType: TextInputType.number,
             hint: 'XX.XX KG',
-            textAlign: TextAlign.center,
+            textAlign: TextAlign.left,
             controller: controller,
             validator: (value) => validator(value),
           ),

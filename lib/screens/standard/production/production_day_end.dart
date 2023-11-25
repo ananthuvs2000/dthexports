@@ -11,7 +11,7 @@ import 'package:dth/_common_widgets/bottom_actions_area.dart';
 import 'package:dth/_common_widgets/box_info_display.dart';
 import 'package:dth/_common_widgets/drop_down_menu_field.dart';
 import 'package:dth/_common_widgets/dynamic_field_row.dart';
-import 'package:dth/_common_widgets/number_entry_field.dart';
+import 'package:dth/_common_widgets/weight_entry_field.dart';
 import 'package:dth/_common_widgets/open_camera_button.dart';
 import 'package:dth/_common_widgets/primary_elevated_button.dart';
 import 'package:dth/_common_widgets/secondary_elevated_button.dart';
@@ -53,7 +53,6 @@ class _DayEndScreenState extends State<DayEndScreen> {
     });
   }
 
-  final TextEditingController _weightController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -137,17 +136,21 @@ class _DayEndScreenState extends State<DayEndScreen> {
                               // Field to Enter Value
                               NumberEntryField(
                                 label: 'Enter weight as shown',
-                                controller: _weightController,
+                                controller: dayEndProvider.weightController,
                                 validator: (value) {
                                   return null;
                                 },
                               ),
 
                               hSpace(15),
-                              const DynamicFieldRow(label: 'Material Weight', value: 'CALCULATED'),
+                              DynamicFieldRow(
+                                label: 'Balance',
+                                value: dayEndProvider.enteredWeight.toString(),
+                              ),
                               hSpace(15),
-                              const DynamicFieldRow(
-                                  label: 'Total Process Wastage', value: 'CALCULATED'),
+                              DynamicFieldRow(
+                                  label: 'Total Process Wastage',
+                                  value: dayEndProvider.totalWastage.toString()),
                               hSpace(15),
                               // const TableWidget(),
                               // ! Table widget for showing each workers contribution
@@ -178,7 +181,7 @@ class _DayEndScreenState extends State<DayEndScreen> {
                           ),
                       ],
                     ),
-                  ),
+                  ), // Daystart consumer
                   hSpace(15),
                 ],
               ),
@@ -193,14 +196,20 @@ class _DayEndScreenState extends State<DayEndScreen> {
               wSpace(10),
               Expanded(
                 child: PrimaryElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      if (_imageProvider.image != null) {
+                        print('Form valid');
+                      }
+                    }
+                  },
                   label: 'Submit',
                 ),
               ),
             ],
           ),
         ),
-      ),
+      ), // dayend consumer
     );
   }
 }

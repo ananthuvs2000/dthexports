@@ -29,8 +29,8 @@ class BatchSelectionTile extends StatelessWidget {
             borderRadius: BorderRadius.circular(globalBorderRadius),
             boxShadow: [
               BoxShadow(
-                color: Colors.deepPurple.withOpacity(0.5),
-                blurRadius: 10,
+                color: Colors.deepPurple.shade400.withOpacity(0.5),
+                blurRadius: 8,
                 offset: const Offset(-2, 2),
               )
             ]),
@@ -65,17 +65,17 @@ class BatchSelectionTile extends StatelessWidget {
 
 TextStyle _batchCodeStyle = TextStyle(
   fontWeight: FontWeight.bold,
-  fontSize: 15,
+  fontSize: 14,
   color: AppColors.inversePrimaryColor,
 );
 TextStyle _subtitleStyle = TextStyle(
   fontWeight: FontWeight.w500,
   height: 0,
-  fontSize: 13,
+  fontSize: 12,
   color: Colors.white.withOpacity(.75),
 );
 TextStyle _trailingStyle = TextStyle(
   fontWeight: FontWeight.normal,
-  fontSize: 10,
+  fontSize: 12,
   color: AppColors.inversePrimaryColor,
 );

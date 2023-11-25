@@ -15,24 +15,27 @@ class WorkerPickerTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-      leading: Text(
+      dense: true,
+      contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+      subtitle: Text(
         worker.empCode,
-        style: const TextStyle(fontSize: 12),
+        style: const TextStyle(fontSize: 12, height: 1),
       ),
+      minVerticalPadding: 0,
       title: Text(
         worker.name,
         style: const TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.w500,
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+          height: 1,
         ),
       ),
       trailing: IconButton(
-        splashRadius: 18,
+        splashRadius: 20,
         onPressed: onAdd,
         icon: Icon(
           Icons.add,
-          size: 20,
+          size: 25,
           color: AppColors.primaryColor,
         ),
       ),

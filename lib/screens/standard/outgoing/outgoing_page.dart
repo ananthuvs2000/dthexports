@@ -1,5 +1,5 @@
 import 'package:dth/_common_widgets/bottom_actions_area.dart';
-import 'package:dth/_common_widgets/number_entry_field.dart';
+import 'package:dth/_common_widgets/weight_entry_field.dart';
 import 'package:dth/_common_widgets/switch_tile.dart';
 import 'package:dth/theme/colors.dart';
 import 'package:dth/theme/layout.dart';

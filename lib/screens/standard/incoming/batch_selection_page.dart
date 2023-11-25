@@ -39,16 +39,15 @@ class BatchSelectionPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                hSpace(15),
                 Text(
                   'Select batch',
                   style: TextStyles.veryLargeHeading,
                 ),
-                Text('All batches undergone checking will be listed here.'),
-                hSpace(15),
+                const Text('All batches that have been checked appear here'),
               ],
             ),
           ),
+          hSpace(15),
           // Batch list builder
           Consumer<ItemCheckProvider>(
             builder: (context, state, child) => Expanded(

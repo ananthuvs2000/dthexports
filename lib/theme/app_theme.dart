@@ -26,6 +26,7 @@ DividerThemeData divTheme = DividerThemeData(
 );
 
 InputDecorationTheme inputTheme = InputDecorationTheme(
+  isDense: true,
   prefixIconColor: MaterialStateColor.resolveWith(
     (states) {
       if (states.contains(MaterialState.focused)) {
