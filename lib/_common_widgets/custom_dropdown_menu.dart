@@ -16,7 +16,7 @@ class CustomDropdownMenu extends StatefulWidget {
   final String dropDownLabel;
   final List<DropdownMenuItem> dropdownEntries;
   final String? Function(dynamic value) validator;
-  final void Function(String p1) onSelected;
+  final void Function(String selected) onSelected;
   final String? defaultValue;
 
   @override

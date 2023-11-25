@@ -280,12 +280,12 @@ class _AcceptPageState extends State<AcceptPage> {
             onPressed: () async {
               if (_acceptFormKey.currentState!.validate()) {
                 if (_imageProvider.image != null) {
-                  print(_imageProvider.image);
+                  print(_imageProvider.image!.path);
                   showLoadingSpinnerModal(context);
 
                   final imageUploadRes =
                       await ImageUploadService().uploadImage(_imageProvider.image!.path);
-
+                  print(imageUploadRes.imagePath);
                   if (imageUploadRes.imagePath != '') {
                     print('image uploaded correctly');
 
@@ -299,7 +299,6 @@ class _AcceptPageState extends State<AcceptPage> {
                       imagePath: imageUploadRes.imagePath,
                     )) {
                       // Clearing all fields and dropdowns
-                      _acceptFormKey.currentState!.reset();
                       _quantityController.clear();
                       _imageProvider.clearImage();
 
@@ -308,8 +307,9 @@ class _AcceptPageState extends State<AcceptPage> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         successSnackbar('Box Accepted Succesfully!'),
                       );
+                      _acceptFormKey.currentState!.reset();
                       // Refetching an updated Remaining boxes
-                      _itemAcceptTemp.getRemainingBoxes(widget.batchCode);
+                      await _itemAcceptTemp.getRemainingBoxes(widget.batchCode);
                     } else {
                       Navigator.pop(context);
                       ScaffoldMessenger.of(context)
@@ -322,7 +322,7 @@ class _AcceptPageState extends State<AcceptPage> {
                     );
                   }
                 } else {
-                  Navigator.pop(context);
+                  // Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(
                     errorSnackbar('Error: Did not take a picture'),
                   );
