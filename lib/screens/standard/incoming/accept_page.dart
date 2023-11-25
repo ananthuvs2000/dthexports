@@ -50,6 +50,7 @@ class _AcceptPageState extends State<AcceptPage> {
     super.initState();
     _imageProvider = Provider.of<CameraProvider>(context, listen: false);
     _itemAcceptTemp = Provider.of<ItemAcceptTempProvider>(context, listen: false);
+    _dropDownProvider = Provider.of<AcceptPageDropDownProvider>(context, listen: false);
   }
 
   @override
@@ -242,6 +243,7 @@ class _AcceptPageState extends State<AcceptPage> {
                         } else if (snapshot.hasData) {
                           final List<AcceptedBox> boxes = snapshot.data!;
                           return ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             itemCount: boxes.length,
                             itemBuilder: (context, index) => AcceptedBoxTile(
@@ -278,6 +280,7 @@ class _AcceptPageState extends State<AcceptPage> {
             onPressed: () async {
               if (_acceptFormKey.currentState!.validate()) {
                 if (_imageProvider.image != null) {
+                  print(_imageProvider.image);
                   showLoadingSpinnerModal(context);
 
                   final imageUploadRes =

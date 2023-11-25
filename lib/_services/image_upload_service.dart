@@ -11,6 +11,7 @@ class ImageUploadService extends ChangeNotifier {
     try {
       var request = http.MultipartRequest('POST', Uri.parse(api));
       request.files.add(await http.MultipartFile.fromPath('image', path));
+      request.persistentConnection = true;
 
       // Send the request
       var response = await request.send();
@@ -28,11 +29,10 @@ class ImageUploadService extends ChangeNotifier {
       } else {
         // Handle other status codes
 
-        throw Exception('Failed to upload image: ${response.statusCode}');
+        throw Exception('${response.statusCode} ${response.reasonPhrase}');
       }
     } catch (error) {
       // Handle errors during the request
-      print('Error during image upload: $error');
       throw Exception('Error during image upload: $error');
     }
   }
